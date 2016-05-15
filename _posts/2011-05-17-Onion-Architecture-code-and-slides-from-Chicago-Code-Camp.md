@@ -7,7 +7,9 @@ tags:
 - architecture
 - presentations
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Onion-Architecture-code-and-slides-from-_DBEE/logo-horizontal_thumb.png" title="logo-horizontal" alt="logo-horizontal" width="400" height="71" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Onion-Architecture-code-and-slides-from-_DBEE/logo-horizontal_2.png)This past Saturday was the third annual [Chicago Code Camp](http://chicagocodecamp.com/). If you missed it and you’re in the area, be sure to attend next year! It’s free, and organized by a great group of community leaders here in the greater Chicagoland area.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Onion-Architecture-code-and-slides-from-_DBEE/logo-horizontal_thumb.png)
+
+This past Saturday was the third annual [Chicago Code Camp](http://chicagocodecamp.com/). If you missed it and you’re in the area, be sure to attend next year! It’s free, and organized by a great group of community leaders here in the greater Chicagoland area.
 
 My talk this year was on Onion Architecture. A slight variation of the “ports and adapters” application architecture, I first started reading and prototyping the concepts introduced by [Jeffrey Palermo](http://jeffreypalermo.com/blog/the-onion-architecture-part-1/). Check out his blog if you want to read a bit more on it.
 

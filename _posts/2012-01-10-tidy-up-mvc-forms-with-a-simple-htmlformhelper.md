@@ -13,7 +13,8 @@ Many line-of-business applications contain dozens of forms similar to the follow
 4.  A tooltip that can be hovered for a detailed description of the field
 5.  Validation messages if the input is incorrect
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_thumb_8.png" title="image" alt="image" width="698" height="524" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_19.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_thumb_8.png)
+
 
 To achieve this, we can create the following Model
 

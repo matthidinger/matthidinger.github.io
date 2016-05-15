@@ -49,13 +49,15 @@ Given my requirements I derived the following database schema. For my purposes, 
 -   The **Audits** table is used to track any change. Most of the columns should be self-explanatory. The Action is what CUD event occurred (Insert, Update, or Delete). The rest of the columns record who made the change, when, what table, and the Primary Key of the modified record.
 -   The **AuditValues** table is used to track each modified column in the table being audited: the Old (Original), and the New (Current) value.
 
-[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb.png" title="image" alt="image" width="439" height="585" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image.png)
+![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb.png)
+
 
 ### Step 2 - The DBML
 
 Now that we have our new tables, we will update our LINQ to SQL Entity classes. I am going to be using Northwind for this example.
 
- [<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_3.png" title="image" alt="image" width="484" height="845" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_3.png)
+ ![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_3.png)
+
 
 ### Step 3 - The Public Audit Extension Method
 
@@ -121,7 +123,8 @@ The heart and soul of my auditing code relies on the DataContext's Object Tracki
 
 Thankfully, the DataContext exposes a GetChangeSet() method, which will allow us to peek into its pending database calls.
 
-[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_4.png" title="image" alt="image" width="377" height="159" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_4.png)
+![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_4.png)
+
 
 ```csharp
 private static void AuditInserts<TEntity, TSubEntity>(DataContext db, Func<TSubEntity, int> tableKeySelector, string title)
@@ -247,11 +250,14 @@ foreach (TSubEntity item in updates)
 
 I wrote a very quick demo app for this article. You can see below a GridView of the Audits table rows. We can see what we changed, when, by whom, etc. If you select one of the Audits, a DetailsView will display all of the Changed Values that took place during the Audit.
 
-[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_5.png" title="image" alt="image" width="694" height="211" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_5.png)
+![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_5.png)
 
-[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_6.png" title="image" alt="image" width="736" height="257" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_6.png)
 
-[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_7.png" title="image" alt="image" width="727" height="498" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_7.png) 
+![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_6.png)
+
+
+![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_7.png)
+ 
 
 ### Get the Code!
 

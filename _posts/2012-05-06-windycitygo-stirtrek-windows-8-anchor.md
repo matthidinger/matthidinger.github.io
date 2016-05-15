@@ -53,7 +53,8 @@ Overall this was a very exciting event with nearly 400 people eager to see what�
 
 |     |                                                                                                                                                                                                                                                                                                                           |
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png" title="eventPics3" alt="eventPics3" id="hero" width="387" height="327" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_2.png) |
+|     | ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png)
+ |
 
 ###  
 
@@ -71,7 +72,8 @@ That said, thankfully I did not have to compete with Scott Hansleman in my time 
 
 |     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg" title="389594_10150889640849224_546684223_11989723_2067556539_n[1]" alt="389594_10150889640849224_546684223_11989723_2067556539_n[1]" width="436" height="327" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_2.jpg) |
+|     | ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg)
+ |
 
 ###  
 
@@ -79,7 +81,8 @@ That said, thankfully I did not have to compete with Scott Hansleman in my time 
 
 #### Aug 13 – 15, 2012
 
-[<img src="http://www.thatconference.com/Images/SiteBadges/440w.jpg?s=badge" alt="That Conference" width="363" height="248" />](http://www.thatconference.com/?s=badge)This one is coming up soon and I’m really pumped for it. Be sure to check it out, registration should open soon!
+![](http://www.thatconference.com/Images/SiteBadges/440w.jpg?s=badge)
+This one is coming up soon and I’m really pumped for it. Be sure to check it out, registration should open soon!
 
 > Spend **3** days, with **1000** of your fellow campers in **125** sessions geeking out on everything **Mobile, Web** and **Cloud** at a giant waterpark.
 

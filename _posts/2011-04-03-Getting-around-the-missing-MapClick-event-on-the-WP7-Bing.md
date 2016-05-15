@@ -36,7 +36,8 @@ In my scenario, I have a visual state on my page called “MapOnlyState” which
 2.  With the GoToStateAction selected, look in the Property pane: the default Trigger will be an EventTrigger, which by itself allows you to select any event on the control to invoke the trigger
 3.  Click the New button to choose a different trigger. Select the MapTapTrigger *(after you’ve added the code below to your project and compiled!)* 
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png" title="SNAGHTML64ad1bd5" alt="SNAGHTML64ad1bd5" width="644" height="370" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png)
+
 
 ####  
 

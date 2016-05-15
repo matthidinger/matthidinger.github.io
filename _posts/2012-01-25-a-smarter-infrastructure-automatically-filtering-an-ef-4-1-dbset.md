@@ -59,7 +59,8 @@ public class EFController : Controller
 
 To prove it, here is the SQL Profiler output when I hit the controller from a browser.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad_thumb.png" title="SNAGHTML3d115fad" alt="SNAGHTML3d115fad" width="441" height="370" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad_thumb.png)
+
 
 ### Creating the IDataContext
 

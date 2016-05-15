@@ -12,7 +12,8 @@ I’ve just finished my new app called Transit Directions. As the name hopefully
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [VIEW SLIDE SHOW](https://cid-7b7c1346ed380da9.skydrive.live.com/redir.aspx?page=play&resid=7B7C1346ED380DA9!534&type=5&authkey=d8SFOnj6y5I%24&Bsrc=Photomail&Bpub=SDX.Photos) | [DOWNLOAD ALL](https://cid-7b7c1346ed380da9.skydrive.live.com/redir.aspx?page=downloadphotos&resid=7B7C1346ED380DA9!534&type=5&Bsrc=Photomail&Bpub=SDX.Photos&authkey=d8SFOnj6y5I%24) |
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/4-10-2011%208-42-07%20PM_thumb.png" title="4-10-2011 8-42-07 PM" alt="4-10-2011 8-42-07 PM" width="107" height="107" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/4-10-2011%208-42-07%20PM_2.png)I’ve just finished my new app called Transit Directions. As the name hopefully implies, the app helps people get around a city with public transit. It will provide step-by-step directions for 11 cities, with an interactive map to aid the experience. I spent a bunch of time polishing this app to replicate the native Bing Maps app experience, hopefully it paid off.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/4-10-2011%208-42-07%20PM_thumb.png)
+I’ve just finished my new app called Transit Directions. As the name hopefully implies, the app helps people get around a city with public transit. It will provide step-by-step directions for 11 cities, with an interactive map to aid the experience. I spent a bunch of time polishing this app to replicate the native Bing Maps app experience, hopefully it paid off.
 
 I assume this functionality will be built into the native app with the Mango phone update, so this baby has a limited shelf-life. **But it’s free now and forever, so get it while it’s hot!**
 
@@ -50,7 +51,8 @@ Easily get directions from A to B using public transit! This app is nearly ident
 
 ### Get it now!
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/wp7_English_480x80_blue4_fa367358-ca8f-4578-8823-739555dc80b1.png" title="wp7_English_480x80_blue4" alt="wp7_English_480x80_blue4" width="484" height="84" />](http://social.zune.net/redirect?type=phoneApp&id=3aeecd34-d463-e011-81d2-78e7d1fa76f8)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/wp7_English_480x80_blue4_fa367358-ca8f-4578-8823-739555dc80b1.png)
+
 
  
 

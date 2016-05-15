@@ -30,13 +30,15 @@ Caliburn.Micro needs to be installed into both the **RealWorldStocks.Client.Core
 
 To get Caliburn.Micro you can open up the Package Manager console and type the following, *but make sure you select the right Default Project. **You must install CM into both .Core and .UI projects!***
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_2.png" title="image" alt="image" width="767" height="91" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_6.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_2.png)
+
 
 #### From the Manage NuGet Packages UI
 
 Alternatively you can right-click on both Projects from the Solution Explorer and select “Manage NuGet Packages…”, then click the Online pane and search for Caliburn.Micro. ***You must install CM into both .Core and .UI projects!***
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png" title="image_thumb[19]" alt="image_thumb[19]" id="hero" width="686" height="369" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png)
+
 
  
 
@@ -148,7 +150,8 @@ If the NuGet package created a ShellViewModel.cs in your project, then you will 
 Application Infrastructure
 --------------------------
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_1.png" title="image" alt="image" width="293" height="636" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_4.png)The final pieces of our infrastructure include the following:
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_1.png)
+The final pieces of our infrastructure include the following:
 
 ### Value Converters
 

@@ -12,11 +12,14 @@ While I was getting my feet wet in Entity Framework 4 (from the Visual Studio 20
 
 The fix was as simple as highlighting the columns and selecting the context menu “Set Primary Key”
 
-[<img src="/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable_thumb.png" title="pphtable" alt="pphtable" width="417" height="187" />](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable.png) [<img src="/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable2_thumb.png" title="pphtable2" alt="pphtable2" width="413" height="186" />](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable2.png)
+![](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable_thumb.png)
+ ![](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable2_thumb.png)
+
 
 Finally, open your EDMX, select the Entity, and **Update Model from Database…**
 
-[<img src="/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphmodel_thumb.png" title="pphmodel" alt="pphmodel" width="493" height="467" />](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphmodel.png)
+![](/images/subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphmodel_thumb.png)
+
 
 All set, now back to business.
 

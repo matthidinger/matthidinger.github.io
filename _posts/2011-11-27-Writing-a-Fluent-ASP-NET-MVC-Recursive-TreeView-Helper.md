@@ -34,7 +34,8 @@ public class TreeViewLocation
 
 #### …we want to generate an HTML unordered-list like this
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png" title="image" alt="image" width="290" height="281" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_11.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png)
+
 
 what’s the new API look like?
 -----------------------------
@@ -116,11 +117,13 @@ With this project I decided to include a [NuGet Sample Package](http://blog.davi
 
 **These are source-only packages.** By installing this package into your project you will get a raw file in **Helpers\\TreeView.cs** that you can edit or update as you see fit.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_4.png" title="image" alt="image" width="766" height="89" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_13.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_4.png)
+
 
 The sample project is the same concept, it will add a **TreeViewController**, and a **TreeView.cshtml** view which demonstrates the usage of the TreeView helper. Once you’ve tried out the sample and played with it, it’s very easy to uninstall via NuGet to remove the unnecessary files.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb.png" title="image" alt="image" width="763" height="86" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_3.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb.png)
+
 
 ### CodePlex
 

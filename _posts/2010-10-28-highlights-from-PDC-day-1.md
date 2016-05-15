@@ -8,7 +8,8 @@ tags:
 - azure
 - wpdev
 ---
-### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg" title="Microsoft-PDC-2010" alt="Microsoft-PDC-2010" width="200" height="200" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_2.jpg)Portable Library Projects
+### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg)
+Portable Library Projects
 
 At MIX 10 Microsoft announced a rather modest code-sharing technique to allow Silverlight and .NET apps to share a small subset of System.\* libraries. Well today at PDC Shawn Burke had a 60-minute session called “3-screen coding – Sharing code between Windows Phone, Silverlight, and .NET.” He unveiled a new Class Library project type called a “Portable Library” which can be directly referenced by any type of project. The obvious goal here is to share your core business logic between your various client-side applications. Thankfully Visual Studio will even trim IntelliSense within a Portable Library project to only APIs which have been specifically defined as portable between all application types.
 

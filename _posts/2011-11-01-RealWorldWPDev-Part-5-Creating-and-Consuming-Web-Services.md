@@ -15,7 +15,8 @@ This series is going to walk through building a polished, functioning Windows Ph
 Choices
 -------
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb.png" title="image" alt="image" width="288" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_4.png)In the Microsoft world we have no shortage of client and server-side HTTP stacks to choose from. Rather than try to cover every possible combination, and to prevent this topic from getting too long-winded, I will keep this part succinct.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb.png)
+In the Microsoft world we have no shortage of client and server-side HTTP stacks to choose from. Rather than try to cover every possible combination, and to prevent this topic from getting too long-winded, I will keep this part succinct.
 
 Our first major decisions revolve around the following options:
 
@@ -53,7 +54,8 @@ The following will walk you through a pretty efficient way for creating and cons
 
 In **RealworldStocks.Client.Core** I have a **Models** folder, which include various classes that inherit from **NotifyObject,** seen below.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6_thumb.png" title="SNAGHTML9d234fa6" alt="SNAGHTML9d234fa6" width="900" height="588" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6_thumb.png)
+
 
 ### step 2: “Add as Link” model classes into your Web project
 
@@ -61,11 +63,13 @@ Since you want these same classes to be serialized from your service, you will n
 
 Then navigate to the **RealWorldStocks.Client.Core\\Models** folder and select the entities you plan on serializing and exposing to your client, **but don’t just press Add!** Next to the Add button is a drop-down arrow, open it and make sure you click **Add As Link**
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_2.png" title="image" alt="image" width="900" height="557" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_6.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_2.png)
+
 
 Notice how the files have little “shortcut” overlays on their icons.
 
-##### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png" title="image" alt="image" width="310" height="513" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_8.png)
+##### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png)
+
 
 ### step 3: Return your data as JSON from the MVC controller
 

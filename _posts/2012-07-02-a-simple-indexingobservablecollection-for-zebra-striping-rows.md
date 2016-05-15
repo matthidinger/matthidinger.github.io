@@ -6,7 +6,9 @@ tags:
 - wpdev
 - xaml
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg" title="zebra-camo" alt="zebra-camo" width="379" height="258" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_2.jpg)I’m currently wrapping up a Windows Phone project and thought this would be a good time to share some of the more reusable stuff we needed.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg)
+
+I’m currently wrapping up a Windows Phone project and thought this would be a good time to share some of the more reusable stuff we needed.
 
 ### Zebra-striping alternate rows
 

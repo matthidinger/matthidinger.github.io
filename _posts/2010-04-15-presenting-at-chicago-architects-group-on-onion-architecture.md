@@ -6,7 +6,9 @@ tags:
 - presentations
 - architecture
 ---
-[<img src="/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png" title="616709595" alt="616709595" width="123" height="101" />](/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595.png) I will be giving a talk at the [Chicago Architects Group](http://chicagoarchitectsgroup.com/) on Onion Architecture next week, details below. This is a completely free event, and of course, pizza will be provided.
+![](/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png)
+
+I will be giving a talk at the [Chicago Architects Group](http://chicagoarchitectsgroup.com/) on Onion Architecture next week, details below. This is a completely free event, and of course, pizza will be provided.
 
 ### When
 

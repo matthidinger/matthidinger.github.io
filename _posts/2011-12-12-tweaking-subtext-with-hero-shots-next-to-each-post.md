@@ -6,7 +6,9 @@ tags:
 - subtext
 - open-source
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png" title="image" alt="image" width="339" height="300" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_4.png)This past weekend I decided to upgrade my Subtext blog to VS 2010 so I could finally rid my machine of VS 2008. After some small hiccups it was ready to rock, and thankfully the deployment to my server was entirely painless with WebDeploy.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png)
+
+This past weekend I decided to upgrade my Subtext blog to VS 2010 so I could finally rid my machine of VS 2008. After some small hiccups it was ready to rock, and thankfully the deployment to my server was entirely painless with WebDeploy.
 
 So being in VS 2010 and having fully tested my deployment process it seemed like a good time to make a tweak to my Skin that I’ve been wanting to try for a while: showing “Hero Shots” next to each post.
 

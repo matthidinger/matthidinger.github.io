@@ -8,7 +8,9 @@ tags:
 - career
 - architecture
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg" title="vincefromshamwow" alt="vincefromshamwow" width="292" height="299" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_2.jpg)The title is slightly tongue-in-cheek, but I do believe selling is a crucial aspect of being an ‘architect.’ And I don’t mean selling to customers.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg)
+
+The title is slightly tongue-in-cheek, but I do believe selling is a crucial aspect of being an ‘architect.’ And I don’t mean selling to customers.
 
 But first, a backstory
 ----------------------

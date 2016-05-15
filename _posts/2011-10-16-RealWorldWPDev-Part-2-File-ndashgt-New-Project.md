@@ -20,7 +20,8 @@ Before you begin, install NuGet!
 
 In Visual Studio: Tools –&gt; Extension Manager and find NuGet
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb.png" title="image" alt="image" width="670" height="408" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb.png)
+
 
  
 -
@@ -28,7 +29,8 @@ In Visual Studio: Tools –&gt; Extension Manager and find NuGet
 Defining our Solution Structure
 -------------------------------
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb_5.png" title="image" alt="image" width="274" height="652" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_12.png)For our solution we are going to create 3 Client-side projects and 1 Server-side project. These projects are described below. The Solution Explorer to the right should help give you a sense of how our solution will start to develop, but for now, let’s just get the basics running.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb_5.png)
+For our solution we are going to create 3 Client-side projects and 1 Server-side project. These projects are described below. The Solution Explorer to the right should help give you a sense of how our solution will start to develop, but for now, let’s just get the basics running.
 
 ### Creating the Windows Phone Projects
 

@@ -70,7 +70,8 @@ public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html
 <%= Html.DisplayForMany(m => m.Comments) %>
 ```
 
-[<img src="http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png" title="image" alt="image" width="1223" height="468" />](http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image.png)
+![](http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png)
+
 
  
 

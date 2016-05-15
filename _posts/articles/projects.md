@@ -11,11 +11,13 @@ windows phone apps
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [VIEW SLIDE SHOW](https://skydrive.live.com/redir.aspx?cid=7b7c1346ed380da9&page=play&resid=7B7C1346ED380DA9!598&type=5&authkey=IEy2l*WZPEc%24&Bsrc=Photomail&Bpub=SDX.Photos) | [DOWNLOAD ALL](https://skydrive.live.com/redir.aspx?cid=7b7c1346ed380da9&page=downloadphotos&resid=7B7C1346ED380DA9!598&type=5&Bsrc=Photomail&Bpub=SDX.Photos&authkey=IEy2l*WZPEc%24) |
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/tile99watch_thumb.png" title="tile99watch" alt="tile99watch" width="103" height="103" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/tile99watch_2.png)With CTA Watch you will always know the perfect time to leave your home or office. By tapping into real-time transit information for all CTA buses and trains, CTA Watch can locate nearby stops and quickly give you the next arrivals with minimal effort. We fully embrace the glance-and-go philosophy of Window Phone, allowing you to mark your most frequently traveled routes and stops as Favorites. Now every time you launch the app it will instantly display next arrivals right on your home screen, so you can get in, get out, and back to life.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/tile99watch_thumb.png)
+With CTA Watch you will always know the perfect time to leave your home or office. By tapping into real-time transit information for all CTA buses and trains, CTA Watch can locate nearby stops and quickly give you the next arrivals with minimal effort. We fully embrace the glance-and-go philosophy of Window Phone, allowing you to mark your most frequently traveled routes and stops as Favorites. Now every time you launch the app it will instantly display next arrivals right on your home screen, so you can get in, get out, and back to life.
 
  
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/4-10-2011%208-42-07%20PM_thumb.png" title="4-10-2011 8-42-07 PM" alt="4-10-2011 8-42-07 PM" width="103" height="103" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/4-10-2011%208-42-07%20PM_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/4-10-2011%208-42-07%20PM_thumb.png)
+
 
 |                                                                                                                                                                                |                                                                                                                                                                                       |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +30,8 @@ Easily get directions from A to B using public transit! This app was meticulousl
 open source projects
 --------------------
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/doddleLogoExport_thumb.png" title="doddleLogoExport" alt="doddleLogoExport" width="190" height="133" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/doddleLogoExport_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/doddleLogoExport_thumb.png)
+
 
 **The Doddle Project** is what I have named a set of libraries that offers common functionality necessary in many line of business applications.
 

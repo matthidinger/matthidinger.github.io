@@ -12,6 +12,7 @@ title_separator          : "-"
 name                     : "Matt Hidinger"
 description              : "Duh."
 url                      : "http://matthidinger.com"
+#url                     : "http://localhost:5000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 gh_repo                  :
 teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"

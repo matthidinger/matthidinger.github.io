@@ -4,9 +4,12 @@ disqus_identifier: http://www.matthidinger.com/archive/2010/05/24/vs-2010-bug-do
 redirect_from: /archive/2010/05/24/vs-2010-bug-dont-filter-by-solution.aspx/
 tags: 
 ---
-[<img src="/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/bugfeature_thumb.jpg" title="bug-feature" alt="bug-feature" width="240" height="180" />](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/bugfeature.jpg) Long story short, I have been struggling with a very frustrating Visual Studio 2010 bug since last Monday. All of a sudden, VS was hanging and eventually crashing every time I loaded my solution. After a while, I finally noticed something in the Server Explorer window… If you look closely at the screenshot below, you will notice that every node in my database says “\[Expanding…\]” after it – but it’s actually worse than that. In fact, every single database connection (I had 8 in my server explorer), is trying to open itself, and expand every single table, column, stored procedure, and view inside of each database… This was issuing thousands and thousands of SQL queries to all my database connections to query their schema, and of course, causing VS2010 to hang itself.
+![](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/bugfeature_thumb.jpg)
 
-[<img src="/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/1_thumb.png" title="1" alt="1" width="265" height="501" />](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/1.png) 
+Long story short, I have been struggling with a very frustrating Visual Studio 2010 bug since last Monday. All of a sudden, VS was hanging and eventually crashing every time I loaded my solution. After a while, I finally noticed something in the Server Explorer window… If you look closely at the screenshot below, you will notice that every node in my database says “\[Expanding…\]” after it – but it’s actually worse than that. In fact, every single database connection (I had 8 in my server explorer), is trying to open itself, and expand every single table, column, stored procedure, and view inside of each database… This was issuing thousands and thousands of SQL queries to all my database connections to query their schema, and of course, causing VS2010 to hang itself.
+
+![](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/1_thumb.png)
+ 
 
 After some research, I found that this bug is only triggered when my solution is bound to source control (TFS 2010). Today, an MS developer who appears to own the code in question, was able to repro my issue and found a workaround for now. \[emphasis mine\]
 
@@ -16,5 +19,6 @@ After some research, I found that this bug is only triggered when my solution is
 
 Below you can see the toolbar button “Filter by Solution” which I have highlighted in red – **Don’t click this button, at least until a hotfix or SP1 is released.** :)
 
-[<img src="/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/image_thumb_3.png" title="image" alt="image" width="771" height="62" />](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/image_3.png)
+![](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/image_thumb_3.png)
+
 

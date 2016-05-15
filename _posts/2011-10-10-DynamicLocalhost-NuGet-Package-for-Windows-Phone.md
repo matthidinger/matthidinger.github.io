@@ -46,7 +46,8 @@ Ok that’s great, but how do I use it?
 
 First you have to install the package. Make sure NuGet is installed.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_thumb.png" title="image" alt="image" width="759" height="82" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_thumb.png)
+
 
 The rest is up to you, to use the DynamicLocalhost class however you see fit.
 

@@ -9,7 +9,8 @@ A very welcomed addition to the all-too-common File In Use dialog when trying to
 
 As you can see from the screenshot, the dialog in Windows 7 *finally* tells the user exactly which process is preventing the deletion. No longer do I need [Process Monitor](http://technet.microsoft.com/en-us/sysinternals/bb896645.aspx) from SysInternals for such a simple need.
 
-[<img src="/images/subtext-content/MuchbetterFileInUsedialoginWindows7_901C/filelockeddialog_thumb.png" title="file-locked-dialog" alt="file-locked-dialog" width="500" height="297" />](/images/subtext-content/MuchbetterFileInUsedialoginWindows7_901C/filelockeddialog.png)
+![](/images/subtext-content/MuchbetterFileInUsedialoginWindows7_901C/filelockeddialog_thumb.png)
+
 
  
 

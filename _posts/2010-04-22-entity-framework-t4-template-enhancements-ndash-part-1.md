@@ -17,7 +17,8 @@ tags:
 
 ### Protip before we get started
 
-[<img src="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb.png" title="image" alt="image" width="240" height="135" />](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image.png)Before working with T4, you will absolutely want to install a helpful tool to get syntax highlighting and intellisense. Head into the Visual Studio Extension Manager and search for “Tangible T4 Editor”
+![](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb.png)
+Before working with T4, you will absolutely want to install a helpful tool to get syntax highlighting and intellisense. Head into the Visual Studio Extension Manager and search for “Tangible T4 Editor”
 
 After restarting VS, working with T4 templates will become much more enjoyable.
 
@@ -75,13 +76,15 @@ Go to line 106 (approximate, may vary slightly), you should be under a chunk of 
 
 Below this code, insert the IDatabase code seen below (I apologize that it’s a screenshot so you cannot copy/paste, but my syntax highlighter was not happy with the T4 syntax for some reason)
 
-[<img src="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_5.png" title="image" alt="image" width="809" height="371" />](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_5.png)
+![](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_5.png)
+
 
 #### Step 2
 
 Go to line 126 (also approximate), where your ObjectContext is being generated. You need to make sure that the generated ObjectContext class implements the IDatabase interface we generated earlier.
 
- [<img src="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_6.png" title="image" alt="image" width="874" height="65" />](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_6.png)
+ ![](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_6.png)
+
 
 #### Step 3
 
@@ -89,7 +92,8 @@ Next we need to change the properties on the datacontext to be of type IObjectSe
 
 Near line 184, you will see an ObjectSet field and property being generated for each table in your database. Change them from ObjectSet to IObjectSet (in both places), seen in the highlighted portions below.
 
-[<img src="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_7.png" title="image" alt="image" width="953" height="270" />](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_7.png)
+![](/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_7.png)
+
 
 #### Step 4
 

@@ -25,7 +25,8 @@ If you’re in the Chicago area and plan on checking out the app, you can get a 
 
 If you’ve got the Zune client installed on your PC then click the link below to get the app now!
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Bus-Watch-Chicago-submitted-to-Marketpla_14686/wp7_English_480x80_blue_3.png" title="wp7_480x80_blue" alt="wp7_480x80_blue" width="484" height="84" />](http://social.zune.net/redirect?type=phoneApp&id=3904d308-71d6-df11-a844-00237de2db9e)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Bus-Watch-Chicago-submitted-to-Marketpla_14686/wp7_English_480x80_blue_3.png)
+
 
  
 

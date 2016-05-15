@@ -110,7 +110,8 @@ DoddleReport has been split into multiple packages to support more users’ need
 -   **Install-Package DoddleReport.OpenXml**
 -   **Install-Package DoddleReport.Dynamic**
 
-### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png" title="image" alt="image" width="625" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_2.png)
+### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png)
+
 
 New in v1.2
 -----------

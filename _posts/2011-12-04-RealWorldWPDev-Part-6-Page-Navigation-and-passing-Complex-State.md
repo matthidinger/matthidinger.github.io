@@ -28,7 +28,8 @@ NavigationService.Navigate(new Uri("/Views/ProductDetails.xaml?ProductID=5&Produ
 
 As you can see, if you need to pass parameters to the page you’re navigating to, you use query string values, again exactly how you would write a web application.
 
-### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png" title="SNAGHTML1dfd0d9f" alt="SNAGHTML1dfd0d9f" width="592" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f.png)
+### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png)
+
 
 In the first image above we have a ListBox of Stock Symbols. When the user clicks on the MSFT item, we want to navigate to the StockDetailsView.xaml, and tell it which Symbol was clicked on. What we are looking to achieve is something along these lines.
 

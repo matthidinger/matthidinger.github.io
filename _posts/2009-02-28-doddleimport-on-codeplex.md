@@ -14,9 +14,11 @@ Flexible importing of data via a fluid and fully extensible API to easily add su
 
 I will update the documentation and provide some better examples when I get back. Here you can see a quick example of me importing some Excel data into a SharePoint list. As you can see it supports a variety of validation including missing fields and data type conversion problems.
 
-[<img src="/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png" title="image" alt="image" width="532" height="432" />](/images/subtext-content/DoddleImportonCodePlex_14E69/image.png) 
+![](/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png)
+ 
 
-[<img src="/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb_3.png" title="image" alt="image" width="891" height="198" />](/images/subtext-content/DoddleImportonCodePlex_14E69/image_3.png)
+![](/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb_3.png)
+
 
 ### Key Components
 

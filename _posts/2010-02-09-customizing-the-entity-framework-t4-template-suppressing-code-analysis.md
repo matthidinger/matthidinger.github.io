@@ -20,7 +20,8 @@ These steps were written for **Visual Studio 2010 Beta 2**, so they may change s
 
 Open the EDMX Designer, right-click on the design surface, and select “Add Code Generation Item…”
 
-[<img src="/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png" title="addcodegenitem" alt="addcodegenitem" width="330" height="319" />](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem.png) 
+![](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png)
+ 
 
 ### Step 2
 
@@ -28,7 +29,8 @@ Select the “ADO.NET EntityObject Generator” from the Add New Item dialog
 
 *Note: The specific instructions below only work for the standard EntityObject Generator, and will not apply directly to the Self-Tracking Entities template. If you wish to use Self-Tracking entities, the instructions in this post should be sufficient to customize the template yourself.*
 
-[<img src="/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image_thumb.png" title="image" alt="image" width="644" height="364" />](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image.png)
+![](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image_thumb.png)
+
 
 Now you should have a new EfModel.tt file in your project. This is the T4 template that the EDMX designer will use to generate the classes that represent your EDMX model.
 

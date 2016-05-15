@@ -9,7 +9,9 @@ tags:
 - linq-to-sql
 - entity-framework
 ---
-[<img src="/images/subtext-content/8eb6584b2301_132D8/security_thumb.jpg" title="security" alt="security" class="wlDisabledImage" width="240" height="223" />](/images/subtext-content/8eb6584b2301_132D8/security.jpg)A common requirement for many applications is filtering rows of data based on the current user. A simple example is an e-commerce site which would want to make sure a Customer who is logged in is only able to view his own Orders. Another example would be a payroll site that would want to make sure a user could only view their own Employees.
+![](/images/subtext-content/8eb6584b2301_132D8/security_thumb.jpg)
+
+A common requirement for many applications is filtering rows of data based on the current user. A simple example is an e-commerce site which would want to make sure a Customer who is logged in is only able to view his own Orders. Another example would be a payroll site that would want to make sure a user could only view their own Employees.
 
 These are of course trivial examples, and could be solved in a number of ways. My concern is that often times the responsibility of security is placed upon each individual developer to make sure they are calling the right methods on your repositories. This may seem fine to many readers, and we could debate whether or not this should be the case, but my current take on security is to let the application infrastructure handle those details for you.
 

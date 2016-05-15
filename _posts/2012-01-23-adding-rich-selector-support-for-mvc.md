@@ -5,7 +5,7 @@ redirect_from: /archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx/
 tags: 
 - aspnet-mvc
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png" title="image" alt="image" width="550" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_6.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png)
 
 By using the the simple **SelectorAttribute** and **EditorTemplate** described in this post, you will get rich support the following very common scenarios (and flip between the various modes with ease):
 
@@ -172,7 +172,8 @@ Rather than pasting the full source here, I will be publishing it along with a s
 
 Using [**TortoiseHg**](http://tortoisehg.bitbucket.org/) simply clone the URL: [**https://hg01.codeplex.com/mvcgrabbag**](https://hg01.codeplex.com/mvcgrabbag)
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_3.png" title="image" alt="image" width="602" height="189" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_8.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_3.png)
+
 
 #### Browse the code
 

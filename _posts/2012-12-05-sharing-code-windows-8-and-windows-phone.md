@@ -12,7 +12,9 @@ tags:
 ---
 I recently had the opportunity to speak at Microsoft’s [New Era of Work](http://www.microsoft.com/enterprise/events/theneweraofwork3/#fbid=7bLqKFFM2kc) conference in Chicago. Below you’ll find the presentation material, the Real-World Stocks project which demonstrates the principles, and a high-level recap of the lessons learned while practicing the following techniques in actual apps.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png" title="image" alt="image" width="200" height="358" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_8.png) [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_thumb.png" title="screenshot_12052012_110659" alt="screenshot_12052012_110659" width="591" height="357" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png)
+ ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_thumb.png)
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Slides
@@ -22,7 +24,8 @@ A number of slides were provided by Microsoft, and many specifically from [Matth
 
 |                                                                                                                                                                                                                                                                                                                                                                                      |     |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
-| [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg" title="WP_20121128_001" alt="WP_20121128_001" width="201" height="356" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_2.jpg)  |     |
+| ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg)
+  |     |
 
  
 
@@ -74,7 +77,8 @@ Sometimes you need to share a raw .cs file between projects. You can copy/paste 
 
 **Pro tip:** Finally in VS 2012, you can hold the Left-Alt key and drag entire folders between projects… It will Add a Link for every file inside the folder!
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_1.png" title="image" alt="image" width="624" height="337" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_13.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_1.png)
+
 
 ####  
 
@@ -119,7 +123,8 @@ When you Add –&gt; New Project and select a Portable Class Library, you will s
 
 Your end result is a single project, with a single codebase, *outputting a single assembly* (.dll) that is able to be referenced by any of the targeted platforms.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_5.png" title="image" alt="image" width="283" height="276" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_15.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_5.png)
+
 
  
 
@@ -166,7 +171,8 @@ Make a great user experience!
 
 Sharing code, assets, and skills are all great tools for more efficient software delivery. Just don’t forget that you are creating software for different platforms, and the user should always have the optimal experience on each. Not every screen is going to show the same data, in the same way.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_6.png" title="image" alt="image" width="787" height="293" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_17.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_6.png)
+
 
  
 

@@ -30,7 +30,8 @@ Needless to say, I am pretty disappointed with this decision.
 
 In the next few days I plan on [publishing a workaround using their T4 templates](http://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx). I will provide the template and detailed instructions on how to take advantage of it if you plan on using EF4 anytime soon.
 
-[<img src="/images/subtext-content/EF4EDMXdoesnotsuppressCodeAnalysiswarnin_F735/CropperCapture3_thumb.png" title="CropperCapture[3]" alt="CropperCapture[3]" width="809" height="484" />](/images/subtext-content/EF4EDMXdoesnotsuppressCodeAnalysiswarnin_F735/CropperCapture3.png)
+![](/images/subtext-content/EF4EDMXdoesnotsuppressCodeAnalysiswarnin_F735/CropperCapture3_thumb.png)
+
 
  
 

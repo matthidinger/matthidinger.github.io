@@ -15,7 +15,10 @@ Realworld Stocks
 
 The app we are creating is called Realworld Stocks, and this is what it looks like as of today. It’s not much yet, but hey, we’re only a few days in! Hopefully as the series progresses we’ll end up with a pretty nice looking stocks app ready for marketplace submission.
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image29_thumb.png" title="image" alt="image" width="200" height="381" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image29.png)[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image45_thumb.png" title="image" alt="image" width="200" height="381" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image45.png)[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image53_thumb.png" title="image" alt="image" width="200" height="381" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image53.png) 
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image29_thumb.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image45_thumb.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image53_thumb.png)
+ 
 
 Series Outline
 --------------
@@ -73,11 +76,13 @@ For a great video tutorial on using Mercurial with CodePlex check out this [free
 2.  In Windows Explorer, create a new folder where you want to download the source to
 3.  Right click in the window, from TortoiseHg select **Clone…**
 
-     [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/SNAGHTML223cc484_thumb.png" title="SNAGHTML223cc484" alt="SNAGHTML223cc484" width="414" height="418" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/SNAGHTML223cc484.png)
+     ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/SNAGHTML223cc484_thumb.png)
+
 
 4.  Type the following Source **https://hg01.codeplex.com/realworldwpdev** **** and press **Clone**
 
-    [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image_thumb_1.png" title="image" alt="image" width="672" height="189" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image_4.png)
+    ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image_thumb_1.png)
+
 
 5.  That’s it
 

@@ -19,13 +19,15 @@ As a quick recap, our goal is to build a Contact Us form that works perfectly on
 
 ### JavaScript enabled
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png" title="SNAGHTML1a3b6b08_thumb4" alt="SNAGHTML1a3b6b08_thumb4" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_4.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png)
+
 
 As you can see when a user visits our site with JavaScript enabled and clicks on the Contact Us link, they are presented with a nice jQuery UI dialog window. They can fill in the form and get a nice confirmation message inside the dialog, and finally close it without ever leaving the page they were on.
 
 ### JavaScript disabled
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_thumb.png" title="SNAGHTML1a48993d_thumb1" alt="SNAGHTML1a48993d_thumb1" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_2.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_thumb.png)
+
 
 A visitor without JavaScript will still get the same functionality, just a slightly lesser experience. Without JavaScript logic attached to our Contact Us link it behaves like a plain old hyperlink, navigating the browser to a new page. Once they fill out the form and press Send Message we redirect them back to the Home page with a confirmation message.
 

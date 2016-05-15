@@ -6,7 +6,9 @@ tags:
 - aspnet-mvc
 - caching
 ---
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png" title="image_thumb[4]" alt="image_thumb[4]" width="466" height="404" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_2.png)Many ASP.NET applications utilize the **System.Web.Caching.Cache** in some way. While it offers a pretty simple Dictionary-like API that your app can start using immediately, I typically create a combined “tell-don’t-ask” wrapper around it – which has some additional architectural benefits as well.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png)
+
+Many ASP.NET applications utilize the **System.Web.Caching.Cache** in some way. While it offers a pretty simple Dictionary-like API that your app can start using immediately, I typically create a combined “tell-don’t-ask” wrapper around it – which has some additional architectural benefits as well.
 
 ### Out of the box concerns
 

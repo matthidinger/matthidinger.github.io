@@ -6,5 +6,6 @@ tags:
 ---
 Researching strategies for unit testing view model mappers… It never occurred to try google.com to find that information…
 
-[<img src="/images/subtext-content/HaveyoutriedGoogletofindthat_CB50/googlesearch2_thumb_3.png" title="googlesearch2" alt="googlesearch2" width="710" height="677" />](/images/subtext-content/HaveyoutriedGoogletofindthat_CB50/googlesearch2_3.png)
+![](/images/subtext-content/HaveyoutriedGoogletofindthat_CB50/googlesearch2_thumb_3.png)
+
 

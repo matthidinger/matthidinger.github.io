@@ -14,7 +14,8 @@ November 30th marked my last day at Triton-Tek after 4.5 years. It was by far th
 What’s Next?
 ------------
 
-[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_thumb.jpg" title="clarity" alt="clarity" width="300" height="72" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_2.jpg)But Chicago is a big city with some great companies and great talent. I would be remiss if I didn’t take this opportunity in my late 20s to explore what else is out there. I’m very excited that on January 5th, 2012 I’ll be joining [Clarity Consulting](http://www.claritycon.com/). The first time I met some of Clarity’s WP7 team was back in October 2010, where we were both invited by Microsoft to speak at the Chicago Windows Phone launch party. They have worked on some really impressive software over the years, and I very much look forward to joining a group well known for their talent and passion for leading edge technology solutions.
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_thumb.jpg)
+But Chicago is a big city with some great companies and great talent. I would be remiss if I didn’t take this opportunity in my late 20s to explore what else is out there. I’m very excited that on January 5th, 2012 I’ll be joining [Clarity Consulting](http://www.claritycon.com/). The first time I met some of Clarity’s WP7 team was back in October 2010, where we were both invited by Microsoft to speak at the Chicago Windows Phone launch party. They have worked on some really impressive software over the years, and I very much look forward to joining a group well known for their talent and passion for leading edge technology solutions.
 
 A Month off
 -----------

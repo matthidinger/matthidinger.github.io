@@ -6,7 +6,9 @@ tags:
 - vs2010
 - .net-4
 ---
-[<img src="/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary_thumb.jpg" title="cloning-results-may-vary" alt="cloning-results-may-vary" width="240" height="236" />](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary.jpg) Starting back in 2007 I read [a series on Co/contra-variance in C\# by](http://blogs.msdn.com/ericlippert/archive/2007/10/16/covariance-and-contravariance-in-c-part-one.aspx) Eric Lippert – Eric is on the compiler team at MS and one of my favorite bloggers to read I might add. At the time, I remember myself reading along with the words but my eyes completely glazing over. To be honest the concept mostly eluded me at the time, so I wanted to take this opportunity to describe the feature in a way that made the most sense to me.
+![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary_thumb.jpg)
+
+Starting back in 2007 I read [a series on Co/contra-variance in C\# by](http://blogs.msdn.com/ericlippert/archive/2007/10/16/covariance-and-contravariance-in-c-part-one.aspx) Eric Lippert – Eric is on the compiler team at MS and one of my favorite bloggers to read I might add. At the time, I remember myself reading along with the words but my eyes completely glazing over. To be honest the concept mostly eluded me at the time, so I wanted to take this opportunity to describe the feature in a way that made the most sense to me.
 
 ### It Seems to Logical…
 
@@ -23,13 +25,15 @@ Naturally, the best way to answer the questions above is to turn them into a tes
 
 #### Visual Studio 2008 (.NET 3.5)
 
-[<img src="/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb.png" title="image" alt="image" width="745" height="796" />](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image.png)
+![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb.png)
+
 
  
 
 #### Visual Studio 2010 (.NET 4)
 
-[<img src="/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb_3.png" title="image" alt="image" width="653" height="730" />](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_3.png)
+![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb_3.png)
+
 
 ### What have we discovered
 
