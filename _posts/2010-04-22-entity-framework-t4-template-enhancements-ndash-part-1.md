@@ -6,6 +6,8 @@ tags:
 - t4
 - ef4
 - entity-framework
+header:
+  teaser: subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb.png
 ---
 > *This post is part of a series on customizing the Entity Framework T4 templates*
 >

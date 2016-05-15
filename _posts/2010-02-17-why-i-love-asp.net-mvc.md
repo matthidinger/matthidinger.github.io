@@ -6,6 +6,8 @@ tags:
 - aspnet
 - aspnet-mvc
 - rant
+header:
+  teaser: subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_thumb.jpg
 ---
 ![](/images/subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_thumb.jpg)
 

@@ -5,6 +5,8 @@ redirect_from: /archive/2008/05/07/ie6-underscore-hack.aspx/
 tags: 
 - css
 - web-standards
+header:
+  teaser: 
 ---
 So as you can see I've been playing with ASP.NET MVC in my free time lately. But as it turns out I learned something totally unrelated to MVC while I was editing the default stylesheet that MVC Preview 2 ships with.
 

@@ -3,6 +3,8 @@ title: "my projects"
 disqus_identifier: http://www.matthidinger.com/archive/2010/10/27/projects.aspx
 redirect_from: /archive/2010/10/27/projects.aspx/
 tags: 
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/my-projects_11F91/CTA%20Watch%202.2.jpg
 ---
 windows phone apps
 ------------------

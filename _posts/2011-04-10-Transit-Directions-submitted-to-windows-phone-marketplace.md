@@ -5,6 +5,8 @@ redirect_from: /archive/2011/04/10/Transit-Directions-submitted-to-windows-phone
 tags: 
 - wpdev
 - bing-maps
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Introducing-Transit-Directions-on-window_11E43/transit%20directions.jpg
 ---
 I’ve just finished my new app called Transit Directions. As the name hopefully implies, the app helps people get around a city with public transit. It will provide step-by-step directions for 11 cities, with an interactive map to aid the experience. I spent a bunch of time polishing this app to replicate the native Bing Maps app experience, hopefully it paid off. I assume this functionality will be built into the native app with the Mango phone update, but it’s free now and forever, so get it while it’s hot!
 

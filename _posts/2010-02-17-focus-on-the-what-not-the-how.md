@@ -5,6 +5,8 @@ redirect_from: /archive/2010/02/17/focus-on-the-what-not-the-how.aspx/
 tags: 
 - c-sharp
 - tips
+header:
+  teaser: subtext-content/Focusonthewhatnotthehow_93EE/627226315_325aa7b527_thumb.jpg
 ---
 I saw the following question asked earlier today -- the only context given was the code itself.
 

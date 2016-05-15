@@ -5,6 +5,8 @@ redirect_from: /archive/2012/07/02/a-simple-indexingobservablecollection-for-zeb
 tags: 
 - wpdev
 - xaml
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg)
 

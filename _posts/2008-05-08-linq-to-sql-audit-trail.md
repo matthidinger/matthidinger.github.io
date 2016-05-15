@@ -5,6 +5,8 @@ redirect_from: /archive/2008/05/08/linq-to-sql-audit-trail.aspx/
 tags: 
 - linq-to-sql
 - doddle
+header:
+  teaser: subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb.png
 ---
 This post is out of date
 ------------------------

@@ -5,6 +5,8 @@ redirect_from: /archive/2010/03/25/share-your-resharper-templates-across-all-you
 tags: 
 - resharper
 - live-mesh
+header:
+  teaser: subtext-content/ShareyourReSharpertemplatesacrossallyour_1242C/live_mesh_thumb.png
 ---
 ![](/images/subtext-content/ShareyourReSharpertemplatesacrossallyour_1242C/live_mesh_thumb.png)
 

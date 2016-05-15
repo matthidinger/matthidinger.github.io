@@ -7,6 +7,8 @@ tags:
 - fluent
 - razor
 - nuget
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png
 ---
 This post is an update to my original [ASP.NET MVC Recursive TreeView Helper](http://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx "http://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx") from almost 3 years ago. Oddly enough it’s still a high-traffic post and has close to 50 comments asking for an update or a complete solution to download. I figured if I was going to do that, I might as well give the API a much-needed facelift and pop it on NuGet.
 

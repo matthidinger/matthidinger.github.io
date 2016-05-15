@@ -8,6 +8,8 @@ tags:
 - linq
 - linq-to-sql
 - entity-framework
+header:
+  teaser: subtext-content/8eb6584b2301_132D8/security_thumb.jpg
 ---
 ![](/images/subtext-content/8eb6584b2301_132D8/security_thumb.jpg)
 

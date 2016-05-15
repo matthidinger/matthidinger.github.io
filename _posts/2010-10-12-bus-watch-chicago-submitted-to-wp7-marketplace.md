@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2010/10/12/bus-watch-chic
 redirect_from: /archive/2010/10/12/bus-watch-chicago-submitted-to-wp7-marketplace.aspx/
 tags: 
 - wpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Bus-Watch-Chicago-submitted-to-Marketpla_14686/Bus%20Watch%201.6_1.jpg
 ---
 So it’s finally version 1 complete. This app has consumed a chunk of my free time over the past couple months while I got familiarized with the WP7 tools, but it’s been a great learning experience. This was pretty much my first time doing any real Silverlight or XAML-based development. Using Blend was an absolute treat so I hope to use this tool much more in my future. Lots of features will be added in the next few months, including some city expansion. I look forward to really exercising my abstractions to see if I can really plug in new Transit Services as easily as I think I’ll be able to.
 

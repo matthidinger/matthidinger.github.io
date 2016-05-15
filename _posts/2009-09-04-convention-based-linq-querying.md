@@ -6,6 +6,8 @@ tags:
 - linq
 - linq-to-sql
 - expression-trees
+header:
+  teaser: 
 ---
 LINQ and Expression Trees have enabled a ton of possibilities for us as developers, particularly in establishing some code-reducing convention based querying. I have found myself playing with Expressions in C\# since their inception and will hopefully be publishing a few other posts I have queued up. For now, this post will simply demonstrate how to take advantage of a popular convention whereby each database table always has a single integer primary key named “Id”
 

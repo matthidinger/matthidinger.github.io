@@ -3,6 +3,8 @@ title: "Community"
 disqus_identifier: http://www.matthidinger.com/archive/2011/07/24/community.aspx
 redirect_from: /archive/2011/07/24/community.aspx/
 tags: 
+header:
+  teaser: http://social.zune.net/xweb/zune/argoV2/images/ZuneLogo.gif
 ---
 #### I’d love to speak to your audience!
 

@@ -3,6 +3,8 @@ title: "Rename namespaces intelligently with ReSharper"
 disqus_identifier: http://www.matthidinger.com/archive/2009/12/03/rename-namespaces-intelligently-with-resharper.aspx
 redirect_from: /archive/2009/12/03/rename-namespaces-intelligently-with-resharper.aspx/
 tags: 
+header:
+  teaser: subtext-content/RenamenamespacesintelligentlywithReSharp_105C4/classview2_thumb.jpg
 ---
 As is usually the case when I encounter a pain point while developing with Visual Studio, a quick google search reminds me that all along this problem has been solved for me. Today’s lesson is brought to you by the all-to-common namespace renaming. Earlier today I started cleaning up the file structure in the Solution Explorer, and up until now I would resort to a clumsy Solution Wide Find-Replace to fix up the namespaces after the files were moved into their more logical placement.
 

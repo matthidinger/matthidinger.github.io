@@ -5,6 +5,8 @@ redirect_from: /archive/2011/02/15/Effectively-serializing-data-to-wp7-using-JSO
 tags: 
 - wpdev
 - aspnet-mvc
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_5.png
 ---
 At [PDC'10 last year](http://www.matthidinger.com/archive/2010/10/28/highlights-from-PDC-day-1.aspx) Microsoft showed their upcoming solution for sharing assemblies between different platforms (Windows Phone, Silverlight, and .NET) – dubbed [Portable Library Projects](http://bit.ly/aUlqkU). The release date is said to be H1 2011 so hopefully they are still on track, maybe even to be included in VS 2010 SP1. Until then, we are on our own…
 

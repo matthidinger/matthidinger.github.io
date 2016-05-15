@@ -7,6 +7,8 @@ tags:
 - architecture
 - expression-trees
 - codefirst
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad_thumb.png
 ---
 If you ~~drink from the fire hose~~ read [Ayende’s blog](http://ayende.com/blog) you would notice a lot of [Anti-Repository talk](http://ayende.com/blog/search?q=repository+pattern) over the past couple years – which I fully agree with.
 

@@ -7,6 +7,8 @@ tags:
 - wpdev
 - caliburn
 - mvvm
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Code-from-my-Chicago-windows-phone-prese_B2AB/Caliburn-cropped_thumb_1.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Code-from-my-Chicago-windows-phone-prese_B2AB/Caliburn-cropped_thumb_1.png)
 

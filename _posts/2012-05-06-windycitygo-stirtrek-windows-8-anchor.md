@@ -9,6 +9,8 @@ tags:
 - winjs
 - metro
 - wpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png
 ---
 ### This blog is quiet… too quiet.
 

@@ -5,6 +5,8 @@ redirect_from: /archive/2012/01/13/simplifying-application-caching.aspx/
 tags: 
 - aspnet-mvc
 - caching
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png)
 

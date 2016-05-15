@@ -7,6 +7,8 @@ tags:
 - open-source
 - reporting
 - nuget
+header:
+  teaser: http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393
 ---
 > DoddleReport generates tabular reports from any IEnumerable datasource. Out of the box it can render reports to Excel, PDF, HTML, and CSV – fully pluggable of course. I created the project to provide reporting output over the LINQ queries we had already written for an application, but maybe you can find other uses for it.
 

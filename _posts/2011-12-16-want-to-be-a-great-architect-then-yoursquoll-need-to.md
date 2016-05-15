@@ -7,6 +7,8 @@ tags:
 - speaking
 - career
 - architecture
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg)
 

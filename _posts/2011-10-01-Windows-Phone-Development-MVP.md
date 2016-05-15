@@ -6,6 +6,8 @@ tags:
 - wpdev
 - mvp
 - community
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Windows-Phone-Development-MVP_9396/mvp-vertical_thumb.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Windows-Phone-Development-MVP_9396/mvp-vertical_thumb.png)
 

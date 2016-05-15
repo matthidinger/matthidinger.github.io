@@ -9,6 +9,8 @@ tags:
 - xaml
 - pcl
 - architecture
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png
 ---
 I recently had the opportunity to speak at Microsoft’s [New Era of Work](http://www.microsoft.com/enterprise/events/theneweraofwork3/#fbid=7bLqKFFM2kc) conference in Chicago. Below you’ll find the presentation material, the Real-World Stocks project which demonstrates the principles, and a high-level recap of the lessons learned while practicing the following techniques in actual apps.
 

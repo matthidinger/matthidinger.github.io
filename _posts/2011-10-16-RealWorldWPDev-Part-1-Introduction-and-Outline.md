@@ -5,6 +5,8 @@ redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outlin
 tags: 
 - wpdev
 - realworldwpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image29_thumb.png
 ---
 ### Series Introduction and Outline
 

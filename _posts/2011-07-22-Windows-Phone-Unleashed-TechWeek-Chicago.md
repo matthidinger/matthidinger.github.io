@@ -6,6 +6,8 @@ tags:
 - wpdev
 - community
 - presentations
+header:
+  teaser: 
 ---
 ### TechWeek Chicago
 

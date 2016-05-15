@@ -5,6 +5,8 @@ redirect_from: /archive/2011/07/20/Building-CTA-Watch-on-the-Developer-Smackdown
 tags: 
 - wpdev
 - podcast
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Building-CTA-Watch-on-the-Developer-Smac_99C8/dslogo%5B7%5D_28a72b7b-7ea7-4248-9b47-8bbd25587479.png
 ---
 A few weeks ago I was invited onto the [Developer Smackdown](http://developersmackdown.com/archives/show/53) podcast to muse about my adventures in Windows Phone development. That episode went live today, and can be found on iTunes/Zune under the series name “The Smackdown.” Of course it can also be streamed by any modern browser from the Developer Smackdown site.
 

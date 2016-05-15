@@ -6,6 +6,8 @@ tags:
 - linq
 - linq-to-sql
 - doddle
+header:
+  teaser: subtext-content/LINQAuditTrailv2_B491/image_thumb.png
 ---
 [A couple months ago](http://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx) I wrote a basic set of extension methods to handle automatic auditing in LINQ to SQL. Well I have received a large number of emails regarding this particular project so I have decided to focus on cleaning up my v2 API and releasing it on CodePlex. There was a lot of room for improvement from version 1 and today I am going to post the all new LINQ Audit Trail code. This new version is significantly enhanced in the previous version.
 

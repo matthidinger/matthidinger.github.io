@@ -5,6 +5,8 @@ redirect_from: /archive/2008/02/26/entity-framework-comparison-frustration-expla
 tags: 
 - entity-framework
 - linq
+header:
+  teaser: 
 ---
 This post is a follow-up to an article I wrote a few weeks ago, [ADO.NET Entity Framework Comparison Frustration](http://blog.matthidinger.com/2008/02/01/ADONETEntityFrameworkComparisonFrustration.aspx). As a quick re-cap, I was simply trying to filter a list of users with a LINQ query expression by comparing custom classes, not primitive types.
 

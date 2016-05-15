@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2009/08/15/creating-a-htm
 redirect_from: /archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx/
 tags: 
 - aspnet-mvc
+header:
+  teaser: http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png
 ---
 **Note: This article was written for ASP.NET MVC 2 Preview 1 – it may become outdated in future previews.**
 

@@ -5,6 +5,8 @@ redirect_from: /archive/2010/04/15/presenting-at-chicago-architects-group-on-oni
 tags: 
 - presentations
 - architecture
+header:
+  teaser: subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png
 ---
 ![](/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png)
 

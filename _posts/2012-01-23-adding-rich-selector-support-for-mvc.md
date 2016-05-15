@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2012/01/23/adding-rich-se
 redirect_from: /archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx/
 tags: 
 - aspnet-mvc
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png)
 

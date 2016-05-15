@@ -7,6 +7,8 @@ tags:
 - web-standards
 - aspnet
 - css
+header:
+  teaser: 
 ---
 Today I just stumbled onto some interesting information regarding placements of script blocks and CSS links. According to some extensive testing performed at Yahoo!, they have published a list of [Best Practices for Speeding Up Your Web Site](http://developer.yahoo.com/performance/rules.html "http://developer.yahoo.com/performance/rules.html"). Many of these rules came as no surprise, for example:
 

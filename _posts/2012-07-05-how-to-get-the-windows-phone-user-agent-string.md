@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2012/07/05/how-to-get-the
 redirect_from: /archive/2012/07/05/how-to-get-the-windows-phone-user-agent-string.aspx/
 tags: 
 - wpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/45d9f34867d2_B652/IE_thumb.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/45d9f34867d2_B652/IE_thumb.png)
 

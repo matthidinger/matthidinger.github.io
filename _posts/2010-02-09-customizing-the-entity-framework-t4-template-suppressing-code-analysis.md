@@ -5,6 +5,8 @@ redirect_from: /archive/2010/02/09/customizing-the-entity-framework-t4-template-
 tags: 
 - entity-framework
 - ef4
+header:
+  teaser: subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png
 ---
 As a brief recap, the reason this post even exists is because the generated code from the EF4 designer [does not properly suppress code analysis warnings](http://matthidinger.com/archive/2010/02/04/ef4-edmx-does-not-suppress-code-analysis-warnings.aspx). In that post, I mentioned that I would provide a proper T4 template and tutorial on integrating it into your EDMX model. This post details the steps to creating and customizing an Entity Framework 4 T4 template.
 

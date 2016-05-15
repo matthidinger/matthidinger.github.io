@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2011/10/21/RealWorldWPDev
 redirect_from: /archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx/
 tags: 
 - realworldwpdev
+header:
+  teaser: 
 ---
 ### Series Introduction and Outline
 

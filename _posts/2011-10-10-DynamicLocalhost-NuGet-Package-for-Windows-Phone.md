@@ -9,6 +9,8 @@ tags:
 - nuget
 - powershell
 - msbuild
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_thumb.png
 ---
 Why?
 ----

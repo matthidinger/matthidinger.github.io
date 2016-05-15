@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2011/12/02/New-job-month-
 redirect_from: /archive/2011/12/02/New-job-month-off-RealWorldWPDev-continues.aspx/
 tags: 
 - career
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_thumb.jpg
 ---
 As Phil put it recently: [it’s not every day you write this sort of blog post](http://haacked.com/archive/2011/11/28/departing-microsoft.aspx).
 

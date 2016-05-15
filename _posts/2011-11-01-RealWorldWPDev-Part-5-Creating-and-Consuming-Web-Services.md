@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2011/11/01/RealWorldWPDev
 redirect_from: /archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx/
 tags: 
 - realworldwpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb.png
 ---
 ### Series Introduction and Outline
 

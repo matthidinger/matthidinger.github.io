@@ -5,6 +5,8 @@ redirect_from: /archive/2008/10/12/managed-addin-framework-system.addin-with-wpf
 tags: 
 - maf
 - wpf
+header:
+  teaser: subtext-content/ManagedAddInFrameworkSystem.AddInwithWPF_B14E/image_thumb.png
 ---
 Disclaimer: This post is mainly for my own reference. Quite honestly, the Managed AddIn Framework (henceforth known as MAF), is a rather complex beast, and I simply cannot remember all the steps necessary to utilize it properly without a small reference guide. This post will cover the complete step-by-step tutorial of every action that a developer must perform to utilize the AddIn framework. It will not be a complete overview of what MAF is or how all the parts tie together. I will do my best to cover these things, but I have also included some very helpful reference material that will cover these topics better than I ever could.
 

@@ -6,6 +6,8 @@ tags:
 - ccc
 - architecture
 - presentations
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Onion-Architecture-code-and-slides-from-_DBEE/logo-horizontal_thumb.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Onion-Architecture-code-and-slides-from-_DBEE/logo-horizontal_thumb.png)
 

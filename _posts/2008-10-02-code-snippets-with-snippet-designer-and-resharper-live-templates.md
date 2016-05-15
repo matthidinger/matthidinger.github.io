@@ -5,6 +5,8 @@ redirect_from: /archive/2008/10/02/code-snippets-with-snippet-designer-and-resha
 tags: 
 - visual-studio
 - resharper
+header:
+  teaser: subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb.png
 ---
 ### Just what exactly are these snippets?
 

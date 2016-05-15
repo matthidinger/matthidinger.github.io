@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2011/12/04/RealWorldWPDev
 redirect_from: /archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx/
 tags: 
 - realworldwpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png
 ---
 ### Series Introduction and Outline
 

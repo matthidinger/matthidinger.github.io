@@ -7,6 +7,8 @@ tags:
 - jquery
 - web-standards
 - javascript
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08_thumb.png
 ---
 > **Progressive enhancement** is a strategy for [web design](http://en.wikipedia.org/wiki/Web_design) that emphasizes accessibility, [semantic HTML markup](http://en.wikipedia.org/wiki/Semantic_HTML), and external stylesheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or Internet connection, while also providing those with better bandwidth or more advanced browser software an enhanced version of the page.
 

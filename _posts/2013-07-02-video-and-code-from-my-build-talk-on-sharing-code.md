@@ -8,6 +8,8 @@ tags:
 - presentations
 - pcl
 - xaml
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/b630e246904a_9C6D/buildconf_thumb.png
 ---
 ![buildconf](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b630e246904a_9C6D/buildconf_thumb.png "buildconf")
 

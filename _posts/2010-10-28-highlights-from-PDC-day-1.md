@@ -7,6 +7,8 @@ tags:
 - c-sharp
 - azure
 - wpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg
 ---
 ### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg)
 Portable Library Projects

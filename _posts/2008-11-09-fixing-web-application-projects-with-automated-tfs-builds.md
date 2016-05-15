@@ -7,6 +7,8 @@ tags:
 - tfs
 - ci
 - aspnet-mvc
+header:
+  teaser: subtext-content/FixingWebApplicationProjectswithautomate_B396/image_thumb.png
 ---
 This weekend I started playing with Automated Builds in TFS 2008. Over the next few weeks I am going to setup automated builds for my various projects so I can start running automated integration testing and automated staging releases at certain intervals (nightly, weekly, etc). Unfortunately I hit a snag when I tried building one of my solutions that contained a Web Application Project.
 

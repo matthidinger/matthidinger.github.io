@@ -5,6 +5,8 @@ redirect_from: /archive/2009/02/19/wcsf-objectcontainerdatasource-with-linq-to-s
 tags: 
 - wcsf
 - linq-to-sql
+header:
+  teaser: 
 ---
 A project I am now working on is using the [Web Client Software Factory](http://www.codeplex.com/websf) (WCSF) from the [patterns & practices](http://msdn.microsoft.com/practices) team. It is basically an elaborate MVP-based framework that currently sits on top of ASP.NET Webforms.
 

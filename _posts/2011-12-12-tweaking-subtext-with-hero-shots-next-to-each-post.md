@@ -5,6 +5,8 @@ redirect_from: /archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each
 tags: 
 - subtext
 - open-source
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png)
 

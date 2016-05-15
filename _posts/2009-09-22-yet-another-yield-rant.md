@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2009/09/22/yet-another-yi
 redirect_from: /archive/2009/09/22/yet-another-yield-rant.aspx/
 tags: 
 - c-sharp
+header:
+  teaser: 
 ---
 This post was spawned as I was reviewing the latest [Oxite source code](http://oxite.codeplex.com/SourceControl/changeset/view/43567#709744) on [CodePlex](http://oxite.codeplex.com). I’ve been reading any source code I could get my hands on lately looking for inspiration to cure my “winter coding boredom.” While it isn’t winter yet, it is fast approaching, which means less outdoors time and more computer time. I try to blog more, update my open source projects with a new release, and with any luck begin a new project worth getting passionate about.
 

@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2012/01/10/tidy-up-mvc-fo
 redirect_from: /archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx/
 tags: 
 - aspnet-mvc
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_thumb_8.png
 ---
 Many line-of-business applications contain dozens of forms similar to the following, each field consisting of a few common characteristics:
 

@@ -8,6 +8,8 @@ tags:
 - xplat
 - ios
 - android
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_thumb.jpg
 ---
 [![WP\_20130416\_002](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_thumb.jpg "WP_20130416_002")](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_2.jpg)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

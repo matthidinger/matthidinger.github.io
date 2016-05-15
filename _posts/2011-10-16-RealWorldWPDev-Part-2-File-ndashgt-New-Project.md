@@ -5,6 +5,8 @@ redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Projec
 tags: 
 - wpdev
 - realworldwpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb.png
 ---
 ### Series Introduction and Outline
 

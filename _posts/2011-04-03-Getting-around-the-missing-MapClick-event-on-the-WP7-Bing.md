@@ -7,6 +7,8 @@ tags:
 - bing-maps
 - blend
 - silverlight
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png
 ---
 update
 ------

@@ -5,6 +5,8 @@ redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Appl
 tags: 
 - wpdev
 - realworldwpdev
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png
 ---
 ### Series Introduction and Outline
 

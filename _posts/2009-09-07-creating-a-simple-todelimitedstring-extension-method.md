@@ -5,6 +5,8 @@ redirect_from: /archive/2009/09/07/creating-a-simple-todelimitedstring-extension
 tags: 
 - c-sharp
 - linq
+header:
+  teaser: 
 ---
 This was one of the first extension methods I wrote when C\# 3.0 arrived, since I just stumbled across it on an older project I figured I might as well post it, if for nothing else but future reference. One downside to be aware of if you choose to use this method, is that it will not project the results on a IQueryable provider like LINQ to SQL, so please be aware the conversion will be done on the client side.
 

@@ -4,6 +4,8 @@ disqus_identifier: http://www.matthidinger.com/archive/2011/08/16/An-inheritance
 redirect_from: /archive/2011/08/16/An-inheritance-aware-ModelBinderProvider-in-MVC-3.aspx/
 tags: 
 - aspnet-mvc
+header:
+  teaser: 
 ---
 The default Model Binder in ASP.NET MVC works fine for most cases. Most of you have probably registered custom binders with it plenty of times.
 

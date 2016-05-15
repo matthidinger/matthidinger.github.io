@@ -5,6 +5,8 @@ redirect_from: /archive/2010/01/27/cryptic-entity-framework-exception-when-a-tab
 tags: 
 - entity-framework
 - ef4
+header:
+  teaser: subtext-content/CrypticEntityFrameworkexceptionwhenatabl_DC8B/pphtable_thumb.png
 ---
 > Unable to update the EntitySet 'PlanPriceHistory' because it has a DefiningQuery and no &lt;InsertFunction&gt; element exists in the &lt;ModificationFunctionMapping&gt; element to support the current operation.
 

@@ -7,6 +7,8 @@ tags:
 - ef4
 - rant
 - code-analysis
+header:
+  teaser: subtext-content/EF4EDMXdoesnotsuppressCodeAnalysiswarnin_F735/CropperCapture3_thumb.png
 ---
 ### Update
 

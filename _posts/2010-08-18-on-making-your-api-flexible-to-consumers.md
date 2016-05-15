@@ -5,6 +5,8 @@ redirect_from: /archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx
 tags: 
 - c-sharp
 - linq
+header:
+  teaser: 
 ---
 A year ago I had written briefly about [my love-affair with the yield keyword](http://matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx). Today a question was posed to me and the follow-up discussion was interesting enough to me to warrant a quick post.
 

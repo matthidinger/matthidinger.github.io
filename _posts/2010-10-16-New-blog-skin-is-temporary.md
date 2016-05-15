@@ -3,6 +3,8 @@ title: "New blog skin is live"
 disqus_identifier: http://www.matthidinger.com/archive/2010/10/16/New-blog-skin-is-temporary.aspx
 redirect_from: /archive/2010/10/16/New-blog-skin-is-temporary.aspx/
 tags: 
+header:
+  teaser: 
 ---
 I finally buckled down and created a new blog skin. As of Oct. 24th everyone should be seeing the new Metro blog theme. Heavily inspired by the Zune client and the Metro XAML template. It should be a little more modern and roomy now.
 

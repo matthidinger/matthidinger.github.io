@@ -5,6 +5,8 @@ redirect_from: /archive/2009/02/28/doddleimport-on-codeplex.aspx/
 tags: 
 - doddle
 - sharepoint
+header:
+  teaser: subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png
 ---
 Well I am heading out to Myrtle Beach tonight at 4am, so I spent today finishing up some cleanup so I could release DoddleImport on CodePlex. It should be pretty feature complete and ready for use, and as always, please let me know if it helps you out!
 

@@ -5,6 +5,8 @@ redirect_from: /archive/2008/10/12/increase-addin-performance-with-maf-and-wpf-u
 tags: 
 - wpf
 - maf
+header:
+  teaser: 
 ---
 As mentioned in my [previous article](http://blog2.matthidinger.com/archive/2008/10/12/managed-addin-framework-system.addin-with-wpf.aspx), the [Managed AddIn Framework](http://www.codeplex.com/clraddins) supports AppDomain isolation out of the box. This can come in very handy as long as you understand what is really happening under the covers. I am not going to cover all the details of AppDomain isolation and assembly loading within the CLR, but there are plenty of great resources about such things on MSDN. All you need to know for this article is that every .NET assembly much be loaded into memory within an AppDomain, and unless you specifically share assemblies across these domains (as explained below) then they will be loaded into memory for every AppDomain you create. This is particularly important for WPF AddIns, because the WPF assemblies consume a rather generous portion of memory, and since your AddIns are each loaded into their own AppDomain, this means that the WPF assemblies must *also* be loaded into each of these AppDomains. If you are not careful, your application could begin to consume large amounts of memory without you even noticing.
 

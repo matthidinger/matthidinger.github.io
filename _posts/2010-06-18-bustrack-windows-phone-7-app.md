@@ -6,6 +6,8 @@ tags:
 - wpdev
 - silverlight
 - bingmaps
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/BusTrack-Windows-Phone-7-App_12DE6/wp7_English_480x80_blue_3.png
 ---
 Update
 ======

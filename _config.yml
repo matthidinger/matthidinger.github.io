@@ -11,13 +11,13 @@ title                    : "Matt Hidinger"
 title_separator          : "-"
 name                     : "Matt Hidinger"
 description              : "Duh."
-url                      : "http://matthidinger.com"
-#url                     : "http://localhost:5000"
+#url                      : "http://matthidinger.com"
+url                     : "http://localhost:5000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 gh_repo                  :
-teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
+teaser                   : "banner.jpg" # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 # breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+words_per_minute         : 100
 comments:
   provider               : "disqus"
   disqus:

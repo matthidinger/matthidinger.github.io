@@ -5,6 +5,8 @@ redirect_from: /archive/2010/04/07/introduction-to-c-4-covariance-with-the-is-ke
 tags: 
 - vs2010
 - .net-4
+header:
+  teaser: subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary_thumb.jpg
 ---
 ![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary_thumb.jpg)
 

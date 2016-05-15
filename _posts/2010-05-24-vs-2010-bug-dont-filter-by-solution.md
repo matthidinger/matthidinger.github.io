@@ -3,6 +3,8 @@ title: "VS 2010 bug - Don&rsquo;t Filter Pending Changes by Solution"
 disqus_identifier: http://www.matthidinger.com/archive/2010/05/24/vs-2010-bug-dont-filter-by-solution.aspx
 redirect_from: /archive/2010/05/24/vs-2010-bug-dont-filter-by-solution.aspx/
 tags: 
+header:
+  teaser: subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/bugfeature_thumb.jpg
 ---
 ![](/images/subtext-content/VS2010bugDontFilterPendingChangesbySolut_A26A/bugfeature_thumb.jpg)
 

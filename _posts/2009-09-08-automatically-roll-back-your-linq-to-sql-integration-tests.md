@@ -5,6 +5,8 @@ redirect_from: /archive/2009/09/08/automatically-roll-back-your-linq-to-sql-inte
 tags: 
 - linq-to-sql
 - unit-testing
+header:
+  teaser: 
 ---
 Today I began integration testing my SqlRepository while I experiment with an MVC prototype. I tried googling for a simple base class for integration testing a LINQ to SQL DataContext that would provide automatic rollback between each test, but after (minimal) searching, decided to simply write my own. Perhaps this will help someone. This base class was written for MS Test, but simply renaming the attributes accordingly would yield the same results on nUnit, xUnit, etc.
 

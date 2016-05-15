@@ -7,6 +7,8 @@ tags:
 - jquery
 - web-standards
 - javascript
+header:
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png
 ---
 Last week I wrote a tutorial on [Progressive enhancement with ASP.NET MVC 3 and jQuery](http://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx). It might be a good idea to skim it if you aren’t already familiar with some of the concepts.
 

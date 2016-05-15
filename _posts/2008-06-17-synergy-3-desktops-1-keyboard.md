@@ -3,6 +3,8 @@ title: "Synergy - 3 Desktops, 1 Keyboard"
 disqus_identifier: http://www.matthidinger.com/archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx
 redirect_from: /archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx/
 tags: 
+header:
+  teaser: subtext-content/Synergy3Desktops1Keyboard_AC32/image_thumb_3.png
 ---
 ![](/images/subtext-content/Synergy3Desktops1Keyboard_AC32/image_thumb_3.png)
 
