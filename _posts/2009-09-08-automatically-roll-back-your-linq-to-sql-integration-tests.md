@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Automatically roll back your LINQ to SQL integration tests"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/09/08/automatically-roll-back-your-linq-to-sql-integration-tests.aspx
 redirect_from: /archive/2009/09/08/automatically-roll-back-your-linq-to-sql-integration-tests.aspx/
 tags: 
@@ -14,7 +12,7 @@ Today I began integration testing my SqlRepository while I experiment with an MV
 
 Simply inherit your test class from this base class and any changes done via the internal Context property will be automatically rolled back after each test runs.
 
-``` brush:
+```csharp
 /// <summary>
 /// The base class will allow LINQ to SQL integration testing with automatic rollbacks after each test
 /// </summary>
@@ -78,7 +76,7 @@ public abstract class RolledBackDataContextTests<TContext> where TContext : Data
 
 ### Usage
 
-``` brush:
+```csharp
 [TestClass]
 public class SqlRepositoryTests : RolledBackDataContextTests<NorthwindDataContext>
 {

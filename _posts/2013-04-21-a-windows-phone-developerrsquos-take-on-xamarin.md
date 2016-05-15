@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "A Windows Phone Developer&rsquo;s take on Xamarin"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx
 redirect_from: /archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx/
 tags: 
@@ -11,7 +9,7 @@ tags:
 - ios
 - android
 ---
-[![WP\_20130416\_002]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_thumb.jpg "WP_20130416_002")]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_2.jpg)
+[![WP\_20130416\_002](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_thumb.jpg "WP_20130416_002")](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_2.jpg)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 [Xamarin](http://xamarin.com/) is all the rage in mobile development right now. They just threw an [amazing conference](http://xamarin.com/evolve) in Austin and started trending on Twitter during the opening keynote.
@@ -41,7 +39,7 @@ Why would Microsoft show interest in a platform designed to sell licenses for de
 
 ### An analogy is in order.
 
-[![WP\_20130416\_010]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_010_thumb_1.jpg "WP_20130416_010")]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_010_4.jpg)
+[![WP\_20130416\_010](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_010_thumb_1.jpg "WP_20130416_010")](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_010_4.jpg)
 
 Take the image to the left. The bar at the conference was serving cocktails named iOS, Android, and Windows. The drinks were colored according to the platform. It was a fun idea.
 

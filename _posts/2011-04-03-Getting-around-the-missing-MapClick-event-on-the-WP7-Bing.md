@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Getting around the missing MouseClick event on the WP7 Bing Maps control"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/04/03/Getting-around-the-missing-MapClick-event-on-the-WP7-Bing.aspx
 redirect_from: /archive/2011/04/03/Getting-around-the-missing-MapClick-event-on-the-WP7-Bing.aspx/
 tags: 
@@ -38,7 +36,7 @@ In my scenario, I have a visual state on my page called “MapOnlyState” which
 2.  With the GoToStateAction selected, look in the Property pane: the default Trigger will be an EventTrigger, which by itself allows you to select any event on the control to invoke the trigger
 3.  Click the New button to choose a different trigger. Select the MapTapTrigger *(after you’ve added the code below to your project and compiled!)* 
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png" title="SNAGHTML64ad1bd5" alt="SNAGHTML64ad1bd5" width="644" height="370" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png" title="SNAGHTML64ad1bd5" alt="SNAGHTML64ad1bd5" width="644" height="370" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5.png)
 
 ####  
 
@@ -46,7 +44,7 @@ In my scenario, I have a visual state on my page called “MapOnlyState” which
 
 The steps above generate the following XAML, which you could of course write yourself in Visual Studio if you wanted.
 
-``` brush:
+```csharp
 <m:Map x:Name="map">
     <Custom:Interaction.Triggers>
         <Controls:MapTapTrigger>
@@ -62,7 +60,7 @@ The steps above generate the following XAML, which you could of course write you
 
 To use this trigger simply paste the class into your project and compile. Blend will find it automatically when the Select Object window opens.
 
-``` brush:
+```csharp
 public class MapTapTrigger : TriggerBase<Map>
 {
     private bool _isTapOnly = true;

@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Writing a Fluent ASP.NET MVC Recursive TreeView Helper"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/11/27/Writing-a-Fluent-ASP-NET-MVC-Recursive-TreeView-Helper.aspx
 redirect_from: /archive/2011/11/27/Writing-a-Fluent-ASP-NET-MVC-Recursive-TreeView-Helper.aspx/
 tags: 
@@ -17,7 +15,7 @@ What is it?
 
 #### Given the following self-referencing hierarchal model…
 
-``` brush:
+```csharp
 public class TreeViewLocation
 {
     public TreeViewLocation()
@@ -36,7 +34,7 @@ public class TreeViewLocation
 
 #### …we want to generate an HTML unordered-list like this
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png" title="image" alt="image" width="290" height="281" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_11.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png" title="image" alt="image" width="290" height="281" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_11.png)
 
 what’s the new API look like?
 -----------------------------
@@ -70,7 +68,7 @@ Writing a fluent API is typically pretty simple. The key requirement is that eac
 
 For example, to set the ItemText which will display the item label in each &lt;li&gt;, we take the property selector and simply store it into the \_displayProperty field, eventually returning the current instance allowing for further methods to be chained together.
 
-``` brush:
+```csharp
 public TreeView<T> ItemText(Func<T, string> selector)
 {
     if (selector == null) throw new ArgumentNullException("selector");
@@ -87,7 +85,7 @@ One way to hook into this infrastructure is by implementing both **IHtmlString**
 
 Also notice the **ValidateSettings()** call – this is necessary in many fluent configurations, since these kinds of APIs lend themselves to invalid configuration on occasion. For example using 2 incompatible methods like ItemText() and ItemTemplate() together – typically you either want to use a simple text display or a full-blowing template display – but it’s impossible to use both. We could throw an exception here alerting the developer that this is an invalid configuration.
 
-``` brush:
+```csharp
 public override string ToString()
 {
     ValidateSettings();
@@ -118,11 +116,11 @@ With this project I decided to include a [NuGet Sample Package](http://blog.davi
 
 **These are source-only packages.** By installing this package into your project you will get a raw file in **Helpers\\TreeView.cs** that you can edit or update as you see fit.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_4.png" title="image" alt="image" width="766" height="89" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_13.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_4.png" title="image" alt="image" width="766" height="89" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_13.png)
 
 The sample project is the same concept, it will add a **TreeViewController**, and a **TreeView.cshtml** view which demonstrates the usage of the TreeView helper. Once you’ve tried out the sample and played with it, it’s very easy to uninstall via NuGet to remove the unnecessary files.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb.png" title="image" alt="image" width="763" height="86" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_3.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb.png" title="image" alt="image" width="763" height="86" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_3.png)
 
 ### CodePlex
 

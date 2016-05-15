@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "LINQ Audit Trail v2 - DoddleAudit"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/01/12/linq-audit-trail-v2.aspx
 redirect_from: /archive/2009/01/12/linq-audit-trail-v2.aspx/
 tags: 
@@ -25,7 +23,7 @@ Usage
 
 Simply define your audit definitions at any time before calling SubmitChanges();
 
-``` brush:
+```csharp
 this.Products.Audit();
 this.Categories.Audit();
 this.Orders.Audit().AuditAssociation(o => o.Order_Details);
@@ -42,13 +40,13 @@ Please see the CodePlex project for updates and new releases. **[DoddleAudit](ht
 -   Inserted records will have their primary keys correctly stored in the audit table now.
 -   Built-in support for auditing across relationships.
     -   E.g., assume you want to audit a Contacts table which has a 1-to-many relationship to the Addresses table, thus allowing any number of Addresses to each Contact. Well ideally you want to show these Address audits on your ContactDetails.aspx, which is exactly what you can see in the screenshot below. 
-        [<img src="{{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image_thumb.png" title="image" alt="image" width="535" height="508" />]({{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image.png)
+        [<img src="/images/subtext-content/LINQAuditTrailv2_B491/image_thumb.png" title="image" alt="image" width="535" height="508" />](/images/subtext-content/LINQAuditTrailv2_B491/image.png)
 
 Ability to define custom “audit property resolvers” to override the default auditing mechanism for properties that you specify.
 
 -   For example, notice in the above screenshot that “Address Type” has a value of “1” since that is how the data is stored in the table. This number does little good for the end user, so in V2 it is now possible to customize specific properties as needed. I will explain more details about this soon. Below I am overriding the default auditing of the Product.CategoryID property by querying the category by looking up the CategoryID, returning the Category.CategoryName, and renaming the audit field to “Category” since “CategoryID” is no longer accurate.
 
-``` brush:
+```csharp
 public class ProductAuditResolver : AuditPropertyResolver
 {
     protected override void CustomizeProperties()
@@ -66,15 +64,15 @@ public class ProductAuditResolver : AuditPropertyResolver
 1.  [Download the latest release from CodePlex](http://www.codeplex.com/doddleaudit), the source code and compiled DLL are available, and add reference to **Doddle.Linq.Audit.dll** in your project that contains your LINQ to SQL DBML
 2.  At a minimum you will need to add 2 tables to your database (and your DBML) to store the audit records. Please see the schema below and add these tables to your database.
     -   NOTE: Keep in mind this database schema is entirely customizable. I chose to use two tables to store all of my audits, but you could very easily change this logic to use a separate table for each entity or whatever storage schema you choose.  
-        [<img src="{{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image_thumb_3.png" title="image" alt="image" width="709" height="274" />]({{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image_3.png)
+        [<img src="/images/subtext-content/LINQAuditTrailv2_B491/image_thumb_3.png" title="image" alt="image" width="709" height="274" />](/images/subtext-content/LINQAuditTrailv2_B491/image_3.png)
 
 3.  Open your DBML and click in the designer surface. In the property pane you will need to change the **Base Class** property of your generated DataContext to be **Doddle.Linq.Audit.LinqToSql.AuditableDataContext 
-    [<img src="{{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image_thumb_4.png" title="image" alt="image" width="618" height="243" />]({{ site.baseurl }}images/subtext-content/LINQAuditTrailv2_B491/image_4.png)
+    [<img src="/images/subtext-content/LINQAuditTrailv2_B491/image_thumb_4.png" title="image" alt="image" width="618" height="243" />](/images/subtext-content/LINQAuditTrailv2_B491/image_4.png)
     **
 4.  Lastly you will need to create a partial DataContext class to wire up the auditing infrastructure to match your database schema. Add a new Class file to your project and insert the following code. Customize if necessary to match your auditing schema.
     [](http://11011.net/software/vspaste)[](http://11011.net/software/vspaste)
 
-    ``` brush:
+    ```csharp
     public partial class NorthwindEntitiesDataContext
     {
         protected override void InsertAuditRecordToDatabase(EntityAuditRecord record)

@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Transform your LINQ queries into Excel/PDF reports with DoddleReport 1.2"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1.aspx
 redirect_from: /archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1.aspx/
 tags: 
@@ -61,7 +59,7 @@ So what does it generate?
 <h3 id="section-1"></h3></td>
 </tr>
 <tr class="even">
-<td><p><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_2.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_thumb.png" title="image_thumb[8]" alt="image_thumb[8]" width="256" height="300" /></a></p></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_thumb.png" title="image_thumb[8]" alt="image_thumb[8]" width="256" height="300" /></a></p></td>
 <td><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204396"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204397" title="doddlepdfreport" alt="doddlepdfreport" width="300" height="295" /></a></td>
 </tr>
 <tr class="odd">
@@ -112,7 +110,7 @@ DoddleReport has been split into multiple packages to support more users’ need
 -   **Install-Package DoddleReport.OpenXml**
 -   **Install-Package DoddleReport.Dynamic**
 
-### [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png" title="image" alt="image" width="625" height="480" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_2.png)
+### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png" title="image" alt="image" width="625" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_2.png)
 
 New in v1.2
 -----------

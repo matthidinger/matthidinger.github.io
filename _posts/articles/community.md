@@ -1,7 +1,5 @@
 ---
-layout: page
 title: "Community"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/07/24/community.aspx
 redirect_from: /archive/2011/07/24/community.aspx/
 tags: 

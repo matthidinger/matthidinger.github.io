@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Sharing Code: Windows 8 and Windows Phone"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/12/05/sharing-code-windows-8-and-windows-phone.aspx
 redirect_from: /archive/2012/12/05/sharing-code-windows-8-and-windows-phone.aspx/
 tags: 
@@ -14,7 +12,7 @@ tags:
 ---
 I recently had the opportunity to speak at Microsoft’s [New Era of Work](http://www.microsoft.com/enterprise/events/theneweraofwork3/#fbid=7bLqKFFM2kc) conference in Chicago. Below you’ll find the presentation material, the Real-World Stocks project which demonstrates the principles, and a high-level recap of the lessons learned while practicing the following techniques in actual apps.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png" title="image" alt="image" width="200" height="358" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_8.png) [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_thumb.png" title="screenshot_12052012_110659" alt="screenshot_12052012_110659" width="591" height="357" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_2.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png" title="image" alt="image" width="200" height="358" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_8.png) [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_thumb.png" title="screenshot_12052012_110659" alt="screenshot_12052012_110659" width="591" height="357" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_2.png)
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Slides
@@ -24,7 +22,7 @@ A number of slides were provided by Microsoft, and many specifically from [Matth
 
 |                                                                                                                                                                                                                                                                                                                                                                                      |     |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
-| [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg" title="WP_20121128_001" alt="WP_20121128_001" width="201" height="356" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_2.jpg)  |     |
+| [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg" title="WP_20121128_001" alt="WP_20121128_001" width="201" height="356" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_2.jpg)  |     |
 
  
 
@@ -38,7 +36,7 @@ source
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_6.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_2.png" title="image" alt="image" width="202" height="354" /></a></td>
+<td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_6.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_2.png" title="image" alt="image" width="202" height="354" /></a></td>
 <td><p>For this talk I started with my <a href="http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx">Real-World Stocks Windows Phone</a> project, extracted the central logic into a Portable Class Library, and used File-Linking to share Controls and Converters between the two projects.</p>
 <p>The full source code for Real-World Stocks can be downloaded at the following link, inside a new folder named <strong>CodeSharingSample</strong>.</p>
 <a href="http://realworldstocks.codeplex.com/" title="http://realworldstocks.codeplex.com/"><br />
@@ -76,7 +74,7 @@ Sometimes you need to share a raw .cs file between projects. You can copy/paste 
 
 **Pro tip:** Finally in VS 2012, you can hold the Left-Alt key and drag entire folders between projects… It will Add a Link for every file inside the folder!
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_1.png" title="image" alt="image" width="624" height="337" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_13.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_1.png" title="image" alt="image" width="624" height="337" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_13.png)
 
 ####  
 
@@ -86,7 +84,7 @@ Sometimes your Linked Files won’t immediately compile on both platforms.
 
 A very common nuisance is when accessibility modifier are different. For example, sharing a custom Control I wrote for Real-World Stocks: in Silverlight the method signature for *OnApplyTemplate* **** is *public;* in Windows it’s marked *protected*. To work around this I had to write a rather silly \#if block to tweak how this code will be compiled, depending on which platform it’s compiling on.
 
-``` brush:
+```csharp
 namespace RealWorldStocks.UI.Phone.Controls
 {
     [TemplateVisualState(Name = "Positive", GroupName = "PriceStates")]
@@ -121,7 +119,7 @@ When you Add –&gt; New Project and select a Portable Class Library, you will s
 
 Your end result is a single project, with a single codebase, *outputting a single assembly* (.dll) that is able to be referenced by any of the targeted platforms.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_5.png" title="image" alt="image" width="283" height="276" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_15.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_5.png" title="image" alt="image" width="283" height="276" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_15.png)
 
  
 
@@ -133,7 +131,7 @@ Suppose you want to write a shared HTTP stack in your PCL, which will certainly 
 
 *Download the full sample project to see how these pieces fit together.*
 
-``` brush:
+```csharp
 namespace RealWorldStocks.Core
 {
     public abstract class PlatformAdapter
@@ -168,7 +166,7 @@ Make a great user experience!
 
 Sharing code, assets, and skills are all great tools for more efficient software delivery. Just don’t forget that you are creating software for different platforms, and the user should always have the optimal experience on each. Not every screen is going to show the same data, in the same way.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_6.png" title="image" alt="image" width="787" height="293" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_17.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_6.png" title="image" alt="image" width="787" height="293" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_17.png)
 
  
 

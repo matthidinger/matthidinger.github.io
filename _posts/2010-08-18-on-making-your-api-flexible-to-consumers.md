@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "On making your API flexible to consumers"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx
 redirect_from: /archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx/
 tags: 

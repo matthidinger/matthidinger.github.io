@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "DynamicLocalhost NuGet Package for Windows Phone"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx
 redirect_from: /archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx/
 tags: 
@@ -48,7 +46,7 @@ Ok that’s great, but how do I use it?
 
 First you have to install the package. Make sure NuGet is installed.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_thumb.png" title="image" alt="image" width="759" height="82" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_2.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_thumb.png" title="image" alt="image" width="759" height="82" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/DynamicLocalhost_132CE/image_2.png)
 
 The rest is up to you, to use the DynamicLocalhost class however you see fit.
 
@@ -56,7 +54,7 @@ For me, in my WP7 projects I create a static ApplicationSettings class to use th
 
  
 
-``` brush:
+```csharp
 public static class ApplicationSettings
 {
     public static string WebServiceBaseUrl { get; private set; }

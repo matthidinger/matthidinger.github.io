@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Focus on the what, not the how"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/02/17/focus-on-the-what-not-the-how.aspx
 redirect_from: /archive/2010/02/17/focus-on-the-what-not-the-how.aspx/
 tags: 
@@ -15,11 +13,11 @@ I saw the following question asked earlier today -- the only context given was t
 > it shows me an exception index out of range exception: length and index must be within the range of the string, parameter name: length 
 > so its five characters and on debug time : index is 2 so I'm starting from index 3 to length which is 5 -1 "4"
 
-[<img src="{{ site.baseurl }}images/subtext-content/Focusonthewhatnotthehow_93EE/627226315_325aa7b527_thumb.jpg" title="627226315_325aa7b527" alt="627226315_325aa7b527" width="310" height="207" />]({{ site.baseurl }}images/subtext-content/Focusonthewhatnotthehow_93EE/627226315_325aa7b527.jpg) It was clear that he looking to parse some sort of pre-defined time format, but just to be sure I confirmed it with him. While I could have helped this person resolve the question he asked about (the IndexOutOfRangeException), instead I took a step back to focus on *what* he really wanted to achieve. His immediate  problem was that he was too focused on the details – *the how*. He knew what he wanted: the hour, and the minute of the occurrence in a timestamp, but using SubString and IndexOf was not going to be the most robust solution to this problem.
+[<img src="/images/subtext-content/Focusonthewhatnotthehow_93EE/627226315_325aa7b527_thumb.jpg" title="627226315_325aa7b527" alt="627226315_325aa7b527" width="310" height="207" />](/images/subtext-content/Focusonthewhatnotthehow_93EE/627226315_325aa7b527.jpg) It was clear that he looking to parse some sort of pre-defined time format, but just to be sure I confirmed it with him. While I could have helped this person resolve the question he asked about (the IndexOutOfRangeException), instead I took a step back to focus on *what* he really wanted to achieve. His immediate  problem was that he was too focused on the details – *the how*. He knew what he wanted: the hour, and the minute of the occurrence in a timestamp, but using SubString and IndexOf was not going to be the most robust solution to this problem.
 
 Two immediate solutions came to mind:
 
-``` brush:
+```csharp
 var time1 = TimeSpan.Parse(leavingTimeTextBox.Text);
 var time2 = DateTime.ParseExact(leaveTimeTextBox.Text, "HH:mm");
 ```

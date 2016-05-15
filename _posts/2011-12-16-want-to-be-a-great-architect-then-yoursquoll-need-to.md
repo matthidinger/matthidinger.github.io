@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Want to be a great architect? Then you&rsquo;ll need to be a great salesman"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx
 redirect_from: /archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx/
 tags: 
@@ -10,7 +8,7 @@ tags:
 - career
 - architecture
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg" title="vincefromshamwow" alt="vincefromshamwow" width="292" height="299" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_2.jpg)The title is slightly tongue-in-cheek, but I do believe selling is a crucial aspect of being an ‘architect.’ And I don’t mean selling to customers.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_thumb.jpg" title="vincefromshamwow" alt="vincefromshamwow" width="292" height="299" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Want-to-be-a-great-architect-be-a-great-_860E/vincefromshamwow_2.jpg)The title is slightly tongue-in-cheek, but I do believe selling is a crucial aspect of being an ‘architect.’ And I don’t mean selling to customers.
 
 But first, a backstory
 ----------------------

@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "RealWorldWPDev Part 5: Creating and Consuming Web Services"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx
 redirect_from: /archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx/
 tags: 
@@ -17,7 +15,7 @@ This series is going to walk through building a polished, functioning Windows Ph
 Choices
 -------
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb.png" title="image" alt="image" width="288" height="480" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_4.png)In the Microsoft world we have no shortage of client and server-side HTTP stacks to choose from. Rather than try to cover every possible combination, and to prevent this topic from getting too long-winded, I will keep this part succinct.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb.png" title="image" alt="image" width="288" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_4.png)In the Microsoft world we have no shortage of client and server-side HTTP stacks to choose from. Rather than try to cover every possible combination, and to prevent this topic from getting too long-winded, I will keep this part succinct.
 
 Our first major decisions revolve around the following options:
 
@@ -55,7 +53,7 @@ The following will walk you through a pretty efficient way for creating and cons
 
 In **RealworldStocks.Client.Core** I have a **Models** folder, which include various classes that inherit from **NotifyObject,** seen below.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6_thumb.png" title="SNAGHTML9d234fa6" alt="SNAGHTML9d234fa6" width="900" height="588" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6_thumb.png" title="SNAGHTML9d234fa6" alt="SNAGHTML9d234fa6" width="900" height="588" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/SNAGHTML9d234fa6.png)
 
 ### step 2: “Add as Link” model classes into your Web project
 
@@ -63,11 +61,11 @@ Since you want these same classes to be serialized from your service, you will n
 
 Then navigate to the **RealWorldStocks.Client.Core\\Models** folder and select the entities you plan on serializing and exposing to your client, **but don’t just press Add!** Next to the Add button is a drop-down arrow, open it and make sure you click **Add As Link**
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_2.png" title="image" alt="image" width="900" height="557" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_6.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_2.png" title="image" alt="image" width="900" height="557" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_6.png)
 
 Notice how the files have little “shortcut” overlays on their icons.
 
-##### [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png" title="image" alt="image" width="310" height="513" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_8.png)
+##### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png" title="image" alt="image" width="310" height="513" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_8.png)
 
 ### step 3: Return your data as JSON from the MVC controller
 
@@ -78,7 +76,7 @@ Below is the complete **StocksController** for exposing Snapshots and getting th
 3.  **\[Compress\]** – This attribute checks the incoming Accept-Encoding of the request, and if it supports GZip, will automatically GZip compress the outgoing response. Our Windows Phone app uses the **SharpGIS**.**GZipWebClient** to decompress it – discussed below.
 4.  **\[OutputCache\]** – On The **GetSnapshot** method below there is an **OutputCache with a Duration of 60**. This attribute instructs MVC to return a cached version of this response as long as the incoming route parameters are the same – in this case, if the same Symbol is requested. This means that if multiple Realworld Stocks users out there are all request a snapshot of MSFT, our service will cache this for 60 seconds and give them all the same response, rather than hitting Yahoo every single time.
 
-``` brush:
+```csharp
 [AllowJsonGet]
 [NoCache]
 [Compress]
@@ -129,7 +127,7 @@ Now that we have our service up there and returning JSON, let’s start consumin
 3.  Logging requests and responses in the Debug window
 4.  Deserializing the JSON into the specific Model type automatically
 
-``` brush:
+```csharp
 public static class HttpClient
 {
     public static TimeSpan Timeout = TimeSpan.FromSeconds(30);
@@ -191,7 +189,7 @@ public static class HttpClient
 
 The logging is helpful to see the following in the Debug window as you’re testing the app.
 
-``` brush:
+```csharp
 INFO: HTTP Request: http://legacy/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK&symbols=AAPL&isTrial=False&clientVersion=1.0.0.0
 INFO: HTTP Response: [{"Symbol":"MSFT","Company":"Microsoft Corpora","OpeningPrice":27.08,"LastPrice":27.19,"DaysChange":0.03,"DaysChangePercentFormatted":"+0.11%","DaysChangeFormatted":"+0.03","DaysRangeMin":0,"DaysRangeMax":0,"Volume":56897792,"PreviousClose":27.16}]
 ```
@@ -207,7 +205,7 @@ Calling an HTTP endpoint is as simple as declaring the URL along with any query 
 3.  Builds up any query string params that will be sent with the request.
 4.  Essentially, it builds a string like the following, and automatically parses the JSON into the type of Model we expect from the server: <http://localhost/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK>
 
-``` brush:
+```csharp
 public class StocksWebService : HttpService, IStocksWebService
 {
     public StocksWebService()
@@ -271,7 +269,7 @@ The **Coroutine** is the **UpdateWatchList** method below.
 
 **This is actually a lot of stuff going on, and it’s async. Notice how there are no lambdas, no callbacks, no anonymous method delegates? It’s really quite elegant, and has suited me very nicely while I patiently wait for C\# 5 and official async compiler support.**
 
-``` brush:
+```csharp
 private IEnumerable<IResult> UpdateWatchList()
 {
     BusyIndictator.Show("Loading watch list...");

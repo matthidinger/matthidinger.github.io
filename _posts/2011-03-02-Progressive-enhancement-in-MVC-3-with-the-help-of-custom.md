@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Progressive enhancement in MVC 3 with the help of custom ActionResults"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx
 redirect_from: /archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx/
 tags: 
@@ -21,13 +19,13 @@ As a quick recap, our goal is to build a Contact Us form that works perfectly on
 
 ### JavaScript enabled
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png" title="SNAGHTML1a3b6b08_thumb4" alt="SNAGHTML1a3b6b08_thumb4" width="772" height="219" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_4.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png" title="SNAGHTML1a3b6b08_thumb4" alt="SNAGHTML1a3b6b08_thumb4" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_4.png)
 
 As you can see when a user visits our site with JavaScript enabled and clicks on the Contact Us link, they are presented with a nice jQuery UI dialog window. They can fill in the form and get a nice confirmation message inside the dialog, and finally close it without ever leaving the page they were on.
 
 ### JavaScript disabled
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_thumb.png" title="SNAGHTML1a48993d_thumb1" alt="SNAGHTML1a48993d_thumb1" width="772" height="219" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_2.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_thumb.png" title="SNAGHTML1a48993d_thumb1" alt="SNAGHTML1a48993d_thumb1" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a48993d_thumb1_2.png)
 
 A visitor without JavaScript will still get the same functionality, just a slightly lesser experience. Without JavaScript logic attached to our Contact Us link it behaves like a plain old hyperlink, navigating the browser to a new page. Once they fill out the form and press Send Message we redirect them back to the Home page with a confirmation message.
 
@@ -39,7 +37,7 @@ Per the suggestion from the commenter, I have abstracted the logic into two cust
 
  
 
-``` brush:
+```csharp
 [HttpGet]
 public ActionResult ContactUs()
 {
@@ -71,7 +69,7 @@ Below you will find the code that abstracts our progressive enhancement logic. T
 
 #### AjaxableActionResult
 
-``` brush:
+```csharp
 /// <summary>
 /// Executes a specific action result depending on whether the incoming request is an Ajax request or not
 /// </summary>
@@ -112,7 +110,7 @@ public class AjaxableActionResult : ActionResult
 
 #### AjaxableViewResult
 
-``` brush:
+```csharp
 /// <summary>
 /// Inspects the incoming request and returns a PartialViewResult for Ajax requests and a full ViewResult for non-Ajax requests
 /// </summary>
@@ -232,7 +230,7 @@ For completeness I decided to add a simple extensibility point to change the Aja
 
  
 
-``` brush:
+```csharp
 protected void Application_Start()
 {
     AreaRegistration.RegisterAllAreas();

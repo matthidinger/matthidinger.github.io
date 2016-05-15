@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "RealWorldWPDev Part 3: Caliburn.Micro and Application Infrastructure"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure.aspx
 redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure.aspx/
 tags: 
@@ -32,13 +30,13 @@ Caliburn.Micro needs to be installed into both the **RealWorldStocks.Client.Core
 
 To get Caliburn.Micro you can open up the Package Manager console and type the following, *but make sure you select the right Default Project. **You must install CM into both .Core and .UI projects!***
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_2.png" title="image" alt="image" width="767" height="91" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_6.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_2.png" title="image" alt="image" width="767" height="91" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_6.png)
 
 #### From the Manage NuGet Packages UI
 
 Alternatively you can right-click on both Projects from the Solution Explorer and select “Manage NuGet Packages…”, then click the Online pane and search for Caliburn.Micro. ***You must install CM into both .Core and .UI projects!***
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png" title="image_thumb[19]" alt="image_thumb[19]" id="hero" width="686" height="369" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_2.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png" title="image_thumb[19]" alt="image_thumb[19]" id="hero" width="686" height="369" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_2.png)
 
  
 
@@ -54,7 +52,7 @@ Once Caliburn.Micro finishes installing it should open up a web page with instru
 6.  Create a new **AppBootstrapper.cs** file in the **Framework** folder
 7.  Paste the following code into **AppBoostrapper.cs**
 
-``` brush:
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -116,7 +114,7 @@ namespace RealWorldStocks.Client.UI.Framework
 
 8. Since we moved the **AppBoostrapper** into the **RealWorldStocks.Client.UI.Framework** namespace we need to update our **App.xaml**. Paste the following into your **App.xaml**
 
-``` brush:
+```csharp
 <Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Framework="clr-namespace:RealWorldStocks.Client.UI.Framework"
@@ -150,7 +148,7 @@ If the NuGet package created a ShellViewModel.cs in your project, then you will 
 Application Infrastructure
 --------------------------
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_1.png" title="image" alt="image" width="293" height="636" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_4.png)The final pieces of our infrastructure include the following:
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb_1.png" title="image" alt="image" width="293" height="636" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_4.png)The final pieces of our infrastructure include the following:
 
 ### Value Converters
 

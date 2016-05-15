@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Better late than never, I've joined twitter"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/04/12/better-late-than-never-ive-joined-twitter.aspx
 redirect_from: /archive/2010/04/12/better-late-than-never-ive-joined-twitter.aspx/
 tags: 

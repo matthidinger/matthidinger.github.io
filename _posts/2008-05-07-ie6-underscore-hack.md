@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "IE6 Underscore Hack"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/05/07/ie6-underscore-hack.aspx
 redirect_from: /archive/2008/05/07/ie6-underscore-hack.aspx/
 tags: 
@@ -10,7 +8,7 @@ tags:
 ---
 So as you can see I've been playing with ASP.NET MVC in my free time lately. But as it turns out I learned something totally unrelated to MVC while I was editing the default stylesheet that MVC Preview 2 ships with.
 
-``` brush:
+```csharp
 #mainContent
 {
     padding: 30px 30px 15px 30px;
@@ -25,7 +23,7 @@ So as you can see I've been playing with ASP.NET MVC in my free time lately. But
 
 I found this URL to [WellStyled](http://www.wellstyled.com/css-underscore-hack.html "http://www.wellstyled.com/css-underscore-hack.html") which describes the hack in more detail. Here are some cool usage examples of this hack:
 
-``` brush:
+```csharp
 #box 
 { 
     min-height: 300px; 

@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Customizing the Entity Framework T4 Template, suppressing code analysis"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx
 redirect_from: /archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx/
 tags: 
@@ -22,7 +20,7 @@ These steps were written for **Visual Studio 2010 Beta 2**, so they may change s
 
 Open the EDMX Designer, right-click on the design surface, and select “Add Code Generation Item…”
 
-[<img src="{{ site.baseurl }}images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png" title="addcodegenitem" alt="addcodegenitem" width="330" height="319" />]({{ site.baseurl }}images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem.png) 
+[<img src="/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png" title="addcodegenitem" alt="addcodegenitem" width="330" height="319" />](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem.png) 
 
 ### Step 2
 
@@ -30,7 +28,7 @@ Select the “ADO.NET EntityObject Generator” from the Add New Item dialog
 
 *Note: The specific instructions below only work for the standard EntityObject Generator, and will not apply directly to the Self-Tracking Entities template. If you wish to use Self-Tracking entities, the instructions in this post should be sufficient to customize the template yourself.*
 
-[<img src="{{ site.baseurl }}images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image_thumb.png" title="image" alt="image" width="644" height="364" />]({{ site.baseurl }}images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image.png)
+[<img src="/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image_thumb.png" title="image" alt="image" width="644" height="364" />](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/image.png)
 
 Now you should have a new EfModel.tt file in your project. This is the T4 template that the EDMX designer will use to generate the classes that represent your EDMX model.
 
@@ -65,7 +63,7 @@ You can use the standard Visual Studio Find dialog to find all instances where c
 
 Following is a snippet from my modified ObjectContext generation.
 
-``` brush:
+```csharp
 /// <summary>
 /// <#=SummaryComment(container)#>
 /// </summary><#=LongDescriptionCommentElement(container, region.CurrentIndentLevel)#>

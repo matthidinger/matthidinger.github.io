@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "New blog skin is live"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/10/16/New-blog-skin-is-temporary.aspx
 redirect_from: /archive/2010/10/16/New-blog-skin-is-temporary.aspx/
 tags: 

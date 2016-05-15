@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Tidy up MVC forms with a simple HtmlFormHelper"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx
 redirect_from: /archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx/
 tags: 
@@ -15,11 +13,11 @@ Many line-of-business applications contain dozens of forms similar to the follow
 4.  A tooltip that can be hovered for a detailed description of the field
 5.  Validation messages if the input is incorrect
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_thumb_8.png" title="image" alt="image" width="698" height="524" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_19.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_thumb_8.png" title="image" alt="image" width="698" height="524" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/1d7e768239e6_E33C/image_19.png)
 
 To achieve this, we can create the following Model
 
-``` brush:
+```csharp
 public class ProductInput
 {
     [HiddenInput(DisplayValue = false)]
@@ -48,7 +46,7 @@ public class ProductInput
 
 However, when it comes to actually rendering the view,  many MVC forms contain some variation of the following pattern, *repeated over and over for every single field.*
 
-``` brush:
+```csharp
 <div class="field-wrapper">
     <div class="field-label">
         @Html.LabelFor(m => m.Name)
@@ -70,7 +68,7 @@ To solve this, I use a very simple HtmlFormHelper called FullFieldEditor, which 
 
 The entire View in the screenshot above consists of the following:
 
-``` brush:
+```csharp
 <form action="" method="post">
     <div class="two-column">
     

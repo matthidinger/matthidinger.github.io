@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Yet Another Yield Rant"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx
 redirect_from: /archive/2009/09/22/yet-another-yield-rant.aspx/
 tags: 
@@ -15,7 +13,7 @@ The following code is an excerpt from the Oxite Blog class. Blog as it turns out
 
 Unfortunately, the developer writing the Blog class did not take advantage of the (albeit minor) utility provided. The developer chose to new up a List, insert the single item, then return the list -- as seen in the following code.
 
-``` brush:
+```csharp
 IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()
 {
     List<ICacheEntity> dependencies = new List<ICacheEntity>();
@@ -30,7 +28,7 @@ We've all written code like this. The bad habit may even be so ingrained into ou
 
 The above code can simply be re-written as follows. The benefits of this should be clear: fewer lines of code, easier readability, greater performance (minor of course, but still).  Since this topic has been covered [at great length](http://lmgtfy.com/?q=c%23+yield) on the blogosphere I won't go into any more detail, but just in case, [here is a quick article](http://www.ytechie.com/2009/02/using-c-yield-for-readability-and-performance.html) I found that should help explain the benefits.
 
-``` brush:
+```csharp
 IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()
 {
      yield return Site;
@@ -43,7 +41,7 @@ IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()
 
 I actually stumbled onto something small but nice while reading the Oxite code. Enumerable.Empty.
 
-``` brush:
+```csharp
 IEnumerable<Product> products = Enumerable.Empty<Product>;
 ```
 

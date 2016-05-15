@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Entity Framework Comparison Frustration: Explained"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/02/26/entity-framework-comparison-frustration-explained.aspx
 redirect_from: /archive/2008/02/26/entity-framework-comparison-frustration-explained.aspx/
 tags: 
@@ -10,7 +8,7 @@ tags:
 ---
 This post is a follow-up to an article I wrote a few weeks ago, [ADO.NET Entity Framework Comparison Frustration](http://blog.matthidinger.com/2008/02/01/ADONETEntityFrameworkComparisonFrustration.aspx). As a quick re-cap, I was simply trying to filter a list of users with a LINQ query expression by comparing custom classes, not primitive types.
 
-``` brush:
+```csharp
 TorvusEntities entities = new TorvusEntities(); 
 
 // Pull my Account Entity from the database
@@ -38,7 +36,7 @@ And here it is, the confirmation I wanted (albeit not the answer I was hoping fo
 
 Oh, another thing worth mentioning, method returns don't count as so-called constant expressions, and will thrown an exception when attempted.
 
-``` brush:
+```csharp
 public class MyBusinessObject
 {
     public int GetId()

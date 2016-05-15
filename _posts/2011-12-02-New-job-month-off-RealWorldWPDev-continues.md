@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "New job, month off, RealWorldWPDev continues"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/12/02/New-job-month-off-RealWorldWPDev-continues.aspx
 redirect_from: /archive/2011/12/02/New-job-month-off-RealWorldWPDev-continues.aspx/
 tags: 
@@ -16,7 +14,7 @@ November 30th marked my last day at Triton-Tek after 4.5 years. It was by far th
 What’s Next?
 ------------
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_thumb.jpg" title="clarity" alt="clarity" width="300" height="72" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_2.jpg)But Chicago is a big city with some great companies and great talent. I would be remiss if I didn’t take this opportunity in my late 20s to explore what else is out there. I’m very excited that on January 5th, 2012 I’ll be joining [Clarity Consulting](http://www.claritycon.com/). The first time I met some of Clarity’s WP7 team was back in October 2010, where we were both invited by Microsoft to speak at the Chicago Windows Phone launch party. They have worked on some really impressive software over the years, and I very much look forward to joining a group well known for their talent and passion for leading edge technology solutions.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_thumb.jpg" title="clarity" alt="clarity" width="300" height="72" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/clarity_2.jpg)But Chicago is a big city with some great companies and great talent. I would be remiss if I didn’t take this opportunity in my late 20s to explore what else is out there. I’m very excited that on January 5th, 2012 I’ll be joining [Clarity Consulting](http://www.claritycon.com/). The first time I met some of Clarity’s WP7 team was back in October 2010, where we were both invited by Microsoft to speak at the Chicago Windows Phone launch party. They have worked on some really impressive software over the years, and I very much look forward to joining a group well known for their talent and passion for leading edge technology solutions.
 
 A Month off
 -----------
@@ -33,7 +31,7 @@ And it’s actually off to a pretty good start, some of which includes…
 6.  Publish the CTA Watch update for Mango and some cool new features
 7.  Publish the Transit Directions update for Mango
 8.  Tackle my massive blog backlog
-9.  Tackle it even more. Seriously, it’s a huge backlog. 20 posts? Ack. Prob won’t get to all of them <img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
+9.  Tackle it even more. Seriously, it’s a huge backlog. 20 posts? Ack. Prob won’t get to all of them <img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
 
 I know what you’re thinking: I need time away from the computer. I’ll do that too. I greatly look forward to unwinding back home in Michigan for a week around Christmas!
 
@@ -46,7 +44,7 @@ Thanks to all of you who read my ramblings on here every few weeks!
 
 Thanks to the Chicago dev Community! Rest assured I will still be fully involved in the local community, probably even more-so.
 
-And come on Nokia, help us get Windows Phone the market attention it deserves <img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
+And come on Nokia, help us get Windows Phone the market attention it deserves <img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
 
  
 

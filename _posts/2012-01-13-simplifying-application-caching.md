@@ -1,14 +1,12 @@
 ---
-layout: post
 title: "Simplifying application caching"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/01/13/simplifying-application-caching.aspx
 redirect_from: /archive/2012/01/13/simplifying-application-caching.aspx/
 tags: 
 - aspnet-mvc
 - caching
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png" title="image_thumb[4]" alt="image_thumb[4]" width="466" height="404" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_2.png)Many ASP.NET applications utilize the **System.Web.Caching.Cache** in some way. While it offers a pretty simple Dictionary-like API that your app can start using immediately, I typically create a combined “tell-don’t-ask” wrapper around it – which has some additional architectural benefits as well.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_thumb.png" title="image_thumb[4]" alt="image_thumb[4]" width="466" height="404" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/11fa22879ac6_B1E4/image_thumb%5B4%5D_2.png)Many ASP.NET applications utilize the **System.Web.Caching.Cache** in some way. While it offers a pretty simple Dictionary-like API that your app can start using immediately, I typically create a combined “tell-don’t-ask” wrapper around it – which has some additional architectural benefits as well.
 
 ### Out of the box concerns
 
@@ -22,7 +20,7 @@ A very common usage of the Cache API can be seen below, but there are a few init
 
  
 
-``` brush:
+```csharp
 public ActionResult Bad()
 {
     var firstVisit = HttpContext.Cache.Get("FirstVisit") as DateTime?;
@@ -42,7 +40,7 @@ public ActionResult Bad()
 
 The wrapper I create is used below. It’s nothing revolutionary, but does try to cut down on the redundancy, while adding a few features as well. The following code functions exactly the same as the code above.
 
-``` brush:
+```csharp
 public ActionResult Index()
 {
     var firstVisit = _cache.Get(CacheScope.User, "FirstVisit", TimeSpan.FromMinutes(1), () => DateTime.Now);
@@ -69,7 +67,7 @@ You may notice that our controller still has intimate knowledge of our caching s
 
 #### A central AppCache
 
-``` brush:
+```csharp
 /// <summary>
 /// This class demonstrates fully abstracting the details of your caching strategy and could serve as the single entry point for cached data
 /// </summary>
@@ -83,7 +81,7 @@ public static class AppCache
 
 #### Usage in a Controller
 
-``` brush:
+```csharp
 public ActionResult FullyAbstracted()
 {
     var firstVisit = AppCache.UsersFirstVisit;

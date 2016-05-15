@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Major updates to doddlereport, get it on nuget"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/01/31/major-updates-to-doddlereport-get-it-on-nuget.aspx
 redirect_from: /archive/2011/01/31/major-updates-to-doddlereport-get-it-on-nuget.aspx/
 tags: 
@@ -35,10 +33,10 @@ DoddleReport automatically generates tabular reports from any IEnumerable dataso
 </ul></td>
 </tr>
 <tr class="even">
-<td><p><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_2.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_thumb.png" title="doddlexlsreport_thumb17" alt="doddlexlsreport_thumb17" width="300" height="211" /></a> <br />
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_thumb.png" title="doddlexlsreport_thumb17" alt="doddlexlsreport_thumb17" width="300" height="211" /></a> <br />
 <br />
 </p></td>
-<td><p><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_2.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_thumb.png" title="doddleTxtReport_thumb" alt="doddleTxtReport_thumb" width="300" height="190" /></a></p></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_thumb.png" title="doddleTxtReport_thumb" alt="doddleTxtReport_thumb" width="300" height="190" /></a></p></td>
 </tr>
 <tr class="odd">
 <td><h3 id="pdf-report">PDF Report</h3>
@@ -52,15 +50,15 @@ DoddleReport automatically generates tabular reports from any IEnumerable dataso
 </ul></td>
 </tr>
 <tr class="even">
-<td><p><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_2.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_thumb.png" title="doddlepdfreport_thumb" alt="doddlepdfreport_thumb" width="300" height="295" /></a></p></td>
-<td><p><a href="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_2.png"><img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_thumb.png" title="doddleHtmlReport_thumb" alt="doddleHtmlReport_thumb" width="300" height="236" /></a></p></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_thumb.png" title="doddlepdfreport_thumb" alt="doddlepdfreport_thumb" width="300" height="295" /></a></p></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_thumb.png" title="doddleHtmlReport_thumb" alt="doddleHtmlReport_thumb" width="300" height="236" /></a></p></td>
 </tr>
 </tbody>
 </table>
 
 ### Basic Usage
 
-``` brush:
+```csharp
 // Get the data for the report (any IEnumerable will work)
 var query = ProductRepository.GetAll();
 var totalProducts = query.Count;

@@ -1,13 +1,11 @@
 ---
-layout: post
 title: "Adding rich Selector support for MVC"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx
 redirect_from: /archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx/
 tags: 
 - aspnet-mvc
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png" title="image" alt="image" width="550" height="480" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_6.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_2.png" title="image" alt="image" width="550" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_6.png)
 
 By using the the simple **SelectorAttribute** and **EditorTemplate** described in this post, you will get rich support the following very common scenarios (and flip between the various modes with ease):
 
@@ -25,7 +23,7 @@ Say you’re inserting a new Product and need to set the **CategoryId** property
 1.  Retrieving the list of categories to present to the user
 2.  Keeping the selected item(s) in sync with the list of choices
 
-``` brush:
+```csharp
 public class Product
 {
     [Required]
@@ -49,7 +47,7 @@ Since the \[CategorySelector\] was placed on an int? property, the selector will
 
 The screenshot you saw easier is rendered simply by using following Model and EditorFor. The magic lies in the **\[CategorySelector\]** and **\[DisplayModeSelector\]** attributes.
 
-``` brush:
+```csharp
 public class DisplayModeOptions
 {
     public DisplayModeOptions()
@@ -87,7 +85,7 @@ public class DisplayModeOptions
 
 #### The View is nothing more than
 
-``` brush:
+```csharp
 <form action="" method="post">
     <div class="two-column">
         <div class="field-group">
@@ -122,7 +120,7 @@ You’ll need to create your own SelectorAttributes in order to specify the list
 
 The DisplayModeSelector displays all possible choices within an enum.
 
-``` brush:
+```csharp
 public class DisplayModeSelectorAttribute : SelectorAttribute
 {
     public override IEnumerable<SelectListItem> GetItems()
@@ -134,7 +132,7 @@ public class DisplayModeSelectorAttribute : SelectorAttribute
 
 The CategorySelector demonstrates how you might access a database to get a list of items dynamically.
 
-``` brush:
+```csharp
 public class CategorySelectorAttribute : SelectorAttribute
 {
     public CategorySelectorAttribute()
@@ -174,7 +172,7 @@ Rather than pasting the full source here, I will be publishing it along with a s
 
 Using [**TortoiseHg**](http://tortoisehg.bitbucket.org/) simply clone the URL: [**https://hg01.codeplex.com/mvcgrabbag**](https://hg01.codeplex.com/mvcgrabbag)
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_3.png" title="image" alt="image" width="602" height="189" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_8.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_3.png" title="image" alt="image" width="602" height="189" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_8.png)
 
 #### Browse the code
 

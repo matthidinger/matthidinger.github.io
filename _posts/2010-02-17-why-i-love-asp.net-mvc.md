@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Why I love ASP.NET MVC"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/02/17/why-i-love-asp.net-mvc.aspx
 redirect_from: /archive/2010/02/17/why-i-love-asp.net-mvc.aspx/
 tags: 
@@ -9,7 +7,7 @@ tags:
 - aspnet-mvc
 - rant
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_thumb.jpg" title="430489129_88c2d4a072" alt="430489129_88c2d4a072" width="305" height="203" />]({{ site.baseurl }}images/subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_3.jpg) On the surface, I suppose this is YAMVCVWFC (Yet Another MVC vs. WebForms Comparison). If this topic doesn’t appeal to you, or you’re sick and tired of this discussion then I encourage you to move on. I won’t be offended, promise. This post is here to serve as my living, breathing arguments for fighting for MVC and it will serve to highlight my major gripes with Web Forms.
+[<img src="/images/subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_thumb.jpg" title="430489129_88c2d4a072" alt="430489129_88c2d4a072" width="305" height="203" />](/images/subtext-content/WhyIloveASP.NETMVC_C88B/430489129_88c2d4a072_3.jpg) On the surface, I suppose this is YAMVCVWFC (Yet Another MVC vs. WebForms Comparison). If this topic doesn’t appeal to you, or you’re sick and tired of this discussion then I encourage you to move on. I won’t be offended, promise. This post is here to serve as my living, breathing arguments for fighting for MVC and it will serve to highlight my major gripes with Web Forms.
 
 The motivation for this post came from an all-too-familiar IRC chat in \#asp.net – for those of you unfamiliar with IRC, it’s a lot like the Twitter of the 90s.
 

@@ -1,14 +1,12 @@
 ---
-layout: post
 title: "Presenting at Chicago Architects Group on Onion Architecture"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/04/15/presenting-at-chicago-architects-group-on-onion-architecture.aspx
 redirect_from: /archive/2010/04/15/presenting-at-chicago-architects-group-on-onion-architecture.aspx/
 tags: 
 - presentations
 - architecture
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png" title="616709595" alt="616709595" width="123" height="101" />]({{ site.baseurl }}images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595.png) I will be giving a talk at the [Chicago Architects Group](http://chicagoarchitectsgroup.com/) on Onion Architecture next week, details below. This is a completely free event, and of course, pizza will be provided.
+[<img src="/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595_thumb.png" title="616709595" alt="616709595" width="123" height="101" />](/images/subtext-content/PresentingatChicagoArchitectsGrouponOnio_9BC8/616709595.png) I will be giving a talk at the [Chicago Architects Group](http://chicagoarchitectsgroup.com/) on Onion Architecture next week, details below. This is a completely free event, and of course, pizza will be provided.
 
 ### When
 

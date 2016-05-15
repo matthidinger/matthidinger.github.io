@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Code Snippets with Snippet Designer and ReSharper Live Templates"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/10/02/code-snippets-with-snippet-designer-and-resharper-live-templates.aspx
 redirect_from: /archive/2008/10/02/code-snippets-with-snippet-designer-and-resharper-live-templates.aspx/
 tags: 
@@ -14,11 +12,11 @@ I believe that snippets are an underused feature built into Visual Studio. This 
 
 Much to my surprise there exists a significant number of .NET developers that are not taking advantage of code snippets, built-in or otherwise. No doubt you have all seen them in intellisense before: they appear with a partially-jagged piece of paper as seen below. When selected, they expand into a template of code that has select editable variables. A number of predefined code-snippets ship with Visual Studio, many of which I use regularly, including ctor, prop, exception, try, etc.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb.png" title="image" alt="image" width="313" height="219" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb.png" title="image" alt="image" width="313" height="219" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image.png)
 
 The “prop” snippet “expands” into the following code:
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_3.png" title="image" alt="image" width="292" height="27" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_3.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_3.png" title="image" alt="image" width="292" height="27" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_3.png)
 
 So the big question is how can we create our own snippets? Let’s take a real-world example and find out.
 
@@ -28,42 +26,42 @@ A few weeks ago a project was released on CodePlex called Snipper Designer. [Sni
 
 To start off I took some Configuration Property code that I had already written as the starting point for my snippet. Anyone who has done extensive configuration with the System.Configuration assembly should be very familiar with this code: it is a property declaration for automatic strongly-typed reading and writing to an XML attribute in your app.config. There are a number of similar code snippets I will be creating for various Configuration-related tasks, and I hope to update this post with my complete list of Configuration snippets shortly.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_4.png" title="image" alt="image" width="715" height="222" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_4.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_4.png" title="image" alt="image" width="715" height="222" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_4.png)
 
 As you can see, the Snipper Designer has added a context menu item to export highlighted code as a snippet. In doing so, the code below was produced in my Snippet Designer:
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_5.png" title="image" alt="image" width="845" height="173" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_5.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_5.png" title="image" alt="image" width="845" height="173" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_5.png)
 
 From here all I had to do was decide which “variables” would be available in my snippet. This is identifiable by the twin dollar signs ($) at the beginning and end of the variable. Finally, I assigned the snippet a shortcut, which is how we will invoke the snippet expansion in a code file. The shortcut I chose was “configProp.”
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_6.png" title="image" alt="image" width="243" height="243" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_6.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_6.png" title="image" alt="image" width="243" height="243" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_6.png)
 
 Our final bit of customization lies in a property pane below the snippet code. From here I can define tooltips to help other developers who may be using my snippets, as well as set default values and expected data types associated with a variable. As you can see, I specified that the isRequired variable should be a Boolean that defaults to true.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_7.png" title="image" alt="image" width="1069" height="194" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_7.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_7.png" title="image" alt="image" width="1069" height="194" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_7.png)
 
 ### 
 ReSharper Live Templates
 
 Many of you will probably be familiar with the Visual Studio plugin [ReSharper](http://www.jetbrains.com/resharper). ReSharper has quickly become a favorite of mine over the last year or so, and I feel as though I have only scratched the surface of it’s productivity potential. One of said features is their own snippet framework (which they have named Live Templates). ReSharper Live Templates are slightly more powerful than the aforementioned Snippet Designer.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_8.png" title="image" alt="image" width="785" height="229" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_8.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_8.png" title="image" alt="image" width="785" height="229" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_8.png)
 
 As you can clearly see, the ReSharper snippet code is almost identical to Snippet Designer. This is a great thing. In fact, I copy-pasted my Snippet Designer code into ReSharper and it instantly recognized it, so the two are very interoperable in that regard.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_9.png" title="image" alt="image" width="629" height="197" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_9.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_9.png" title="image" alt="image" width="629" height="197" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_9.png)
 
 The variable definition pane is where ReSharper really shines. It has significantly more customization over Snippet Designer, given it’s very nice macro support. I have certainly not experimented with all of these predefined macro’s but they seem like they would be great features for advanced and more intelligent snippet scenarios. I hope to play with them a bit more in the near future. Above you will notice that I have used the “Constant value” macro to specify defaults for the isRequired and DataType variable, which are “true” and “string”, respectively..
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_10.png" title="image" alt="image" width="383" height="589" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_10.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_10.png" title="image" alt="image" width="383" height="589" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_10.png)
 
 So what exactly did the last few minutes do for us? Well for me, any time in the future where I need to define a new Configuration Property in code, I will no longer by force into vastly error-prone copy-pasting. Instead, I simply trigger my snippet by it’s predefined shortcut. In my case, I chose “configProp.”
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_11.png" title="image" alt="image" width="271" height="212" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_11.png)
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_11.png" title="image" alt="image" width="271" height="212" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_11.png)
 
 When selected, it expands into this simple code block, which allows me to \[tab\] through the 5 variables and be on my way. And if you happen to think this won’t save you much time, then I would challenge the fact that you have probably not copy-pasted a significant number of these configuration properties before. As I mentioned in the beginning, I will be creating an army of these snippets, ranging from not only my Configuration-related ones, but repeatable tasks like ViewState-backed property wrappers, etc.
 
-[<img src="{{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_12.png" title="image" alt="image" width="702" height="109" />]({{ site.baseurl }}images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_12.png) 
+[<img src="/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_12.png" title="image" alt="image" width="702" height="109" />](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_12.png) 
 
 ### Download
 

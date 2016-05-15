@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "BusTrack Windows Phone 7 App"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/06/18/bustrack-windows-phone-7-app.aspx
 redirect_from: /archive/2010/06/18/bustrack-windows-phone-7-app.aspx/
 tags: 
@@ -14,7 +12,7 @@ Update
 
 Quite a bit has changed since June! The app is now called Bus Watch Chicago and is live on the marketplace. If you’ve got a windows phone please check it out! (You need the Zune client software installed for the link to work)
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/BusTrack-Windows-Phone-7-App_12DE6/wp7_English_480x80_blue_3.png" title="wp7_480x80_blue" alt="wp7_480x80_blue" width="484" height="84" />](http://social.zune.net/redirect?type=phoneApp&id=3904d308-71d6-df11-a844-00237de2db9e)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/BusTrack-Windows-Phone-7-App_12DE6/wp7_English_480x80_blue_3.png" title="wp7_480x80_blue" alt="wp7_480x80_blue" width="484" height="84" />](http://social.zune.net/redirect?type=phoneApp&id=3904d308-71d6-df11-a844-00237de2db9e)
 
  
 

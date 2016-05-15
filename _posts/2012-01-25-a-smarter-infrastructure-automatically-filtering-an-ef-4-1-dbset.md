@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "A Smarter Infrastructure: Automatically filtering an EF 4.1 DbSet"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/01/25/a-smarter-infrastructure-automatically-filtering-an-ef-4-1-dbset.aspx
 redirect_from: /archive/2012/01/25/a-smarter-infrastructure-automatically-filtering-an-ef-4-1-dbset.aspx/
 tags: 
@@ -40,7 +38,7 @@ Here is a typical controller with constructor injection to obtain an IDataContex
 
 The Categories table has 3 rows in it, but one of them has IsDeleted set to true. If you were to execute the following query, you would see that only 2 of the rows are returned.
 
-``` brush:
+```csharp
 public class EFController : Controller
 {
     private readonly IDataContext _db;
@@ -61,13 +59,13 @@ public class EFController : Controller
 
 To prove it, here is the SQL Profiler output when I hit the controller from a browser.
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad_thumb.png" title="SNAGHTML3d115fad" alt="SNAGHTML3d115fad" width="441" height="370" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad_thumb.png" title="SNAGHTML3d115fad" alt="SNAGHTML3d115fad" width="441" height="370" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Smarter-Infrastructure-Autom.1-DbContext_AA28/SNAGHTML3d115fad.png)
 
 ### Creating the IDataContext
 
 Now let me show you what the IDataContext looks like. It’s pretty simple. Each of the properties are of type IDbSet&lt;T&gt; and not IList&lt;T&gt;, which would commonly be found in a repository abstraction.
 
-``` brush:
+```csharp
 public interface IDataContext
 {
     IDbSet<Category> Categories { get; set; }
@@ -89,7 +87,7 @@ Using this [answer from StackOverflow](http://stackoverflow.com/questions/567628
 
 Since consumers of the IDataContext are only ever working with IDbSet, they have no idea that this automatic filtering is taking place behind the scenes. Hooray: a smarter infrastructure.
 
-``` brush:
+```csharp
 public class ECommerceDb : DbContext, IDataContext
 {
     public ECommerceDb()
@@ -119,7 +117,7 @@ What about accessing the unfiltered set?
 
 [Kevin LaBranche](http://twitter.com/klabranche) asked below how I might handle a scenario where I needed to bypass the filter, such as for reporting. One way to solve this would be to create an Unfiltered extension method which could check if the IDbSet is a FilteredDbSet, and if so, return underlying set instead of the filtered one.
 
-``` brush:
+```csharp
 public static class DbSetHelper
 {
     public static IQueryable<TEntity> Unfiltered<TEntity>(this IDbSet<TEntity> set) where TEntity : class
@@ -132,7 +130,7 @@ public static class DbSetHelper
 
 **Note:** I also had to add the following method to the FilteredDbSet class
 
-``` brush:
+```csharp
 public IQueryable<TEntity> Unfiltered()
 {
     return _set;
@@ -141,7 +139,7 @@ public IQueryable<TEntity> Unfiltered()
 
 #### Which could then be used as follows:
 
-``` brush:
+```csharp
 public ActionResult Index()
 {
     var categories = _db.Categories;

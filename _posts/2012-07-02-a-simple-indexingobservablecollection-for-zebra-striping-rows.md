@@ -1,14 +1,12 @@
 ---
-layout: post
 title: "A simple IndexingObservableCollection for zebra-striping rows"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/07/02/a-simple-indexingobservablecollection-for-zebra-striping-rows.aspx
 redirect_from: /archive/2012/07/02/a-simple-indexingobservablecollection-for-zebra-striping-rows.aspx/
 tags: 
 - wpdev
 - xaml
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg" title="zebra-camo" alt="zebra-camo" width="379" height="258" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_2.jpg)I’m currently wrapping up a Windows Phone project and thought this would be a good time to share some of the more reusable stuff we needed.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_thumb.jpg" title="zebra-camo" alt="zebra-camo" width="379" height="258" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/58c4cfa70f46_956D/zebra-camo_2.jpg)I’m currently wrapping up a Windows Phone project and thought this would be a good time to share some of the more reusable stuff we needed.
 
 ### Zebra-striping alternate rows
 
@@ -20,7 +18,7 @@ Instead, we wrote a simple IndexingObservableCollection that will automatically 
 
 To use it, you have to implement the IIndexable interface which ensure an Index property on your model. Then simply replace the ObservableCollection property on your view-model with the following IndexingObservableCollection.
 
-``` brush:
+```csharp
 public class IndexingObservableCollection<T> : ObservableCollection<T> where T : IIndexable
 {
     protected override void InsertItem(int index, T item)
@@ -48,11 +46,11 @@ public interface IIndexable
 
 Below is a sample model that could be used for displaying a list of products. In this case I’m returning a specific Brush for odd-numbered rows, and the XAML Grid simply binds Background="{Binding Background}"
 
-``` brush:
+```csharp
  
 ```
 
-``` brush:
+```csharp
 public class ProductRow : IIndexable
 {
     public int Index { get; set; }

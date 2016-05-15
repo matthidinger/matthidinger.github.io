@@ -1,21 +1,19 @@
 ---
-layout: post
 title: "Tweaking Subtext with Hero Shots next to each post"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post.aspx
 redirect_from: /archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post.aspx/
 tags: 
 - subtext
 - open-source
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png" title="image" alt="image" width="339" height="300" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_4.png)This past weekend I decided to upgrade my Subtext blog to VS 2010 so I could finally rid my machine of VS 2008. After some small hiccups it was ready to rock, and thankfully the deployment to my server was entirely painless with WebDeploy.
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_thumb_1.png" title="image" alt="image" width="339" height="300" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/image_4.png)This past weekend I decided to upgrade my Subtext blog to VS 2010 so I could finally rid my machine of VS 2008. After some small hiccups it was ready to rock, and thankfully the deployment to my server was entirely painless with WebDeploy.
 
 So being in VS 2010 and having fully tested my deployment process it seemed like a good time to make a tweak to my Skin that I’ve been wanting to try for a while: showing “Hero Shots” next to each post.
 
 Hero shots?
 -----------
 
-I’m not really sure what they should be called, I just know I’ve heard the term hero shot a lot this year and it seemed to fit, but call it whatever you want <img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
+I’m not really sure what they should be called, I just know I’ve heard the term hero shot a lot this year and it seemed to fit, but call it whatever you want <img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Modify_8E10/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
 
 The idea is pretty simple: when viewing a list of posts (the home page, a specific tag, the archives) I want to show an image that helps illustrate the topic and allow for easier scanning with the eye.
 
@@ -36,7 +34,7 @@ With that installed the change to Subtext was actually really simple. Within Ent
 
 #### Subtext.Web\\UI\\Controls\\EntryList.cs
 
-``` brush:
+```csharp
 private void BindPostText(RepeaterItemEventArgs e, Entry entry)
 {
     BindHeroShot(e, entry);
@@ -93,7 +91,7 @@ That’s actually all that had to be changed in Subtext. The rest of the changes
 
 Below is the Repeater which shows each Post, the only thing I added to it was an **&lt;asp:Image ID=”PostImage”/&gt;**
 
-``` brush:
+```csharp
 <asp:Repeater runat="server" ID="Entries" OnItemCreated="PostCreated">
     <ItemTemplate>
         <div class="post">
@@ -116,7 +114,7 @@ Below is the Repeater which shows each Post, the only thing I added to it was an
 
 Naturally I gave the PostImage a CSS Class so I could style it. I chose to float it right and give it max height and widths so it doesn’t take up the entire post. You can of course tweak this any way you like – this part is entirely in your skin. Put the image wherever and style it how you like.
 
-``` brush:
+```csharp
 .post-hero-image
 {
     float: right;

@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Creating a Html.DisplayForMany Helper for MVC 2"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx
 redirect_from: /archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx/
 tags: 
@@ -33,7 +31,7 @@ This is what ended up being rendered on my page, which makes sense – DisplayFo
 
 The code is longer than I would like due to a number of complications and restrictions in the current DisplayFor extension methods and internal classes that would have been handy to have access to. The comments hopefully explain the workarounds, but in any case, just copy this code into your helper class and enjoy.
 
-``` brush:
+```csharp
 public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, IEnumerable<TValue>>> expression) where TModel : class
 {
     StringBuilder sb = new StringBuilder();
@@ -67,7 +65,7 @@ public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html
 
 ### Usage and Output
 
-``` brush:
+```csharp
 <h3>Comments</h3>
 <%= Html.DisplayForMany(m => m.Comments) %>
 ```

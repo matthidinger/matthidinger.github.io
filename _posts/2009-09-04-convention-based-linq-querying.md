@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Convention based LINQ querying"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/09/04/convention-based-linq-querying.aspx
 redirect_from: /archive/2009/09/04/convention-based-linq-querying.aspx/
 tags: 
@@ -15,7 +13,7 @@ By taking advantage of this primary key convention I can save myself a ton of bo
 
 ### The Extension Method
 
-``` brush:
+```csharp
 public static T GetById<T>(this IQueryable<T> query, int id) where T : class
 {
     // Create lambda parameter x of type T
@@ -39,7 +37,7 @@ public static T GetById<T>(this IQueryable<T> query, int id) where T : class
 
 ### Usage
 
-``` brush:
+```csharp
 NorthwindDataContext db = new NorthwindDataContext();
 var product = db.Products.GetById(1);
 var order = db.Orders.GetById(15);

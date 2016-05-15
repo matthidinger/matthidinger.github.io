@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Windows Phone Unleashed @ TechWeek Chicago"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/07/22/Windows-Phone-Unleashed-TechWeek-Chicago.aspx
 redirect_from: /archive/2011/07/22/Windows-Phone-Unleashed-TechWeek-Chicago.aspx/
 tags: 

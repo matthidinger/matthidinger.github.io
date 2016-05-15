@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "DoddleImport on CodePlex"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/02/28/doddleimport-on-codeplex.aspx
 redirect_from: /archive/2009/02/28/doddleimport-on-codeplex.aspx/
 tags: 
@@ -16,9 +14,9 @@ Flexible importing of data via a fluid and fully extensible API to easily add su
 
 I will update the documentation and provide some better examples when I get back. Here you can see a quick example of me importing some Excel data into a SharePoint list. As you can see it supports a variety of validation including missing fields and data type conversion problems.
 
-[<img src="{{ site.baseurl }}images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png" title="image" alt="image" width="532" height="432" />]({{ site.baseurl }}images/subtext-content/DoddleImportonCodePlex_14E69/image.png) 
+[<img src="/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png" title="image" alt="image" width="532" height="432" />](/images/subtext-content/DoddleImportonCodePlex_14E69/image.png) 
 
-[<img src="{{ site.baseurl }}images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb_3.png" title="image" alt="image" width="891" height="198" />]({{ site.baseurl }}images/subtext-content/DoddleImportonCodePlex_14E69/image_3.png)
+[<img src="/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb_3.png" title="image" alt="image" width="891" height="198" />](/images/subtext-content/DoddleImportonCodePlex_14E69/image_3.png)
 
 ### Key Components
 
@@ -40,7 +38,7 @@ DoddleImport ships with some basic Import Sources, but just like all other Doddl
 
 ### Usage
 
-``` brush:
+```csharp
 // Basic import from one type of in-memory collection to another
 ImportableDictionary source = new ImportableDictionary();
 source.Fields.Add("ProductID", typeof(int));
@@ -57,7 +55,7 @@ Importer importer = new Importer();
 importer.Import(source, destination);
 ```
 
-``` brush:
+```csharp
 // More realistic example, importing an Excel Spreadsheet into a SharePoint list
 Stream uploadedFile = fileUpload.PostedFile.InputStream;
 Spreadsheet spreadsheet = new Spreadsheet(uploadedFile);
@@ -90,7 +88,7 @@ To use configuration, be sure to register the &lt;section&gt; node between &lt;c
 
 From there, you can add or remove validation rules that will be automatically applied to every import. You are also able to customize the default validation messages. Below is a quick sample of some of the changes that can be made.
 
-``` brush:
+```csharp
 <configuration>
   <configSections>
     <section name="doddleImport" 

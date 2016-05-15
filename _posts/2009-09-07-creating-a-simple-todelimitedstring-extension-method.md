@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Creating a simple ToDelimitedString extension method"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2009/09/07/creating-a-simple-todelimitedstring-extension-method.aspx
 redirect_from: /archive/2009/09/07/creating-a-simple-todelimitedstring-extension-method.aspx/
 tags: 
@@ -12,7 +10,7 @@ This was one of the first extension methods I wrote when C\# 3.0 arrived, since 
 
 ### The Code
 
-``` brush:
+```csharp
 public static class DelimitedStringExtensions
 {
     public static string DefaultDelimiter = ", ";
@@ -68,7 +66,7 @@ public static class DelimitedStringExtensions
 
 Example using an array of ints
 
-``` brush:
+```csharp
 int[] ints = { 1, 4, 5, 7 };
 
 // Returns "1, 4, 5, 7"
@@ -77,7 +75,7 @@ string result = ints.ToDelimitedString();
 
 Example using a List
 
-``` brush:
+```csharp
 var products = new List<Product>
                {
                    new Product { ProductName = "Chai" },
@@ -95,7 +93,7 @@ string result2 = products.ToDelimitedString(p => p.ProductName, ";");
 
 Example using a DataTable
 
-``` brush:
+```csharp
 // Returns "Chai, Chang, Tofu"
 string result = table.AsEnumerable().ToDelimitedString(row => (string)row["ProductName"]);
 ```

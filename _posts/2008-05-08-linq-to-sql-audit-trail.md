@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "LINQ to SQL Audit Trail"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx
 redirect_from: /archive/2008/05/08/linq-to-sql-audit-trail.aspx/
 tags: 
@@ -30,7 +28,7 @@ The code I ended up with did in fact meet my goal -- which would add Auditing to
 As long as you call the Audit&lt;&gt; method before calling SubmitChanges() then any INSERTED/UPDATED/DELETED entities will be properly Audited automatically.
 The first parameter in the method, is telling the Auditing code how to identity which property is the Primary Key of the table.
 
-``` brush:
+```csharp
 public partial class NorthwindDataContext
 {
     public override void SubmitChanges(ConflictMode failureMode)
@@ -51,19 +49,19 @@ Given my requirements I derived the following database schema. For my purposes, 
 -   The **Audits** table is used to track any change. Most of the columns should be self-explanatory. The Action is what CUD event occurred (Insert, Update, or Delete). The rest of the columns record who made the change, when, what table, and the Primary Key of the modified record.
 -   The **AuditValues** table is used to track each modified column in the table being audited: the Old (Original), and the New (Current) value.
 
-[<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb.png" title="image" alt="image" width="439" height="585" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image.png)
+[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb.png" title="image" alt="image" width="439" height="585" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image.png)
 
 ### Step 2 - The DBML
 
 Now that we have our new tables, we will update our LINQ to SQL Entity classes. I am going to be using Northwind for this example.
 
- [<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_3.png" title="image" alt="image" width="484" height="845" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_3.png)
+ [<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_3.png" title="image" alt="image" width="484" height="845" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_3.png)
 
 ### Step 3 - The Public Audit Extension Method
 
 First we need to create a public method that client code will use to begin Auditing a table.
 
-``` brush:
+```csharp
 /// <summary>
 /// This method will enlist a LINQ to SQL Entity for automatic Auditing
 /// </summary>
@@ -89,7 +87,7 @@ I ran into something unexpected when I began testing the auditing code I wrote: 
 
 Naturally, I assumed that I could use the following code to Audit entities that supported inheritance just like regular Entities:
 
-``` brush:
+```csharp
 this.Audit<SalesPerson>(sp => sp.PersonID, "SalesPerson changed");
 this.Audit<Contact>(c => c.PersonID, "Contact changed");
 ```
@@ -98,13 +96,13 @@ Unfortunately for me, I was wrong. The Auditing code that I wrote relies on data
 
 So due to this unexpected exception, I had to add an overload to the Audit method that supported two types, a TBaseEntity, and a TSubEntity.
 
-``` brush:
+```csharp
 this.Audit<Contact, SalesPerson>(sp => sp.PersonID, "SalesPerson changed");
 ```
 
 The method signature for this method is listed below. You will notice an additional Generic Constraint added, defining that TSubEntity must in fact derive from TBaseEntity.
 
-``` brush:
+```csharp
 /// <summary>
 /// This method will enlist a LINQ to SQL Entity for automatic Auditing
 /// </summary>
@@ -123,9 +121,9 @@ The heart and soul of my auditing code relies on the DataContext's Object Tracki
 
 Thankfully, the DataContext exposes a GetChangeSet() method, which will allow us to peek into its pending database calls.
 
-[<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_4.png" title="image" alt="image" width="377" height="159" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_4.png)
+[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_4.png" title="image" alt="image" width="377" height="159" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_4.png)
 
-``` brush:
+```csharp
 private static void AuditInserts<TEntity, TSubEntity>(DataContext db, Func<TSubEntity, int> tableKeySelector, string title)
     where TEntity : class
     where TSubEntity : TEntity
@@ -137,19 +135,19 @@ Here we can see a perfect example of LINQ to Objects. The GetChangeSet().Inserts
 
 Next, we need to obtain a reference to the Table&lt;&gt; that our Entity belongs to.
 
-``` brush:
+```csharp
 Table<TEntity> table = db.GetTable<TEntity>();
 ```
 
 Then we need to get all the public properties that our Entity has.
 
-``` brush:
+```csharp
 PropertyInfo[] props = typeof(TSubEntity).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 ```
 
 I have also created a quick helper-method that will create the row in the Audit table for us
 
-``` brush:
+```csharp
 private static Audit CreateAudit<TEntity>(string title, Table<TEntity> table, int key) where TEntity : class
 {
     Audit audit = new Audit();
@@ -163,7 +161,7 @@ private static Audit CreateAudit<TEntity>(string title, Table<TEntity> table, in
 
 The rest of the code is simply looping through all of the Entities in the ChangeSet.
 
-``` brush:
+```csharp
 foreach (TSubEntity item in inserts)
 {
     // Get the Primary Key for our table by Invoking the tableKeySelector delegate on the current TSubEntity item
@@ -202,13 +200,13 @@ foreach (TSubEntity item in inserts)
 
 Very few things change from the Insert code here.
 
-``` brush:
+```csharp
 var deletes = db.GetChangeSet().Deletes.OfType<TSubEntity>();
 ```
 
 I also set the OldValue property instead of the NewValue property when creating the AuditValues entity.
 
-``` brush:
+```csharp
 AuditValue values = new AuditValue();
 values.MemberName = pi.Name;
 values.OldValue = GetPropertyValue(pi, item);
@@ -218,7 +216,7 @@ values.OldValue = GetPropertyValue(pi, item);
 
 Auditing updates is greatly simplified again thanks to our hard-working DataContext. Every Table&lt;T&gt; class has a GetModifiedMembers method that can be invoked on any entity. This method will only return properties which were CHANGED. This is exactly what I need because I did not want to record any values that stayed the same, especially for tables with a large number of columns.
 
-``` brush:
+```csharp
 ModifiedMemberInfo[] mmi = table.GetModifiedMembers(item);
 foreach (TSubEntity item in updates)
 {
@@ -249,11 +247,11 @@ foreach (TSubEntity item in updates)
 
 I wrote a very quick demo app for this article. You can see below a GridView of the Audits table rows. We can see what we changed, when, by whom, etc. If you select one of the Audits, a DetailsView will display all of the Changed Values that took place during the Audit.
 
-[<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_5.png" title="image" alt="image" width="694" height="211" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_5.png)
+[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_5.png" title="image" alt="image" width="694" height="211" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_5.png)
 
-[<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_6.png" title="image" alt="image" width="736" height="257" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_6.png)
+[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_6.png" title="image" alt="image" width="736" height="257" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_6.png)
 
-[<img src="{{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_7.png" title="image" alt="image" width="727" height="498" />]({{ site.baseurl }}images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_7.png) 
+[<img src="/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_7.png" title="image" alt="image" width="727" height="498" />](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_7.png) 
 
 ### Get the Code!
 

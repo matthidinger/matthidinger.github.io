@@ -1,12 +1,10 @@
 ---
-layout: post
 title: "Synergy - 3 Desktops, 1 Keyboard"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx
 redirect_from: /archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx/
 tags: 
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/Synergy3Desktops1Keyboard_AC32/image_thumb_3.png" title="image" alt="image" width="390" height="299" />]({{ site.baseurl }}images/subtext-content/Synergy3Desktops1Keyboard_AC32/image_3.png) I recently noticed a colleague of mine using a hardware KVM to share his desktop keyboard and mouse with his laptop. He had a standard hardware KVM with basic PS/2 inputs and could toggle between the PCs by pressing Scroll Lock twice. Pretty typical setup for many people who have multiple PCs, and it wasn't more than a few years ago that I was doing that same.
+[<img src="/images/subtext-content/Synergy3Desktops1Keyboard_AC32/image_thumb_3.png" title="image" alt="image" width="390" height="299" />](/images/subtext-content/Synergy3Desktops1Keyboard_AC32/image_3.png) I recently noticed a colleague of mine using a hardware KVM to share his desktop keyboard and mouse with his laptop. He had a standard hardware KVM with basic PS/2 inputs and could toggle between the PCs by pressing Scroll Lock twice. Pretty typical setup for many people who have multiple PCs, and it wasn't more than a few years ago that I was doing that same.
 
 Enter [Synergy](http://synergy2.sourceforge.net/). Synergy is actually lot more than a basic KVM. **It makes multiple computers behave exactly as though they were a single PC with dual-monitors.** You simply move your mouse to the edge of one monitor and it instantly jumps to the next one -- even though they are entirely different computers.
 

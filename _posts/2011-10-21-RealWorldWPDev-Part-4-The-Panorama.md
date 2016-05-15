@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "RealWorldWPDev Part 4: The Panorama"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx
 redirect_from: /archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx/
 tags: 
@@ -61,7 +59,7 @@ Now then, the HomeViewModel is a great starting point.  At the time of the writ
 
  
 
-``` brush:
+```csharp
 public class HomeViewModel : Conductor<IScreen>.Collection.OneActive, IRefreshable, IAppBarController
 {
     private readonly INavigationService _navigation;
@@ -94,7 +92,7 @@ So we have a HomeViewModel, with an **Items** property that now contains 3 **oth
 1.  The Panorama control inherits from **ItemsControl,** which means it supports binding to collections just like a **ListBox** does. In the end, since our “Items” are just ViewModels themselves, they are in turn rendered as Views in the Panorama. This concept is the basis of known as building **Composite Views**.
 2.  **No ItemsSource=”{Binding Items}”??** You may notice there is no explicit binding in the XAML below – Caliburn is a *Convention over Configuration* framework (if you want it to be!). This means it will by default use its **x:Name** and look for a property on the ViewModel that it can bind itself to. *If you prefer to explicitly bind your Views then please do so! The conventions are entirely optional.*
 
-``` brush:
+```csharp
 <controls:Panorama x:Name="Items" Title="{StaticResource AppNameUpper}">
     <controls:Panorama.HeaderTemplate>
         <DataTemplate>
@@ -116,7 +114,7 @@ This concept is known as Inversion of Control. Our HomeViewModel relies on other
 
 When you create new ViewModels and other services, you just need to register them in your **AppBootstrapper**. A snippet can be seen below. Once these ViewModels are registered in the Bootstrapper, Caliburn will take care of the rest.
 
-``` brush:
+```csharp
 public class AppBootstrapper : PhoneBootstrapper
 {
     private PhoneContainer _container;
@@ -151,7 +149,7 @@ For our app I wanted a global hook into the ProgressIndicator from my ViewModels
 
 I will be going more into the BusyIndicator in a future post.
 
-``` brush:
+```csharp
 public void RefreshData()
 {
     BusyIndictator.Show("Loading watch list...");
@@ -166,7 +164,7 @@ public void RefreshData()
 
 Refreshing  data is very common in these types of apps. Acknowledging this I decided to create a simple **IRefreshable** interface, which in our Conductor’s case, simply delegates along to the **ActiveItem** (the currently active panorama pane ViewModel) and says *“Hey, do you know how to refresh data? If so, please proceed to do!”*
 
-``` brush:
+```csharp
 public void RefreshData()
 {
     var refreshableChild = ActiveItem as IRefreshable;
@@ -179,7 +177,7 @@ Then, in the **HomeWatchListViewModel** for example, it also implements **IRefre
 
 *This is another example of compositing pieces together to write really extensible code as our app progresses.*
 
-``` brush:
+```csharp
 public class HomeWatchListViewModel : Screen, IRefreshable
 {
     public void RefreshData()
@@ -229,7 +227,7 @@ In addition to the above events, a while ago I came up with **OnViewReady** and 
 
 At the time of this writing, in the 1.2 NuGet package, I could not get it to behave correctly, so instead opted for a slightly uglier workaround. Essentially this creates a background thread, and then sleeps for 1 second in that thread, before starting to work. 1 second should be plenty of time for any base loading and animations to complete.
 
-``` brush:
+```csharp
 protected override void OnInitialize()
 {
     RefreshData();

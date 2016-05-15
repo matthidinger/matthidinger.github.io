@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Progressive enhancement tutorial with ASP.NET MVC 3 and jQuery"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx
 redirect_from: /archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx/
 tags: 
@@ -32,13 +30,13 @@ Building a Contact Us form
 
 ### JavaScript enabled
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08_thumb.png" title="SNAGHTML1a3b6b08" alt="SNAGHTML1a3b6b08" width="772" height="219" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08_thumb.png" title="SNAGHTML1a3b6b08" alt="SNAGHTML1a3b6b08" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08.png)
 
 As you can see when a user visits our site with JavaScript enabled and clicks on the Contact Us link, they are presented with a nice jQuery UI dialog window. They can fill in the form and get a nice confirmation message inside the dialog, and finally close it without ever leaving the page they were on.
 
 ### JavaScript disabled
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a48993d_thumb.png" title="SNAGHTML1a48993d" alt="SNAGHTML1a48993d" width="772" height="219" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a48993d.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a48993d_thumb.png" title="SNAGHTML1a48993d" alt="SNAGHTML1a48993d" width="772" height="219" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a48993d.png)
 
 A visitor without JavaScript will still get the same functionality, just a slightly lesser experience. Without JavaScript logic attached to our Contact Us link it behaves like a plain old hyperlink, navigating the browser to a new page. Once they fill out the form and press Send Message we redirect them back to the Home page with a confirmation message.
 
@@ -52,7 +50,7 @@ A visitor without JavaScript will still get the same functionality, just a sligh
 
 You may notice that very little server-side code is required to achieve the functionality seen in the screenshots above.
 
-``` brush:
+```csharp
 [HttpGet]
 public ActionResult ContactUs()
 {
@@ -108,7 +106,7 @@ The jQuery code below operates on the following conventions:
 2.  When the hyperlink is clicked, use the hyperlink’s href to make an Ajax request using .load(this.href) and inject the returned HTML into the DOM
 3.  Open the Dialog window
 
-``` brush:
+```csharp
 <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -152,7 +150,7 @@ The Contact Us hyperlink is just a standard ActionLink with some additional attr
 
 **\* Note:** Sweet! The MVC 3 helpers convert the underscore in HTML attributes to a dash when rendered!
 
-``` brush:
+```csharp
 @Html.ActionLink("Contact Us", "ContactUs", "Home", null,
        new { @class = "openDialog", data_dialog_id = "emailDialog", data_dialog_title = "Contact Us"})
 ```
@@ -161,7 +159,7 @@ The Contact Us hyperlink is just a standard ActionLink with some additional attr
 
 The ActionLink renders the following HTML
 
-``` brush:
+```csharp
 <a class="openDialog" data-dialog-id="emailDialog" 
      data-dialog-title="Contact Us" href="/Home/ContactUs">Contact Us</a>
 ```
@@ -180,7 +178,7 @@ I am using Ajax.BeginForm since MVC 3 renders unobtrusive HTML-5-compatible Ajax
 
 **\*Note:** The UpdateTargetId must match the ID of the dialog window we open with jQuery (in this example I am passing the ID in the Html.ActionLink using data\_dialog\_id). This makes sure that when the form submits and returns a response the HTML will be properly injected into our dialog window.
 
-``` brush:
+```csharp
 @model ProgressiveEnhancement.Models.ContactUsInput
 
 
@@ -202,7 +200,7 @@ I am using Ajax.BeginForm since MVC 3 renders unobtrusive HTML-5-compatible Ajax
 
 Below is the full ContactUs view, used for non-Ajax requests. In this example it just adds a nice &lt;h2&gt; to the page (that we don’t want in our Ajax Dialog view) and then delegates the rest of the rendering to the partial view created above.
 
-``` brush:
+```csharp
 @model ProgressiveEnhancement.Models.ContactUsInput
 
 
@@ -215,7 +213,7 @@ Below is the full ContactUs view, used for non-Ajax requests. In this example it
 
 #### \_ThanksForFeedback.cshtml
 
-``` brush:
+```csharp
 @model ProgressiveEnhancement.Models.ContactUsInput
 
 <p>Thanks for your feedback, @Model.Name! We will contact you shortly.</p>
@@ -226,7 +224,7 @@ Below is the full ContactUs view, used for non-Ajax requests. In this example it
 
 ### Wrap-up and source code
 
-[<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/image_thumb_2.png" title="image" alt="image" width="275" height="572" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/image_6.png)
+[<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/image_thumb_2.png" title="image" alt="image" width="275" height="572" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/image_6.png)
 
 Hopefully this tutorial covered everything! It’s exciting to see how far MVC 3 and jQuery have come to really make progressive enhancement a reality with very minimal effort.
 

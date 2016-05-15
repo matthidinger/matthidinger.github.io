@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "WindyCityGo, StirTrek, Windows 8 Anchor"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2012/05/06/windycitygo-stirtrek-windows-8-anchor.aspx
 redirect_from: /archive/2012/05/06/windycitygo-stirtrek-windows-8-anchor.aspx/
 tags: 
@@ -55,7 +53,7 @@ Overall this was a very exciting event with nearly 400 people eager to see what�
 
 |     |                                                                                                                                                                                                                                                                                                                           |
 |-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png" title="eventPics3" alt="eventPics3" id="hero" width="387" height="327" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_2.png) |
+|     | [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png" title="eventPics3" alt="eventPics3" id="hero" width="387" height="327" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_2.png) |
 
 ###  
 
@@ -73,7 +71,7 @@ That said, thankfully I did not have to compete with Scott Hansleman in my time 
 
 |     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg" title="389594_10150889640849224_546684223_11989723_2067556539_n[1]" alt="389594_10150889640849224_546684223_11989723_2067556539_n[1]" width="436" height="327" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_2.jpg) |
+|     | [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg" title="389594_10150889640849224_546684223_11989723_2067556539_n[1]" alt="389594_10150889640849224_546684223_11989723_2067556539_n[1]" width="436" height="327" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_2.jpg) |
 
 ###  
 

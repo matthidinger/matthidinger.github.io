@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Styles up Top, Scripts on Bottom"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/02/25/styles-up-top-scripts-on-bottom.aspx
 redirect_from: /archive/2008/02/25/styles-up-top-scripts-on-bottom.aspx/
 tags: 

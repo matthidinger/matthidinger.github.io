@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "An inheritance-aware ModelBinderProvider in MVC 3"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/08/16/An-inheritance-aware-ModelBinderProvider-in-MVC-3.aspx
 redirect_from: /archive/2011/08/16/An-inheritance-aware-ModelBinderProvider-in-MVC-3.aspx/
 tags: 

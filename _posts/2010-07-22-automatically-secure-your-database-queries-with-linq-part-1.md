@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Automatically secure your database queries with LINQ &ndash; Part 1"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx
 redirect_from: /archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx/
 tags: 
@@ -11,7 +9,7 @@ tags:
 - linq-to-sql
 - entity-framework
 ---
-[<img src="{{ site.baseurl }}images/subtext-content/8eb6584b2301_132D8/security_thumb.jpg" title="security" alt="security" class="wlDisabledImage" width="240" height="223" />]({{ site.baseurl }}images/subtext-content/8eb6584b2301_132D8/security.jpg)A common requirement for many applications is filtering rows of data based on the current user. A simple example is an e-commerce site which would want to make sure a Customer who is logged in is only able to view his own Orders. Another example would be a payroll site that would want to make sure a user could only view their own Employees.
+[<img src="/images/subtext-content/8eb6584b2301_132D8/security_thumb.jpg" title="security" alt="security" class="wlDisabledImage" width="240" height="223" />](/images/subtext-content/8eb6584b2301_132D8/security.jpg)A common requirement for many applications is filtering rows of data based on the current user. A simple example is an e-commerce site which would want to make sure a Customer who is logged in is only able to view his own Orders. Another example would be a payroll site that would want to make sure a user could only view their own Employees.
 
 These are of course trivial examples, and could be solved in a number of ways. My concern is that often times the responsibility of security is placed upon each individual developer to make sure they are calling the right methods on your repositories. This may seem fine to many readers, and we could debate whether or not this should be the case, but my current take on security is to let the application infrastructure handle those details for you.
 
@@ -23,7 +21,7 @@ Below I have written a simple QueryFilterService that will basically store “wh
 
 If you want to play around with this class, the usage is described below – however, this “manual” method is not recommended, the next part of the series will describe how to incorporate this into your repository classes automatically:
 
-``` brush:
+```csharp
 // On your application init, you need to register your security rules
 // Below I am securing Orders so that the logged in Customer can only see his own Orders
 // You will notice the syntax looks a lot like a LINQ Where statement -- which is exactly what it is.
@@ -48,7 +46,7 @@ Essentially, the process is boiled down to this:
 
 ### Implementation
 
-``` brush:
+```csharp
 public class QueryFilterService
 {
     private readonly Dictionary<Type, LambdaExpression> _filters;

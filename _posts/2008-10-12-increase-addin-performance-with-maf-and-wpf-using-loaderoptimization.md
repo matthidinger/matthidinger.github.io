@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "Increase AddIn Performance with MAF and WPF using LoaderOptimization"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2008/10/12/increase-addin-performance-with-maf-and-wpf-using-loaderoptimization.aspx
 redirect_from: /archive/2008/10/12/increase-addin-performance-with-maf-and-wpf-using-loaderoptimization.aspx/
 tags: 
@@ -14,7 +12,7 @@ To solve this, you can place an attribute on the Main method of any .NET executa
 
 When you create a new WPF Project the project template will create an App.xaml for you. Since WPF does a little magic behind the scenes, there is no way to access the Main method of your application. In this case, you simply delete the App.xaml and create a new Application.cs class with the following code:
 
-``` brush:
+```csharp
 
 public class Application : System.Windows.Application
 {

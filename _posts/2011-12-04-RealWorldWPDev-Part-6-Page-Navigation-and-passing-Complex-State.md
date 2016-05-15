@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "RealWorldWPDev Part 6: Page Navigation and passing Complex State"
-comments: true
 disqus_identifier: http://www.matthidinger.com/archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx
 redirect_from: /archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx/
 tags: 
@@ -23,18 +21,18 @@ Even though this series assumes a basic understanding of Windows Phone developme
 
 The simplest way to navigate would be to drop in a Button, add a Click handler for the button, and use the following sample code in your code-behind.
 
-``` brush:
+```csharp
 NavigationService.Navigate(new Uri("/Views/Home.xaml"));
 NavigationService.Navigate(new Uri("/Views/ProductDetails.xaml?ProductID=5&ProductName=HTC%20Titan"));
 ```
 
 As you can see, if you need to pass parameters to the page you’re navigating to, you use query string values, again exactly how you would write a web application.
 
-### [<img src="{{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png" title="SNAGHTML1dfd0d9f" alt="SNAGHTML1dfd0d9f" width="592" height="480" />]({{ site.baseurl }}images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f.png)
+### [<img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png" title="SNAGHTML1dfd0d9f" alt="SNAGHTML1dfd0d9f" width="592" height="480" />](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f.png)
 
 In the first image above we have a ListBox of Stock Symbols. When the user clicks on the MSFT item, we want to navigate to the StockDetailsView.xaml, and tell it which Symbol was clicked on. What we are looking to achieve is something along these lines.
 
-``` brush:
+```csharp
 NavigationService.Navigate(new Uri("/Views/StockDetailsView.xaml?Symbol=MSFT"));
 ```
 
@@ -42,7 +40,7 @@ NavigationService.Navigate(new Uri("/Views/StockDetailsView.xaml?Symbol=MSFT"));
 
 Now we are on our new page and need to access the QueryString. So if we open up code-behind for StockDetailsView.xaml.cs we could ** override **OnNavigatedTo**, and access the **NavigationContext.QueryString** dictionary to pull out the params that were passed in.
 
-``` brush:
+```csharp
 public partial class StockDetailsView : PhoneApplicationPage
 {
     public StockDetailsView()
@@ -79,7 +77,7 @@ In the screenshot above we can see a ListBox showing a list of Stocks. And with 
 
 Within HomeWatchListView.xaml we have defined the following DataTemplate, which has a **HyperlinkButton** with something special – **cal:Message.Attach=”LoadSymbol($dataContext)”**
 
-``` brush:
+```csharp
 <DataTemplate x:Key="WatchListItemTemplate">
     <HyperlinkButton cal:Message.Attach="LoadSymbol($dataContext)">
         <Grid>                
@@ -98,7 +96,7 @@ Now, in our HomeViewModel we can see exactly where this method is defined. And i
 
 This give us the added benefit of writing navigation login in our ViewModel and not in our View. ViewModels are more easily testable than Views and can be reused if necessary.
 
-``` brush:
+```csharp
 public class HomeViewModel : Screen
 {
     // ... snip ...
@@ -117,7 +115,7 @@ Caliburn has an **INavigationService** that we use in our ViewModel. It offers 2
 1.  Building a URI for us using **\_navigationSerice.UriFor&lt;T&gt;()** – **Look ma’,** **no strings!**
 2.  Take the generated URI and Navigate to a new page
 
-``` brush:
+```csharp
 public void LoadSymbol(StockSnapshot snapshot)
 {
     var uri = _navigation.UriFor<StockDetailsViewModel>()
@@ -139,7 +137,7 @@ Now that we have navigated to StockDetailsView.xaml we need to figure out which 
 
 That is a long way of saying this: **On your ViewModel, create a property whose name matches a QueryString parameter and it will be injected for you automatically.**
 
-``` brush:
+```csharp
 public class StockDetailsViewModel : Screen
 {
     private string _symbol;
@@ -169,7 +167,7 @@ For this scenario I typically **combine** query strings with a singleton data du
 
 #### GlobalData / SnapshotCache
 
-``` brush:
+```csharp
 public class SnapshotCache : Dictionary<string, StockSnapshot>
 {
     public StockSnapshot GetFromCache(string key)
@@ -217,7 +215,7 @@ public class GlobalData : NotifyObject
 
 #### Before navigating to a new page, store the object into GlobalData…
 
-``` brush:
+```csharp
 public class HomeViewModel : Screen
 {
     public void LoadSymbol(StockSnapshot snapshot)
@@ -233,7 +231,7 @@ public class HomeViewModel : Screen
 
 #### …on the new page, pull the object out of GlobalData
 
-``` brush:
+```csharp
 public class StockDetailsViewModel : Screen
 {
     private string _symbol;
