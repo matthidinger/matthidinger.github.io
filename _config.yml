@@ -239,3 +239,7 @@ dynamic_typing:
   lines: # You can add HTML Tags in the Text 
    - "Hi, I'm Matt"   
   me_img: "images/bio-photo.jpg" 
+  
+  
+# Needed to timeline latest post
+post-preview-words: 96

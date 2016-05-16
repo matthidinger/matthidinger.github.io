@@ -9,7 +9,7 @@
 	{% include timeline/navigation.html %}
 	{% include timeline/header.html %}
 
-  {% for page in site.pages %}
+  {% for page in site.pages | sort page.timeline.position %}
     {% if page.timeline %}
 	  {% if page.timeline.section_type == null %}
       <!-- {{ page.title }} Section -->
@@ -23,7 +23,7 @@
     {% elsif page.timeline.section_type == "latest-post" %}
       <section id="{{ page.title }}" class="container content-section text-center">
         <div class="row">
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-lg-8 col-lg-offset-2">
 
             {{ page.content | markdownify }}
 
@@ -38,7 +38,7 @@
               <small> <a href="{{site.baseurl}}{{post.url}}#disqus_thread">Comments</a></small>
             </h4>
 
-            {{ post.content | truncatewords: site.post-preview-words | strip_html | markdownify }}
+            {{ post.content | strip_html | markdownify | truncatewords: site.post-preview-words }}
 
             <h4><a href="{{site.baseurl}}/blog/">View more posts</a></h4>
 

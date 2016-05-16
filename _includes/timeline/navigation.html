@@ -18,7 +18,7 @@
                         <a href="#page-top"></a>
                     </li>
 
-                    {% for page in site.pages | sort: "title" %}
+                    {% for page in site.pages | sort: "timeline.position" %}
                     {% if page.timeline %}
                     <li>
                         <a class="page-scroll" href="#{{ page.title }}">{{ page.title }}</a>
