@@ -22,3 +22,57 @@
 
     </script>
     {% endif %}
+
+
+  <!-- Dynamic Typing Start -->
+
+	{% if page.dynamic_typing %}
+
+
+  <script type="text/javascript" src="{{site.baseurl}}/js/typed.min.js"></script>
+  <script type="text/javascript">
+
+  var myQuotes =  new Array();
+  {% for line in site.dynamic_typing.lines %}
+    myQuotes.push("{{ line }}");
+  {% endfor %}
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  {% if site.shuffle %}
+    shuffle(myQuotes)
+  {% endif %}
+
+    $(".intro-text").typed({
+      strings: myQuotes,
+      typeSpeed: {{ site.dynamic_typing.type_speed }},
+      backDelay: {{ site.dynamic_typing.delete_delay }},
+      startDelay: {{ site.dynamic_typing.start_delay }},
+      loop: {{ site.dynamic_typing.loop }},
+      loopCount: {{ site.dynamic_typing.loop_count }},
+      cursorChar: "|"
+    });
+  </script>
+
+
+
+  {% endif %}
+
+  <!-- Dynamic Typing End  -->

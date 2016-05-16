@@ -227,3 +227,15 @@ defaults:
     values:
       layout: single
       author_profile: true
+
+
+dynamic_typing: 
+  shuffle: false # Shuffle the lines. 
+  loop: false
+  loop_count: False # Set False for infinite loop, or set any number for finite loop. 
+  type_speed: 8 
+  start_delay: 700 
+  delete_delay: 5000 
+  lines: # You can add HTML Tags in the Text 
+   - "Hi, I'm Matt"   
+  me_img: "images/bio-photo.jpg" 

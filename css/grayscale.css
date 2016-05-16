@@ -158,6 +158,7 @@ a:focus {
 }
 
 .intro .intro-body .intro-text {
+    font-family: "Consolas","Courier New","Courier";
     font-size: 18px;
 }
 
@@ -172,7 +173,7 @@ a:focus {
     }
 
     .intro .intro-body .intro-text {
-        font-size: 25px;
+        font-size: 30px;
     }
 }
 
@@ -390,3 +391,38 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+/* Added in { Personal } for Typed Cursor in Header */
+
+    
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+    font-size: 16px;
+    vertical-align: top;
+    
+}
+@media(min-width:768px) {
+    .typed-cursor {
+        font-size: 28px;
+    }
+}
+
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+/* END Added in { Personal } for Typed Cursor in Header */
