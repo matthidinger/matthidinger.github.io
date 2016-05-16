@@ -1,6 +1,6 @@
 ---
 layout: null
-title: Career
+title: Work
 section_type: events
 starting_image: mini-me.jpg
 events:
@@ -24,4 +24,4 @@ events:
     body: "I dreamed of being a linux sysadmin when I grew up. Eventually started a web hosting company and all the scripting I was doing made me realize how amazing programming can be."
     image: basement-cropped.jpg
 ---
-## Career
+## Work
