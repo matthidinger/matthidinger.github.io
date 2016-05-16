@@ -162,6 +162,10 @@ a:focus {
     font-size: 18px;
 }
 
+.intro .intro-body .social-header {
+    padding: 30px;
+}
+
 @media(min-width:767px) {
     .intro {
         height: 100%;
@@ -393,6 +397,9 @@ body {
 }
 
 /* Added in { Personal } for Typed Cursor in Header */
+.intro-text {
+    text-shadow: 1px 3px 2px rgba(0,0,0,0.3);
+}
 
     
 .typed-cursor{
@@ -401,8 +408,8 @@ body {
     -moz-animation: blink 0.7s infinite;
     animation: blink 0.7s infinite;
     font-size: 16px;
-    vertical-align: top;
-    
+    vertical-align: top;   
+    text-shadow: 1px 3px 2px rgba(0,0,0,0.3);    
 }
 @media(min-width:768px) {
     .typed-cursor {
