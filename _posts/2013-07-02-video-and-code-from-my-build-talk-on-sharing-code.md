@@ -9,16 +9,13 @@ tags:
 - pcl
 - xaml
 header:
-  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/b630e246904a_9C6D/buildconf_thumb.png  
+  teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/b630e246904a_9C6D/buildconf_thumb.png
 ---
 ![buildconf](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b630e246904a_9C6D/buildconf_thumb.png "buildconf")
 
 Last week I had another incredible time at Microsoft’s annual [Build conference](http://www.buildwindows.com/). This year was particularly exciting for me, as I was invited to speak about some real-world experience on [Building Apps for both Windows and Windows Phone](http://channel9.msdn.com/Events/Build/2013/2-215).
 
 > This talk is all about cutting to the chase: cross-platform development is challenging. It's also increasingly a reality we must accept, embrace, and learn to take advantage of. By demonstrating a "real-world" app designed for Windows and Windows Phone, you will learn six battle-tested techniques for maximizing both code and skill reuse between multiple platforms.
-
-<iframe src="https://channel9.msdn.com/Events/Build/2013/2-215/player" width="960" height="540" allowFullScreen frameBorder="0"></iframe>
-
 
 Get the code
 ------------

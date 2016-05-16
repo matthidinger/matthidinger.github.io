@@ -3,12 +3,12 @@ main:
   - title: "About"
     url: /about/
     
+  - title: "Blog"
+    url: /blog/
+    
   - title: "Projects"
     url: /projects/
 
   - title: "Talks"
     url: /talks/
-    
-  - title: "Tags"
-    url: /tags/
-    
+   

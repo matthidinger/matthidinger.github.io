@@ -1,8 +1,7 @@
 ---
-title: "Matt Hidinger"
-layout: timeline
-redirect_from: /Default.aspx/
-dynamic_typing: true
+layout: null
+title: Contact
+section_type: contact
 social:
   - title: twitter
     url: http://twitter.com/matthidinger
@@ -13,3 +12,6 @@ social:
   - title: facebook
     url: http://facebook/matt.hidinger
 ---
+## Contact
+
+I'm easy to find

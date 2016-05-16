@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+	{% include timeline/head.html %}
+    {% include base_path %}
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+	{% include timeline/navigation.html %}
+	{% include timeline/header.html %}
+
+  {% for section_path in site.timeline_sections %}
+    {% for page in site.pages %}
+      {% if page.path == section_path %}
+        {% include timeline/section_{{ page.section_type }}.html %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+
+
+	{% include timeline/footer.html %}
+	{% include timeline/js.html %}
+
+</body>
+</html>
