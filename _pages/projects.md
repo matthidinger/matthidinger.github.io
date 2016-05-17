@@ -1,6 +1,7 @@
 ---
 title: "Projects"
 permalink: /projects/
+redirect_from: /articles/projects.aspx/
 ---
 
-These are my projects
+Projects page coming soon!
