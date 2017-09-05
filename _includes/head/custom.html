@@ -8,4 +8,101 @@
 <link rel="shortcut icon" href="/favicon.ico?v=QEMGgEzKv9">
 <meta name="theme-color" content="#ffffff">
 
+
+<script type="application/vnd.microsoft.card.adaptive">
+{
+	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+	"type": "AdaptiveCard",
+	"body": [
+		{
+			"type": "Container",
+			"items": [
+				{
+					"type": "ColumnSet",
+					"columns": [
+						{
+							"type": "Column",
+							"size": 1,
+							"items": [
+								{
+									"type": "Image",
+									"url": "http://matthidinger.com/images/bio-photo.jpg",
+									"size": "medium",
+									"style": "person"
+								}
+							]
+						},
+						{
+							"type": "Column",
+							"size": 3,
+							"items": [
+								{
+									"type": "TextBlock",
+									"text": "**Matt Hidinger**",
+									"wrap": true
+								},
+								{
+									"type": "TextBlock",
+									"separation": "none",
+									"text": "Sailing and making. Principal Program Manager at Microsoft, running the Adaptive Cards project. Loving the new cross-platform, open-source, MSFT ride.",
+									"isSubtle": true,
+									"wrap": true
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "Container",
+			"items": [
+				{
+					"type": "TextBlock",
+					"text": "",
+					"speak": "",
+					"wrap": true
+				},
+				{
+					"type": "FactSet",
+					"speak": "It has been assigned to: David Claux",
+					"facts": [
+						{
+							"title": "🏠 Home:",
+							"value": "Seattle"
+						},
+						{
+							"title": "🏢 Work:",
+							"value": "Microsoft"
+						},
+						{
+							"title": "🌐 Web:",
+							"value": "http://matthidinger.com"
+						}
+					]
+				}
+			]
+		}
+	],
+	"actions": [
+		{
+			"type": "Action.OpenUrl",
+			"title": "Twitter",
+			"url": "http://twitter.com/matthidinger"
+		},
+			{
+			"type": "Action.OpenUrl",
+			"title": "GitHub",
+			"url": "http://github.com/matthidinger"
+		},
+			{
+			"type": "Action.OpenUrl",
+			"title": "Instagram",
+			"url": "http://instagram.com/matthidinger"
+		}
+	]
+}
+</script>
+
+
 <!-- end custom head snippets -->
