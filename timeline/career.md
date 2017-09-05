@@ -6,7 +6,7 @@ starting_image: mini-me.jpg
 events:
   - date: "July 2013 - Present"
     title: Microsoft
-    body: "Time to pack up my bags and head  west. Working as a Senior Program Manager on the Windows Developer Platform."
+    body: "Time to pack up my bags and head west. Working as a Principal Program Manager on various developer platform initiatives."
     image: microsoft.png
       
   - date: "December 2011 - July 2013"
