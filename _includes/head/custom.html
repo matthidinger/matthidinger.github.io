@@ -11,96 +11,92 @@
 
 <script type="application/vnd.microsoft.card.adaptive">
 {
-	"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-	"type": "AdaptiveCard",
-  "version": "1.0",
-	"body": [
-		{
-			"type": "Container",
-			"items": [
-				{
-					"type": "ColumnSet",
-					"columns": [
-						{
-							"type": "Column",
-							"size": 1,
-							"items": [
-								{
-									"type": "Image",
-									"url": "https://matthidinger.com/images/bio-photo.jpg",
-									"size": "medium",
-									"style": "person"
-								}
-							]
-						},
-						{
-							"type": "Column",
-							"size": 3,
-							"items": [
-								{
-									"type": "TextBlock",
-									"text": "**Matt Hidinger**",
-									"wrap": true
-								},
-								{
-									"type": "TextBlock",
-									"separation": "none",
-									"text": "Sailing and making. Principal Program Manager at Microsoft, running the Adaptive Cards project. Loving the new cross-platform, open-source, MSFT ride.",
-									"isSubtle": true,
-									"wrap": true
-								}
-							]
-						}
-					]
-				}
-			]
-		},
-		{
-			"type": "Container",
-			"items": [
-				{
-					"type": "TextBlock",
-					"text": "",
-					"speak": "",
-					"wrap": true
-				},
-				{
-					"type": "FactSet",
-					"facts": [
-						{
-							"title": "🏠 Home:",
-							"value": "Seattle"
-						},
-						{
-							"title": "🏢 Work:",
-							"value": "Microsoft"
-						},
-						{
-							"title": "🌐 Web:",
-							"value": "https://matthidinger.com"
-						}
-					]
-				}
-			]
-		}
-	],
-	"actions": [
-		{
-			"type": "Action.OpenUrl",
-			"title": "Twitter",
-			"url": "https://twitter.com/matthidinger"
-		},
-			{
-			"type": "Action.OpenUrl",
-			"title": "GitHub",
-			"url": "https://github.com/matthidinger"
-		},
-			{
-			"type": "Action.OpenUrl",
-			"title": "Instagram",
-			"url": "https://instagram.com/matthidinger"
-		}
-	]
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.3",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "size": 1,
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://matthidinger.com/images/bio-photo.jpg",
+                                    "size": "Medium",
+                                    "style": "Person"
+                                }
+                            ],
+                            "width": "auto"
+                        },
+                        {
+                            "type": "Column",
+                            "size": 3,
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "**Matt Hidinger**",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "separation": "none",
+                                    "text": "Sailing and making. Principal Program Manager at Microsoft, running the Adaptive Cards project. Loving the new cross-platform, open-source, MSFT ride.",
+                                    "isSubtle": true,
+                                    "wrap": true
+                                }
+                            ],
+                            "width": "stretch"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "FactSet",
+                    "facts": [
+                        {
+                            "title": "🏠 Home:",
+                            "value": "Seattle"
+                        },
+                        {
+                            "title": "🏢 Work:",
+                            "value": "Microsoft"
+                        },
+                        {
+                            "title": "🌐 Web:",
+                            "value": "https://matthidinger.com"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.OpenUrl",
+            "title": "Twitter",
+            "url": "https://twitter.com/matthidinger"
+        },
+        {
+            "type": "Action.OpenUrl",
+            "title": "GitHub",
+            "url": "https://github.com/matthidinger"
+        },
+        {
+            "type": "Action.OpenUrl",
+            "title": "Instagram",
+            "url": "https://instagram.com/matthidinger"
+        }
+    ]
 }
 </script>
 
