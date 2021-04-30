@@ -1,6 +1,6 @@
 ---
 title: "Windows Phone Development MVP"
-disqus_identifier: http://www.matthidinger.com/archive/2011/10/01/Windows-Phone-Development-MVP.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/10/01/Windows-Phone-Development-MVP.aspx
 redirect_from: /archive/2011/10/01/Windows-Phone-Development-MVP.aspx/
 tags: 
 - wpdev
@@ -17,11 +17,11 @@ I’d also like to offer a very special thanks to the entire Windows Phone Dev c
 
 ### Chicago Community
 
-And of course to anyone in Chicagoland who is at least slightly curious about Windows Phone development, don’t miss our [Chicago Windows Phone Developer group](http://www.meetup.com/Chicago-Windows-Phone-Developers/) meetings on the first Thursday of every month at 200 S Wacker.
+And of course to anyone in Chicagoland who is at least slightly curious about Windows Phone development, don’t miss our [Chicago Windows Phone Developer group](https://www.meetup.com/Chicago-Windows-Phone-Developers/) meetings on the first Thursday of every month at 200 S Wacker.
 
 ### Thanks!
 
 Thanks again to the entire development community for investing so much of your personal time to speaking, training, blogging, and critiquing the tools and platforms we use every day!
 
-Technorati Tags: [wp7](http://technorati.com/tags/wp7),[wp7dev](http://technorati.com/tags/wp7dev),[mvp](http://technorati.com/tags/mvp),[community](http://technorati.com/tags/community)
+Technorati Tags: [wp7](https://technorati.com/tags/wp7),[wp7dev](https://technorati.com/tags/wp7dev),[mvp](https://technorati.com/tags/mvp),[community](https://technorati.com/tags/community)
 

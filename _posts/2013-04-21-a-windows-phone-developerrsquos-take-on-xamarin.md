@@ -1,6 +1,6 @@
 ---
 title: "A Windows Phone Developer&rsquo;s take on Xamarin"
-disqus_identifier: http://www.matthidinger.com/archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx
 redirect_from: /archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx/
 tags: 
 - wpdev
@@ -14,7 +14,7 @@ header:
 [![WP\_20130416\_002](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_thumb.jpg "WP_20130416_002")](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/378d9bf4981b_91E1/WP_20130416_002_2.jpg)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[Xamarin](http://xamarin.com/) is all the rage in mobile development right now. They just threw an [amazing conference](http://xamarin.com/evolve) in Austin and started trending on Twitter during the opening keynote.
+[Xamarin](https://xamarin.com/) is all the rage in mobile development right now. They just threw an [amazing conference](https://xamarin.com/evolve) in Austin and started trending on Twitter during the opening keynote.
 
 But I’ve identified myself as a Microsoft platform dev for years now, and Xamarin is all about iOS and Android. Why am I, and more importantly Microsoft, seemingly so interested in this product?
 
@@ -68,13 +68,13 @@ The more iOS apps written in C\#, the more apps can be ported to Windows at a si
 It’s a cross-platform world
 ---------------------------
 
-This is obvious to anyone working in the mobile space, but the idea of 95% market-share of a single client-platform is a thing of the past. Rocky Lhotka had a great article on the [future of the smart client](http://www.lhotka.net/weblog/FutureOfTheSmartClient.aspx) and what this means for developers, although we may differ on which language could take us to that future.
+This is obvious to anyone working in the mobile space, but the idea of 95% market-share of a single client-platform is a thing of the past. Rocky Lhotka had a great article on the [future of the smart client](https://www.lhotka.net/weblog/FutureOfTheSmartClient.aspx) and what this means for developers, although we may differ on which language could take us to that future.
 
 The one thing we all agree on: this is going to be a fun ride.
 
 ### So let’s all enjoy a xammy whammy
 
-I’d like to wrap-up with a special thanks the entire Xamarin community, I met a ton of great people and definitely look forward to seeing everyone next year! And of course a huge thanks to [Stephanie Schatz](http://twitter.com/she_travels), [Erik Polzin](https://twitter.com/epolzin), and [Anuj Bhatia](https://twitter.com/anooj) for the warm welcome and great conversations throughout the week.
+I’d like to wrap-up with a special thanks the entire Xamarin community, I met a ton of great people and definitely look forward to seeing everyone next year! And of course a huge thanks to [Stephanie Schatz](https://twitter.com/she_travels), [Erik Polzin](https://twitter.com/epolzin), and [Anuj Bhatia](https://twitter.com/anooj) for the warm welcome and great conversations throughout the week.
 
 See you all at BUILD 2013!
 

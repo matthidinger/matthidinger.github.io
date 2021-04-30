@@ -1,6 +1,6 @@
 ---
 title: "Automatically secure your database queries with LINQ &ndash; Part 1"
-disqus_identifier: http://www.matthidinger.com/archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx
 redirect_from: /archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx/
 tags: 
 - security

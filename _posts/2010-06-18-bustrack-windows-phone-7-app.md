@@ -1,6 +1,6 @@
 ---
 title: "BusTrack Windows Phone 7 App"
-disqus_identifier: http://www.matthidinger.com/archive/2010/06/18/bustrack-windows-phone-7-app.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/06/18/bustrack-windows-phone-7-app.aspx
 redirect_from: /archive/2010/06/18/bustrack-windows-phone-7-app.aspx/
 tags: 
 - wpdev

@@ -1,6 +1,6 @@
 ---
 title: "Sharing Code: Windows 8 and Windows Phone"
-disqus_identifier: http://www.matthidinger.com/archive/2012/12/05/sharing-code-windows-8-and-windows-phone.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/12/05/sharing-code-windows-8-and-windows-phone.aspx
 redirect_from: /archive/2012/12/05/sharing-code-windows-8-and-windows-phone.aspx/
 tags: 
 - presentations
@@ -12,7 +12,7 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png
 ---
-I recently had the opportunity to speak at Microsoft’s [New Era of Work](http://www.microsoft.com/enterprise/events/theneweraofwork3/#fbid=7bLqKFFM2kc) conference in Chicago. Below you’ll find the presentation material, the Real-World Stocks project which demonstrates the principles, and a high-level recap of the lessons learned while practicing the following techniques in actual apps.
+I recently had the opportunity to speak at Microsoft’s [New Era of Work](https://www.microsoft.com/enterprise/events/theneweraofwork3/#fbid=7bLqKFFM2kc) conference in Chicago. Below you’ll find the presentation material, the Real-World Stocks project which demonstrates the principles, and a high-level recap of the lessons learned while practicing the following techniques in actual apps.
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_3.png)
  ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/screenshot_12052012_110659_thumb.png)
@@ -22,7 +22,7 @@ I recently had the opportunity to speak at Microsoft’s [New Era of Work](http:
 Slides
 ------
 
-A number of slides were provided by Microsoft, and many specifically from [Matthias Shapiro](http://twitter.com/matthiasshap). Be sure to check out [his blog](http://matthiasshapiro.com/) for more excellent Windows Phone articles!
+A number of slides were provided by Microsoft, and many specifically from [Matthias Shapiro](https://twitter.com/matthiasshap). Be sure to check out [his blog](https://matthiasshapiro.com/) for more excellent Windows Phone articles!
 
 |                                                                                                                                                                                                                                                                                                                                                                                      |     |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
@@ -42,10 +42,10 @@ source
 <tbody>
 <tr class="odd">
 <td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_6.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_2.png" title="image" alt="image" width="202" height="354" /></a></td>
-<td><p>For this talk I started with my <a href="http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx">Real-World Stocks Windows Phone</a> project, extracted the central logic into a Portable Class Library, and used File-Linking to share Controls and Converters between the two projects.</p>
+<td><p>For this talk I started with my <a href="https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx">Real-World Stocks Windows Phone</a> project, extracted the central logic into a Portable Class Library, and used File-Linking to share Controls and Converters between the two projects.</p>
 <p>The full source code for Real-World Stocks can be downloaded at the following link, inside a new folder named <strong>CodeSharingSample</strong>.</p>
-<a href="http://realworldstocks.codeplex.com/" title="http://realworldstocks.codeplex.com/"><br />
-http://realworldstocks.codeplex.com/</a><br />
+<a href="https://realworldstocks.codeplex.com/" title="https://realworldstocks.codeplex.com/"><br />
+https://realworldstocks.codeplex.com/</a><br />
 <br />
 
 <p><br />

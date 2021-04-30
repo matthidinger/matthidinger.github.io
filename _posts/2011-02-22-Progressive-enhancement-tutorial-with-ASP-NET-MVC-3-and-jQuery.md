@@ -1,6 +1,6 @@
 ---
 title: "Progressive enhancement tutorial with ASP.NET MVC 3 and jQuery"
-disqus_identifier: http://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx
 redirect_from: /archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx/
 tags: 
 - aspnet-mvc
@@ -10,7 +10,7 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/5a3bbd81a699_12AB1/SNAGHTML1a3b6b08_thumb.png
 ---
-> **Progressive enhancement** is a strategy for [web design](http://en.wikipedia.org/wiki/Web_design) that emphasizes accessibility, [semantic HTML markup](http://en.wikipedia.org/wiki/Semantic_HTML), and external stylesheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or Internet connection, while also providing those with better bandwidth or more advanced browser software an enhanced version of the page.
+> **Progressive enhancement** is a strategy for [web design](https://en.wikipedia.org/wiki/Web_design) that emphasizes accessibility, [semantic HTML markup](https://en.wikipedia.org/wiki/Semantic_HTML), and external stylesheet and scripting technologies. Progressive enhancement uses web technologies in a layered fashion that allows everyone to access the basic content and functionality of a web page, using any browser or Internet connection, while also providing those with better bandwidth or more advanced browser software an enhanced version of the page.
 
 Now that it’s 2011 I hope more .NET web developers really start to take progressive enhancement seriously. Sure many ASP.NET devs work on internal LOB apps and can enforce javascript requirements, but if you’re working on an internet-facing site I encourage you to take advantage of the many PE/unobtrusive javascript techniques we have available these days, especially in MVC 3.
 
@@ -21,7 +21,7 @@ update 3/2/2011
 
 Per a suggestion from a commenter I have written a followup article that encapsulates the logic presented here into a much more reusable pair of custom ActionResults.
 
-[Progressive enhancement in MVC 3 with the help of custom ActionResults](http://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx "http://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx")
+[Progressive enhancement in MVC 3 with the help of custom ActionResults](https://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx "https://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx")
 
  
 
@@ -239,7 +239,7 @@ Hopefully this tutorial covered everything! It’s exciting to see how far MVC 3
 
  
 
-[Download the Source](http://buswatchapp.com/downloads/progressiveenhancement.zip)
+[Download the Source](https://buswatchapp.com/downloads/progressiveenhancement.zip)
 ----------------------------------------------------------------------------------
 
 VS 2010 with ASP.NET MVC 3 required to open it

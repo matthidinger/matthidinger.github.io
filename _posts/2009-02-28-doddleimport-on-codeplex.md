@@ -1,6 +1,6 @@
 ---
 title: "DoddleImport on CodePlex"
-disqus_identifier: http://www.matthidinger.com/archive/2009/02/28/doddleimport-on-codeplex.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/02/28/doddleimport-on-codeplex.aspx
 redirect_from: /archive/2009/02/28/doddleimport-on-codeplex.aspx/
 tags: 
 - doddle
@@ -117,7 +117,7 @@ That's all for now, check back for updates on this and some other projects.
 
 ### Get the Source and Try it out!
 
-[Check it out at CodePlex](http://codeplex.com/doddleimport)
+[Check it out at CodePlex](https://codeplex.com/doddleimport)
 
 
 

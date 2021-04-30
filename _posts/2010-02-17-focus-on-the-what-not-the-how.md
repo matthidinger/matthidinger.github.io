@@ -1,6 +1,6 @@
 ---
 title: "Focus on the what, not the how"
-disqus_identifier: http://www.matthidinger.com/archive/2010/02/17/focus-on-the-what-not-the-how.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/02/17/focus-on-the-what-not-the-how.aspx
 redirect_from: /archive/2010/02/17/focus-on-the-what-not-the-how.aspx/
 tags: 
 - c-sharp

@@ -1,6 +1,6 @@
 ---
 title: "Customizing the Entity Framework T4 Template, suppressing code analysis"
-disqus_identifier: http://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx
 redirect_from: /archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx/
 tags: 
 - entity-framework
@@ -8,9 +8,9 @@ tags:
 header:
   teaser: subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png
 ---
-As a brief recap, the reason this post even exists is because the generated code from the EF4 designer [does not properly suppress code analysis warnings](http://matthidinger.com/archive/2010/02/04/ef4-edmx-does-not-suppress-code-analysis-warnings.aspx). In that post, I mentioned that I would provide a proper T4 template and tutorial on integrating it into your EDMX model. This post details the steps to creating and customizing an Entity Framework 4 T4 template.
+As a brief recap, the reason this post even exists is because the generated code from the EF4 designer [does not properly suppress code analysis warnings](https://matthidinger.com/archive/2010/02/04/ef4-edmx-does-not-suppress-code-analysis-warnings.aspx). In that post, I mentioned that I would provide a proper T4 template and tutorial on integrating it into your EDMX model. This post details the steps to creating and customizing an Entity Framework 4 T4 template.
 
-[T4](http://www.hanselman.com/blog/T4TextTemplateTransformationToolkitCodeGenerationBestKeptVisualStudioSecret.aspx) (the [Text Template Transformation Toolkit](http://msdn.microsoft.com/en-us/library/bb126445.aspx)) is the code generation technology built into Visual Studio. Thankfully, the EF4 designer has been enhanced to support customizable templates so that developers are free to change the code that is generated for your ObjectContext and Entity classes.
+[T4](https://www.hanselman.com/blog/T4TextTemplateTransformationToolkitCodeGenerationBestKeptVisualStudioSecret.aspx) (the [Text Template Transformation Toolkit](https://msdn.microsoft.com/en-us/library/bb126445.aspx)) is the code generation technology built into Visual Studio. Thankfully, the EF4 designer has been enhanced to support customizable templates so that developers are free to change the code that is generated for your ObjectContext and Entity classes.
 
 To get started, I am assuming you already have an EDMX file that has been generated from your database.
 
@@ -46,7 +46,7 @@ From here, you can customize the template yourself (instructions are provided in
 
 #### Step 3a – Download the corrected template
 
-1.  [Open the T4 Template](http://www.matthidinger.com/downloads/codesnippets/edmxt4template.txt)
+1.  [Open the T4 Template](https://www.matthidinger.com/downloads/codesnippets/edmxt4template.txt)
 2.  Overwrite all text in your .tt file with the text from the link above
 3.  Change the token “YOUR\_EDMX\_FILE.edmx” to be the file name of you actual edmx file
 4.  Proceed to step 4

@@ -1,6 +1,6 @@
 ---
 title: "Entity Framework T4 Template Enhancements &ndash; Part 1"
-disqus_identifier: http://www.matthidinger.com/archive/2010/04/22/entity-framework-t4-template-enhancements-ndash-part-1.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/04/22/entity-framework-t4-template-enhancements-ndash-part-1.aspx
 redirect_from: /archive/2010/04/22/entity-framework-t4-template-enhancements-ndash-part-1.aspx/
 tags: 
 - t4

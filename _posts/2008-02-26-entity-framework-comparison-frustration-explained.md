@@ -1,6 +1,6 @@
 ---
 title: "Entity Framework Comparison Frustration: Explained"
-disqus_identifier: http://www.matthidinger.com/archive/2008/02/26/entity-framework-comparison-frustration-explained.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2008/02/26/entity-framework-comparison-frustration-explained.aspx
 redirect_from: /archive/2008/02/26/entity-framework-comparison-frustration-explained.aspx/
 tags: 
 - entity-framework
@@ -8,7 +8,7 @@ tags:
 header:
   teaser: 
 ---
-This post is a follow-up to an article I wrote a few weeks ago, [ADO.NET Entity Framework Comparison Frustration](http://blog.matthidinger.com/2008/02/01/ADONETEntityFrameworkComparisonFrustration.aspx). As a quick re-cap, I was simply trying to filter a list of users with a LINQ query expression by comparing custom classes, not primitive types.
+This post is a follow-up to an article I wrote a few weeks ago, [ADO.NET Entity Framework Comparison Frustration](https://blog.matthidinger.com/2008/02/01/ADONETEntityFrameworkComparisonFrustration.aspx). As a quick re-cap, I was simply trying to filter a list of users with a LINQ query expression by comparing custom classes, not primitive types.
 
 ```csharp
 TorvusEntities entities = new TorvusEntities(); 
@@ -28,7 +28,7 @@ However, an exception was thrown.
 
 So I left it at that. The Entity Framework could only handle comparison on primitive types, which makes sense of course, since the expression needs to be converted into the underlying data storage language (T-SQL in this case). I was simply hoping that they would provide a more object-oriented way of translating the comparison I hoped to express by some other means. E.g., overriding Object.Equals() or the == operator, implementing a certain interface on my entities, something that felt OO to me.
 
-Today however, I found my answer. Embarrassingly enough, it was [in the MSDN docs all along](http://msdn2.microsoft.com/en-us/library/bb738686.aspx).
+Today however, I found my answer. Embarrassingly enough, it was [in the MSDN docs all along](https://msdn2.microsoft.com/en-us/library/bb738686.aspx).
 
 > A comparison expression checks whether a constant value, property value, or method result is equal, not equal, greater than, or less than another value. If a particular comparison is not valid for LINQ to Entities, an exception will be thrown. \[Specifically, the exception I wrote above.\] All comparisons, both implicit and explicit, require that all components are comparable in the data store. Comparison expressions are often used in **Where** clauses for restricting the query results.
 

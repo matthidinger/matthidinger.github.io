@@ -1,6 +1,6 @@
 ---
 title: "my projects"
-disqus_identifier: http://www.matthidinger.com/archive/2010/10/27/projects.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/10/27/projects.aspx
 redirect_from: /archive/2010/10/27/projects.aspx/
 tags: 
 header:
@@ -55,16 +55,16 @@ open source projects
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><h3 id="doddleaudit"><a href="http://doddleaudit.codeplex.com/">DoddleAudit</a></h3></td>
+<td><h3 id="doddleaudit"><a href="https://doddleaudit.codeplex.com/">DoddleAudit</a></h3></td>
 <td><p>DoddleAudit will add data auditing to your LINQ to SQL or Entity Framework application.</p></td>
 </tr>
 <tr class="even">
-<td><h3 id="doddlereport"><a href="http://doddlereport.codeplex.com/">DoddleReport</a></h3></td>
+<td><h3 id="doddlereport"><a href="https://doddlereport.codeplex.com/">DoddleReport</a></h3></td>
 <td><p>DoddleReport automatically generates tabular reports from any IEnumerable datasource.</p>
 <p>Out of the box it can render reports to Excel, PDF, HTML, and CSV – fully pluggable of course. I designed the project to provide reporting output over the LINQ queries we had already written for the application, but maybe you can find other uses for it.</p></td>
 </tr>
 <tr class="odd">
-<td><h3 id="doddleimport"><a href="http://doddleimport.codeplex.com/">DoddleImport</a></h3></td>
+<td><h3 id="doddleimport"><a href="https://doddleimport.codeplex.com/">DoddleImport</a></h3></td>
 <td><p>DoddleImport will allow you to easily import data (with validation) to and from a variety of extensible sources.</p></td>
 </tr>
 </tbody>

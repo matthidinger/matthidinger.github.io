@@ -1,6 +1,6 @@
 ---
 title: "RealWorldWPDev Part 2: File &ndash;&gt; New Project"
-disqus_identifier: http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx
 redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx/
 tags: 
 - wpdev
@@ -10,15 +10,15 @@ header:
 ---
 ### Series Introduction and Outline
 
-This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](http://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
+This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 Before you begin, install NuGet!
 --------------------------------
 
-[NuGet](http://nuget.org) is a Visual Studio extension that makes it easy to install and update open source libraries and tools in Visual Studio. It can be installed directly from within Visual Studio and only takes a minute.
+[NuGet](https://nuget.org) is a Visual Studio extension that makes it easy to install and update open source libraries and tools in Visual Studio. It can be installed directly from within Visual Studio and only takes a minute.
 
 In Visual Studio: Tools –&gt; Extension Manager and find NuGet
 
@@ -83,7 +83,7 @@ At this point we can F5 our project and marvel at our progress! In the next part
 
 ### Want some more RealWorldWPDev?
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 

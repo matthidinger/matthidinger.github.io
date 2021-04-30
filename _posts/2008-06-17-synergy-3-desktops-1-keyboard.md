@@ -1,6 +1,6 @@
 ---
 title: "Synergy - 3 Desktops, 1 Keyboard"
-disqus_identifier: http://www.matthidinger.com/archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx
 redirect_from: /archive/2008/06/17/synergy-3-desktops-1-keyboard.aspx/
 tags: 
 header:
@@ -10,7 +10,7 @@ header:
 
 I recently noticed a colleague of mine using a hardware KVM to share his desktop keyboard and mouse with his laptop. He had a standard hardware KVM with basic PS/2 inputs and could toggle between the PCs by pressing Scroll Lock twice. Pretty typical setup for many people who have multiple PCs, and it wasn't more than a few years ago that I was doing that same.
 
-Enter [Synergy](http://synergy2.sourceforge.net/). Synergy is actually lot more than a basic KVM. **It makes multiple computers behave exactly as though they were a single PC with dual-monitors.** You simply move your mouse to the edge of one monitor and it instantly jumps to the next one -- even though they are entirely different computers.
+Enter [Synergy](https://synergy2.sourceforge.net/). Synergy is actually lot more than a basic KVM. **It makes multiple computers behave exactly as though they were a single PC with dual-monitors.** You simply move your mouse to the edge of one monitor and it instantly jumps to the next one -- even though they are entirely different computers.
 
 Synergy also lets you share your clipboard between all connected PCs, and it can even sync screensavers so they all start and stop together. But probably the best feature for some, is that Synergy works on Linux, Windows, and Mac! If you notice the screenshot to the right, I have a Fedora box on the far left. Oh, and did I mention it's open source and totally free?
 

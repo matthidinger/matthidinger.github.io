@@ -1,6 +1,6 @@
 ---
 title: "RealWorldWPDev Part 3: Caliburn.Micro and Application Infrastructure"
-disqus_identifier: http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure.aspx
 redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure.aspx/
 tags: 
 - wpdev
@@ -10,21 +10,21 @@ header:
 ---
 ### Series Introduction and Outline
 
-This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](http://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
+This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 Caliburn.Micro
 --------------
 
-Many Windows Phone Applications use a lightweight MVVM framework for basic infrastructure services. Realworld Stocks is going to use Caliburn.Micro. I have had great success with Caliburn.Micro in my previous Windows Phone and Silverlight apps. CM was created by [Rob Eisenberg](http://twitter.com/eisenbergeffect) and is under active development and has a great community and following.
+Many Windows Phone Applications use a lightweight MVVM framework for basic infrastructure services. Realworld Stocks is going to use Caliburn.Micro. I have had great success with Caliburn.Micro in my previous Windows Phone and Silverlight apps. CM was created by [Rob Eisenberg](https://twitter.com/eisenbergeffect) and is under active development and has a great community and following.
 
-This article is going to walk through a lot of Caliburn.Micro setup, but for the full documentation please see the [official project documentation](http://caliburnmicro.codeplex.com/documentation).
+This article is going to walk through a lot of Caliburn.Micro setup, but for the full documentation please see the [official project documentation](https://caliburnmicro.codeplex.com/documentation).
 
 ### Installing Caliburn.Micro from NuGet
 
-If you’ve been following along then you already have NuGet installed. If not, please see [Part 2: File –&gt; New Project](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx).
+If you’ve been following along then you already have NuGet installed. If not, please see [Part 2: File –&gt; New Project](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx).
 
 Caliburn.Micro needs to be installed into both the **RealWorldStocks.Client.Core** and the **RealWorldStocks.Client.UI** projects.
 
@@ -48,7 +48,7 @@ Alternatively you can right-click on both Projects from the Solution Explorer an
 
 Once Caliburn.Micro finishes installing it should open up a web page with instructions to finish the configuration.
 
-1.  **[Follow the instructions that opened up in Visual Studio](http://caliburnmicro.codeplex.com/wikipage?title=Nuget&referringTitle=Documentation)**
+1.  **[Follow the instructions that opened up in Visual Studio](https://caliburnmicro.codeplex.com/wikipage?title=Nuget&referringTitle=Documentation)**
 2.  Make sure your **App.xaml** and **App.xaml.cs** are cleared out from the instructions above!
 3.  Delete **MainPage.xaml**
 4.  In **RealworldStocks.Client.UI**, create a new folder called **Framework**
@@ -119,8 +119,8 @@ namespace RealWorldStocks.Client.UI.Framework
 8. Since we moved the **AppBoostrapper** into the **RealWorldStocks.Client.UI.Framework** namespace we need to update our **App.xaml**. Paste the following into your **App.xaml**
 
 ```csharp
-<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+<Application xmlns="https://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="https://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Framework="clr-namespace:RealWorldStocks.Client.UI.Framework"
              x:Class="RealWorldStocks.Client.UI.App">
     <Application.Resources>
@@ -157,11 +157,11 @@ The final pieces of our infrastructure include the following:
 
 ### Value Converters
 
-I have a set of IValueConverters that I have used on all of my Windows Phone projects. They can be viewed from the [CodePlex source code](http://realworldwpdev.codeplex.com/SourceControl/list/changesets).
+I have a set of IValueConverters that I have used on all of my Windows Phone projects. They can be viewed from the [CodePlex source code](https://realworldwpdev.codeplex.com/SourceControl/list/changesets).
 
 ### Assets
 
-Assets are a set of ResourceDictionaries that contain the resources used throughout the application. They can be viewed from the [CodePlex source code](http://realworldwpdev.codeplex.com/SourceControl/list/changesets).
+Assets are a set of ResourceDictionaries that contain the resources used throughout the application. They can be viewed from the [CodePlex source code](https://realworldwpdev.codeplex.com/SourceControl/list/changesets).
 
 #### Constants.xaml
 
@@ -223,13 +223,13 @@ Now we’re getting somewhere. We have the majority of our application infrastru
 If the app exits immediately after launching check the following:
 
 1.  WPAppManifest NavigationPage points at a .xaml file that actually exists
-2.  Make sure you App.xaml.cs has nothing but InitializeComponent() and App.xaml only has the Bootstrapper in it. [See the Caliburn.Micro documentation for more](http://caliburnmicro.codeplex.com/wikipage?title=Nuget&referringTitle=Documentation)
+2.  Make sure you App.xaml.cs has nothing but InitializeComponent() and App.xaml only has the Bootstrapper in it. [See the Caliburn.Micro documentation for more](https://caliburnmicro.codeplex.com/wikipage?title=Nuget&referringTitle=Documentation)
 3.  Check the namespaces in your ViewModels and Views and make sure ViewModels and Views namespaces match up
-4.  For further Caliburn troubleshooting check the [Caliburn.Micro documentation](http://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Conventions&referringTitle=Documentation)
+4.  For further Caliburn troubleshooting check the [Caliburn.Micro documentation](https://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Conventions&referringTitle=Documentation)
 
 ### Want some more RealWorldWPDev?
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 

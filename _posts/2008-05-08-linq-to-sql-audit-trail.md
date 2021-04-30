@@ -1,6 +1,6 @@
 ---
 title: "LINQ to SQL Audit Trail"
-disqus_identifier: http://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx
 redirect_from: /archive/2008/05/08/linq-to-sql-audit-trail.aspx/
 tags: 
 - linq-to-sql
@@ -11,7 +11,7 @@ header:
 This post is out of date
 ------------------------
 
-This post is outdated and has significantly enhanced with a new version. Please see [LINQ Audit Trail V2](http://www.matthidinger.com/archive/2009/01/12/linq-audit-trail-v2.aspx)
+This post is outdated and has significantly enhanced with a new version. Please see [LINQ Audit Trail V2](https://www.matthidinger.com/archive/2009/01/12/linq-audit-trail-v2.aspx)
 
 In a project I am currently working on, we had a fairly common requirement of recording an Audit Trail of any data changes. The requirements were typical, provide a running log of any changes in the database, including:
 
@@ -85,9 +85,9 @@ This is our public entry point for Auditing a table. This method might look a li
 
 ### Step 4 - Auditing LINQ to SQL Entity Inheritance
 
-I ran into something unexpected when I began testing the auditing code I wrote: Auditing my Entities that used inheritance. In case you didn't know, LINQ to SQL supports a type of relational inheritance known as Table-Per-Class Hierarchy. This means that every custom field for the derived entity classes are stored in the same table in the database. This article will not go into this subject any further, but please see [Guy Burnstein's Inheritance Article](http://blogs.microsoft.co.il/blogs/bursteg/archive/2007/10/01/linq-to-sql-inheritance.aspx "http://blogs.microsoft.co.il/blogs/bursteg/archive/2007/10/01/linq-to-sql-inheritance.aspx") on the subject of LINQ to SQL inheritance. The following images are courtesy of him, and only for demonstration's sake -- these entities will not be in my sample code.
+I ran into something unexpected when I began testing the auditing code I wrote: Auditing my Entities that used inheritance. In case you didn't know, LINQ to SQL supports a type of relational inheritance known as Table-Per-Class Hierarchy. This means that every custom field for the derived entity classes are stored in the same table in the database. This article will not go into this subject any further, but please see [Guy Burnstein's Inheritance Article](https://blogs.microsoft.co.il/blogs/bursteg/archive/2007/10/01/linq-to-sql-inheritance.aspx "https://blogs.microsoft.co.il/blogs/bursteg/archive/2007/10/01/linq-to-sql-inheritance.aspx") on the subject of LINQ to SQL inheritance. The following images are courtesy of him, and only for demonstration's sake -- these entities will not be in my sample code.
 
-<img src="http://blogs.microsoft.co.il/blogs/bursteg/WindowsLiveWriter/LinqtoSQLInheritance_7597/Person_0f4a4940-612f-4ad6-9969-9d7eb8cdea18.jpg" alt="Linq to SQL Inheritance" width="357" height="457" /><img src="http://blogs.microsoft.co.il/blogs/bursteg/WindowsLiveWriter/LinqtoSQLInheritance_7597/TablePerClassHierarchy_bb6bd854-6f96-44bb-9737-52680ec4f532.jpg" alt="Linq to SQL Inheritance" width="297" height="315" />
+<img src="https://blogs.microsoft.co.il/blogs/bursteg/WindowsLiveWriter/LinqtoSQLInheritance_7597/Person_0f4a4940-612f-4ad6-9969-9d7eb8cdea18.jpg" alt="Linq to SQL Inheritance" width="357" height="457" /><img src="https://blogs.microsoft.co.il/blogs/bursteg/WindowsLiveWriter/LinqtoSQLInheritance_7597/TablePerClassHierarchy_bb6bd854-6f96-44bb-9737-52680ec4f532.jpg" alt="Linq to SQL Inheritance" width="297" height="315" />
 
 Naturally, I assumed that I could use the following code to Audit entities that supported inheritance just like regular Entities:
 
@@ -265,7 +265,7 @@ I wrote a very quick demo app for this article. You can see below a GridView of 
 
 If you stuck around for that whole article then I am impressed! If however, you just want to view, experiment with, and use the code, then I provide it here for your use. I have also included the sample Northwind Project so you can play with the demo yourself.
 
-To download the latest version of this project please see the CodePlex Project: [DoddleAudit](http://www.codeplex.com/DoddleAudit)
+To download the latest version of this project please see the CodePlex Project: [DoddleAudit](https://www.codeplex.com/DoddleAudit)
 
 Thanks for reading, and please let me know if you end up using this code or have any cool features or optimizations that you have added or would like to see added!
 

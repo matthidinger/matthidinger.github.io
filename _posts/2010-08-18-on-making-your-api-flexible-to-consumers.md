@@ -1,6 +1,6 @@
 ---
 title: "On making your API flexible to consumers"
-disqus_identifier: http://www.matthidinger.com/archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx
 redirect_from: /archive/2010/08/18/on-making-your-api-flexible-to-consumers.aspx/
 tags: 
 - c-sharp
@@ -8,7 +8,7 @@ tags:
 header:
   teaser: 
 ---
-A year ago I had written briefly about [my love-affair with the yield keyword](http://matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx). Today a question was posed to me and the follow-up discussion was interesting enough to me to warrant a quick post.
+A year ago I had written briefly about [my love-affair with the yield keyword](https://matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx). Today a question was posed to me and the follow-up discussion was interesting enough to me to warrant a quick post.
 
 > If you're returning an IEnumberable&lt;T&gt; from a method that reads from a DataReader, is it bad to use yield? My concern is calling a long-running method while looping over the items returned from the method – won’t this keep the SQL connection open longer? Also what if an exception happens while looping, will my reader still get closed?
 

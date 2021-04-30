@@ -1,6 +1,6 @@
 ---
 title: "LINQ Audit Trail v2 - DoddleAudit"
-disqus_identifier: http://www.matthidinger.com/archive/2009/01/12/linq-audit-trail-v2.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/01/12/linq-audit-trail-v2.aspx
 redirect_from: /archive/2009/01/12/linq-audit-trail-v2.aspx/
 tags: 
 - linq
@@ -9,7 +9,7 @@ tags:
 header:
   teaser: subtext-content/LINQAuditTrailv2_B491/image_thumb.png
 ---
-[A couple months ago](http://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx) I wrote a basic set of extension methods to handle automatic auditing in LINQ to SQL. Well I have received a large number of emails regarding this particular project so I have decided to focus on cleaning up my v2 API and releasing it on CodePlex. There was a lot of room for improvement from version 1 and today I am going to post the all new LINQ Audit Trail code. This new version is significantly enhanced in the previous version.
+[A couple months ago](https://www.matthidinger.com/archive/2008/05/08/linq-to-sql-audit-trail.aspx) I wrote a basic set of extension methods to handle automatic auditing in LINQ to SQL. Well I have received a large number of emails regarding this particular project so I have decided to focus on cleaning up my v2 API and releasing it on CodePlex. There was a lot of room for improvement from version 1 and today I am going to post the all new LINQ Audit Trail code. This new version is significantly enhanced in the previous version.
 
 ### Objective
 
@@ -34,7 +34,7 @@ this.Contacts.Audit().AuditAssociation(c => c.Addresses).AuditAssociation(c => c
 
 ### Updates and Download
 
-Please see the CodePlex project for updates and new releases. **[DoddleAudit](http://www.codeplex.com/DoddleAudit)**
+Please see the CodePlex project for updates and new releases. **[DoddleAudit](https://www.codeplex.com/DoddleAudit)**
 
 ### New Features and Fixes in V2
 
@@ -64,7 +64,7 @@ public class ProductAuditResolver : AuditPropertyResolver
 
 ### Instructions
 
-1.  [Download the latest release from CodePlex](http://www.codeplex.com/doddleaudit), the source code and compiled DLL are available, and add reference to **Doddle.Linq.Audit.dll** in your project that contains your LINQ to SQL DBML
+1.  [Download the latest release from CodePlex](https://www.codeplex.com/doddleaudit), the source code and compiled DLL are available, and add reference to **Doddle.Linq.Audit.dll** in your project that contains your LINQ to SQL DBML
 2.  At a minimum you will need to add 2 tables to your database (and your DBML) to store the audit records. Please see the schema below and add these tables to your database.
     -   NOTE: Keep in mind this database schema is entirely customizable. I chose to use two tables to store all of my audits, but you could very easily change this logic to use a separate table for each entity or whatever storage schema you choose.  
         ![](/images/subtext-content/LINQAuditTrailv2_B491/image_thumb_3.png)
@@ -75,7 +75,7 @@ public class ProductAuditResolver : AuditPropertyResolver
 
     **
 4.  Lastly you will need to create a partial DataContext class to wire up the auditing infrastructure to match your database schema. Add a new Class file to your project and insert the following code. Customize if necessary to match your auditing schema.
-    [](http://11011.net/software/vspaste)[](http://11011.net/software/vspaste)
+    [](https://11011.net/software/vspaste)[](https://11011.net/software/vspaste)
 
     ```csharp
     public partial class NorthwindEntitiesDataContext

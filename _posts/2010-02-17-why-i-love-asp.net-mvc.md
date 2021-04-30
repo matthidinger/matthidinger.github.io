@@ -1,6 +1,6 @@
 ---
 title: "Why I love ASP.NET MVC"
-disqus_identifier: http://www.matthidinger.com/archive/2010/02/17/why-i-love-asp.net-mvc.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/02/17/why-i-love-asp.net-mvc.aspx
 redirect_from: /archive/2010/02/17/why-i-love-asp.net-mvc.aspx/
 tags: 
 - aspnet
@@ -25,7 +25,7 @@ The motivation for this post came from an all-too-familiar IRC chat in \#asp.net
 
 (01:33p) &lt;webformsdev&gt; how is &lt;%HtmlHelper%&gt; innovative
 (01:34p) &lt;@mattman&gt; HtmlHelpers are 4% of the ASP.NET MVC platform. That’s like saying &lt;asp:Textbox&gt; is all of asp.net webforms
-(01:35p) &lt;@mattman&gt; <http://www.codethinked.com/post/2010/01/22/Controls-Do-Not-Make-You-More-Productive.aspx> 
+(01:35p) &lt;@mattman&gt; <https://www.codethinked.com/post/2010/01/22/Controls-Do-Not-Make-You-More-Productive.aspx> 
 
 ### Fallacy: Web Forms is easier
 

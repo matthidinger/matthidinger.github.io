@@ -1,6 +1,6 @@
 ---
 title: "Transit Directions submitted to windows phone marketplace"
-disqus_identifier: http://www.matthidinger.com/archive/2011/04/10/Transit-Directions-submitted-to-windows-phone-marketplace.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/04/10/Transit-Directions-submitted-to-windows-phone-marketplace.aspx
 redirect_from: /archive/2011/04/10/Transit-Directions-submitted-to-windows-phone-marketplace.aspx/
 tags: 
 - wpdev

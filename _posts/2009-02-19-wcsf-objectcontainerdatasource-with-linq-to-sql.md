@@ -1,6 +1,6 @@
 ---
 title: "WCSF ObjectContainerDataSource with LINQ to SQL"
-disqus_identifier: http://www.matthidinger.com/archive/2009/02/19/wcsf-objectcontainerdatasource-with-linq-to-sql.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/02/19/wcsf-objectcontainerdatasource-with-linq-to-sql.aspx
 redirect_from: /archive/2009/02/19/wcsf-objectcontainerdatasource-with-linq-to-sql.aspx/
 tags: 
 - wcsf
@@ -8,7 +8,7 @@ tags:
 header:
   teaser: 
 ---
-A project I am now working on is using the [Web Client Software Factory](http://www.codeplex.com/websf) (WCSF) from the [patterns & practices](http://msdn.microsoft.com/practices) team. It is basically an elaborate MVP-based framework that currently sits on top of ASP.NET Webforms.
+A project I am now working on is using the [Web Client Software Factory](https://www.codeplex.com/websf) (WCSF) from the [patterns & practices](https://msdn.microsoft.com/practices) team. It is basically an elaborate MVP-based framework that currently sits on top of ASP.NET Webforms.
 
 One of the components it ships with is the **ObjectContainerDataSource** which is a lot like the ObjectDataSource that ASP.NET provides. I admittedly have little experience with either of these controls, since I am not a huge fan of declarative data binding in larger applications. It does however offer better integration with the MVP pattern, simplifying the “bubbling” of DataSource events up to the Presenter to handle them. The Presenter is of course where all of the logic for the view and its services belongs.
 

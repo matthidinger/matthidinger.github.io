@@ -1,6 +1,6 @@
 ---
 title: "Fixing Web Application Projects with automated TFS Builds"
-disqus_identifier: http://www.matthidinger.com/archive/2008/11/09/fixing-web-application-projects-with-automated-tfs-builds.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2008/11/09/fixing-web-application-projects-with-automated-tfs-builds.aspx
 redirect_from: /archive/2008/11/09/fixing-web-application-projects-with-automated-tfs-builds.aspx/
 tags: 
 - aspnet
@@ -37,7 +37,7 @@ It would appear the Visual Studio 2008 will install all necessary MSBuild target
 
 ### Solution 1 – Add Conditional Imports (Not Recommended)
 
-A google search of the actual MSBuild error brought me to a single post by [Steven Harman](http://stevenharman.net/blog/archive/0001/01/01/multi-targeting-vs2005-and-vs2008-web-application-projects-a-gotcha.aspx) which seemed helpful but I was skeptical because it was related to multi-targeting and problems with a machine running both VS 2008 and VS 2005. I decided to try it out by editing my csproj to the following:
+A google search of the actual MSBuild error brought me to a single post by [Steven Harman](https://stevenharman.net/blog/archive/0001/01/01/multi-targeting-vs2005-and-vs2008-web-application-projects-a-gotcha.aspx) which seemed helpful but I was skeptical because it was related to multi-targeting and problems with a machine running both VS 2008 and VS 2005. I decided to try it out by editing my csproj to the following:
 
 I replaced the original &lt;Import&gt; declaration to the following
 

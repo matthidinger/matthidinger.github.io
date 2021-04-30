@@ -1,6 +1,6 @@
 ---
 title: "Rename namespaces intelligently with ReSharper"
-disqus_identifier: http://www.matthidinger.com/archive/2009/12/03/rename-namespaces-intelligently-with-resharper.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/12/03/rename-namespaces-intelligently-with-resharper.aspx
 redirect_from: /archive/2009/12/03/rename-namespaces-intelligently-with-resharper.aspx/
 tags: 
 header:

@@ -1,6 +1,6 @@
 ---
 title: "IE6 Underscore Hack"
-disqus_identifier: http://www.matthidinger.com/archive/2008/05/07/ie6-underscore-hack.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2008/05/07/ie6-underscore-hack.aspx
 redirect_from: /archive/2008/05/07/ie6-underscore-hack.aspx/
 tags: 
 - css
@@ -21,9 +21,9 @@ So as you can see I've been playing with ASP.NET MVC in my free time lately. But
 }
 ```
 
-[](http://11011.net/software/vspaste)I can't believe I never knew about this. I have read 3 CSS books in the past few years and don't recall ever reading about this hack. So while it isn't the end-all solution to fixing CSS bugs in IE6, I think it should come in pretty handy in the future now that I know it exists.
+[](https://11011.net/software/vspaste)I can't believe I never knew about this. I have read 3 CSS books in the past few years and don't recall ever reading about this hack. So while it isn't the end-all solution to fixing CSS bugs in IE6, I think it should come in pretty handy in the future now that I know it exists.
 
-I found this URL to [WellStyled](http://www.wellstyled.com/css-underscore-hack.html "http://www.wellstyled.com/css-underscore-hack.html") which describes the hack in more detail. Here are some cool usage examples of this hack:
+I found this URL to [WellStyled](https://www.wellstyled.com/css-underscore-hack.html "https://www.wellstyled.com/css-underscore-hack.html") which describes the hack in more detail. Here are some cool usage examples of this hack:
 
 ```csharp
 #box 

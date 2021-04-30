@@ -1,6 +1,6 @@
 ---
 title: "How to get the Windows Phone user agent string"
-disqus_identifier: http://www.matthidinger.com/archive/2012/07/05/how-to-get-the-windows-phone-user-agent-string.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/07/05/how-to-get-the-windows-phone-user-agent-string.aspx
 redirect_from: /archive/2012/07/05/how-to-get-the-windows-phone-user-agent-string.aspx/
 tags: 
 - wpdev
@@ -9,7 +9,7 @@ header:
 ---
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/45d9f34867d2_B652/IE_thumb.png)
 
-On a recent project I needed to extract the [windows phone user-agent string](http://windowsteamblog.com/windows_phone/b/wpdev/archive/2011/08/29/introducing-the-ie9-on-windows-phone-mango-user-agent-string.aspx) for our usage analytics, and it had to be the same user-agent as the IE requests. While this didn’t end up being as straight forward and I had hoped, the code below involves a few simple steps. First we have to insert a collapsed browser onto the page, then we can navigate it to specifically crafted HTML/JavaScript, which will in-turn notify the WebBrowser control of it’s user-agent. All you need to do is store it somewhere; in my case, I put it into a custom ApplicationSettings class, but you can store it anywhere you want.
+On a recent project I needed to extract the [windows phone user-agent string](https://windowsteamblog.com/windows_phone/b/wpdev/archive/2011/08/29/introducing-the-ie9-on-windows-phone-mango-user-agent-string.aspx) for our usage analytics, and it had to be the same user-agent as the IE requests. While this didn’t end up being as straight forward and I had hoped, the code below involves a few simple steps. First we have to insert a collapsed browser onto the page, then we can navigate it to specifically crafted HTML/JavaScript, which will in-turn notify the WebBrowser control of it’s user-agent. All you need to do is store it somewhere; in my case, I put it into a custom ApplicationSettings class, but you can store it anywhere you want.
 
 ### Usage
 

@@ -1,6 +1,6 @@
 ---
 title: "Cryptic Entity Framework exception when a table is missing a primary key"
-disqus_identifier: http://www.matthidinger.com/archive/2010/01/27/cryptic-entity-framework-exception-when-a-table-is-missing-a.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/01/27/cryptic-entity-framework-exception-when-a-table-is-missing-a.aspx
 redirect_from: /archive/2010/01/27/cryptic-entity-framework-exception-when-a-table-is-missing-a.aspx/
 tags: 
 - entity-framework

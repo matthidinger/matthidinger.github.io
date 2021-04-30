@@ -1,6 +1,6 @@
 ---
 title: "Effectively serializing data to wp7 using JSON and asp.net mvc"
-disqus_identifier: http://www.matthidinger.com/archive/2011/02/15/Effectively-serializing-data-to-wp7-using-JSON-and-asp-net.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/02/15/Effectively-serializing-data-to-wp7-using-JSON-and-asp-net.aspx
 redirect_from: /archive/2011/02/15/Effectively-serializing-data-to-wp7-using-JSON-and-asp-net.aspx/
 tags: 
 - wpdev
@@ -8,9 +8,9 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_5.png
 ---
-At [PDC'10 last year](http://www.matthidinger.com/archive/2010/10/28/highlights-from-PDC-day-1.aspx) Microsoft showed their upcoming solution for sharing assemblies between different platforms (Windows Phone, Silverlight, and .NET) – dubbed [Portable Library Projects](http://bit.ly/aUlqkU). The release date is said to be H1 2011 so hopefully they are still on track, maybe even to be included in VS 2010 SP1. Until then, we are on our own…
+At [PDC'10 last year](https://www.matthidinger.com/archive/2010/10/28/highlights-from-PDC-day-1.aspx) Microsoft showed their upcoming solution for sharing assemblies between different platforms (Windows Phone, Silverlight, and .NET) – dubbed [Portable Library Projects](https://bit.ly/aUlqkU). The release date is said to be H1 2011 so hopefully they are still on track, maybe even to be included in VS 2010 SP1. Until then, we are on our own…
 
-[Derick Bailey](http://www.lostechies.com/blogs/derickbailey/) actually prompted this post from his tweet a little bit ago, so I figured I would share the solution I used for [Bus Watch Chicago](http://buswatchapp.com/).
+[Derick Bailey](https://www.lostechies.com/blogs/derickbailey/) actually prompted this post from his tweet a little bit ago, so I figured I would share the solution I used for [Bus Watch Chicago](https://buswatchapp.com/).
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_5.png)
 

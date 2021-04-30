@@ -1,6 +1,6 @@
 ---
 title: "Adding rich Selector support for MVC"
-disqus_identifier: http://www.matthidinger.com/archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx
 redirect_from: /archive/2012/01/23/adding-rich-selector-support-for-mvc.aspx/
 tags: 
 - aspnet-mvc
@@ -162,7 +162,7 @@ public class CategorySelectorAttribute : SelectorAttribute
 Get the Code!
 -------------
 
-Rather than pasting the full source here, I will be publishing it along with a sample project at [**http://mvcgrabbag.codeplex.com**](http://mvcgrabbag.codeplex.com)
+Rather than pasting the full source here, I will be publishing it along with a sample project at [**https://mvcgrabbag.codeplex.com**](https://mvcgrabbag.codeplex.com)
 
 #### What you need for Selector support
 
@@ -172,14 +172,14 @@ Rather than pasting the full source here, I will be publishing it along with a s
 
 #### Pull it down locally
 
-Using [**TortoiseHg**](http://tortoisehg.bitbucket.org/) simply clone the URL: [**https://hg01.codeplex.com/mvcgrabbag**](https://hg01.codeplex.com/mvcgrabbag)
+Using [**TortoiseHg**](https://tortoisehg.bitbucket.org/) simply clone the URL: [**https://hg01.codeplex.com/mvcgrabbag**](https://hg01.codeplex.com/mvcgrabbag)
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Adding-really-rich-Selector-support-for-_8379/image_thumb_3.png)
 
 
 #### Browse the code
 
-[**Browse the Selector code, MvcGrabBag.Web/Selectors folder**](http://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fSelectors%2fSelectorAttribute.cs)
+[**Browse the Selector code, MvcGrabBag.Web/Selectors folder**](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fSelectors%2fSelectorAttribute.cs)
 
  
 

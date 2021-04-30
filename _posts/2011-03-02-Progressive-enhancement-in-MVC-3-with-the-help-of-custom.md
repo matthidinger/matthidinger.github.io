@@ -1,6 +1,6 @@
 ---
 title: "Progressive enhancement in MVC 3 with the help of custom ActionResults"
-disqus_identifier: http://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx
 redirect_from: /archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx/
 tags: 
 - aspnet-mvc
@@ -10,7 +10,7 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/Progressive-enhancement-with-MVC-3-take-_14529/SNAGHTML1a3b6b08_thumb4_thumb_1.png
 ---
-Last week I wrote a tutorial on [Progressive enhancement with ASP.NET MVC 3 and jQuery](http://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx). It might be a good idea to skim it if you aren’t already familiar with some of the concepts.
+Last week I wrote a tutorial on [Progressive enhancement with ASP.NET MVC 3 and jQuery](https://www.matthidinger.com/archive/2011/02/22/Progressive-enhancement-tutorial-with-ASP-NET-MVC-3-and-jQuery.aspx). It might be a good idea to skim it if you aren’t already familiar with some of the concepts.
 
 A commenter on the last article posed a great question which sparked some improvements to the original code. Thanks for the suggestion!
 
@@ -253,7 +253,7 @@ protected void Application_Start()
 
 Thanks again to the commenter who sparked these improvements!  The full source code is attached to this post, hopefully it helps someone!
 
-[download the source](http://buswatchapp.com/downloads/progressiveenhancement2.zip)
+[download the source](https://buswatchapp.com/downloads/progressiveenhancement2.zip)
 -----------------------------------------------------------------------------------
 
  

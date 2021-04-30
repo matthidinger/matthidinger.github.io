@@ -1,6 +1,6 @@
 ---
 title: "DynamicLocalhost NuGet Package for Windows Phone"
-disqus_identifier: http://www.matthidinger.com/archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx
 redirect_from: /archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx/
 tags: 
 - wpdev
@@ -23,9 +23,9 @@ I think simplicity is a crucial measure of success in all software. I think bein
 
 The aforementioned goals have been easily achievable in all of my projects except Windows Phone apps. A key component to this workflow is the magical variable known as **localhost**.
 
-When I F5 one of my MVC apps the project launches a browser to **<http://localhost/MyProject>**.
+When I F5 one of my MVC apps the project launches a browser to **<https://localhost/MyProject>**.
 
-When I F5 one of my Windows Phone apps in the emulator, it connects to my local IIS server at **<http://localhost/MyProject>**.
+When I F5 one of my Windows Phone apps in the emulator, it connects to my local IIS server at **<https://localhost/MyProject>**.
 
 When I F5 one of my Winodws Phone apps on a real device, things go awry. Localhost on the phone does not point to my development box, naturally, it points back to itself. Thus the predicament.
 
@@ -35,7 +35,7 @@ Last night I had an idea, and decided to spike it out. What if I could store the
 
 ### NuGet, PowerShell, meet DynamicLocalhost
 
-I’ve been a long-time fan of NuGet. I have seen some amazingly creative things done with it beyond just simple library dumps. [People much smarter than me](http://blog.stevensanderson.com/2011/01/13/scaffold-your-aspnet-mvc-3-project-with-the-mvcscaffolding-package/) are using PowerShell to create impressive scaffolding frameworks. Inspired, I cracked open my Windows PowerShell and MSBuild books and got to work.
+I’ve been a long-time fan of NuGet. I have seen some amazingly creative things done with it beyond just simple library dumps. [People much smarter than me](https://blog.stevensanderson.com/2011/01/13/scaffold-your-aspnet-mvc-3-project-with-the-mvcscaffolding-package/) are using PowerShell to create impressive scaffolding frameworks. Inspired, I cracked open my Windows PowerShell and MSBuild books and got to work.
 
 I ended up building the following:
 
@@ -65,12 +65,12 @@ public static class ApplicationSettings
     static ApplicationSettings()
     {
 #if DEBUG
-        // Compiling this app on MY machine, WebServiceBaseUrl will become: http://MATT-PC/RealWorldWP7.Web/
+        // Compiling this app on MY machine, WebServiceBaseUrl will become: https://MATT-PC/RealWorldWP7.Web/
         // The returned URL will be automatically determined on each compile
         // Therefore no issues checking it in and getting latest on any developer machine
-        WebServiceBaseUrl = DynamicLocalhost.ReplaceLocalhost("http://localhost/RealWorldWP7.Web/");
+        WebServiceBaseUrl = DynamicLocalhost.ReplaceLocalhost("https://localhost/RealWorldWP7.Web/");
 #else
-        WebServiceBaseUrl = "http://services.mydomain.com/v1/";
+        WebServiceBaseUrl = "https://services.mydomain.com/v1/";
 #endif
     }
 }
@@ -83,7 +83,7 @@ I would really, really love feedback on this. I scoured the internet trying to s
 
 I’m also very new at PowerShell and would not be surprised if I wrote some of the worst .ps1 scripts ever. Any input by PowerShell guru’s would be most welcome.
 
-[Get the Source!](http://dynamiclocalhost.codeplex.com/SourceControl/list/changesets)
+[Get the Source!](https://dynamiclocalhost.codeplex.com/SourceControl/list/changesets)
 -------------------------------------------------------------------------------------
 
 It’s using Mercurial, so fork it, and be sure to send me pull requests if you write something awesome!

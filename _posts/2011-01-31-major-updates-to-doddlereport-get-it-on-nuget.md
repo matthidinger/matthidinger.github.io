@@ -1,6 +1,6 @@
 ---
 title: "Major updates to doddlereport, get it on nuget"
-disqus_identifier: http://www.matthidinger.com/archive/2011/01/31/major-updates-to-doddlereport-get-it-on-nuget.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/01/31/major-updates-to-doddlereport-get-it-on-nuget.aspx
 redirect_from: /archive/2011/01/31/major-updates-to-doddlereport-get-it-on-nuget.aspx/
 tags: 
 - doddle
@@ -26,12 +26,12 @@ DoddleReport automatically generates tabular reports from any IEnumerable dataso
 <td><h3 id="excel-report">Excel Report</h3>
 <ul>
 <li>Automatic Sticky/Frozen Headers stay at the top when scrolling through the data</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.xls">See it live!</a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.xls">See it live!</a></li>
 </ul></td>
 <td><h3 id="csvdelimited">CSV/Delimited</h3>
 <ul>
 <li>Use any kind of delimiter you want</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.txt">See it live!</a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.txt">See it live!</a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -44,11 +44,11 @@ DoddleReport automatically generates tabular reports from any IEnumerable dataso
 <td><h3 id="pdf-report">PDF Report</h3>
 <ul>
 <li>Automatically repeat title, column headers, and page numbers on every page</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.pdf">See it live!</a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.pdf">See it live!</a></li>
 </ul></td>
 <td><h3 id="html-report">HTML Report</h3>
 <ul>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.html">See it live!</a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.html">See it live!</a></li>
 </ul></td>
 </tr>
 <tr class="even">
@@ -83,8 +83,8 @@ report.TextFields.Footer = "Copyright 2011 © The Doddle Project";
 
 New to DoddleReport?
 
--   Look at the [**Building Your First Report**](http://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
--   Review the [documentation](http://doddlereport.codeplex.com/documentation)
+-   Look at the [**Building Your First Report**](https://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
+-   Review the [documentation](https://doddlereport.codeplex.com/documentation)
 -   Got NuGet? **Install-Package DoddleReport**
 
  

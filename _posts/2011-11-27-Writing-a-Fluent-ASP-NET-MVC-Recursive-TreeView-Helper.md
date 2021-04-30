@@ -1,6 +1,6 @@
 ---
 title: "Writing a Fluent ASP.NET MVC Recursive TreeView Helper"
-disqus_identifier: http://www.matthidinger.com/archive/2011/11/27/Writing-a-Fluent-ASP-NET-MVC-Recursive-TreeView-Helper.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/11/27/Writing-a-Fluent-ASP-NET-MVC-Recursive-TreeView-Helper.aspx
 redirect_from: /archive/2011/11/27/Writing-a-Fluent-ASP-NET-MVC-Recursive-TreeView-Helper.aspx/
 tags: 
 - aspnet-mvc
@@ -10,7 +10,7 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/d59c757b9eff_CC0C/image_thumb_3.png
 ---
-This post is an update to my original [ASP.NET MVC Recursive TreeView Helper](http://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx "http://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx") from almost 3 years ago. Oddly enough it’s still a high-traffic post and has close to 50 comments asking for an update or a complete solution to download. I figured if I was going to do that, I might as well give the API a much-needed facelift and pop it on NuGet.
+This post is an update to my original [ASP.NET MVC Recursive TreeView Helper](https://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx "https://www.matthidinger.com/archive/2009/02/08/asp.net-mvc-recursive-treeview-helper.aspx") from almost 3 years ago. Oddly enough it’s still a high-traffic post and has close to 50 comments asking for an update or a complete solution to download. I figured if I was going to do that, I might as well give the API a much-needed facelift and pop it on NuGet.
 
 What is it?
 -----------
@@ -115,7 +115,7 @@ This helper is very easy to add to your project using NuGet. Alternatively you c
 
 ### NuGet / NuGet Sample Package
 
-With this project I decided to include a [NuGet Sample Package](http://blog.davidebbo.com/2011/03/take-nuget-to-next-level-with-sample.html) which is used to easily demonstrate the usage of the helper.
+With this project I decided to include a [NuGet Sample Package](https://blog.davidebbo.com/2011/03/take-nuget-to-next-level-with-sample.html) which is used to easily demonstrate the usage of the helper.
 
 **These are source-only packages.** By installing this package into your project you will get a raw file in **Helpers\\TreeView.cs** that you can edit or update as you see fit.
 
@@ -131,9 +131,9 @@ The sample project is the same concept, it will add a **TreeViewController**, an
 
 And of course, the full source is available to download on CodePlex.
 
-#### <http://mvctreeview.codeplex.com>
+#### <https://mvctreeview.codeplex.com>
 
-#### [Browse the latest source code](http://mvctreeview.codeplex.com/SourceControl/BrowseLatest)
+#### [Browse the latest source code](https://mvctreeview.codeplex.com/SourceControl/BrowseLatest)
 
  
 

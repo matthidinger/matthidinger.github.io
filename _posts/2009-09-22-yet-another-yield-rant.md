@@ -1,13 +1,13 @@
 ---
 title: "Yet Another Yield Rant"
-disqus_identifier: http://www.matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/09/22/yet-another-yield-rant.aspx
 redirect_from: /archive/2009/09/22/yet-another-yield-rant.aspx/
 tags: 
 - c-sharp
 header:
   teaser: 
 ---
-This post was spawned as I was reviewing the latest [Oxite source code](http://oxite.codeplex.com/SourceControl/changeset/view/43567#709744) on [CodePlex](http://oxite.codeplex.com). I’ve been reading any source code I could get my hands on lately looking for inspiration to cure my “winter coding boredom.” While it isn’t winter yet, it is fast approaching, which means less outdoors time and more computer time. I try to blog more, update my open source projects with a new release, and with any luck begin a new project worth getting passionate about.
+This post was spawned as I was reviewing the latest [Oxite source code](https://oxite.codeplex.com/SourceControl/changeset/view/43567#709744) on [CodePlex](https://oxite.codeplex.com). I’ve been reading any source code I could get my hands on lately looking for inspiration to cure my “winter coding boredom.” While it isn’t winter yet, it is fast approaching, which means less outdoors time and more computer time. I try to blog more, update my open source projects with a new release, and with any luck begin a new project worth getting passionate about.
 
 Today I'm going to hit the ground running with a short tip, again, on the yield keyword.
 
@@ -28,7 +28,7 @@ IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()
 
 We've all written code like this. The bad habit may even be so ingrained into our developer DNA that we don't even realize it. *Long story short, if it returns IEnumerable, you should probably use the yield keyword!*
 
-The above code can simply be re-written as follows. The benefits of this should be clear: fewer lines of code, easier readability, greater performance (minor of course, but still).  Since this topic has been covered [at great length](http://lmgtfy.com/?q=c%23+yield) on the blogosphere I won't go into any more detail, but just in case, [here is a quick article](http://www.ytechie.com/2009/02/using-c-yield-for-readability-and-performance.html) I found that should help explain the benefits.
+The above code can simply be re-written as follows. The benefits of this should be clear: fewer lines of code, easier readability, greater performance (minor of course, but still).  Since this topic has been covered [at great length](https://lmgtfy.com/?q=c%23+yield) on the blogosphere I won't go into any more detail, but just in case, [here is a quick article](https://www.ytechie.com/2009/02/using-c-yield-for-readability-and-performance.html) I found that should help explain the benefits.
 
 ```csharp
 IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()

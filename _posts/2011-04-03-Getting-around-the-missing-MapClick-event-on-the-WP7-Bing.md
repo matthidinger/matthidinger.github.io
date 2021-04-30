@@ -1,6 +1,6 @@
 ---
 title: "Getting around the missing MouseClick event on the WP7 Bing Maps control"
-disqus_identifier: http://www.matthidinger.com/archive/2011/04/03/Getting-around-the-missing-MapClick-event-on-the-WP7-Bing.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/04/03/Getting-around-the-missing-MapClick-event-on-the-WP7-Bing.aspx
 redirect_from: /archive/2011/04/03/Getting-around-the-missing-MapClick-event-on-the-WP7-Bing.aspx/
 tags: 
 - wpdev

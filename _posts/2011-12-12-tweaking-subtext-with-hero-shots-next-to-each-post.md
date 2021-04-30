@@ -1,6 +1,6 @@
 ---
 title: "Tweaking Subtext with Hero Shots next to each post"
-disqus_identifier: http://www.matthidinger.com/archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post.aspx
 redirect_from: /archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post.aspx/
 tags: 
 - subtext

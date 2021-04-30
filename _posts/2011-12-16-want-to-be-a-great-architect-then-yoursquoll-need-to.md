@@ -1,6 +1,6 @@
 ---
 title: "Want to be a great architect? Then you&rsquo;ll need to be a great salesman"
-disqus_identifier: http://www.matthidinger.com/archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx
 redirect_from: /archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx/
 tags: 
 - opinions
@@ -46,7 +46,7 @@ As in the anecdote above, the time will come when you may need extra time or res
 
 #### Sell your plan to the team
 
-It’s equally important to get your team on board. Don’t be an [Ivory Tower Architect](http://igloocoder.com/archive/2009/04/01/ivory-tower-architect.aspx). You are still a part of the team (or many teams). Don’t just swoop into meetings, impose your will, and avoid implementing the architecture you’ve laid out. Let your team contribute to the discussion and decisions; you are not infallible. This means being able to address concerns directly and intelligently, **especially when they don’t align with your beliefs.** This means proving that you have considered alternatives and are prepared to have a rational debate on them. This also means having at least cursory knowledge of a number of technologies, patterns, strategies, and platforms.
+It’s equally important to get your team on board. Don’t be an [Ivory Tower Architect](https://igloocoder.com/archive/2009/04/01/ivory-tower-architect.aspx). You are still a part of the team (or many teams). Don’t just swoop into meetings, impose your will, and avoid implementing the architecture you’ve laid out. Let your team contribute to the discussion and decisions; you are not infallible. This means being able to address concerns directly and intelligently, **especially when they don’t align with your beliefs.** This means proving that you have considered alternatives and are prepared to have a rational debate on them. This also means having at least cursory knowledge of a number of technologies, patterns, strategies, and platforms.
 
 I understand at the end of the day work needs to get done and us technologists can debate for weeks on something as simple as Hungarian notation, so you’ll still need to use your best judgment when a topic should be put to rest and the team needs to move on.
 
@@ -67,16 +67,16 @@ I can say without a doubt the largest contributors to my professional growth hav
 
 Since I’m absolutely no expert at public speaking, if it’s something you’re interested in then you should definitely check out this TekPub production:
 
-#### [The Art of Speaking: Scott Hanselman](http://tekpub.com/hanselman "http://tekpub.com/hanselman")
+#### [The Art of Speaking: Scott Hanselman](https://tekpub.com/hanselman "https://tekpub.com/hanselman")
 
 Summary
 -------
 
 I don’t often write opinion pieces on this blog, mostly because I am still learning every day, and will probably look back on this post a year from now and think these are absurd suggestions. In any event, the following Five Whys blog has some pretty helpful advice, and the book Code Leader I read a few years ago had some nice insight for an aspiring tech lead like myself.
 
-Blog: [Five Whys - Team Leadership](http://5whys.com/ "http://5whys.com/")
+Blog: [Five Whys - Team Leadership](https://5whys.com/ "https://5whys.com/")
 
-Book: [Code Leader: Using People, Tools, and Processes to Build Successful Software](http://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248 "http://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248")
+Book: [Code Leader: Using People, Tools, and Processes to Build Successful Software](https://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248 "https://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248")
 
  
 

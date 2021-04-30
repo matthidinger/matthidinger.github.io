@@ -7,15 +7,15 @@
 //  For example, if the text template is named TextTemplate.tt, the generated file will be named         
 //  TextTemplate.vb or TextTemplate.cs.         
 //  *The Custom Tool property of the targeted .edmx file must be empty. For more information,       
-//  see .edmx File Properties (http://go.microsoft.com/fwlink/?LinkId=139299).        
+//  see .edmx File Properties (https://go.microsoft.com/fwlink/?LinkId=139299).        
 //  *The SourceCsdlPath initialization below must be set to one of the following:       
 //  1) the path of the targeted .edmx or .csdl file                
 //  2) the path of the targeted .edmx or .csdl file relative to the template path                
 //
 //  For more detailed information about using this template, see   
-//  How to: Customize Object Layer Code Generation (http://go.microsoft.com/fwlink/?LinkId=139297).   
+//  How to: Customize Object Layer Code Generation (https://go.microsoft.com/fwlink/?LinkId=139297).   
 //  For general information about text templates, see   
-//  Generating Artifacts by Using Text Templates (http://go.microsoft.com/fwlink/?LinkId=139298)   
+//  Generating Artifacts by Using Text Templates (https://go.microsoft.com/fwlink/?LinkId=139298)   
 #>
 <#@ template language="C#" debug="false" hostspecific="true"#>
 <#@ include file="EF.Utility.CS.ttinclude"#><#@

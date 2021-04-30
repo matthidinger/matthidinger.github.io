@@ -1,6 +1,6 @@
 ---
 title: "Introduction to C# 4 Covariance with the is keyword"
-disqus_identifier: http://www.matthidinger.com/archive/2010/04/07/introduction-to-c-4-covariance-with-the-is-keyword.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/04/07/introduction-to-c-4-covariance-with-the-is-keyword.aspx
 redirect_from: /archive/2010/04/07/introduction-to-c-4-covariance-with-the-is-keyword.aspx/
 tags: 
 - vs2010
@@ -10,7 +10,7 @@ header:
 ---
 ![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/cloningresultsmayvary_thumb.jpg)
 
-Starting back in 2007 I read [a series on Co/contra-variance in C\# by](http://blogs.msdn.com/ericlippert/archive/2007/10/16/covariance-and-contravariance-in-c-part-one.aspx) Eric Lippert – Eric is on the compiler team at MS and one of my favorite bloggers to read I might add. At the time, I remember myself reading along with the words but my eyes completely glazing over. To be honest the concept mostly eluded me at the time, so I wanted to take this opportunity to describe the feature in a way that made the most sense to me.
+Starting back in 2007 I read [a series on Co/contra-variance in C\# by](https://blogs.msdn.com/ericlippert/archive/2007/10/16/covariance-and-contravariance-in-c-part-one.aspx) Eric Lippert – Eric is on the compiler team at MS and one of my favorite bloggers to read I might add. At the time, I remember myself reading along with the words but my eyes completely glazing over. To be honest the concept mostly eluded me at the time, so I wanted to take this opportunity to describe the feature in a way that made the most sense to me.
 
 ### It Seems to Logical…
 

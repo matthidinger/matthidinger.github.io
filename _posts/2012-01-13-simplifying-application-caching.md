@@ -1,6 +1,6 @@
 ---
 title: "Simplifying application caching"
-disqus_identifier: http://www.matthidinger.com/archive/2012/01/13/simplifying-application-caching.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/01/13/simplifying-application-caching.aspx
 redirect_from: /archive/2012/01/13/simplifying-application-caching.aspx/
 tags: 
 - aspnet-mvc
@@ -98,9 +98,9 @@ Now we are completely free to change the caching strategy of our application in 
 Get the Code
 ------------
 
-Rather than pasting the full source here, I will be publishing it along with a sample project at [**http://mvcgrabbag.codeplex.com**](http://mvcgrabbag.codeplex.com)
+Rather than pasting the full source here, I will be publishing it along with a sample project at [**https://mvcgrabbag.codeplex.com**](https://mvcgrabbag.codeplex.com)
 
-#### [Browse the HttpCache code, MvcGrabBag.Web/Caching folder](http://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fCaching%2fHttpCache.cs)
+#### [Browse the HttpCache code, MvcGrabBag.Web/Caching folder](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fCaching%2fHttpCache.cs)
 
  
 

@@ -1,6 +1,6 @@
 ---
 title: "Automatically roll back your LINQ to SQL integration tests"
-disqus_identifier: http://www.matthidinger.com/archive/2009/09/08/automatically-roll-back-your-linq-to-sql-integration-tests.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/09/08/automatically-roll-back-your-linq-to-sql-integration-tests.aspx
 redirect_from: /archive/2009/09/08/automatically-roll-back-your-linq-to-sql-integration-tests.aspx/
 tags: 
 - linq-to-sql

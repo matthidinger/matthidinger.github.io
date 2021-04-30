@@ -1,6 +1,6 @@
 ---
 title: "RealWorldWPDev Part 6: Page Navigation and passing Complex State"
-disqus_identifier: http://www.matthidinger.com/archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx
 redirect_from: /archive/2011/12/04/RealWorldWPDev-Part-6-Page-Navigation-and-passing-Complex-State.aspx/
 tags: 
 - realworldwpdev
@@ -9,9 +9,9 @@ header:
 ---
 ### Series Introduction and Outline
 
-This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](http://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
+This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 Navigation Basics
@@ -262,15 +262,15 @@ This tutorial covered quite a bit but hopefully didn’t throw too much at you. 
 
 If you want to dive more into using CM with Windows Phone please check out the following pages:
 
-[Caliburn Docs: Working with Windows Phone](http://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation "http://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation")
+[Caliburn Docs: Working with Windows Phone](https://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation "https://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation")
 
-[Caliburn Docs: All About Actions](http://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation "http://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation")
+[Caliburn Docs: All About Actions](https://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation "https://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation")
 
  
 
 ### Want some more RealWorldWPDev?
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 

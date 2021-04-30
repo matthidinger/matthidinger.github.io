@@ -1,6 +1,6 @@
 ---
 title: "Share your ReSharper templates across all your dev machines"
-disqus_identifier: http://www.matthidinger.com/archive/2010/03/25/share-your-resharper-templates-across-all-your-dev-machines.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2010/03/25/share-your-resharper-templates-across-all-your-dev-machines.aspx
 redirect_from: /archive/2010/03/25/share-your-resharper-templates-across-all-your-dev-machines.aspx/
 tags: 
 - resharper
@@ -12,7 +12,7 @@ header:
 
 I’m going to assume that most of you reading my blog are passionate about software and do some developing in your spare time. If you’re a consultant, you probably do most of your work on a laptop -- perhaps using the same laptop for office and hobbyist development. Others among you might have a laptop and a desktop, or maybe you’re like me and have a laptop and multiple desktops. All with Visual Studio and ReSharper on them – of course.
 
-About 2 years ago I got [really big into ReSharper Live Templates](http://www.matthidinger.com/archive/2008/10/02/code-snippets-with-snippet-designer-and-resharper-live-templates.aspx) – I started writing them for everything. To date, my most commonly used are probably “tm” to generate a Test Method in AAA syntax, and “jsdr” for a quick block of &lt;script&gt; tags and some jQuery $(document).ready code.
+About 2 years ago I got [really big into ReSharper Live Templates](https://www.matthidinger.com/archive/2008/10/02/code-snippets-with-snippet-designer-and-resharper-live-templates.aspx) – I started writing them for everything. To date, my most commonly used are probably “tm” to generate a Test Method in AAA syntax, and “jsdr” for a quick block of &lt;script&gt; tags and some jQuery $(document).ready code.
 
 Over time I would naturally tweak the existing templates and add some new ones. I grew increasingly frustrated when I would try to use a template I created on my work machine, and not have access to it when I was coding at home. As luck would have it, there is a very simple solution to sharing these custom templates between computers.
 

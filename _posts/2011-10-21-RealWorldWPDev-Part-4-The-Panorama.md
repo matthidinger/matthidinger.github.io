@@ -1,6 +1,6 @@
 ---
 title: "RealWorldWPDev Part 4: The Panorama"
-disqus_identifier: http://www.matthidinger.com/archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx
 redirect_from: /archive/2011/10/21/RealWorldWPDev-Part-4-The-Panorama.aspx/
 tags: 
 - realworldwpdev
@@ -9,19 +9,19 @@ header:
 ---
 ### Series Introduction and Outline
 
-This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](http://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
+This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 The windows phone panorama
 --------------------------
 
-Many apps lend themselves nicely to a Windows Phone Panorama. [CTA Watch](http://www.matthidinger.com/articles/projects.aspx) looks similar but it’s actually a Pivot with a background image. After going back and forth for a bit with Real-world Stocks I decided that the panorama looked pretty nice and went with it.
+Many apps lend themselves nicely to a Windows Phone Panorama. [CTA Watch](https://www.matthidinger.com/articles/projects.aspx) looks similar but it’s actually a Pivot with a background image. After going back and forth for a bit with Real-world Stocks I decided that the panorama looked pretty nice and went with it.
 
-Thanks again [@Templarian](http://twitter.com/templarian) for the background! Be sure to hit him up if you’re in need of a great designer who actually gets metro!
+Thanks again [@Templarian](https://twitter.com/templarian) for the background! Be sure to hit him up if you’re in need of a great designer who actually gets metro!
 
-This post is going to cover a lot of topics so I will do my best to whet your appetite, but please be sure to **[Download the Code](http://realworldwpdev.codeplex.com/SourceControl/list/changesets)** and check out the app for yourself! The code should be pretty easy to follow as you get more familiar with how Caliburn does things.
+This post is going to cover a lot of topics so I will do my best to whet your appetite, but please be sure to **[Download the Code](https://realworldwpdev.codeplex.com/SourceControl/list/changesets)** and check out the app for yourself! The code should be pretty easy to follow as you get more familiar with how Caliburn does things.
 
  
 
@@ -41,9 +41,9 @@ This entire series assumes a basic understanding of Silverlight and MVVM. If you
 
 Caliburn.Micro has great documentation. Check out the following links if you’re looking to deep dive into anything covered here.
 
-[Caliburn.Micro Documentation](http://caliburnmicro.codeplex.com/documentation)
+[Caliburn.Micro Documentation](https://caliburnmicro.codeplex.com/documentation)
 
-[Working with Windows Phone 7](http://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation)
+[Working with Windows Phone 7](https://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation)
 
  
 
@@ -57,7 +57,7 @@ MVVM is covered everywhere, so all I will say about here is the following – it
 
 ### The Anatomy of the HomeViewModel
 
-Now then, the HomeViewModel is a great starting point.  At the time of the writing you can see the [full HomeViewModel source.](http://realworldwpdev.codeplex.com/SourceControl/changeset/view/ec2bb5b9a273#src%2fRealWorldStocks.Client.UI%2fViewModels%2fHome%2fHomeViewModel.cs) It’s actually a pretty simple class for doing a whole lot of stuff for us. Let’s dissect this bad boy.
+Now then, the HomeViewModel is a great starting point.  At the time of the writing you can see the [full HomeViewModel source.](https://realworldwpdev.codeplex.com/SourceControl/changeset/view/ec2bb5b9a273#src%2fRealWorldStocks.Client.UI%2fViewModels%2fHome%2fHomeViewModel.cs) It’s actually a pretty simple class for doing a whole lot of stuff for us. Let’s dissect this bad boy.
 
  
 
@@ -221,7 +221,7 @@ Caliburn Screens have a few important methods that you will want to override to 
 3.  **OnDeactivate** – Override this method to add custom logic which should be executed whenever the screen is deactivated or closed. The bool property will indicated if the deactivation is actually a close. After deactivation is complete, IsActive will be false.
 4.  **OnViewLoaded** – Since Screen implements IViewAware, it takes this as an opportunity to let you know when your view’s Loaded event is fired. Use this if you are following a SupervisingController or PassiveView style and you need to work with the view. This is also a place to put view model logic which may be dependent on the presence of a view even though you may not be working with the view directly.
 
-[Read more about Screens, Conductors, and Composition](http://caliburnmicro.codeplex.com/wikipage?title=Screens%2c%20Conductors%20and%20Composition&referringTitle=Documentation)
+[Read more about Screens, Conductors, and Composition](https://caliburnmicro.codeplex.com/wikipage?title=Screens%2c%20Conductors%20and%20Composition&referringTitle=Documentation)
 
 In addition to the above events, a while ago I came up with **OnViewReady** and submitted the patch to Rob. The idea is simple: fire after **OnViewLoaded**, but also after the first **LayoutUpdated**; meaning the base UI is rendered, so feel free to start doing hogging CPU! By waiting until **OnViewReady** you make sure that your code doesn’t start running and burning precious CPU cycles while the platform is trying to finish starting up (and animating things into view, like the panorama).
 
@@ -260,7 +260,7 @@ Please post any questions you have here, and again, please pull down the code an
 
 ### Want some more RealWorldWPDev?
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 

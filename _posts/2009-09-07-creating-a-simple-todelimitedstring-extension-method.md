@@ -1,6 +1,6 @@
 ---
 title: "Creating a simple ToDelimitedString extension method"
-disqus_identifier: http://www.matthidinger.com/archive/2009/09/07/creating-a-simple-todelimitedstring-extension-method.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/09/07/creating-a-simple-todelimitedstring-extension-method.aspx
 redirect_from: /archive/2009/09/07/creating-a-simple-todelimitedstring-extension-method.aspx/
 tags: 
 - c-sharp

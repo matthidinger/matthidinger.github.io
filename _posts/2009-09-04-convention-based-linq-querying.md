@@ -1,6 +1,6 @@
 ---
 title: "Convention based LINQ querying"
-disqus_identifier: http://www.matthidinger.com/archive/2009/09/04/convention-based-linq-querying.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/09/04/convention-based-linq-querying.aspx
 redirect_from: /archive/2009/09/04/convention-based-linq-querying.aspx/
 tags: 
 - linq

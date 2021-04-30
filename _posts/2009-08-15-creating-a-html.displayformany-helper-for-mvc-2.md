@@ -1,15 +1,15 @@
 ---
 title: "Creating a Html.DisplayForMany Helper for MVC 2"
-disqus_identifier: http://www.matthidinger.com/archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx
 redirect_from: /archive/2009/08/15/creating-a-html.displayformany-helper-for-mvc-2.aspx/
 tags: 
 - aspnet-mvc
 header:
-  teaser: http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png
+  teaser: https://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png
 ---
 **Note: This article was written for ASP.NET MVC 2 Preview 1 – it may become outdated in future previews.**
 
-The Html helper in ASP.NET MVC 2 comes with some handy methods called “DisplayFor” and “EditFor” – please see [Scott Gu’s](http://weblogs.asp.net/scottgu/archive/2009/07/31/asp-net-mvc-v2-preview-1-released.aspx) article if you are not familiar with these new features. Long story short, they provide an ASP.NET Dynamic Data-like mechanism which uses reflection and templating to render a display form or an edit form. It works great for primitive properties like String, DataTime, Int32, as well as complex types like “Address.” However, as I was playing with them, I came across a rather funny exception (excusable, I suppose, due to the preview state of MVC 2 at the time of this writing).
+The Html helper in ASP.NET MVC 2 comes with some handy methods called “DisplayFor” and “EditFor” – please see [Scott Gu’s](https://weblogs.asp.net/scottgu/archive/2009/07/31/asp-net-mvc-v2-preview-1-released.aspx) article if you are not familiar with these new features. Long story short, they provide an ASP.NET Dynamic Data-like mechanism which uses reflection and templating to render a display form or an edit form. It works great for primitive properties like String, DataTime, Int32, as well as complex types like “Address.” However, as I was playing with them, I came across a rather funny exception (excusable, I suppose, due to the preview state of MVC 2 at the time of this writing).
 
  
 
@@ -72,7 +72,7 @@ public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html
 <%= Html.DisplayForMany(m => m.Comments) %>
 ```
 
-![](http://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png)
+![](https://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png)
 
 
  

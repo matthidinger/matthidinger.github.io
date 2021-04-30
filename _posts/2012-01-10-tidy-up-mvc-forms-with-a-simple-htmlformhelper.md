@@ -1,6 +1,6 @@
 ---
 title: "Tidy up MVC forms with a simple HtmlFormHelper"
-disqus_identifier: http://www.matthidinger.com/archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx
 redirect_from: /archive/2012/01/10/tidy-up-mvc-forms-with-a-simple-htmlformhelper.aspx/
 tags: 
 - aspnet-mvc
@@ -95,9 +95,9 @@ The entire View in the screenshot above consists of the following:
 
 ### Source Code
 
-Rather than pasting the full source here, I will be publishing it along with a sample project at <http://mvcgrabbag.codeplex.com>
+Rather than pasting the full source here, I will be publishing it along with a sample project at <https://mvcgrabbag.codeplex.com>
 
-#### [View the full HtmlFormHelper.cs](http://mvcgrabbag.codeplex.com/SourceControl/changeset/view/dee469477184#MvcGrabBag.Web%2fHelpers%2fHtmlFormHelper.cs "HtmlFormHelper.cs")
+#### [View the full HtmlFormHelper.cs](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/dee469477184#MvcGrabBag.Web%2fHelpers%2fHtmlFormHelper.cs "HtmlFormHelper.cs")
 
  
 

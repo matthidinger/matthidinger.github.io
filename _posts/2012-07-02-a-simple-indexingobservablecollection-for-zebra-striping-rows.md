@@ -1,6 +1,6 @@
 ---
 title: "A simple IndexingObservableCollection for zebra-striping rows"
-disqus_identifier: http://www.matthidinger.com/archive/2012/07/02/a-simple-indexingobservablecollection-for-zebra-striping-rows.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2012/07/02/a-simple-indexingobservablecollection-for-zebra-striping-rows.aspx
 redirect_from: /archive/2012/07/02/a-simple-indexingobservablecollection-for-zebra-striping-rows.aspx/
 tags: 
 - wpdev
@@ -14,9 +14,9 @@ I’m currently wrapping up a Windows Phone project and thought this would be a 
 
 ### Zebra-striping alternate rows
 
-This particular app displays a lot of tabular data, so we wanted to zebra-stripe the rows to make them easier to discern. At first we tried using a ValueConverter to get the index of the current container, but this method didn’t end up working with the [Telerik DataBoundListBox](http://www.telerik.com/products/windows-phone/overview/all-controls.aspx#databoundlistbox).
+This particular app displays a lot of tabular data, so we wanted to zebra-stripe the rows to make them easier to discern. At first we tried using a ValueConverter to get the index of the current container, but this method didn’t end up working with the [Telerik DataBoundListBox](https://www.telerik.com/products/windows-phone/overview/all-controls.aspx#databoundlistbox).
 
-Instead, we wrote a simple IndexingObservableCollection that will automatically populate the Index of each item as it’s added to the collection. This method also works with the [infinite scrolling feature of Telerik’s listbox](http://www.telerik.com/help/windows-phone/raddataboundlistbox-features-datavirtualization-overview.html) – which we actually needed anyway.
+Instead, we wrote a simple IndexingObservableCollection that will automatically populate the Index of each item as it’s added to the collection. This method also works with the [infinite scrolling feature of Telerik’s listbox](https://www.telerik.com/help/windows-phone/raddataboundlistbox-features-datavirtualization-overview.html) – which we actually needed anyway.
 
 ### IndexingObservableCollection
 

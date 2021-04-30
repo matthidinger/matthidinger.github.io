@@ -1,6 +1,6 @@
 ---
 title: "RealWorldWPDev Part 5: Creating and Consuming Web Services"
-disqus_identifier: http://www.matthidinger.com/archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx
 redirect_from: /archive/2011/11/01/RealWorldWPDev-Part-5-Creating-and-Consuming-Web-Services.aspx/
 tags: 
 - realworldwpdev
@@ -9,9 +9,9 @@ header:
 ---
 ### Series Introduction and Outline
 
-This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](http://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
+This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 Choices
@@ -37,7 +37,7 @@ Without getting too deep into it, and certainly without suggesting that this is 
 Creating Services
 -----------------
 
-Since we’ve decided to go down the path of ASP.NET MVC for this project, I’m going to walk you through creating services using MVC. If you’ve been following along then you already have your Web project setup. If not, please see [Part 2: File –&gt; New Project](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx)
+Since we’ve decided to go down the path of ASP.NET MVC for this project, I’m going to walk you through creating services using MVC. If you’ve been following along then you already have your Web project setup. If not, please see [Part 2: File –&gt; New Project](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx)
 
 ### Should I create a middle-man service?
 
@@ -50,7 +50,7 @@ Many mobile apps communicate with some kind of 3rd party service(s). The decisio
 Enough background, implementation time
 --------------------------------------
 
-The following will walk you through a pretty efficient way for creating and consuming services, while enhancing them very easily over time. Of course, to get the full idea of how it works in practice, [make sure you pull down the latest code and check it out.](http://realworldwp7.codeplex.com/)
+The following will walk you through a pretty efficient way for creating and consuming services, while enhancing them very easily over time. Of course, to get the full idea of how it works in practice, [make sure you pull down the latest code and check it out.](https://realworldwp7.codeplex.com/)
 
 ### step 1: Define your entities/model in the WP7 project
 
@@ -122,13 +122,13 @@ public class StocksController : Controller
 
 If everything goes as planned you should be able to hit this URL in a browser. On my machine hosted under IIS, the URL is:
 
-<http://localhost/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK>
+<https://localhost/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK>
 
 ### step 4: Creating a robust HttpClient
 
 Now that we have our service up there and returning JSON, let’s start consuming it from the app. The following HttpClient handles a number of concerns on our behalf.
 
-1.  GZip Compression using [SharpGIS.GZipWebClient](http://www.sharpgis.net/post/2011/08/28/GZIP-Compressed-Web-Requests-in-WP7-Take-2.aspx) (can be found on NuGet!)
+1.  GZip Compression using [SharpGIS.GZipWebClient](https://www.sharpgis.net/post/2011/08/28/GZIP-Compressed-Web-Requests-in-WP7-Take-2.aspx) (can be found on NuGet!)
 2.  Timeout Support to automatically kill requests that take too long (30 seconds by default)
 3.  Logging requests and responses in the Debug window
 4.  Deserializing the JSON into the specific Model type automatically
@@ -196,7 +196,7 @@ public static class HttpClient
 The logging is helpful to see the following in the Debug window as you’re testing the app.
 
 ```csharp
-INFO: HTTP Request: http://legacy/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK&symbols=AAPL&isTrial=False&clientVersion=1.0.0.0
+INFO: HTTP Request: https://legacy/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK&symbols=AAPL&isTrial=False&clientVersion=1.0.0.0
 INFO: HTTP Response: [{"Symbol":"MSFT","Company":"Microsoft Corpora","OpeningPrice":27.08,"LastPrice":27.19,"DaysChange":0.03,"DaysChangePercentFormatted":"+0.11%","DaysChangeFormatted":"+0.03","DaysRangeMin":0,"DaysRangeMax":0,"Volume":56897792,"PreviousClose":27.16}]
 ```
 
@@ -209,7 +209,7 @@ Calling an HTTP endpoint is as simple as declaring the URL along with any query 
 1.  Declares what type of model is returned from the server by defining the method as HttpRequest&lt;T&gt; where T is what is returned from the server
 2.  Declares the base URL path for the request, e.g., “Stocks/GetSnapshot”
 3.  Builds up any query string params that will be sent with the request.
-4.  Essentially, it builds a string like the following, and automatically parses the JSON into the type of Model we expect from the server: <http://localhost/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK>
+4.  Essentially, it builds a string like the following, and automatically parses the JSON into the type of Model we expect from the server: <https://localhost/RealWorldStocks.Web/Stocks/GetSnapshots?symbols=MSFT&symbols=NOK>
 
 ```csharp
 public class StocksWebService : HttpService, IStocksWebService
@@ -217,9 +217,9 @@ public class StocksWebService : HttpService, IStocksWebService
     public StocksWebService()
     {
 #if DEBUG
-        BaseUrl = DynamicLocalhost.ReplaceLocalhost("http://localhost/RealWorldStocks.Web/");
+        BaseUrl = DynamicLocalhost.ReplaceLocalhost("https://localhost/RealWorldStocks.Web/");
 #else
-        BaseUrl = "http://services.mydomain.com/v1/";
+        BaseUrl = "https://services.mydomain.com/v1/";
 #endif
     }
 
@@ -255,7 +255,7 @@ public class StocksWebService : HttpService, IStocksWebService
 
 DynamicLocalhost is a NuGet package I wrote to make debugging services on multiple machines with multiple developers easier.
 
-[You can read more about the DynamicLocalhost package here](http://www.matthidinger.com/archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx).
+[You can read more about the DynamicLocalhost package here](https://www.matthidinger.com/archive/2011/10/10/DynamicLocalhost-NuGet-Package-for-Windows-Phone.aspx).
 
 ### step 6: Bringing it all together – Orchestrating the request from the ViewModel
 
@@ -305,7 +305,7 @@ That covered a lot of stuff. My hope is that it wasn’t too daunting or overwhe
 
 ### Want some more RealWorldWPDev?
 
-[View the Series Introduction and Outline](http://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
+[View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
 ==============================================================================================================================================
 
 

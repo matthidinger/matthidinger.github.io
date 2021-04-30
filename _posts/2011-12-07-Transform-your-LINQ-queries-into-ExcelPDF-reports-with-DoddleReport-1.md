@@ -1,6 +1,6 @@
 ---
 title: "Transform your LINQ queries into Excel/PDF reports with DoddleReport 1.2"
-disqus_identifier: http://www.matthidinger.com/archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1.aspx
+disqus_identifier: https://www.matthidinger.com/archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1.aspx
 redirect_from: /archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1.aspx/
 tags: 
 - doddle
@@ -8,7 +8,7 @@ tags:
 - reporting
 - nuget
 header:
-  teaser: http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393
+  teaser: https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393
 ---
 > DoddleReport generates tabular reports from any IEnumerable datasource. Out of the box it can render reports to Excel, PDF, HTML, and CSV – fully pluggable of course. I created the project to provide reporting output over the LINQ queries we had already written for an application, but maybe you can find other uses for it.
 
@@ -28,58 +28,58 @@ So what does it generate?
 <ul>
 <li>Creates a native Excel file using OpenXML</li>
 <li>Requires the DoddleReport.OpenXml package</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.xlsx"><strong>See it live!</strong></a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.xlsx"><strong>See it live!</strong></a></li>
 </ul></td>
 <td><h3 id="excel-report-html">Excel Report (HTML)</h3>
 <ul>
 <li>Creates an Excel file using HTML (downside being an Excel security prompt when opening the report)</li>
 <li>Automatic Sticky/Frozen Headers stay at the top when scrolling through the data</li>
-<li><strong><a href="http://doddle.matthidinger.com/Reporting/home/productreport.xls">See it live!</a></strong></li>
+<li><strong><a href="https://doddle.matthidinger.com/Reporting/home/productreport.xls">See it live!</a></strong></li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><p><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a><br />
+<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a><br />
 <br />
 </p></td>
-<td><p><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a></p></td>
+<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a></p></td>
 </tr>
 <tr class="odd">
 <td><h3 id="pdf-report-itextsharp">PDF Report (iTextSharp)</h3>
 <ul>
 <li>Automatically repeats title and column headers numbers on every page</li>
 <li>Requires the DoddleReport.iTextSharp package</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.pdf"><strong>See it live!</strong></a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.pdf"><strong>See it live!</strong></a></li>
 </ul>
 <h3 id="section"></h3></td>
 <td><h3 id="pdf-report-abcpdf">PDF Report (ABCpdf)</h3>
 <ul>
 <li>Automatically repeats title, column headers, and page numbers on every page</li>
 <li>Requires the DoddleReport.AbcPdf package</li>
-<li><em>Requires an</em> <a href="http://www.websupergoo.com/products.htm#pd"><em>ABCpdf license</em></a></li>
-<li><a href="http://doddle.matthidinger.com/Reporting/abcpdf/productreport.pdf"><strong>See it live!</strong></a></li>
+<li><em>Requires an</em> <a href="https://www.websupergoo.com/products.htm#pd"><em>ABCpdf license</em></a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/abcpdf/productreport.pdf"><strong>See it live!</strong></a></li>
 </ul>
 <h3 id="section-1"></h3></td>
 </tr>
 <tr class="even">
 <td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_thumb.png" title="image_thumb[8]" alt="image_thumb[8]" width="256" height="300" /></a></p></td>
-<td><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204396"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204397" title="doddlepdfreport" alt="doddlepdfreport" width="300" height="295" /></a></td>
+<td><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204396"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204397" title="doddlepdfreport" alt="doddlepdfreport" width="300" height="295" /></a></td>
 </tr>
 <tr class="odd">
 <td><h3 id="csvdelimited">CSV/Delimited</h3>
 <ul>
 <li>Use any kind of delimiter you want</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.txt"><strong>See it live!</strong></a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.txt"><strong>See it live!</strong></a></li>
 </ul></td>
 <td><h3 id="html-report">HTML Report</h3>
 <ul>
 <li>Good old HTML report</li>
-<li><a href="http://doddle.matthidinger.com/Reporting/home/productreport.html"><strong>See it live!</strong></a></li>
+<li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.html"><strong>See it live!</strong></a></li>
 </ul>
 <h3 id="section-2"></h3></td>
 </tr>
 <tr class="even">
-<td><p><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204394"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204395" title="doddleTxtReport" alt="doddleTxtReport" width="300" height="190" /></a></p></td>
-<td><a href="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204398"><img src="http://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204399" title="doddleHtmlReport" alt="doddleHtmlReport" width="300" height="236" /></a></td>
+<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204394"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204395" title="doddleTxtReport" alt="doddleTxtReport" width="300" height="190" /></a></p></td>
+<td><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204398"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204399" title="doddleHtmlReport" alt="doddleHtmlReport" width="300" height="236" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -89,17 +89,17 @@ Get Started!
 
 ### New to DoddleReport?
 
--   The project lives at CodePlex: [**http://doddlereport.codeplex.com/**](http://doddlereport.codeplex.com/ "http://doddlereport.codeplex.com/")
--   Look at the [**Building Your First Report**](http://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
--   If you’re using ASP.NET make sure to read the [**Web Reporting**](http://doddlereport.codeplex.com/wikipage?title=Web%20Reporting) section
--   Review the [**sample project**](http://doddlereport.codeplex.com/wikipage?title=Check%20out%20the%20sample%20project) in the solution
--   Check out the [**full documentation**](http://doddlereport.codeplex.com/documentation) **** for advanced customization and configuration
+-   The project lives at CodePlex: [**https://doddlereport.codeplex.com/**](https://doddlereport.codeplex.com/ "https://doddlereport.codeplex.com/")
+-   Look at the [**Building Your First Report**](https://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
+-   If you’re using ASP.NET make sure to read the [**Web Reporting**](https://doddlereport.codeplex.com/wikipage?title=Web%20Reporting) section
+-   Review the [**sample project**](https://doddlereport.codeplex.com/wikipage?title=Check%20out%20the%20sample%20project) in the solution
+-   Check out the [**full documentation**](https://doddlereport.codeplex.com/documentation) **** for advanced customization and configuration
 
 ### Get it!
 
 -   The preferred install method is NuGet
--   …but the compiled Binaries can be found under [**Downloads**](http://doddlereport.codeplex.com/releases/view/77983)
--   …or just get [**the latest source**](http://doddlereport.codeplex.com/SourceControl/list/changesets)
+-   …but the compiled Binaries can be found under [**Downloads**](https://doddlereport.codeplex.com/releases/view/77983)
+-   …or just get [**the latest source**](https://doddlereport.codeplex.com/SourceControl/list/changesets)
 
 ### NuGet Packages
 

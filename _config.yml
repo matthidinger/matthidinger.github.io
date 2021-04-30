@@ -11,8 +11,8 @@ title                    : "Matt Hidinger"
 title_separator          : "-"
 name                     : "Matt Hidinger"
 description              : "Duh."
-url                      : "http://matthidinger.com"
-#url                     : "http://localhost:5000"
+url                      : "https://matthidinger.com"
+#url                     : "https://localhost:5000"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 gh_repo                  :
 teaser                   : "banner.jpg" # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -77,7 +77,7 @@ author:
   linkedin         :
   pinterest        :
   soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
+  stackoverflow    : # https://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
   twitter          : "matthidinger"
@@ -145,7 +145,7 @@ kramdown:
 permalink: /archive/:year/:month/:day/:title/
 paginate: 5 # amount of posts to show
 paginate_path: blog/page:num/
-timezone: # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
@@ -198,7 +198,7 @@ tags:
 
 
 # HTML Compression
-# - http://jch.penibelst.de/
+# - https://jch.penibelst.de/
 compress_html:
   clippings: all
   ignore:
