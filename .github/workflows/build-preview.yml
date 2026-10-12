@@ -17,27 +17,13 @@ jobs:
           source: ./
           destination: ./_site
       - name: Screenshot /talks/
+        timeout-minutes: 10
         run: |
-          mkdir -p shots
-          (cd _site && python3 -m http.server 8080 >/dev/null 2>&1 &)
-          sleep 2
           mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw" && npm init -y >/dev/null
           npm install --no-audit --no-fund playwright
           npx playwright install --with-deps chromium
           cd "$GITHUB_WORKSPACE"
-          cat > shot.js <<'JS'
-          const { chromium } = require('playwright');
-          (async () => {
-            const b = await chromium.launch();
-            for (const [n, w, h] of [['desktop', 1280, 900], ['mobile', 390, 844]]) {
-              const p = await b.newPage({ viewport: { width: w, height: h } });
-              await p.goto('http://localhost:8080/talks/');
-              await p.screenshot({ path: `shots/talks-${n}.png`, fullPage: true });
-            }
-            await b.close();
-          })();
-          JS
-          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node shot.js
+          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node .github/scripts/preview-screenshots.js _site shots
       - name: Assemble artifact
         run: |
           mkdir -p preview
