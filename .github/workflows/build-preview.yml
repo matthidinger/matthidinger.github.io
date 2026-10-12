@@ -21,8 +21,10 @@ jobs:
           mkdir -p shots
           (cd _site && python3 -m http.server 8080 >/dev/null 2>&1 &)
           sleep 2
-          npm install --no-save --no-audit --no-fund playwright
+          mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw" && npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright
           npx playwright install --with-deps chromium
+          cd "$GITHUB_WORKSPACE"
           cat > shot.js <<'JS'
           const { chromium } = require('playwright');
           (async () => {
@@ -35,7 +37,7 @@ jobs:
             await b.close();
           })();
           JS
-          node shot.js
+          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node shot.js
       - name: Assemble artifact
         run: |
           mkdir -p preview
