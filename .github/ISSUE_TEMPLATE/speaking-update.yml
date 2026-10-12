@@ -1,0 +1,31 @@
+name: Speaking / content update
+description: Request a public speaking or conference update for matthidinger.com
+title: "Speaking update: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Missing facts must be clarified, never invented. Only public information belongs here.
+        The `copilotd-ready` label is applied separately by Matt after reviewing this issue.
+  - type: input
+    id: url
+    attributes:
+      label: Public URL
+      description: Exact public link for the event, talk, video or slides.
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: What to add or change
+      description: For example, "Add this talk to the Talks page".
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Event / talk title (only if known)
+  - type: input
+    id: date
+    attributes:
+      label: Date (only if known)

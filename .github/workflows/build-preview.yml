@@ -1,0 +1,48 @@
+name: Build preview
+
+on:
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Screenshot /talks/
+        run: |
+          mkdir -p shots
+          (cd _site && python3 -m http.server 8080 >/dev/null 2>&1 &)
+          sleep 2
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+          cat > shot.js <<'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const b = await chromium.launch();
+            for (const [n, w, h] of [['desktop', 1280, 900], ['mobile', 390, 844]]) {
+              const p = await b.newPage({ viewport: { width: w, height: h } });
+              await p.goto('http://localhost:8080/talks/');
+              await p.screenshot({ path: `shots/talks-${n}.png`, fullPage: true });
+            }
+            await b.close();
+          })();
+          JS
+          node shot.js
+      - name: Assemble artifact
+        run: |
+          mkdir -p preview
+          cp -r _site preview/site
+          cp -r shots preview/screenshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: preview
+          retention-days: 7
