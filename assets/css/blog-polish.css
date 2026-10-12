@@ -1,0 +1,45 @@
+/* Blog readability polish: code blocks, tables, images, quotes */
+.page__content{font-size:1.0625em;line-height:1.75}
+.page__content p,.page__content li{max-width:100%;overflow-wrap:break-word}
+.page__content img{max-width:100%;height:auto;border-radius:6px}
+.page__content p>img:only-child{display:block;margin:1.25em auto;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+
+/* Inline code */
+.page__content :not(pre)>code{padding:.15em .4em;border:0;border-radius:4px;background:#eef1f5;color:#c7254e;font-size:.875em;font-family:SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+/* Code blocks */
+.page__content div.highlighter-rouge,.page__content figure.highlight{margin:1.5em 0;padding:0;border:1px solid #1f2937;border-radius:8px;background:#0f172a;box-shadow:0 4px 14px rgba(15,23,42,.18);overflow:hidden}
+.page__content div.highlighter-rouge:before,.page__content figure.highlight:before{display:none}
+.page__content div.highlighter-rouge .highlight,.page__content figure.highlight .highlight{margin:0;background:transparent}
+.page__content div.highlighter-rouge pre,.page__content figure.highlight pre,.page__content pre.highlight{margin:0;padding:1em 1.25em;border:0;border-radius:0;background:transparent;color:#e2e8f0;font-size:.8125em;line-height:1.65;font-family:SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;overflow-x:auto;white-space:pre;tab-size:4;-webkit-overflow-scrolling:touch}
+.page__content pre code{padding:0;background:transparent;color:inherit;font-size:inherit;white-space:inherit}
+.page__content>pre{margin:1.5em 0;padding:1em 1.25em;border-radius:8px;background:#0f172a;color:#e2e8f0;overflow-x:auto;line-height:1.65}
+.highlight .c,.highlight .c1,.highlight .cm,.highlight .cs{color:#94a3b8;font-style:italic}
+.highlight .k,.highlight .kd,.highlight .kn,.highlight .kt,.highlight .kc,.highlight .kr,.highlight .nt{color:#7dd3fc}
+.highlight .s,.highlight .s1,.highlight .s2,.highlight .sb,.highlight .sc{color:#86efac}
+.highlight .m,.highlight .mi,.highlight .mf,.highlight .mh{color:#fca5a5}
+.highlight .nc,.highlight .nn,.highlight .nf,.highlight .nx{color:#fde68a}
+.highlight .na,.highlight .nb,.highlight .no{color:#c4b5fd}
+.highlight .o,.highlight .p{color:#cbd5e1}
+.highlight .err{color:inherit;background:transparent}
+
+/* Tables */
+.page__content table{display:block;width:100%;max-width:100%;margin:1.5em 0;overflow-x:auto;border-collapse:separate;border-spacing:0;border:1px solid #e5e7eb;border-radius:8px;font-size:.9375em}
+.page__content table th,.page__content table td{padding:.65em .9em;border:0;border-bottom:1px solid #e5e7eb;vertical-align:top;text-align:left}
+.page__content table thead th{background:#f3f4f6;font-weight:600;white-space:nowrap}
+.page__content table tbody tr:nth-child(even){background:#fafafa}
+.page__content table tbody tr:last-child td{border-bottom:0}
+.page__content table td img{margin:0;box-shadow:none}
+/* Layout tables migrated with blank headers: hide the empty header row */
+.page__content table thead:not(:has(th:not(:empty))){display:none}
+.page__content table:has(thead th:empty:only-child),.page__content table:has(thead:not(:has(th:not(:empty)))){border:0;background:transparent}
+.page__content table:has(thead:not(:has(th:not(:empty)))) td{border:0;padding:.5em .9em}
+.page__content table:has(thead:not(:has(th:not(:empty)))) tbody tr{background:transparent}
+@media (max-width:600px){
+  .page__content table:has(thead:not(:has(th:not(:empty)))),.page__content table:has(thead:not(:has(th:not(:empty)))) tbody,.page__content table:has(thead:not(:has(th:not(:empty)))) tr,.page__content table:has(thead:not(:has(th:not(:empty)))) td{display:block;width:100%}
+}
+
+/* Quotes and rules */
+.page__content blockquote{margin:1.5em 0;padding:.5em 1.25em;border-left:4px solid #3b82f6;border-radius:0 6px 6px 0;background:#f8fafc;color:#475569;font-style:normal}
+.page__content hr{margin:2em 0;border:0;border-top:1px solid #e5e7eb}
+.page__content h2,.page__content h3{margin-top:1.75em}
