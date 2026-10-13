@@ -48,8 +48,37 @@ test('normal commands, ranges and non-shell tools get no decision', () => {
 });
 
 test('never returns allow', () => {
-  for (const c of [REJECTED, ROOTED, '', 'cd ..']) {
+  for (const c of [REJECTED, ROOTED, '', 'cd ..', 'node -p 1', 'node a.mjs']) {
     const d = decide({ toolName: 'bash', toolArgs: { command: c } });
     assert.ok(d === null || d.permissionDecision === 'deny');
   }
+});
+
+// The inline-node command that was rejected because its URL literals were scanned as filesystem paths.
+const REJECTED_INLINE = `R=.artifacts/acceptance/pr-2-x; node --input-type=module -e "
+import fs from 'node:fs';
+const P = '/matthidinger.github.io/pr-2/SHA';
+console.log(fs.existsSync(P + '/site/talks/'));
+"`;
+
+test('denies inline node scripts (-e/--eval/-p/--print) with a rooted-helper instruction', () => {
+  const cmds = [REJECTED_INLINE, 'node -e "1"', 'node -p 1+1', 'node --eval "x"', 'node --print=1', 'node -pe 1', 'node --input-type=module -e "x"',
+    'node -r ./a.cjs -e 1', 'FOO=1 node -e 1', 'env NODE_ENV=x node -p 1', '/usr/bin/node -p 1', 'nodejs -e 1',
+    'echo hi && node -p 1', 'ls; node -e 1', 'x=$(node -p 1)', 'npm test | node -e "process.stdin.pipe(process.stdout)"', 'node.exe -e 1'];
+  for (const c of cmds) {
+    const d = decide({ toolName: 'bash', toolArgs: { command: c } });
+    assert.equal(d?.permissionDecision, 'deny', c);
+    assert.match(d.permissionDecisionReason, /helper file inside the checkout/);
+  }
+  const d = JSON.parse(runHook({ toolName: 'bash', toolArgs: JSON.stringify({ command: REJECTED_INLINE }) }));
+  assert.equal(d.permissionDecision, 'deny');
+});
+
+test('ordinary node FILE commands and non-node -e/-p flags get no decision', () => {
+  for (const c of ['node .artifacts/check.mjs', 'node .github/acceptance/bin/accept.mjs --pr 2', 'node .github/acceptance/bin/inspect.mjs RUN --note "x -e y"',
+    'node script.mjs -e -p --eval', 'node --test "test/*.test.mjs"', 'node --input-type=module .artifacts/x.mjs', 'node -- -e',
+    'npm --prefix .github/acceptance test', 'grep -e pattern -e other file', 'sed -e s/a/b/ f', 'echo node -e 1', 'git log -p', 'nodemon -e js', 'node']) {
+    assert.equal(decide({ toolName: 'bash', toolArgs: { command: c } }), null, c);
+  }
+  assert.equal(runHook({ toolName: 'bash', toolArgs: { command: 'node .artifacts/check.mjs' } }), '');
 });

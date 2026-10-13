@@ -109,6 +109,6 @@ Only post the deep link in a public PR if Matt has approved disclosing that orig
 - Some old posts overflow horizontally on mobile because of long unbroken identifiers. This is report-only unless `--ux` is used.
 - Screenshots are cut off at 5000px. Third-party widgets/CDNs are blocked during checks.
 - `inspect.mjs` records the agent's statement that it viewed each image, bound to the image hashes. It cannot prove who looked.
-- `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands so paths stay rooted at the checkout. It is a hygiene guard, not a security sandbox.
+- `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands so paths stay rooted at the checkout. It also denies inline node scripts (`node -e/--eval/-p/--print`), because their URL literals get scanned as filesystem paths. Put the script in a checkout-rooted helper file (e.g. `.artifacts/check.mjs`) and run `node .artifacts/check.mjs`. The hook only ever denies or stays silent. It is a hygiene guard, not a security sandbox.
 
 Phone workflow for Matt: [.github/MOBILE_GUIDE.md](.github/MOBILE_GUIDE.md). PR checklist: [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md).
