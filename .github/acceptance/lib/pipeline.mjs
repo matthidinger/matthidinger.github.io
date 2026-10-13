@@ -125,6 +125,10 @@ export function renderReport(report) {
     const notes = [...(r.failures || []), ...(r.warnings || [])].join('; ') || '—';
     lines.push(`| \`${r.path}\` | ${r.viewport} | ${r.passed ? '✅' : '❌'} | ${okCount}/${(r.assertions || []).length} | ${notes.replace(/\|/g, '\\|')} |`);
   }
+  const hosts = [...new Set(report.results.flatMap((r) => r.externalBlocked || []))].sort();
+  if (hosts.length) {
+    lines.push('', `Third-party hosts blocked for isolation (their images/widgets appear missing in screenshots): ${hosts.map((h) => `\`${h}\``).join(', ')}`);
+  }
   if (report.failures.length) lines.push('', 'Build failures:', ...report.failures.map((f) => `- ${f}`));
   return lines.join('\n') + '\n';
 }
