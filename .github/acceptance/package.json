@@ -1,0 +1,13 @@
+{
+  "name": "site-acceptance",
+  "private": true,
+  "description": "Isolated build/browser acceptance tooling for matthidinger.github.io. Not part of the site or the legacy root npm toolchain.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\""
+  },
+  "dependencies": {
+    "playwright-core": "1.64.0"
+  }
+}

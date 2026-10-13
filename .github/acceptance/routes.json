@@ -1,0 +1,88 @@
+{
+  "productionOrigins": [
+    "https://matthidinger.com",
+    "http://matthidinger.com",
+    "https://www.matthidinger.com",
+    "http://www.matthidinger.com"
+  ],
+  "build": {
+    "productionShape": {
+      "talks/index.html": [
+        "<link rel=\"canonical\" href=\"https://matthidinger.com/talks/\"",
+        "href=\"https://matthidinger.com/assets/css/main.css\""
+      ],
+      "CNAME": ["matthidinger.com"]
+    },
+    "mustNotExist": [
+      "AGENTS.md",
+      ".github",
+      ".artifacts",
+      "_config.yml",
+      "Gemfile",
+      "Gemfile.lock",
+      "package.json",
+      "node_modules"
+    ]
+  },
+  "viewports": [
+    { "name": "desktop", "width": 1280, "height": 900 },
+    { "name": "mobile", "width": 390, "height": 844, "isMobile": true }
+  ],
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "purpose": "Home page (timeline layout)",
+      "title": "Matt Hidinger",
+      "text": ["Matt Hidinger"],
+      "selectors": { "img.img-circle": 5 },
+      "knownPageErrors": [
+        {
+          "message": "google is not defined",
+          "reason": "pre-existing: js/grayscale.js calls Google Maps but the timeline layout never loads that API (also happens in production)"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "path": "/blog/",
+      "purpose": "Blog listing (paginated archive)",
+      "title": "Blog",
+      "h1": "Blog",
+      "selectors": { ".archive__item-title": 5 }
+    },
+    {
+      "id": "talks",
+      "path": "/talks/",
+      "purpose": "Talks page",
+      "title": "Talks",
+      "h1": "Talks",
+      "text": ["These are talks I"],
+      "minText": 50
+    },
+    {
+      "id": "post-code",
+      "path": "/archive/2008/05/08/linq-to-sql-audit-trail/",
+      "purpose": "Post with many fenced C# code blocks and images",
+      "title": "LINQ to SQL Audit Trail",
+      "h1": "LINQ to SQL Audit Trail",
+      "selectors": { "pre.highlight": 10, ".page__content img": 5 }
+    },
+    {
+      "id": "post-migrated-code",
+      "path": "/archive/2009/01/12/linq-audit-trail-v2/",
+      "purpose": "Migrated post with list-indented and plain code fences",
+      "title": "LINQ Audit Trail v2",
+      "h1": "LINQ Audit Trail v2 - DoddleAudit",
+      "selectors": { "pre.highlight": 3, "li pre.highlight": 1 }
+    },
+    {
+      "id": "post-table-images",
+      "path": "/archive/2012/12/05/sharing-code-windows-8-and-windows-phone/",
+      "purpose": "Migrated post with HTML/Markdown tables, images and code",
+      "title": "Sharing Code: Windows 8 and Windows Phone",
+      "h1": "Sharing Code: Windows 8 and Windows Phone",
+      "selectors": { ".page__content table": 2, ".page__content img": 6, "pre.highlight": 2 }
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 name: Build preview
 
+# Read-only PR verification. Builds the committed PR head with the GitHub Pages build action and runs
+# the same browser acceptance as the self-hosted runtime. It never deploys and has no write access.
 on:
   pull_request:
     branches: [master]
@@ -7,30 +9,68 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: build-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  site-acceptance:
+    name: site-acceptance
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      CHROMIUM_PATH: /usr/bin/google-chrome
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/jekyll-build-pages@v1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          source: ./
-          destination: ./_site
-      - name: Screenshot /talks/
-        timeout-minutes: 10
-        run: |
-          mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw" && npm init -y >/dev/null
-          npm install --no-audit --no-fund playwright
-          npx playwright install --with-deps chromium
-          cd "$GITHUB_WORKSPACE"
-          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node .github/scripts/preview-screenshots.js _site shots
-      - name: Assemble artifact
-        run: |
-          mkdir -p preview
-          cp -r _site preview/site
-          cp -r shots preview/screenshots
-      - uses: actions/upload-artifact@v4
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          name: site-preview
-          path: preview
+          node-version: 22
+
+      - name: Install pinned acceptance tooling (isolated from the legacy root npm project)
+        run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+
+      - name: Unit and negative tests
+        run: npm --prefix .github/acceptance test
+
+      - name: Stage committed sources
+        id: stage
+        run: |
+          node .github/acceptance/bin/accept.mjs --stage-only --pr "$PR" | tee "$RUNNER_TEMP/stage.log"
+          echo "run_dir=$(sed -n 's/^run_dir=//p' "$RUNNER_TEMP/stage.log")" >> "$GITHUB_OUTPUT"
+
+      - name: Build with the GitHub Pages Jekyll action
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ${{ steps.stage.outputs.run_dir }}/src
+          destination: ${{ steps.stage.outputs.run_dir }}/site
+          build_revision: ${{ github.event.pull_request.head.sha }}
+          verbose: false
+
+      - name: Browser acceptance
+        env:
+          RUN_DIR: ${{ steps.stage.outputs.run_dir }}
+        run: node .github/acceptance/bin/accept.mjs --run "$RUN_DIR" --site "$RUN_DIR/site" --pr "$PR" --builder "actions/jekyll-build-pages v1.0.13"
+
+      - name: Job summary
+        if: always() && steps.stage.outputs.run_dir != ''
+        env:
+          RUN_DIR: ${{ steps.stage.outputs.run_dir }}
+        run: cat "$RUN_DIR/report.md" >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "No acceptance report was produced." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload acceptance evidence (downloadable; not a hosted preview)
+        if: always() && steps.stage.outputs.run_dir != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: acceptance-evidence-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ steps.stage.outputs.run_dir }}/report.json
+            ${{ steps.stage.outputs.run_dir }}/report.md
+            ${{ steps.stage.outputs.run_dir }}/evidence/
           retention-days: 7
+          if-no-files-found: warn
