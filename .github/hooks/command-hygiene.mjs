@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // preToolUse command-hygiene guard (not a security sandbox).
 // Denies (1) shell commands that combine a directory change with parent-directory (..) paths, because
-// their effective paths are ambiguous, and (2) inline node scripts (node -e/--eval/-p/--print), because
-// URL or path literals inside them are indistinguishable from filesystem paths. It never allows or grants
+// their effective paths are ambiguous, (2) inline node scripts, and (3) absolute-looking node arguments,
+// because URL routes in shell text are indistinguishable from filesystem paths. It never allows or grants
 // anything: for every other input it prints nothing, leaving the normal permission flow unchanged.
 import { pathToFileURL } from 'node:url';
 
@@ -18,23 +18,41 @@ export const INLINE_NODE_REASON = 'Command-hygiene guard: inline node scripts (n
   + 'literals inside them are scanned as filesystem paths. Write the script to a helper file inside the checkout '
   + '(e.g. .artifacts/check.mjs) and run it with `node .artifacts/check.mjs`.';
 
+export const ABSOLUTE_NODE_REASON = 'Command-hygiene guard: node arguments beginning with / can be mistaken for outside-checkout filesystem access. '
+  + 'Use checkout-relative file arguments. Put non-filesystem URL routes in a checkout-local helper/configuration, '
+  + 'or pass a named route ID from routes.json instead. No additional filesystem permission is granted.';
+
 const NODE_BIN_RE = /^(?:\S*\/)?node(?:js)?(?:\.exe)?$/i;
 const PREFIX_WORDS = new Set(['env', 'exec', 'time', 'command', 'nohup', 'nice', 'sudo']);
 const EVAL_FLAG_RE = /^(?:-[a-z]*[ep][a-z]*|--eval|--print)(?:=.*)?$/;
 const VALUE_FLAGS = new Set(['-r', '--require', '--import', '--loader', '--experimental-loader', '-C', '--conditions', '--input-type', '--env-file']);
 
-// True when any simple command runs node with an inline-script flag before its script file argument.
-export function hasInlineNode(command) {
+function* nodeArguments(command) {
   for (const segment of command.split(/[;&|\n`]|\$\(|\(/)) {
-    const words = segment.trim().split(/\s+/).filter(Boolean);
+    const words = (segment.match(/(?:[^\s"'\\]|\\.|"(?:\\.|[^"\\])*"|'[^']*')+/g) || [])
+      .map((word) => word.replace(/^(['"])(.*)\1$/s, '$2'));
     let i = 0;
     while (i < words.length && (PREFIX_WORDS.has(words[i]) || /^[A-Za-z_][A-Za-z0-9_]*=/.test(words[i]))) i++;
     if (!NODE_BIN_RE.test(words[i] || '')) continue;
-    for (i++; i < words.length && words[i].startsWith('-'); i++) {
-      if (words[i] === '--') break;
-      if (!words[i].startsWith('--') ? EVAL_FLAG_RE.test(words[i]) : /^--(?:eval|print)(?:=|$)/.test(words[i])) return true;
-      if (VALUE_FLAGS.has(words[i])) i++;
+    yield words.slice(i + 1);
+  }
+}
+
+// True when any simple command runs node with an inline-script flag before its script file argument.
+export function hasInlineNode(command) {
+  for (const args of nodeArguments(command)) {
+    for (let i = 0; i < args.length && args[i].startsWith('-'); i++) {
+      if (args[i] === '--') break;
+      if (!args[i].startsWith('--') ? EVAL_FLAG_RE.test(args[i]) : /^--(?:eval|print)(?:=|$)/.test(args[i])) return true;
+      if (VALUE_FLAGS.has(args[i])) i++;
     }
+  }
+  return false;
+}
+
+export function hasAbsoluteNodeArgument(command) {
+  for (const args of nodeArguments(command)) {
+    if (args.some((arg) => /^(?:--?[\w-]+=)?['"]?\//.test(arg))) return true;
   }
   return false;
 }
@@ -50,6 +68,7 @@ export function decide(input) {
   const command = args && typeof args.command === 'string' ? args.command : '';
   if (CD_RE.test(command) && PARENT_RE.test(command)) return { permissionDecision: 'deny', permissionDecisionReason: REASON };
   if (hasInlineNode(command)) return { permissionDecision: 'deny', permissionDecisionReason: INLINE_NODE_REASON };
+  if (hasAbsoluteNodeArgument(command)) return { permissionDecision: 'deny', permissionDecisionReason: ABSOLUTE_NODE_REASON };
   return null;
 }
 

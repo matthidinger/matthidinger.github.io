@@ -82,3 +82,22 @@ test('ordinary node FILE commands and non-node -e/-p flags get no decision', () 
   }
   assert.equal(runHook({ toolName: 'bash', toolArgs: { command: 'node .artifacts/check.mjs' } }), '');
 });
+
+test('denies the observed URL-route argument stall without granting filesystem access', () => {
+  const observed = 'sed -n 1,46p .github/acceptance/lib/server.mjs | grep -n "export\\|function" ; ls .github/acceptance/node_modules/playwright-core/ | head; node .artifacts/probe-nav.mjs .artifacts/acceptance/baseline-0a7995deb3f3/preview /archive/2012/12/05/sharing-code-windows-8-and-windows-phone/ 8 2>&1 | tail -5';
+  for (const command of [observed, 'node probe.mjs "/"', "node probe.mjs '/talks/'",
+    'node probe.mjs --route=/blog/', 'node probe.mjs --route="/archive/example/"', 'node /workspace/probe.mjs']) {
+    const decision = JSON.parse(runHook({ toolName: 'bash', toolArgs: { command } }));
+    assert.equal(decision.permissionDecision, 'deny', command);
+    assert.match(decision.permissionDecisionReason, /named route ID/);
+  }
+});
+
+test('relative files, named routes, real URLs and descriptive notes keep normal permission handling', () => {
+  for (const command of ['node .artifacts/probe-nav.mjs .artifacts/preview tables-images 8',
+    'node probe.mjs --config=.artifacts/probe.json', 'node probe.mjs --origin=https://example.com',
+    'node inspect.mjs RUN --note "Viewed /talks/ and /blog/ at both widths"',
+    'node inspect.mjs RUN --note="Viewed /talks/ and /blog/"', 'cat /approved/exact/snapshot.md']) {
+    assert.equal(runHook({ toolName: 'bash', toolArgs: { command } }), '', command);
+  }
+});
