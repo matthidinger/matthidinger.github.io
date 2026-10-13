@@ -70,7 +70,7 @@ node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N                
 ## What the checks enforce
 
 - **Build.** `nas-pages-build` runs on a `git archive` of HEAD with `PAGES_ENV=dotcom`, which matches github.com Pages. Without that variable, github-metadata produces a `/pages/<owner>` baseurl. CI builds the same staged source with `actions/jekyll-build-pages`. The build must keep its production shape (canonical/CSS URLs, `CNAME`). Setup files (`AGENTS.md`, `.github`, `.artifacts`, config, Gemfiles) must not appear in the output.
-- **Prefix rewrite.** The preview is served under `/matthidinger.github.io/pr-N/FULL_SHA/site`. Compiled HTML/CSS URL attributes that point at production or the site root are rewritten into that prefix. Text inside `pre`/`code`/`script`/`style` is never changed. No CSS or content is injected.
+- **Prefix rewrite.** The preview is served under the URL prefix `/matthidinger.github.io/pr-N/FULL_SHA/` (no `/site` segment). Compiled HTML/CSS URL attributes that point at production or the site root are rewritten into that prefix. Text inside `pre`/`code`/`script`/`style` is never changed. No CSS or content is injected.
 - **Browser checks.** Each route in `routes.json` is checked at desktop (1280px) and mobile (390px) widths with Chromium:
   - document status 200, the expected title/h1/text, and minimum counts of real elements (code blocks, tables, images)
   - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests
@@ -85,17 +85,21 @@ node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N                
   - screenshots matching their hashes, inspected and embedded as `github.com/user-attachments` URLs together with the SHA
   - the `site-acceptance` check succeeded on that SHA
   - the preview is exported, and its private link is configured and verified
-  - for `--ux` jobs, before/after evidence
+  - for `--ux` jobs, before/after evidence, with a baseline built from the merge base with `origin/master` (if the merge base cannot be established, the gate fails)
 
 ## Private preview
 
-`export-preview.mjs` copies only the compiled, prefix-rewritten public site into `$COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site`. The copy is atomic (stage, then rename) and immutable (a different build for the same commit is refused). It validates the PR number, state, base, head repo and head SHA first.
+`export-preview.mjs` copies only the compiled, prefix-rewritten public site into `$COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site`. The preview reader serves that directory at the URL `/matthidinger.github.io/pr-N/FULL_SHA/...`: `site` is a disk directory, never a URL segment. The copy is atomic (stage, then rename) and immutable (a different build for the same commit is refused). It validates the PR number, state, base, head repo and head SHA first.
 
 The serving origin is controlled by the operator. Agents never create ingress or access policy and never copy GitHub credentials to another service.
 
-If `COPILOT_PREVIEW_BASE_URL` is empty, readiness is `BLOCKED`: no link exists, so never invent one or use a public fallback. When it is configured, readiness requires two things:
-- an unauthenticated request must not get the page
-- an operator-provided `COPILOT_PREVIEW_AUTH_HEADER` must get it
+Owner-only access is an operator-verified prerequisite. The operator configures `COPILOT_PREVIEW_BASE_URL` only after checking that unauthenticated and wrong-owner requests are denied and that genuine owner access works. It cannot be inferred by adding or removing an HTTP header on one client, so never inject identity/auth headers, add credentials or request wider access.
+
+If `COPILOT_PREVIEW_BASE_URL` is empty, readiness is `BLOCKED`: no link exists, so never invent one or use a public fallback. When it is configured, readiness checks every accepted route over this runtime's ambient authenticated transport:
+- the base must be a bare `https://` origin (no path, query, fragment or credentials)
+- requests use bounded timeouts and never follow redirects; any redirect fails
+- each route must return 200, `X-Preview-Revision` equal to the full SHA, and HTML bytes whose hash matches the accepted build
+- a timeout, unreachable origin or 401/403 from this runtime is reported as an external verification blocker (`BLOCKED`), never worked around
 
 Only post the deep link in a public PR if Matt has approved disclosing that origin.
 

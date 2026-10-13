@@ -2,12 +2,65 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { previewTarget, prInfo, validateAssociation } from './preview.mjs';
-import { REPO_NWO, dirtyFiles, headSha, manifest, readJson, sh, sha256File } from './util.mjs';
+import { REPO_NWO, dirtyFiles, headSha, manifest, readJson, sh, sha256, sha256File } from './util.mjs';
 
 export const REQUIRED_CHECK = 'site-acceptance';
+export const PREVIEW_TIMEOUT_MS = 15000;
 const ATTACHMENT_RE = /^https:\/\/github\.com\/user-attachments\/assets\/[0-9a-f-]{36}$/;
 
 const readIf = (f) => (fs.existsSync(f) ? readJson(f) : null);
+
+// The configured preview base must be a bare HTTPS origin (no credentials, path, query or fragment).
+export function previewOrigin(base) {
+  let u;
+  try { u = new URL(base); } catch { throw new Error('COPILOT_PREVIEW_BASE_URL is not a valid URL'); }
+  if (u.protocol !== 'https:') throw new Error('COPILOT_PREVIEW_BASE_URL must use https');
+  if (u.username || u.password || (u.pathname !== '/' && u.pathname !== '') || u.search || u.hash || base.includes('?') || base.includes('#')) {
+    throw new Error('COPILOT_PREVIEW_BASE_URL must be a bare origin (no credentials, path, query or fragment)');
+  }
+  return u.origin;
+}
+
+export const routeFile = (routePath) => (routePath.endsWith('/') ? routePath + 'index.html' : routePath).replace(/^\/+/, '');
+
+// Verifies the operator-configured private preview over this runtime's ambient authenticated transport.
+// No identity/auth headers are injected and redirects are never followed. Owner-only access policy is an
+// operator-verified prerequisite; it cannot be inferred from one client's responses. Details never echo the origin.
+export async function verifyPreviewLink({ base, prefix, sha, paths, expected, fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS }) {
+  let origin;
+  try { origin = previewOrigin(base); } catch (e) { return { status: 'fail', detail: e.message, routes: [] }; }
+  const routes = [];
+  for (const p of [...new Set(paths)]) {
+    const want = expected?.[routeFile(p)];
+    if (!want) { routes.push({ path: p, status: 'fail', detail: 'route not in the accepted preview manifest' }); continue; }
+    let res;
+    try {
+      res = await fetchImpl(origin + prefix + p, { method: 'GET', redirect: 'manual', signal: AbortSignal.timeout(timeoutMs) });
+    } catch (e) {
+      const why = e?.name === 'TimeoutError' || e?.name === 'AbortError' ? `timed out after ${timeoutMs}ms` : `unreachable (${e?.cause?.code || e?.name || 'error'})`;
+      routes.push({ path: p, status: 'blocked', detail: `${why} from this runtime` });
+      continue;
+    }
+    const s = res.status;
+    if (s >= 300 && s < 400 || res.type === 'opaqueredirect') routes.push({ path: p, status: 'fail', detail: `redirected (${s}); redirects are not followed` });
+    else if (s === 401 || s === 403 || s === 407) routes.push({ path: p, status: 'blocked', detail: `access denied (${s}) for this runtime's ambient identity` });
+    else if (s !== 200) routes.push({ path: p, status: 'fail', detail: `HTTP ${s}` });
+    else {
+      const rev = res.headers.get('x-preview-revision');
+      const body = Buffer.from(await res.arrayBuffer());
+      if (rev !== sha) routes.push({ path: p, status: 'fail', detail: `X-Preview-Revision ${rev || 'missing'} != ${sha}` });
+      else if (sha256(body) !== want) routes.push({ path: p, status: 'fail', detail: 'served HTML differs from the accepted build' });
+      else routes.push({ path: p, status: 'pass' });
+    }
+  }
+  const bad = routes.filter((r) => r.status === 'fail');
+  const blocked = routes.filter((r) => r.status === 'blocked');
+  const list = (xs) => xs.map((r) => `${r.path}: ${r.detail}`).join('; ');
+  if (!routes.length) return { status: 'fail', detail: 'no accepted routes to verify', routes };
+  if (bad.length) return { status: 'fail', detail: list(bad), routes };
+  if (blocked.length) return { status: 'blocked', detail: list(blocked), routes };
+  return { status: 'pass', detail: `${routes.length} accepted routes served with X-Preview-Revision ${sha} and accepted HTML bytes`, routes };
+}
 
 export function verifyEvidence(runDir, report) {
   const missing = [];
@@ -21,7 +74,7 @@ export function verifyEvidence(runDir, report) {
   return { missing, mismatched };
 }
 
-export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.env, run = sh, fetchStatus }) {
+export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.env, run = sh }) {
   const report = readIf(path.join(runDir, 'report.json'));
   const facts = {
     pr, ux: !!ux, head: headSha(root), dirty: dirtyFiles(root), report,
@@ -33,7 +86,7 @@ export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.e
     previewRoot: env.COPILOT_PREVIEW_ROOT || '', previewBaseUrl: env.COPILOT_PREVIEW_BASE_URL || '',
     preview: null, previewFetch: null,
   };
-  try { facts.mergeBase = run('git', ['merge-base', 'HEAD', 'origin/master'], { cwd: root }); } catch { /* reported by gate */ }
+  try { facts.mergeBase = run('git', ['merge-base', 'HEAD', 'origin/master'], { cwd: root }) || null; } catch (e) { facts.mergeBaseError = e.message.split('\n')[0]; }
   try { facts.pr_info = prInfo(pr, run); } catch (e) { facts.pr_info = { error: e.message.split('\n')[0] }; }
   if (report?.sha) {
     try {
@@ -111,15 +164,17 @@ export function evaluate(f) {
 
   if (!f.previewBaseUrl) gate('private-preview-link', 'blocked', 'COPILOT_PREVIEW_BASE_URL is not configured: private preview ingress has not been approved/configured by the operator');
   else if (!f.previewFetch) gate('private-preview-link', 'fail', 'preview deep link was not verified');
-  else if (!f.previewFetch.ok) gate('private-preview-link', 'fail', `preview deep link check failed: ${f.previewFetch.detail}`);
-  else gate('private-preview-link', 'pass', 'authenticated preview deep link serves this revision');
+  else if (f.previewFetch.status === 'blocked') gate('private-preview-link', 'blocked', `external verification blocker: ${f.previewFetch.detail}`);
+  else if (f.previewFetch.status !== 'pass') gate('private-preview-link', 'fail', `preview deep link check failed: ${f.previewFetch.detail}`);
+  else gate('private-preview-link', 'pass', f.previewFetch.detail);
 
   if (f.ux) {
     const b = f.baseline;
     if (!r?.strictOverflow) gate('ux-overflow', 'fail', 'UX jobs require the strict overflow gate (--ux)');
     else gate('ux-overflow', 'pass', 'no page-level overflow on any route/viewport');
-    if (!b?.report || b.report.role !== 'baseline') gate('ux-before-after', 'fail', 'no baseline ("before") run; use --baseline-ref master');
-    else if (f.mergeBase && b.report.sha !== f.mergeBase) gate('ux-before-after', 'fail', `baseline ${b.report.sha} is not the merge base ${f.mergeBase}`);
+    if (!f.mergeBase) gate('ux-before-after', 'fail', `cannot establish the merge base with origin/master${f.mergeBaseError ? ` (${f.mergeBaseError})` : ''}; fetch origin/master and re-run`);
+    else if (!b?.report || b.report.role !== 'baseline') gate('ux-before-after', 'fail', 'no baseline ("before") run; use --baseline-ref master');
+    else if (b.report.sha !== f.mergeBase) gate('ux-before-after', 'fail', `baseline ${b.report.sha} is not the merge base ${f.mergeBase}`);
     else if (!b.uploads?.items?.length || b.uploads.items.some((i) => !body.includes(i.url))) gate('ux-before-after', 'fail', 'before screenshots are not embedded in the PR');
     else gate('ux-before-after', 'pass', 'before/after screenshots embedded');
   }

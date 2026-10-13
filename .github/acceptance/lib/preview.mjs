@@ -22,8 +22,21 @@ export function validateAssociation({ pr, sha, head, info }) {
   return errors;
 }
 
+// Disk layout: ROOT/matthidinger.github.io/pr-N/FULL_SHA/site/. The URL omits "site" (see previewPrefix).
 export function previewTarget(previewRoot, pr, sha) {
   return path.join(previewRoot, PREVIEW_SITE_DIR, `pr-${pr}`, sha, 'site');
+}
+
+// The preview reader's URL -> file contract, used to prove exported links resolve. Returns null when
+// the URL is outside a revision prefix or would escape it.
+export function readerFile(previewRoot, urlPath) {
+  const m = /^\/([^/]+)\/pr-(\d+)\/([0-9a-f]{40})(\/.*)?$/.exec(urlPath.split(/[?#]/)[0]);
+  if (!m || m[1] !== PREVIEW_SITE_DIR) return null;
+  const site = previewTarget(previewRoot, Number(m[2]), m[3]);
+  let rest = decodeURIComponent(m[4] || '/');
+  if (rest.endsWith('/')) rest += 'index.html';
+  const file = path.join(site, rest);
+  return file.startsWith(site + path.sep) ? file : null;
 }
 
 export function exportPreview({ runDir, previewRoot }) {

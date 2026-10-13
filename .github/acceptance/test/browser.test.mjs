@@ -10,7 +10,7 @@ import { stagePrefixedSite } from '../lib/rewrite.mjs';
 import { startServer } from '../lib/server.mjs';
 
 const SHA = 'b'.repeat(40);
-const PREFIX = `/matthidinger.github.io/pr-9/${SHA}/site`;
+const PREFIX = `/matthidinger.github.io/pr-9/${SHA}`;
 const ORIGINS = ['https://matthidinger.com'];
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64');
 const CSS = 'body{font:16px sans-serif;color:#222;margin:20px} .ink{height:300px;background:#333} pre{overflow-x:auto}';

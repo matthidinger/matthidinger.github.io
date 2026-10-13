@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { escapingRefs, rewriteCss, rewriteHtml } from '../lib/rewrite.mjs';
 
-const P = '/matthidinger.github.io/pr-7/' + 'a'.repeat(40) + '/site';
+const P = '/matthidinger.github.io/pr-7/' + 'a'.repeat(40);
 const O = ['https://matthidinger.com', 'https://www.matthidinger.com', 'http://matthidinger.com'];
 
 test('rewrites production and root-relative URLs into the prefix', () => {

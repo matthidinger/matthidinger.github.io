@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Publish an accepted deliverable run into the runtime-provided preview volume:
-//   COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site
+//   COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site (disk), served at URL /matthidinger.github.io/pr-N/FULL_SHA/
 // Requires a clean tree whose HEAD is the PR head. Never overwrites a published revision.
 import path from 'node:path';
 import { exportPreview, prInfo, validateAssociation } from '../lib/preview.mjs';

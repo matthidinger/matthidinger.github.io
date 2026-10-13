@@ -31,10 +31,12 @@ export function isFullSha(s) {
   return typeof s === 'string' && /^[0-9a-f]{40}$/.test(s);
 }
 
+// URL prefix of a preview. The reader maps URL /matthidinger.github.io/pr-N/FULL_SHA/... to disk
+// ROOT/matthidinger.github.io/pr-N/FULL_SHA/site/...; "site" is a disk directory, never a URL segment.
 export function previewPrefix(pr, sha) {
   if (!Number.isInteger(pr) || pr < 0) throw new Error(`invalid PR number: ${pr}`);
   if (!isFullSha(sha)) throw new Error(`invalid full commit SHA: ${sha}`);
-  return `/${PREVIEW_SITE_DIR}/pr-${pr}/${sha}/site`;
+  return `/${PREVIEW_SITE_DIR}/pr-${pr}/${sha}`;
 }
 
 export function sha256(buf) {
