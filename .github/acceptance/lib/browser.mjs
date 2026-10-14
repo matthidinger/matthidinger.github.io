@@ -57,6 +57,8 @@ function inspectPage(spec) {
   const text = document.body ? document.body.innerText : '';
   const counts = {};
   for (const [sel] of Object.entries(spec.selectors || {})) counts[sel] = [...document.querySelectorAll(sel)].filter(visible).length;
+  // Upper bounds count every match, visible or not (e.g. nav items folded into a hidden menu).
+  for (const [sel] of Object.entries(spec.maxSelectors || {})) counts[sel] = document.querySelectorAll(sel).length;
   const sheets = [...document.styleSheets].filter((s) => {
     try { return s.href && new URL(s.href).origin === location.origin && s.cssRules.length > 0; } catch { return false; }
   }).length;
@@ -129,13 +131,15 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
     await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => warnings.push('network did not go idle within 15s'));
     await page.evaluate(() => document.fonts.ready.then(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))));
 
-    const info = await page.evaluate(inspectPage, { selectors: route.selectors });
+    const info = await page.evaluate(inspectPage, { selectors: route.selectors, maxSelectors: route.maxSelectors });
     const assertions = [];
     const assert = (name, ok, detail) => { assertions.push({ name, ok, detail }); if (!ok) failures.push(`${name}: ${detail}`); };
     if (route.title) assert('title', info.title.includes(route.title), `expected "${route.title}" in "${info.title}"`);
     if (route.h1) assert('h1', info.h1.some((h) => h === route.h1), `expected visible h1 "${route.h1}", got ${JSON.stringify(info.h1)}`);
     for (const t of route.text || []) assert(`text "${t}"`, info.text.includes(t), info.text.includes(t) ? 'present' : 'missing');
+    for (const t of route.absentText || []) assert(`absent text "${t}"`, !info.text.includes(t), info.text.includes(t) ? 'present' : 'absent');
     for (const [sel, min] of Object.entries(route.selectors || {})) assert(`selector ${sel} >= ${min}`, info.counts[sel] >= min, `found ${info.counts[sel]}`);
+    for (const [sel, max] of Object.entries(route.maxSelectors || {})) assert(`selector ${sel} <= ${max}`, info.counts[sel] <= max, `found ${info.counts[sel]}`);
     assert('visible text', info.textLength >= (route.minText || 100), `${info.textLength} chars`);
     assert('site stylesheet loaded', info.sheets > 0, `${info.sheets} same-origin stylesheets with rules`);
     assert('images loaded', info.brokenImages.length === 0, info.brokenImages.length ? info.brokenImages.slice(0, 5).join(', ') : 'all same-origin images decoded');
@@ -153,9 +157,37 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(path.join(outDir, file), png);
 
+    const interactions = [];
+    for (const step of route.interactions || []) {
+      if (step.viewports && !step.viewports.includes(viewport.name)) continue;
+      const name = `interaction ${step.name || step.click}`;
+      try {
+        await page.goto(url, { waitUntil: 'load' });
+        await page.evaluate(() => document.fonts.ready);
+        const target = page.locator(step.click).locator('visible=true').first();
+        if (step.expectPath) {
+          const [nav] = await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), target.click()]);
+          const got = new URL(page.url()).pathname;
+          const ok = got === prefix + step.expectPath && nav && nav.status() === 200;
+          interactions.push({ name, ok, detail: `navigated to ${got.replace(prefix, '') || '/'} (${nav ? nav.status() : 'no response'})` });
+          assert(name, ok, `expected ${step.expectPath}, navigated to ${got.replace(prefix, '') || '/'} (${nav ? nav.status() : 'no response'})`);
+        } else if (step.expectVisible) {
+          await target.click();
+          const ok = await page.locator(step.expectVisible).first().waitFor({ state: 'visible', timeout: 5000 }).then(() => true, () => false);
+          interactions.push({ name, ok, detail: ok ? `${step.expectVisible} visible` : `${step.expectVisible} not visible` });
+          assert(name, ok, ok ? 'visible' : `${step.expectVisible} not visible after click`);
+        } else {
+          throw new Error('interaction needs expectPath or expectVisible');
+        }
+      } catch (e) {
+        interactions.push({ name, ok: false, detail: e.message.split('\n')[0] });
+        failures.push(`${name}: ${e.message.split('\n')[0]}`);
+      }
+    }
+
     return {
       route: route.id, path: route.path, purpose: route.purpose, viewport: viewport.name,
-      status: resp ? resp.status() : null, h1: info.h1, counts: info.counts, assertions,
+      status: resp ? resp.status() : null, h1: info.h1, counts: info.counts, assertions, interactions,
       overflowPx: info.overflowPx, wideBlocks: info.wideBlocks, blocks: info.blocks,
       externalBlocked: [...external].sort(),
       screenshot: { file, sha256: sha256(png), width: viewport.width, height, truncated: info.scrollHeight > MAX_SHOT_HEIGHT, inkRatio: Number(ink.toFixed(4)) },

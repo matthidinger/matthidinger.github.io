@@ -23,7 +23,7 @@ These steps were written for **Visual Studio 2010 Beta 2**, so they may change s
 Open the EDMX Designer, right-click on the design surface, and select “Add Code Generation Item…”
 
 ![](/images/subtext-content/CustomizingtheEntityFrameworkT4Templates_DCCE/addcodegenitem_thumb.png)
- 
+
 
 ### Step 2
 
@@ -42,7 +42,6 @@ Open the newly created EfModel.tt file.
 
 From here, you can customize the template yourself (instructions are provided in Step 3b, or simply download the T4 template that I have provided in Step 3a)
 
- 
 
 #### Step 3a – Download the corrected template
 
@@ -51,7 +50,6 @@ From here, you can customize the template yourself (instructions are provided in
 3.  Change the token “YOUR\_EDMX\_FILE.edmx” to be the file name of you actual edmx file
 4.  Proceed to step 4
 
- 
 
 #### Step 3b - Customize your template manually
 
@@ -84,6 +82,4 @@ Open the EDMX designer and Ctrl+S to save it.
 If all goes correctly, the T4 template should kick into action and a new .cs file should be created. This .cs file includes the actual generated code based on your EDMX model and your T4 template. As always with generated code don’t attempt to modify it directly, since the next time you (or someone else) saves the edmx file it will overwrite any changes you made.
 
 Lastly, one final benefit of all of this is that you can make any changes in the T4 template to fully customize how your entities are generated from now on.
-
- 
 

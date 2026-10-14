@@ -24,7 +24,6 @@ If you enjoyed the talk and would like to check out the code for the Real-world 
 
 #### <https://github.com/matthidinger/Build2013RealWorldStocks>
 
- 
 
 Introspective
 -------------
@@ -34,6 +33,4 @@ This was my first talk at a major conference. It’s funny watching yourself on 
 That said, any other feedback on the presentation would be greatly appreciated! Was the pace ok? I’ve already received feedback that I was both too fast, and too slow, so this will definitely vary depending on one’s own comfort level with the technologies discussed, but I’d love any additional comments.
 
 Thanks for watching!
-
- 
 

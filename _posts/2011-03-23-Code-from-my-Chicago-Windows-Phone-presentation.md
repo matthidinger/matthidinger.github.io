@@ -18,5 +18,3 @@ It should serve as a pretty good reference application for how to implement the 
 
 ### [Download the Code!](https://buswatchapp.com/downloads/caliburnwp7.zip)
 
- 
-

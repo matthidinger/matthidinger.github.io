@@ -100,5 +100,3 @@ Example using a DataTable
 string result = table.AsEnumerable().ToDelimitedString(row => (string)row["ProductName"]);
 ```
 
- 
-

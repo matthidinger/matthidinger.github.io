@@ -11,7 +11,6 @@ header:
 
 The Html helper in ASP.NET MVC 2 comes with some handy methods called “DisplayFor” and “EditFor” – please see [Scott Gu’s](https://weblogs.asp.net/scottgu/archive/2009/07/31/asp-net-mvc-v2-preview-1-released.aspx) article if you are not familiar with these new features. Long story short, they provide an ASP.NET Dynamic Data-like mechanism which uses reflection and templating to render a display form or an edit form. It works great for primitive properties like String, DataTime, Int32, as well as complex types like “Address.” However, as I was playing with them, I came across a rather funny exception (excusable, I suppose, due to the preview state of MVC 2 at the time of this writing).
 
- 
 
 > #### *This exception should never occur.*
 >
@@ -63,7 +62,6 @@ public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html
 }
 ```
 
- 
 
 ### Usage and Output
 
@@ -73,7 +71,4 @@ public static string DisplayForMany<TModel, TValue>(this HtmlHelper<TModel> html
 ```
 
 ![](https://www.matthidinger.com/contentimages/CreatingaHtm.DisplayForManyHelperforMVC2_1164D/image_thumb.png)
-
-
- 
 

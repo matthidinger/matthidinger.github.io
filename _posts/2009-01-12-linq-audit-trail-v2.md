@@ -20,8 +20,7 @@ header:
 > -   Who made the change?
 > -   When did it occur?
 
-### 
-Usage
+### Usage
 
 Simply define your audit definitions at any time before calling SubmitChanges();
 
@@ -43,11 +42,8 @@ Please see the CodePlex project for updates and new releases. **[DoddleAudit](ht
 -   Built-in support for auditing across relationships.
     -   E.g., assume you want to audit a Contacts table which has a 1-to-many relationship to the Addresses table, thus allowing any number of Addresses to each Contact. Well ideally you want to show these Address audits on your ContactDetails.aspx, which is exactly what you can see in the screenshot below. 
         ![](/images/subtext-content/LINQAuditTrailv2_B491/image_thumb.png)
-
-
-Ability to define custom “audit property resolvers” to override the default auditing mechanism for properties that you specify.
-
--   For example, notice in the above screenshot that “Address Type” has a value of “1” since that is how the data is stored in the table. This number does little good for the end user, so in V2 it is now possible to customize specific properties as needed. I will explain more details about this soon. Below I am overriding the default auditing of the Product.CategoryID property by querying the category by looking up the CategoryID, returning the Category.CategoryName, and renaming the audit field to “Category” since “CategoryID” is no longer accurate.
+-   Ability to define custom “audit property resolvers” to override the default auditing mechanism for properties that you specify.
+    -   For example, notice in the above screenshot that “Address Type” has a value of “1” since that is how the data is stored in the table. This number does little good for the end user, so in V2 it is now possible to customize specific properties as needed. I will explain more details about this soon. Below I am overriding the default auditing of the Product.CategoryID property by querying the category by looking up the CategoryID, returning the Category.CategoryName, and renaming the audit field to “Category” since “CategoryID” is no longer accurate.
 
 ```csharp
 public class ProductAuditResolver : AuditPropertyResolver
@@ -60,7 +56,6 @@ public class ProductAuditResolver : AuditPropertyResolver
    
 ```
 
-### 
 
 ### Instructions
 
@@ -70,12 +65,11 @@ public class ProductAuditResolver : AuditPropertyResolver
         ![](/images/subtext-content/LINQAuditTrailv2_B491/image_thumb_3.png)
 
 
-3.  Open your DBML and click in the designer surface. In the property pane you will need to change the **Base Class** property of your generated DataContext to be **Doddle.Linq.Audit.LinqToSql.AuditableDataContext 
+3.  Open your DBML and click in the designer surface. In the property pane you will need to change the **Base Class** property of your generated DataContext to be **Doddle.Linq.Audit.LinqToSql.AuditableDataContext**  
     ![](/images/subtext-content/LINQAuditTrailv2_B491/image_thumb_4.png)
 
-    **
 4.  Lastly you will need to create a partial DataContext class to wire up the auditing infrastructure to match your database schema. Add a new Class file to your project and insert the following code. Customize if necessary to match your auditing schema.
-    [](https://11011.net/software/vspaste)[](https://11011.net/software/vspaste)
+    
 
     ```csharp
     public partial class NorthwindEntitiesDataContext
@@ -118,6 +112,4 @@ public class ProductAuditResolver : AuditPropertyResolver
 1.  I have not finished the support for the Entity Framework implementation of the auditing yet. If anyone more experienced with EF is out there downloading this source please let me know if you want to help complete it.
 
 Hopefully that is enough to get anyone started with the code. I am certainly looking for feedback for any suggestions, problems, or improvements. After some more unit testing and perhaps some slight refinements to the API I will remove the “beta” moniker.
-
-
 

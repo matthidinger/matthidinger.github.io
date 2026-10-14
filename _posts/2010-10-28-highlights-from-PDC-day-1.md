@@ -10,7 +10,7 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg
 ---
-### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/d9e167c9f174_135B1/Microsoft-PDC-2010_thumb.jpg)
 Portable Library Projects
 
 At MIX 10 Microsoft announced a rather modest code-sharing technique to allow Silverlight and .NET apps to share a small subset of System.\* libraries. Well today at PDC Shawn Burke had a 60-minute session called “3-screen coding – Sharing code between Windows Phone, Silverlight, and .NET.” He unveiled a new Class Library project type called a “Portable Library” which can be directly referenced by any type of project. The obvious goal here is to share your core business logic between your various client-side applications. Thankfully Visual Studio will even trim IntelliSense within a Portable Library project to only APIs which have been specifically defined as portable between all application types.
@@ -19,7 +19,6 @@ Release date for Portable Library projects is H1 2011
 
 [PDC Video: 3-Screen Coding](https://bit.ly/aUlqkU)
 
- 
 
 ### Async Programming Improvements
 
@@ -31,7 +30,6 @@ Probably the most popular announcement today was “The Future of C\# and VB” 
 
 [Eric Lippert is starting a series on the enhancements](https://blogs.msdn.com/b/ericlippert/archive/2010/10/28/asynchrony-in-c-5-part-one.aspx)
 
- 
 
 ### Windows Phone Profiler
 
@@ -39,13 +37,10 @@ The new Windows Phone Profiler was probably my favorite announcement. As of this
 
 [Covered in the keynote](https://bit.ly/akeK7Q)
 
- 
 
 ### Azure Improvements
 
 I don’t use Azure right now, but I think I’ll be looking into it more soon. The coolest feature that I saw demo'd was RDP access to the virtual machine. You also get a full IIS Manager, as well as a number of other improvements that I probably can’t full appreciate until I use them or was forced to suffer through the hardships that the early adopters had to deal with without them.
 
 [Covered in the keynote](https://bit.ly/akeK7Q)
-
- 
 

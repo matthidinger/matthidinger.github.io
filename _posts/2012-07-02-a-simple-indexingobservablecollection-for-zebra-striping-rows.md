@@ -44,7 +44,6 @@ public interface IIndexable
 }
 ```
 
- 
 
 ### Tweaking your model
 
@@ -74,6 +73,4 @@ public class ProductRow : IIndexable
     }
 }
 ```
-
- 
 

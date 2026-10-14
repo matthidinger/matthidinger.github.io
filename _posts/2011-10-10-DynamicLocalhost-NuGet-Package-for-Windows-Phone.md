@@ -55,7 +55,6 @@ The rest is up to you, to use the DynamicLocalhost class however you see fit.
 
 For me, in my WP7 projects I create a static ApplicationSettings class to use throughout the app. The comments below hopefully explain how it works. The only source code you ever check in says “localhost” – and will be dynamically replaced at compile-time to the actual developer’s machine name. This means that you are free to check in everything, get latest anytime you want, and never have to worry about someone accidently checking in their real machine’s URL, hampering your workflow.
 
- 
 
 ```csharp
 public static class ApplicationSettings
@@ -87,6 +86,4 @@ I’m also very new at PowerShell and would not be surprised if I wrote some of 
 -------------------------------------------------------------------------------------
 
 It’s using Mercurial, so fork it, and be sure to send me pull requests if you write something awesome!
-
- 
 

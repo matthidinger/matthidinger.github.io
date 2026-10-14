@@ -1,4 +1,26 @@
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
+<script>
+  (function () {
+    /* The theme's greedy nav restores only one folded link per call, so a single large resize
+       (rotation, maximise) or late font load can leave links stuck in the overflow menu.
+       Re-run it until the folded set is stable. */
+    function settleNav() {
+      if (typeof updateNav !== 'function' || typeof breaks === 'undefined') return;
+      for (var i = 0; i < 10; i++) {
+        var before = breaks.length;
+        updateNav();
+        if (breaks.length === before) break;
+      }
+    }
+    window.addEventListener('load', settleNav);
+    window.addEventListener('resize', settleNav);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(settleNav);
+    /* Let keyboard users scroll code blocks that are wider than the column. */
+    document.querySelectorAll('.page__content pre').forEach(function (pre) {
+      if (pre.scrollWidth > pre.clientWidth) pre.setAttribute('tabindex', '0');
+    });
+  })();
+</script>
 
 {% include analytics.html %}
 {% include /comments-providers/scripts.html %}

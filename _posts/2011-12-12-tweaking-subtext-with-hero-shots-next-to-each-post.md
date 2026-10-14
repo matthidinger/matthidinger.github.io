@@ -23,9 +23,9 @@ The idea is pretty simple: when viewing a list of posts (the home page, a specif
 
 As for implementation I wanted to allow some basic configuration of the hero shot from within Live Writer (or whatever you use to author posts). It goes something like this:
 
-1.  Find an &lt;img id=”hero” /&gt; within each post and if found, float it inline with the PostText
-2.  If no images have that ID, then grab the first &lt;img/&gt; and float it inline with the PostText
-3.  If I want to entirely disable a Hero Shot for a post then I just add a &lt;div id=”no-hero” /&gt; into the post body
+1.  Find an `<img id="hero" />` within each post and if found, float it inline with the PostText
+2.  If no images have that ID, then grab the first `<img/>` and float it inline with the PostText
+3.  If I want to entirely disable a Hero Shot for a post then I just add a `<div id="no-hero" />` into the post body
 
 Cool, what’s the tweak?
 -----------------------
@@ -89,7 +89,6 @@ private static void BindHeroShot(RepeaterItemEventArgs e, Entry entry)
 
 That’s actually all that had to be changed in Subtext. The rest of the changes take place in your current Skin.
 
- 
 
 #### Subtext.Web\\Skins\\{YourSkin}\\EntryList.ascx
 
@@ -132,6 +131,4 @@ Summary
 -------
 
 All in all pretty small tweaks and I actually like how it turned out. I think images next to the posts make it a lot easier to scan topics as I’m scrolling down the page. If you agree and are using Subtext then hopefully this post will make it easy to add to your blog!
-
- 
 

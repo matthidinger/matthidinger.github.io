@@ -30,8 +30,6 @@ Naturally, the best way to answer the questions above is to turn them into a tes
 ![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb.png)
 
 
- 
-
 #### Visual Studio 2010 (.NET 4)
 
 ![](/images/subtext-content/ExploringC4Covariancewiththeisandaskeywo_FE57/image_thumb_3.png)
@@ -59,6 +57,4 @@ It would have to be declared as List&lt;in out T&gt; – which is not possible f
 2.  IList&lt;in out T&gt; is a syntax error. It would mean the same thing as it always has: IList&lt;T&gt; already means that it can be used as inputs and outputs.
 
 Hopefully this quick introduction to generic variance was helpful. I am by no means an expert on this subject, so I encourage you to read Eric Lippert’s series above if this is something you find interesting!
-
- 
 

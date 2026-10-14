@@ -23,5 +23,3 @@ Register the Model Binder Provider just as you normally would register Model Bin
 
 Given the example above, if I’m binding to a type that that **inherits from ILoadProvider** my LoadProviderModelBinder will still handle the binding.
 
- 
-

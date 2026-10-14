@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 // preToolUse command-hygiene guard (not a security sandbox).
-// Denies (1) shell commands that combine a directory change with parent-directory (..) paths, because
-// their effective paths are ambiguous, (2) inline node scripts, and (3) absolute-looking node arguments,
-// because URL routes in shell text are indistinguishable from filesystem paths. It never allows or grants
-// anything: for every other input it prints nothing, leaving the normal permission flow unchanged.
+// Denies ambiguous directory changes, inline node scripts, absolute-looking node arguments and
+// absolute executables that can turn routine probes into filesystem-approval prompts.
+// It never grants permissions; other inputs leave the normal permission flow unchanged.
 import { pathToFileURL } from 'node:url';
 
 const SHELL_TOOLS = new Set(['bash', 'shell', 'powershell', 'pwsh', 'sh']);
@@ -22,19 +21,28 @@ export const ABSOLUTE_NODE_REASON = 'Command-hygiene guard: node arguments begin
   + 'Use checkout-relative file arguments. Put non-filesystem URL routes in a checkout-local helper/configuration, '
   + 'or pass a named route ID from routes.json instead. No additional filesystem permission is granted.';
 
+export const ABSOLUTE_EXECUTABLE_REASON = 'Command-hygiene guard: absolute executable paths require separate filesystem approval. '
+  + 'Invoke installed tools by name through PATH (e.g. `chromium --version` or `nas-pages-build --help`), '
+  + 'and use checkout-relative paths for repository scripts. Do not request wider filesystem access for tool discovery.';
+
 const NODE_BIN_RE = /^(?:\S*\/)?node(?:js)?(?:\.exe)?$/i;
 const PREFIX_WORDS = new Set(['env', 'exec', 'time', 'command', 'nohup', 'nice', 'sudo']);
 const EVAL_FLAG_RE = /^(?:-[a-z]*[ep][a-z]*|--eval|--print)(?:=.*)?$/;
 const VALUE_FLAGS = new Set(['-r', '--require', '--import', '--loader', '--experimental-loader', '-C', '--conditions', '--input-type', '--env-file']);
 
-function* nodeArguments(command) {
+function* commandWords(command) {
   for (const segment of command.split(/[;&|\n`]|\$\(|\(/)) {
     const words = (segment.match(/(?:[^\s"'\\]|\\.|"(?:\\.|[^"\\])*"|'[^']*')+/g) || [])
       .map((word) => word.replace(/^(['"])(.*)\1$/s, '$2'));
     let i = 0;
     while (i < words.length && (PREFIX_WORDS.has(words[i]) || /^[A-Za-z_][A-Za-z0-9_]*=/.test(words[i]))) i++;
-    if (!NODE_BIN_RE.test(words[i] || '')) continue;
-    yield words.slice(i + 1);
+    if (i < words.length) yield words.slice(i);
+  }
+}
+
+function* nodeArguments(command) {
+  for (const words of commandWords(command)) {
+    if (NODE_BIN_RE.test(words[0])) yield words.slice(1);
   }
 }
 
@@ -57,6 +65,13 @@ export function hasAbsoluteNodeArgument(command) {
   return false;
 }
 
+export function hasAbsoluteExecutable(command) {
+  for (const words of commandWords(command)) {
+    if (words[0].startsWith('/')) return true;
+  }
+  return false;
+}
+
 export function decide(input) {
   let data = input;
   if (typeof data === 'string') { try { data = JSON.parse(data); } catch { return null; } }
@@ -69,6 +84,7 @@ export function decide(input) {
   if (CD_RE.test(command) && PARENT_RE.test(command)) return { permissionDecision: 'deny', permissionDecisionReason: REASON };
   if (hasInlineNode(command)) return { permissionDecision: 'deny', permissionDecisionReason: INLINE_NODE_REASON };
   if (hasAbsoluteNodeArgument(command)) return { permissionDecision: 'deny', permissionDecisionReason: ABSOLUTE_NODE_REASON };
+  if (hasAbsoluteExecutable(command)) return { permissionDecision: 'deny', permissionDecisionReason: ABSOLUTE_EXECUTABLE_REASON };
   return null;
 }
 

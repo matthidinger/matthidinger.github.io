@@ -13,6 +13,3 @@ As you can see from the screenshot, the dialog in Windows 7 *finally* tells the 
 
 ![](/images/subtext-content/MuchbetterFileInUsedialoginWindows7_901C/filelockeddialog_thumb.png)
 
-
- 
-

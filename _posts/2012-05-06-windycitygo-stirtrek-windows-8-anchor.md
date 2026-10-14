@@ -28,20 +28,8 @@ And now that my speaking gigs are winding down I can finally get back to that se
 
 #### [GET THE CODE](https://realworldstocks.codeplex.com/)
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><p></p></td>
-<td><a href="https://windycitygo.org/"><img src="https://lh4.googleusercontent.com/-PQvNSqMlV8s/T4_NVSoBhrI/AAAAAAAAORk/twmdX24iHG4/s839/2012_WindyCityGo_0170.jpg" width="486" height="325" /></a></td>
-</tr>
-</tbody>
-</table>
+<p><a href="https://windycitygo.org/"><img src="https://lh4.googleusercontent.com/-PQvNSqMlV8s/T4_NVSoBhrI/AAAAAAAAORk/twmdX24iHG4/s839/2012_WindyCityGo_0170.jpg" width="486" height="325" /></a></p>
 
- 
 
 ### Windows 8 Anchor at Navy Pier
 
@@ -53,12 +41,8 @@ Since Clarity had been using the consumer preview tools to build a few metro-sty
 
 Overall this was a very exciting event with nearly 400 people eager to see what’s coming with windows 8 and this new metro design language.
 
-|     |                                                                                                                                                                                                                                                                                                                           |
-|-----|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png)
- |
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/eventPics3_thumb.png)
 
-###  
 
 ### StirTrek
 
@@ -72,12 +56,8 @@ That said, thankfully I did not have to compete with Scott Hansleman in my time 
 
 #### [GET THE CODE](https://realworldstocks.codeplex.com/)
 
-|     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-----|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg)
- |
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/9e7703fc2670_A43F/389594_10150889640849224_546684223_11989723_2067556539_n%5B1%5D_thumb.jpg)
 
-###  
 
 ### ThatConference
 
@@ -89,6 +69,4 @@ This one is coming up soon and I’m really pumped for it. Be sure to check it o
 > Spend **3** days, with **1000** of your fellow campers in **125** sessions geeking out on everything **Mobile, Web** and **Cloud** at a giant waterpark.
 
 With over [125 sessions](https://thatconference.com/Sessions) to choose from, your head will eventually start to overheat. Cool off in one of the many nearby pools, because unlike your traditional technology conference, you will be camping at a giant indoor waterpark. Be sure to follow us on [twitter](https://twitter.com/thatConference/) and check us out on [facebook](https://facebook.com/thatconference/). Then start practicing your cannon balls.
-
- 
 

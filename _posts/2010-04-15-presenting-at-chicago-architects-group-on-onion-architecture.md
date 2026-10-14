@@ -33,11 +33,8 @@ Onion architecture exploits well-known patterns like dependency injection to pro
 
 Followed by open forum
 
- 
 
 CAG site: <https://chicagoarchitectsgroup.com/>
 
 Registration: <https://chicagoarchitectsgroup.eventbrite.com/>
-
- 
 

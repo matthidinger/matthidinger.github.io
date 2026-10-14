@@ -12,7 +12,7 @@ header:
 This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
+{: .series-link}
 
 Choices
 -------
@@ -70,7 +70,7 @@ Then navigate to the **RealWorldStocks.Client.Core\\Models** folder and select t
 
 Notice how the files have little “shortcut” overlays on their icons.
 
-##### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-5-The-Panorama_12221/image_thumb_3.png)
 
 
 ### step 3: Return your data as JSON from the MVC controller
@@ -200,7 +200,6 @@ INFO: HTTP Request: https://legacy/RealWorldStocks.Web/Stocks/GetSnapshots?symbo
 INFO: HTTP Response: [{"Symbol":"MSFT","Company":"Microsoft Corpora","OpeningPrice":27.08,"LastPrice":27.19,"DaysChange":0.03,"DaysChangePercentFormatted":"+0.11%","DaysChangeFormatted":"+0.03","DaysRangeMin":0,"DaysRangeMax":0,"Volume":56897792,"PreviousClose":27.16}]
 ```
 
-####  
 
 ### step 5: Create the client-side API for communicating with the server
 
@@ -296,7 +295,6 @@ private IEnumerable<IResult> UpdateWatchList()
 }
 ```
 
-###  
 
 Summary
 -------
@@ -306,7 +304,5 @@ That covered a lot of stuff. My hope is that it wasn’t too daunting or overwhe
 ### Want some more RealWorldWPDev?
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
-
-
+{: .series-link}
 

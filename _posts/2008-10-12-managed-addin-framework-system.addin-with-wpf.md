@@ -77,7 +77,7 @@ public interface ICouchPotatoAddInContract : IContract
 }
 ```
 
-[](https://11011.net/software/vspaste)
+
 
 -   For now, don’t worry about INativeHandleContract. This is an interface that the MAF team added to support much better UI passing between isolation boundaries (AppDomains). This interface allows an AddIn to very easily pass direct UI elements to the host application, which is very important for my application.
 -   Notice that MAF requires two rules for your AddIn Contracts: first you must derive from the **IContact** interface from System.AddIn.Contract assembly, as well as add the **\[AddInContract\]** attribute also from the same assembly.
@@ -102,8 +102,6 @@ public interface ICouchPotatoAddInContract : IContract
 
 ![](/images/subtext-content/ManagedAddInFrameworkSystem.AddInwithWPF_B14E/image_thumb_6.png)
 
-
-###  
 
 ### Step 2 – Create our Host WPF Application
 
@@ -165,7 +163,6 @@ public Window1()
 }
 ```
 
-###  
 
 ### Step 3 – Create our first AddIn
 
@@ -200,7 +197,7 @@ For this last step we are going to create a fake PhotoGallery AddIn.
 </UserControl>
 ```
 
--   [](https://11011.net/software/vspaste)Lastly, create a the WeatherAddIn.cs file
+-   Lastly, create a the WeatherAddIn.cs file
 
     -   Implement the ICouchPotatoAddIn interface
     -   Add the \[AddIn\] attribute to describe the AddIn.
@@ -245,12 +242,9 @@ With any luck, hopefully you are able to run your host application and find the 
 ![](/images/subtext-content/ManagedAddInFrameworkSystem.AddInwithWPF_B14E/image_thumb_11.png)
 
 
- 
-
 ### Resources
 
 -   [Excellent Daniel Moth screencast on MAF](https://channel9.msdn.com/posts/DanielMoth/Managed-AddIn-Framework/ "https://channel9.msdn.com/posts/DanielMoth/Managed-AddIn-Framework/")
 -   [Managed AddIn Framework at CodePlex](https://www.codeplex.com/clraddins "https://www.codeplex.com/clraddins")
 -   [Pipline Builder](https://www.codeplex.com/clraddins/Release/ProjectReleases.aspx?ReleaseId=9222 "https://www.codeplex.com/clraddins/Release/ProjectReleases.aspx?ReleaseId=9222")
-
 

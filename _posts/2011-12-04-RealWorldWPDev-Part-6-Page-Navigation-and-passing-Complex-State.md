@@ -12,7 +12,7 @@ header:
 This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
+{: .series-link}
 
 Navigation Basics
 -----------------
@@ -30,7 +30,7 @@ NavigationService.Navigate(new Uri("/Views/ProductDetails.xaml?ProductID=5&Produ
 
 As you can see, if you need to pass parameters to the page you’re navigating to, you use query string values, again exactly how you would write a web application.
 
-### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/b44afa443a77_8012/SNAGHTML1dfd0d9f_thumb.png)
 
 
 In the first image above we have a ListBox of Stock Symbols. When the user clicks on the MSFT item, we want to navigate to the StockDetailsView.xaml, and tell it which Symbol was clicked on. What we are looking to achieve is something along these lines.
@@ -41,7 +41,7 @@ NavigationService.Navigate(new Uri("/Views/StockDetailsView.xaml?Symbol=MSFT"));
 
 ### Accessing QueryString params (the bad way)
 
-Now we are on our new page and need to access the QueryString. So if we open up code-behind for StockDetailsView.xaml.cs we could ** override **OnNavigatedTo**, and access the **NavigationContext.QueryString** dictionary to pull out the params that were passed in.
+Now we are on our new page and need to access the QueryString. So if we open up code-behind for StockDetailsView.xaml.cs we could override **OnNavigatedTo**, and access the **NavigationContext.QueryString** dictionary to pull out the params that were passed in.
 
 ```csharp
 public partial class StockDetailsView : PhoneApplicationPage
@@ -266,12 +266,9 @@ If you want to dive more into using CM with Windows Phone please check out the f
 
 [Caliburn Docs: All About Actions](https://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation "https://caliburnmicro.codeplex.com/wikipage?title=All%20About%20Actions&referringTitle=Documentation")
 
- 
 
 ### Want some more RealWorldWPDev?
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
-
-
+{: .series-link}
 

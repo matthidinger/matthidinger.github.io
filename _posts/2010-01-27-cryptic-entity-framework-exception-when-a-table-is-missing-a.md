@@ -25,5 +25,3 @@ Finally, open your EDMX, select the Entity, and **Update Model from Database…*
 
 All set, now back to business.
 
- 
-

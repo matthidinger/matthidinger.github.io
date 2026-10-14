@@ -37,7 +37,6 @@ IEnumerable<ICacheEntity> ICacheEntity.GetCacheDependencyItems()
 }
 ```
 
- 
 
 ### Bonus Protip
 
@@ -46,6 +45,4 @@ I actually stumbled onto something small but nice while reading the Oxite code. 
 ```csharp
 IEnumerable<Product> products = Enumerable.Empty<Product>;
 ```
-
- 
 

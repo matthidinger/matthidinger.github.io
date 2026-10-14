@@ -12,15 +12,10 @@ header:
 ---
 DoddleReport automatically generates tabular reports from any IEnumerable datasource. Out of the box it can render reports to Excel, PDF, HTML, and CSV – fully pluggable of course. I designed the project to provide reporting output over the LINQ queries we had already written for the application, but maybe you can find other uses for it.
 
- 
 
 ### So what does it generate?
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
+<table class="layout-grid">
 <tbody>
 <tr class="odd">
 <td><h3 id="excel-report">Excel Report</h3>
@@ -77,7 +72,6 @@ report.TextFields.SubTitle = "This is a sample Doddle Report";
 report.TextFields.Footer = "Copyright 2011 © The Doddle Project";
 ```
 
- 
 
 ### Get Started!
 
@@ -86,8 +80,4 @@ New to DoddleReport?
 -   Look at the [**Building Your First Report**](https://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
 -   Review the [documentation](https://doddlereport.codeplex.com/documentation)
 -   Got NuGet? **Install-Package DoddleReport**
-
- 
-
-
 

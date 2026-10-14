@@ -13,7 +13,7 @@ header:
 This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
+{: .series-link}
 
 Caliburn.Micro
 --------------
@@ -41,8 +41,6 @@ Alternatively you can right-click on both Projects from the Solution Explorer an
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a6c05f249a11_E881/image_thumb%5B19%5D_thumb.png)
 
-
- 
 
 ### Finishing Caliburn Setup
 
@@ -114,11 +112,11 @@ namespace RealWorldStocks.Client.UI.Framework
 }
 ```
 
-####  
 
-8. Since we moved the **AppBoostrapper** into the **RealWorldStocks.Client.UI.Framework** namespace we need to update our **App.xaml**. Paste the following into your **App.xaml**
+{: start="8"}
+8.  Since we moved the **AppBoostrapper** into the **RealWorldStocks.Client.UI.Framework** namespace we need to update our **App.xaml**. Paste the following into your **App.xaml**
 
-```csharp
+```xml
 <Application xmlns="https://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="https://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Framework="clr-namespace:RealWorldStocks.Client.UI.Framework"
@@ -137,7 +135,6 @@ namespace RealWorldStocks.Client.UI.Framework
 </Application>
 ```
 
- 
 
 ### Working around a small NuGet bug
 
@@ -176,16 +173,14 @@ Defines the set of converters used in our project
 
 Defines a set of reusable styles
 
- 
 
 ### ViewModels
 
 ViewModels define the logic for all of our views. They take advantage of XAML’s great binding mechanisms and Caliburn’s ActionMessages to control how our views behave. Later in the series we will deep dive into Views and ViewModels.
 
-To get started, make sure you have a **ViewModels** folder, then right-click and select **New Item…**, add a **Class** file called **HomeViewModel.cs
-**
+To get started, make sure you have a **ViewModels** folder, then right-click and select **New Item…**, add a **Class** file called **HomeViewModel.cs**
 
-``` code
+```csharp
 public class HomeViewModel : Screen
 {
     public HomeViewModel()
@@ -207,11 +202,10 @@ Lastly, you need to update the WMAppManifest to tell it what page should load wh
 
 Open **WMAppManifest.xml** and set the **NavigationPage** to your primary page
 
-``` code
+```xml
 <DefaultTask Name="_default" NavigationPage="Views/HomeView.xaml" />
 ```
 
- 
 
 Run it!
 -------
@@ -230,7 +224,5 @@ If the app exits immediately after launching check the following:
 ### Want some more RealWorldWPDev?
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
-
-
+{: .series-link}
 

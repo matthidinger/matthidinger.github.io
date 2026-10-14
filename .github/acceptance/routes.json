@@ -11,7 +11,9 @@
         "<link rel=\"canonical\" href=\"https://matthidinger.com/talks/\"",
         "href=\"https://matthidinger.com/assets/css/main.css\""
       ],
-      "CNAME": ["matthidinger.com"]
+      "CNAME": [
+        "matthidinger.com"
+      ]
     },
     "mustNotExist": [
       "AGENTS.md",
@@ -25,8 +27,17 @@
     ]
   },
   "viewports": [
-    { "name": "desktop", "width": 1280, "height": 900 },
-    { "name": "mobile", "width": 390, "height": 844, "isMobile": true }
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "isMobile": true
+    }
   ],
   "routes": [
     {
@@ -34,8 +45,12 @@
       "path": "/",
       "purpose": "Home page (timeline layout)",
       "title": "Matt Hidinger",
-      "text": ["Matt Hidinger"],
-      "selectors": { "img.img-circle": 5 },
+      "text": [
+        "Matt Hidinger"
+      ],
+      "selectors": {
+        "img.img-circle": 5
+      },
       "knownPageErrors": [
         {
           "message": "google is not defined",
@@ -49,7 +64,21 @@
       "purpose": "Blog listing (paginated archive)",
       "title": "Blog",
       "h1": "Blog",
-      "selectors": { ".archive__item-title": 5 }
+      "selectors": {
+        ".archive__item-title": 5,
+        ".archive__item .page__meta-item time": 5,
+        "nav.pagination a[rel=\"next\"]": 1
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0
+      },
+      "interactions": [
+        {
+          "name": "blog next page",
+          "click": "nav.pagination a[rel=\"next\"]",
+          "expectPath": "/blog/page2/"
+        }
+      ]
     },
     {
       "id": "talks",
@@ -57,8 +86,13 @@
       "purpose": "Talks page",
       "title": "Talks",
       "h1": "Talks",
-      "text": ["These are talks I"],
-      "minText": 50
+      "text": [
+        "These are talks I"
+      ],
+      "minText": 50,
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0
+      }
     },
     {
       "id": "post-code",
@@ -66,7 +100,23 @@
       "purpose": "Post with many fenced C# code blocks and images",
       "title": "LINQ to SQL Audit Trail",
       "h1": "LINQ to SQL Audit Trail",
-      "selectors": { "pre.highlight": 10, ".page__content img": 5 }
+      "selectors": {
+        "pre.highlight": 10,
+        ".page__content img": 5,
+        "header .page__meta time": 1
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
+      },
+      "interactions": [
+        {
+          "name": "next post",
+          "click": ".post-pager__link--next",
+          "expectPath": "/archive/2008/06/17/synergy-3-desktops-1-keyboard/"
+        }
+      ]
     },
     {
       "id": "post-migrated-code",
@@ -74,15 +124,135 @@
       "purpose": "Migrated post with list-indented and plain code fences",
       "title": "LINQ Audit Trail v2",
       "h1": "LINQ Audit Trail v2 - DoddleAudit",
-      "selectors": { "pre.highlight": 3, "li pre.highlight": 1 }
+      "selectors": {
+        "pre.highlight": 3,
+        "li pre.highlight": 1
+      },
+      "absentText": [
+        "### Usage",
+        "**Doddle"
+      ],
+      "text": [
+        "Usage"
+      ],
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
+      }
     },
     {
       "id": "post-table-images",
       "path": "/archive/2012/12/05/sharing-code-windows-8-and-windows-phone/",
-      "purpose": "Migrated post with HTML/Markdown tables, images and code",
+      "purpose": "Migrated post whose layout tables became images/paragraphs; code, images and a former setext heading",
       "title": "Sharing Code: Windows 8 and Windows Phone",
       "h1": "Sharing Code: Windows 8 and Windows Phone",
-      "selectors": { ".page__content table": 2, ".page__content img": 6, "pre.highlight": 2 }
+      "selectors": {
+        ".page__content img": 6,
+        "pre.highlight": 2,
+        ".page__content h3#finally-above-all-else": 1
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
+        ".page__content table:not(.layout-grid)": 0
+      },
+      "absentText": [
+        "**",
+        "###"
+      ]
+    },
+    {
+      "id": "blog-page-2",
+      "path": "/blog/page2/",
+      "purpose": "Blog listing page 2: paginator links back to /blog/ (not the home timeline) and on to page 3",
+      "title": "Blog - Matt Hidinger - Page 2",
+      "h1": "Blog",
+      "selectors": {
+        ".archive__item-title": 5,
+        "nav.pagination a[aria-current=\"page\"]": 1
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0
+      },
+      "interactions": [
+        {
+          "name": "paginator previous",
+          "click": "nav.pagination a[rel=\"prev\"]",
+          "expectPath": "/blog/"
+        },
+        {
+          "name": "paginator next",
+          "click": "nav.pagination a[rel=\"next\"]",
+          "expectPath": "/blog/page3/"
+        }
+      ]
+    },
+    {
+      "id": "post-layout-grid",
+      "path": "/archive/2011/12/07/Transform-your-LINQ-queries-into-ExcelPDF-reports-with-DoddleReport-1/",
+      "purpose": "Migrated two-column HTML layout table rendered as a responsive grid; dead CodePlex thumbnails replaced with the archived local copies",
+      "title": "Transform your LINQ queries into Excel/PDF reports with DoddleReport 1.2",
+      "h1": "Transform your LINQ queries into Excel/PDF reports with DoddleReport 1.2",
+      "selectors": {
+        "table.layout-grid": 1,
+        "table.layout-grid img": 6,
+        ".page__content img": 7
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
+      },
+      "absentText": [
+        "**"
+      ]
+    },
+    {
+      "id": "post-image-layout",
+      "path": "/archive/2010/03/25/share-your-resharper-templates-across-all-your-dev-machines/",
+      "purpose": "Former Markdown layout table converted to floated screenshots with captions in prose",
+      "title": "Share your ReSharper templates across all your dev machines",
+      "h1": "Share your ReSharper templates across all your dev machines",
+      "selectors": {
+        ".page__content img": 4
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
+        ".page__content table": 0
+      },
+      "absentText": [
+        "| ---"
+      ]
+    },
+    {
+      "id": "post-series",
+      "path": "/archive/2011/10/16/RealWorldWPDev-Part-3-Caliburn-Micro-and-Application-Infrastructure/",
+      "purpose": "Series post: setext series links are links (not h1), code fences have correct languages, numbered steps continue after a code block",
+      "title": "RealWorldWPDev Part 3: Caliburn.Micro and Application Infrastructure",
+      "h1": "RealWorldWPDev Part 3: Caliburn.Micro and Application Infrastructure",
+      "selectors": {
+        "p.series-link a": 2,
+        "div.language-csharp pre.highlight": 2,
+        "div.language-xml pre.highlight": 2,
+        ".page__content ol[start=\"8\"]": 1
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content h1": 0,
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
+        "div.language-plaintext pre.highlight": 0
+      },
+      "interactions": [
+        {
+          "name": "previous post (decoded title)",
+          "click": ".post-pager__link--prev",
+          "expectPath": "/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project/"
+        }
+      ]
     }
   ]
 }

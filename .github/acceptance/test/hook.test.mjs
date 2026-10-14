@@ -101,3 +101,20 @@ test('relative files, named routes, real URLs and descriptive notes keep normal 
     assert.equal(runHook({ toolName: 'bash', toolArgs: { command } }), '', command);
   }
 });
+
+test('denies the observed absolute Chromium executable before outside-path approval', () => {
+  const observed = 'grep -n "stopImmediate\\|const height" .artifacts/probe-shot.mjs; /usr/bin/chromium --version 2>/dev/null';
+  for (const command of [observed, '"/usr/bin/chromium" --version', 'env /usr/bin/chromium --version',
+    'exec /usr/local/bin/nas-pages-build --help', '/usr/bin/node .artifacts/check.mjs']) {
+    const decision = decide({ toolName: 'bash', toolArgs: { command } });
+    assert.equal(decision?.permissionDecision, 'deny', command);
+    assert.match(decision.permissionDecisionReason, /PATH/);
+  }
+});
+
+test('installed command names and checkout-relative executables keep normal permission handling', () => {
+  for (const command of ['chromium --version', 'nas-pages-build --help', './.artifacts/check.sh',
+    'env chromium --version', 'echo "/usr/bin/chromium"', 'cat /approved/exact/snapshot.md']) {
+    assert.equal(runHook({ toolName: 'bash', toolArgs: { command } }), '', command);
+  }
+});

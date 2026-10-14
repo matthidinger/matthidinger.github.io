@@ -109,3 +109,32 @@ test('wide code/table that cannot scroll fails', opts, async () => {
   const res = await check({ 'index.html': html }, { mobile: true });
   assert.ok(has(res, /code\/table blocks scrollable/));
 });
+
+test('absentText and maxSelectors fail when violated', opts, async () => {
+  const html = page(GOOD + '<p>### Usage</p><ul class="hidden-links"><li>x</li></ul>');
+  const res = await check({ 'index.html': html }, { route: { absentText: ['### Usage'], maxSelectors: { '.hidden-links li': 0 } } });
+  assert.ok(has(res, /absent text "### Usage"/));
+  assert.ok(has(res, /selector \.hidden-links li <= 0/));
+  const ok = await check({ 'index.html': page(GOOD) }, { route: { absentText: ['### Usage'], maxSelectors: { '.hidden-links li': 0 } } });
+  assert.deepEqual(ok.failures, []);
+});
+
+test('click interactions verify navigation target and revealed elements', opts, async () => {
+  const html = page(GOOD + '<a id="next" href="next/">Next</a> <a id="wrong" href="/">Home</a>'
+    + '<button id="t" onclick="document.getElementById(\'m\').style.display=\'block\'">menu</button><div id="m" style="display:none">menu</div>'
+    + '<button id="dead">dead</button>');
+  const files = { 'index.html': html, 'next/index.html': page(GOOD) };
+  const good = await check(files, { route: { interactions: [
+    { name: 'next', click: '#next', expectPath: '/next/' },
+    { name: 'menu', click: '#t', expectVisible: '#m' },
+    { name: 'mobile only', click: '#missing', expectPath: '/x/', viewports: ['mobile'] },
+  ] } });
+  assert.deepEqual(good.failures, []);
+  assert.equal(good.interactions.length, 2);
+  const bad = await check(files, { route: { interactions: [
+    { name: 'wrong', click: '#wrong', expectPath: '/next/' },
+    { name: 'dead', click: '#dead', expectVisible: '#m' },
+  ] } });
+  assert.ok(has(bad, /interaction wrong: expected \/next\//));
+  assert.ok(has(bad, /interaction dead/));
+});

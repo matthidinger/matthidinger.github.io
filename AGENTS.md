@@ -8,6 +8,7 @@ These instructions apply to every coding agent job in this repository.
 - This repo is a fork. Always target `matthidinger/matthidinger.github.io` in `gh`/API calls. Never target the upstream theme repo.
 - PRs target `master`. Never push to `master`, merge, enable auto-merge, deploy, or change Pages settings, permissions, secrets, credentials or network access. Only Matt merges and publishes.
 - Everything here is public. Issues, PRs, comments, logs, artifacts and screenshots may contain only public website information. Never include private hostnames, local paths, infrastructure details, credentials or private source data.
+- Keep public updates brief: the site changes, the verified evidence, and any blocker in one sentence. Runtime troubleshooting, tooling and hosting details stay out of issues and PRs.
 - Keep content facts, URLs, permalinks, `redirect_from` redirects, `CNAME`, `_config.yml`, the theme and the Pages deployment unchanged unless the approved request explicitly asks for a change.
 - Do not use or modernize the historical `Gemfile.lock` or the root `package.json`/npm asset pipeline. Builds use the pinned GitHub Pages runtime. Browser tooling lives only in `.github/acceptance`.
 
@@ -64,8 +65,10 @@ node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N [--baseline BAS
 node .github/acceptance/bin/export-preview.mjs "$RUN" --pr N                            # isolated immutable preview
 gh pr checks N -R matthidinger/matthidinger.github.io --watch                           # final-SHA CI
 node .github/acceptance/bin/readiness.mjs "$RUN" --pr N [--ux --baseline BASE_RUN]      # 0 ready, 2 blocked, 1 not ready
-node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N                        # refresh the PR's readiness table
+node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N [--baseline BASE_RUN]  # refresh the readiness table; keep --baseline or the before images drop out
 ```
+
+Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-build --help`), never by absolute path; the command-hygiene hook denies absolute executables. Probe helpers go in `.artifacts/*.mjs` and take route IDs from `routes.json`.
 
 ## What the checks enforce
 
@@ -79,6 +82,8 @@ node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N                
   - wide code and tables scroll inside their own box
   - the screenshot is not blank
   - page-level horizontal overflow is a warning, or a failure with `--ux`
+  - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot)
+  - screenshots show the real UI. Never hide a defect in the harness; if a capture looks wrong, reproduce it with real browser actions (e.g. a viewport change) and fix the site
 - **Readiness.** Every gate must pass:
   - a deliverable passing report, a clean tree, and HEAD equal to the PR head and the evidence SHA
   - an open PR from this repo against `master`
@@ -109,6 +114,6 @@ Only post the deep link in a public PR if Matt has approved disclosing that orig
 - Some old posts overflow horizontally on mobile because of long unbroken identifiers. This is report-only unless `--ux` is used.
 - Screenshots are cut off at 5000px. Third-party widgets/CDNs are blocked during checks.
 - `inspect.mjs` records the agent's statement that it viewed each image, bound to the image hashes. It cannot prove who looked.
-- `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands, inline node scripts (`node -e/--eval/-p/--print`), and absolute-looking node arguments. Put scripts in checkout-rooted helper files and use checkout-relative file arguments. Pass route IDs from `routes.json`, or keep non-filesystem URL routes inside the helper/configuration: `node probe.mjs /archive/...` otherwise looks like outside-checkout filesystem access and stalls unattended work. Do not request broader access to fix a route-expression problem. The hook only ever denies or stays silent; ordinary permitted commands still use normal permission handling. It is a hygiene guard, not a security sandbox or full shell parser.
+- `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands, inline node scripts (`node -e/--eval/-p/--print`), absolute-looking node arguments, and absolute executable paths (run installed tools by name through `PATH`). Because it reads shell text, a heredoc line that begins with `/` (e.g. a `/*` comment) also trips it; write such files with the edit tool. Put scripts in checkout-rooted helper files and use checkout-relative file arguments. Pass route IDs from `routes.json`, or keep non-filesystem URL routes inside the helper/configuration: `node probe.mjs /archive/...` otherwise looks like outside-checkout filesystem access and stalls unattended work. Do not request broader access to fix a route-expression problem. The hook only ever denies or stays silent; ordinary permitted commands still use normal permission handling. It is a hygiene guard, not a security sandbox or full shell parser.
 
 Phone workflow for Matt: [.github/MOBILE_GUIDE.md](.github/MOBILE_GUIDE.md). PR checklist: [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md).

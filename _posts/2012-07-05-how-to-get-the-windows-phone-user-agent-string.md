@@ -73,5 +73,3 @@ public static class UserAgentHelper
 }
 ```
 
- 
-

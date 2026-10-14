@@ -45,5 +45,3 @@ var product = db.Products.GetById(1);
 var order = db.Orders.GetById(15);
 ```
 
-
-

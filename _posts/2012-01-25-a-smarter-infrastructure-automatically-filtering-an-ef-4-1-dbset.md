@@ -158,5 +158,3 @@ Like the saying goes: complexity is easy; simplicity is hard.
 
 Striving for a clean and simple architecture, without needless layers of complexity, is a goal we should all have. Sometimes it makes sense to try and make your infrastructure smarter, instead of adding yet another layer of indirection.
 
- 
-

@@ -22,5 +22,3 @@ So sure I thought, maybe it will provide better performance, but when creating i
 
 > The [script](https://www.w3.org/mod-scripting.html#edef_scripting_script) element places a script within a document. This element may appear any number of times in the [head](https://www.w3.org/mod-structure.html#edef_structure_head) or [body](https://www.w3.org/mod-structure.html#edef_structure_body) of an XHTML document.
 
-
-

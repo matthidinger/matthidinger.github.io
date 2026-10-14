@@ -9,17 +9,12 @@ tags:
 header:
   teaser: subtext-content/www_matthidinger_com/Windows-Live-Writer/BusTrack-Windows-Phone-7-App_12DE6/wp7_English_480x80_blue_3.png
 ---
-Update
-======
+## Update
 
 Quite a bit has changed since June! The app is now called Bus Watch Chicago and is live on the marketplace. If you’ve got a windows phone please check it out! (You need the Zune client software installed for the link to work)
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/BusTrack-Windows-Phone-7-App_12DE6/wp7_English_480x80_blue_3.png)
 
-
- 
-
- 
 
 Below is a preview of my Windows Phone 7 app used for real-time tracking of Chicago buses.
 
@@ -34,6 +29,4 @@ Rather than listing out all of the features, please have a look at the video bel
 ### Today Chicago… tomorrow, the world!
 
 (I plan on exploring other bus services around the country/world, to make sure BusTrack can integrate with them too!)
-
- 
 
