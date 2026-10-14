@@ -43,23 +43,98 @@
     {
       "id": "home",
       "path": "/",
-      "purpose": "Home page (timeline layout)",
+      "purpose": "Home page (Dusk layout): scroll-driven sunset scene, About, Work with the original logos, latest posts",
       "title": "Matt Hidinger",
       "text": [
-        "Matt Hidinger"
+        "Principal Product Manager at Microsoft in Seattle. Into Sailing and making.",
+        "Microsoft",
+        "Clarity Consulting",
+        "Triton-Tek",
+        "Parent's basement",
+        "199X"
+      ],
+      "absentText": [
+        "Principal Program Manager"
       ],
       "selectors": {
-        "img.img-circle": 5
+        ".dk-nav a": 3,
+        ".dk-about img": 1,
+        ".dk-work img.dk-badge": 4,
+        ".dk-posts a": 5,
+        ".dk-more a": 1,
+        ".dk-foot a": 6
       },
-      "knownPageErrors": [
+      "maxSelectors": {
+        ".masthead": 0,
+        "img[loading=\"lazy\"]": 0,
+        ".code-copy": 0
+      },
+      "interactions": [
         {
-          "message": "google is not defined",
-          "reason": "pre-existing: js/grayscale.js calls Google Maps but the timeline layout never loads that API (also happens in production)"
+          "name": "home nav to About",
+          "click": ".dk-nav a[href$=\"/about/\"]",
+          "expectPath": "/about/"
+        },
+        {
+          "name": "home nav to Blog",
+          "click": ".dk-nav a[href$=\"/blog/\"]",
+          "expectPath": "/blog/"
+        },
+        {
+          "name": "home nav to Talks",
+          "click": ".dk-nav a[href$=\"/talks/\"]",
+          "expectPath": "/talks/"
+        },
+        {
+          "name": "home latest post",
+          "click": ".dk-posts li:first-child a",
+          "expectPath": "/archive/2013/07/02/video-and-code-from-my-build-talk-on-sharing-code/"
+        },
+        {
+          "name": "home view more posts",
+          "click": ".dk-more a",
+          "expectPath": "/blog/"
+        },
+        {
+          "name": "home footer to Talks",
+          "click": ".dk-foot a[href$=\"/talks/\"]",
+          "expectPath": "/talks/"
+        },
+        {
+          "name": "home signature",
+          "click": ".dk-sig",
+          "expectPath": "/"
         }
+      ]
+    },
+    {
+      "id": "about",
+      "path": "/about/",
+      "purpose": "About page: updated title and round trips to home and the blog",
+      "title": "About",
+      "h1": "About",
+      "text": [
+        "Principal Product Manager at Microsoft"
+      ],
+      "absentText": [
+        "Principal Program Manager"
       ],
       "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
         ".code-copy": 0
-      }
+      },
+      "interactions": [
+        {
+          "name": "about back to home",
+          "click": ".masthead__menu-item--lg a",
+          "expectPath": "/"
+        },
+        {
+          "name": "about nav to Blog",
+          "click": "#site-nav .visible-links a[href$=\"/blog/\"]",
+          "expectPath": "/blog/"
+        }
+      ]
     },
     {
       "id": "blog",
@@ -81,6 +156,16 @@
           "name": "blog next page",
           "click": "nav.pagination a[rel=\"next\"]",
           "expectPath": "/blog/page2/"
+        },
+        {
+          "name": "blog back to home",
+          "click": ".masthead__menu-item--lg a",
+          "expectPath": "/"
+        },
+        {
+          "name": "blog nav to Talks",
+          "click": "#site-nav .visible-links a[href$=\"/talks/\"]",
+          "expectPath": "/talks/"
         }
       ]
     },
@@ -97,7 +182,19 @@
       "maxSelectors": {
         "#site-nav .hidden-links li": 0,
         ".code-copy": 0
-      }
+      },
+      "interactions": [
+        {
+          "name": "talks back to home",
+          "click": ".masthead__menu-item--lg a",
+          "expectPath": "/"
+        },
+        {
+          "name": "talks nav to About",
+          "click": "#site-nav .visible-links a[href$=\"/about/\"]",
+          "expectPath": "/about/"
+        }
+      ]
     },
     {
       "id": "post-code",
@@ -120,6 +217,11 @@
           "name": "next post",
           "click": ".post-pager__link--next",
           "expectPath": "/archive/2008/06/17/synergy-3-desktops-1-keyboard/"
+        },
+        {
+          "name": "post back to home",
+          "click": ".masthead__menu-item--lg a",
+          "expectPath": "/"
         }
       ],
       "copyCode": {

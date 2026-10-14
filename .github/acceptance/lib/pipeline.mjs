@@ -7,6 +7,39 @@ import { startServer } from './server.mjs';
 import { REPO_NWO, dirtyFiles, headSha, manifest, previewPrefix, readJson, sh, writeJson } from './util.mjs';
 
 export const RUNS_DIR = '.artifacts/acceptance';
+const ROUTES_REL = ['.github', 'acceptance', 'routes.json'];
+
+// A baseline is judged by the routes.json committed at that ref: HEAD's routes describe the change
+// under review and would fail the old site by design. HEAD routes the baseline lacks are still
+// captured for before/after comparison, without HEAD's expectations, and are report-only.
+export function baselineConfig(headConfig, ownConfig) {
+  const own = ownConfig || { ...headConfig, routes: [] };
+  const ids = new Set(own.routes.map((r) => r.id));
+  const paths = new Set(own.routes.map((r) => r.path));
+  const added = headConfig.routes
+    .filter((r) => !ids.has(r.id) && !paths.has(r.path))
+    .map((r) => ({ id: r.id, path: r.path, purpose: `Before capture only (not in the baseline's routes.json). ${r.purpose || ''}`.trim(), captureOnly: true }));
+  return { ...own, routes: [...own.routes, ...added] };
+}
+
+export function runConfig({ runDir, role, headConfig }) {
+  if (role !== 'baseline') return { config: headConfig, source: 'checkout routes.json' };
+  const file = path.join(runDir, 'src', ...ROUTES_REL);
+  const own = fs.existsSync(file) ? readJson(file) : null;
+  return {
+    config: baselineConfig(headConfig, own),
+    source: own ? 'baseline routes.json (+ capture-only routes added since)' : 'capture only (baseline has no routes.json)',
+  };
+}
+
+// captureOnly is honoured only in baseline runs, so it can never relax a deliverable or development check.
+export function settleCaptureOnly(results, config, role) {
+  if (role !== 'baseline') return results;
+  const only = new Set(config.routes.filter((r) => r.captureOnly).map((r) => r.id));
+  return results.map((r) => (only.has(r.route)
+    ? { ...r, captureOnly: true, passed: true, failures: [], warnings: [...(r.warnings || []), ...(r.failures || []).map((f) => `capture only: ${f}`)] }
+    : r));
+}
 
 // role: "deliverable" (clean committed HEAD), "development" (working tree, never deliverable) or "baseline" (a ref, e.g. master).
 export function stageSource({ root, role = 'deliverable', ref, pr = 0 }) {
@@ -81,7 +114,7 @@ export function verifyBuild(siteDir, config) {
   return { checks, failures };
 }
 
-export async function acceptRun({ runDir, siteDir, config, builder, strictOverflow = false, chromium, label = '' }) {
+export async function acceptRun({ runDir, siteDir, config, configSource = 'checkout routes.json', builder, strictOverflow = false, chromium, label = '' }) {
   const meta = readJson(path.join(runDir, 'meta.json'));
   const build = verifyBuild(siteDir, config);
   const previewRoot = path.join(runDir, 'preview');
@@ -98,10 +131,11 @@ export async function acceptRun({ runDir, siteDir, config, builder, strictOverfl
   } finally {
     await server.close();
   }
+  results = settleCaptureOnly(results, config, meta.role);
   const passed = failures.length === 0 && results.every((r) => r.passed);
   const report = {
     schema: 1, repo: meta.repo, sha: meta.sha, role: meta.role, deliverable: meta.deliverable, pr: meta.pr,
-    prefix: meta.prefix, builder, strictOverflow, generatedAt: new Date().toISOString(),
+    prefix: meta.prefix, builder, configSource, strictOverflow, generatedAt: new Date().toISOString(),
     build: { checks: build.checks, rewrittenFiles: rewrite.rewritten, unrewritten: rewrite.escaping.length },
     failures, results, passed,
   };
@@ -115,7 +149,7 @@ export function renderReport(report) {
   const lines = [
     `### Acceptance: ${report.passed ? 'PASS' : 'FAIL'} (${report.role}${report.deliverable ? '' : ', NOT deliverable'})`,
     '',
-    `Commit \`${report.sha}\` · builder ${report.builder} · overflow gate ${report.strictOverflow ? 'strict' : 'report-only'}`,
+    `Commit \`${report.sha}\` · builder ${report.builder}${report.configSource ? ` · checks from ${report.configSource}` : ''} · overflow gate ${report.strictOverflow ? 'strict' : 'report-only'}`,
     '',
     '| Route | Viewport | Result | Checks | Notes |',
     '|---|---|---|---|---|',

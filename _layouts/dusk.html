@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ site.title }}{% if page.title %} | {{ page.title }}{% endif %}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}/feed.xml">
+  {% include head/custom.html %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/dusk.css">
+</head>
+<body>
+{%- assign nav = site.data.navigation.main -%}
+<div class="dk">
+  <a class="dk-skip" href="#dk-main">Skip to content</a>
+  <svg class="dk-scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+  <header class="dk-top">
+    <a class="dk-sig" href="{{ site.baseurl }}/">{{ site.title }}</a>
+    <nav class="dk-nav" aria-label="Primary">
+      {%- for link in nav %}
+      <a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>
+      {%- endfor %}
+    </nav>
+  </header>
+
+  <main id="dk-main">
+    <section class="dk-hero">
+      <h1 class="dk-name">{{ site.title }}</h1>
+      <div class="dk-lede">
+        <p class="dk-hi">{{ page.intro }}</p>
+        <p>{{ page.lede }}</p>
+      </div>
+    </section>
+{%- assign plate = 0 -%}
+{%- for section_path in site.timeline_sections -%}
+  {%- for section in site.pages -%}
+    {%- if section.path == section_path -%}
+      {%- assign plate = plate | plus: 1 -%}
+      {%- if plate > 1 %}
+    <div class="dk-gap" aria-hidden="true"></div>
+      {%- endif -%}
+      {%- if section.section_type == "events" %}
+    <section class="dk-plate dk-plate-{{ plate }}" aria-labelledby="{{ section.title | slugify }}">
+      <svg class="dk-edge" viewBox="0 0 1600 90" preserveAspectRatio="none" aria-hidden="true"><path d=""/></svg>
+      <div class="dk-inner">
+        {{ section.content | markdownify }}
+        <ol class="dk-work">
+        {%- for e in section.events %}
+          {%- assign parts = e.date | split: " - " -%}
+          {%- assign years = parts[0] | split: " " | last -%}
+          {%- if parts.size > 1 -%}
+            {%- assign y1 = parts[1] | split: " " | last -%}
+            {%- if y1 == "Present" -%}{%- assign years = years | append: "–" -%}
+            {%- else -%}{%- assign yy = y1 | slice: 2, 2 -%}{%- assign years = years | append: "–" | append: yy -%}{%- endif -%}
+          {%- elsif years contains "something" -%}
+            {%- assign years = years | slice: 0, 3 | append: "X" -%}
+          {%- endif %}
+          <li>
+            <p class="dk-years">{{ years }}</p>
+            <img class="dk-badge" src="{{ site.baseurl }}/images/{{ e.image }}" alt="{{ e.title }}" width="116" height="116">
+            <div>
+              <h3>{{ e.title }}</h3>
+              <p class="dk-when">{{ e.date | replace: " - ", " – " }}</p>
+              <p>{{ e.body | strip }}</p>
+            </div>
+          </li>
+        {%- endfor %}
+        </ol>
+      </div>
+    </section>
+      {%- else -%}
+      {%- include dusk/section_{{ section.section_type }}.html section=section plate=plate -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor %}
+  </main>
+
+  <footer class="dk-foot">
+    <div class="dk-foot-cols">
+      <nav aria-label="Site">
+        {%- for link in nav %}<a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>{% endfor -%}
+      </nav>
+      <nav aria-label="Elsewhere">
+        {%- for s in page.social %}<a href="{{ s.url }}">{% if s.title == 'github' %}GitHub{% else %}{{ s.title | capitalize }}{% endif %}</a>{% endfor -%}
+      </nav>
+    </div>
+    <p class="dk-copy">Copyright &copy; {{ site.author.name }} {{ site.time | date: "%Y" }}</p>
+  </footer>
+</div>
+<script src="{{ site.baseurl }}/assets/js/dusk-kit.js"></script>
+<script src="{{ site.baseurl }}/assets/js/dusk-geo.js"></script>
+<script src="{{ site.baseurl }}/assets/js/dusk-scene.js"></script>
+<script src="{{ site.baseurl }}/assets/js/dusk.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* Dusk homepage: a fixed screen-print scene of the Sound; scrolling moves the light from golden hour to night. */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #0a1026; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; }
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, p, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+.dk {
+  --dk-disp: "Tw Cen MT Condensed Extra Bold", "Bahnschrift Condensed", "DIN Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --dk-body: "Gill Sans MT", "Gill Sans", "Seravek", "Segoe UI", system-ui, sans-serif;
+  --dk-pad: clamp(20px, 4vw, 56px);
+  --dk-cream: #f3e6cf;
+  --dk-amber: #f2a571;
+  position: relative;
+  font: 18px/1.6 var(--dk-body);
+  color: #14193a;
+}
+
+.dk-skip {
+  position: absolute; z-index: 10; top: 12px; left: var(--dk-pad); padding: 10px 16px;
+  background: var(--dk-cream); color: #14193a; font-size: 14px; letter-spacing: .12em; text-transform: uppercase;
+  transform: translateY(-200%);
+}
+.dk-skip:focus { transform: none; }
+
+.dk-scene { position: fixed; inset: 0; width: 100%; height: 100vh; height: 100lvh; max-width: none; }
+.dk main { position: relative; z-index: 1; }
+
+.dk-top {
+  position: absolute; z-index: 2; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 24px var(--dk-pad);
+  font-size: 14px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+}
+.dk-top a { text-decoration: none; padding: 6px 0; }
+.dk-top a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.dk-nav { display: flex; gap: 28px; }
+
+.dk-hero { min-height: 100vh; min-height: 100svh; padding: clamp(96px, 13vh, 140px) var(--dk-pad) 0; }
+.dk-name { font: 400 clamp(64px, 12vw, 180px)/.86 var(--dk-disp); letter-spacing: .02em; text-transform: uppercase; color: var(--dk-cream); margin-bottom: 24px; }
+.dk-drawn .dk-name {
+  position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.dk-lede { max-width: 27rem; }
+.dk-hi { font: 400 clamp(34px, 4vw, 52px)/1 var(--dk-disp); letter-spacing: .02em; text-transform: uppercase; margin-bottom: 12px; }
+.dk-lede p + p { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; }
+html:not(.dk-drawn) .dk-top,
+html:not(.dk-drawn) .dk-lede { color: var(--dk-cream); }
+
+.dk-plate { position: relative; padding: clamp(36px, 5vw, 72px) var(--dk-pad) clamp(64px, 8vw, 112px); background: var(--plate); }
+.dk-edge { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: clamp(40px, 5.5vw, 90px); max-width: none; }
+.dk-edge path { fill: var(--plate); }
+.dk-plate-1 { --plate: #f1e3c8; color: #1b2142; }
+.dk-plate-2 { --plate: #3d4a7a; color: var(--dk-cream); }
+.dk-plate-3 { --plate: #141a36; color: var(--dk-cream); }
+.dk-inner { max-width: 1120px; margin: 0 auto; }
+.dk-gap { height: 72vh; }
+.dk-plate h2 {
+  font: 400 clamp(56px, 8vw, 116px)/.86 var(--dk-disp); letter-spacing: .01em; text-transform: uppercase;
+  margin-bottom: clamp(24px, 3vw, 44px);
+}
+
+.dk-about { display: grid; grid-template-columns: minmax(150px, 250px) 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+.dk-about p { font-size: clamp(19px, 1.7vw, 23px); line-height: 1.55; max-width: 34em; }
+.dk-about a { color: #9a3b26; text-underline-offset: 4px; }
+.dk-duo {
+  position: relative; display: block; isolation: isolate; overflow: hidden;
+  aspect-ratio: 1 / 1.18; border-radius: 999px 999px 6px 6px; background: var(--dk-amber);
+}
+.dk-duo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.25); mix-blend-mode: multiply; }
+.dk-duo::after { content: ""; position: absolute; inset: 0; background: #2b3b6b; mix-blend-mode: lighten; }
+
+/* Work: each stop gets its original badge, mounted like a porthole. Rows share one subgrid so the
+   years column fits the widest label in whatever display face the visitor has, never wrapping. */
+.dk-work { --b: clamp(84px, 8.4vw, 116px); display: grid; grid-template-columns: max-content var(--b) 1fr; column-gap: clamp(16px, 3vw, 44px); }
+.dk-work li {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: minmax(150px, .36fr) var(--b) 1fr; grid-template-columns: subgrid; gap: clamp(16px, 3vw, 44px); align-items: start;
+  padding: clamp(22px, 2.8vw, 36px) 0; border-top: 1px solid rgba(243, 230, 207, .22);
+}
+.dk-years { font: 400 clamp(52px, 6.6vw, 96px)/.84 var(--dk-disp); color: var(--dk-amber); letter-spacing: .01em; white-space: nowrap; }
+.dk-badge {
+  width: var(--b); height: var(--b); border-radius: 50%; object-fit: cover; background: #fff;
+  box-shadow: 0 0 0 3px var(--dk-cream), 0 0 0 9px rgba(243, 230, 207, .14);
+}
+.dk-work h3 { font-size: clamp(21px, 2vw, 27px); line-height: 1.2; font-weight: 600; }
+.dk-when { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; opacity: .72; margin: 6px 0 10px; }
+.dk-work li > div > p:last-child { max-width: 40em; }
+
+.dk-posts li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 28px;
+  padding: 18px 0; border-top: 1px solid rgba(243, 230, 207, .18);
+}
+.dk-posts a { text-decoration: none; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.35; }
+.dk-posts a:hover { color: #f7c27a; text-decoration: underline; text-underline-offset: 4px; }
+.dk-posts time { flex: none; font: 400 21px/1 var(--dk-disp); letter-spacing: .06em; text-transform: uppercase; color: var(--dk-amber); }
+.dk-more { margin-top: 30px; }
+.dk-more a { display: inline-block; padding: 6px 0; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; text-underline-offset: 6px; }
+.dk-more a:hover { color: #f7c27a; }
+
+.dk-foot {
+  position: relative; z-index: 1; min-height: 100vh; min-height: 100svh;
+  padding: clamp(40px, 7vh, 72px) var(--dk-pad) 84px; color: var(--dk-cream);
+}
+.dk-foot-cols { display: flex; flex-wrap: wrap; gap: 14px 56px; }
+.dk-foot nav { display: flex; flex-wrap: wrap; gap: 6px 28px; }
+.dk-foot a { display: inline-block; padding: 6px 0; text-decoration: none; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; }
+.dk-foot a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.dk-copy { margin-top: 14px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; opacity: .62; }
+
+.dk-tw { animation: dk-tw 3.4s ease-in-out infinite alternate; }
+.dk-tw:nth-child(2) { animation-duration: 2.7s; animation-delay: -1.2s; }
+.dk-tw:nth-child(3) { animation-duration: 4.1s; animation-delay: -2.3s; }
+.dk-gl { animation: dk-gl 1.3s steps(2, jump-none) infinite alternate; }
+.dk-gl + .dk-gl { animation-delay: -.65s; }
+@keyframes dk-tw { to { opacity: .3; } }
+@keyframes dk-gl { to { opacity: .2; } }
+@media (prefers-reduced-motion: reduce) { .dk-tw, .dk-gl { animation: none; } }
+
+@media (max-width: 760px) {
+  .dk { font-size: 17px; }
+  .dk-top { padding-top: 18px; font-size: 12px; letter-spacing: .12em; }
+  .dk-nav { gap: 16px; }
+  .dk-about { grid-template-columns: 1fr; }
+  .dk-duo { width: 150px; }
+  .dk-work { display: block; }
+  .dk-work li { --b: 76px; grid-template-columns: var(--b) 1fr; grid-template-areas: "badge years" "text text"; align-items: center; gap: 14px 20px; }
+  .dk-years { grid-area: years; }
+  .dk-badge { grid-area: badge; }
+  .dk-work li > div { grid-area: text; }
+  .dk-posts li { flex-direction: column; gap: 6px; }
+  .dk-gap { height: 60vh; }
+}
