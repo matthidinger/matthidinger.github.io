@@ -41,6 +41,12 @@ jobs:
           ref: master
           fetch-depth: 0
           persist-credentials: false
+      - name: Require activated default-branch tooling
+        run: |
+          if [ ! -f .github/acceptance/bin/cloud-build.mjs ]; then
+            echo "::error::BLOCKED: the automatic preview tooling must be merged to master before cloud builds can activate."
+            exit 1
+          fi
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22

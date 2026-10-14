@@ -348,18 +348,19 @@ test('GitHub pagination handles more than one page and fails malformed responses
 function zip(entries) {
   const local = [], central = [];
   let offset = 0;
-  for (const { name, body = 'x', mode = 0o100644 } of entries) {
+  for (const { name, body = 'x', mode = 0o100644, declaredSize, method = 0, flags = 0 } of entries) {
     const n = Buffer.from(name), b = Buffer.from(body);
     let crc = 0xffffffff;
     for (const byte of b) { crc ^= byte; for (let i = 0; i < 8; i++) crc = (crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0); }
     crc = (crc ^ 0xffffffff) >>> 0;
     const l = Buffer.alloc(30);
-    l.writeUInt32LE(0x04034b50); l.writeUInt16LE(20, 4); l.writeUInt32LE(crc, 14);
-    l.writeUInt32LE(b.length, 18); l.writeUInt32LE(b.length, 22); l.writeUInt16LE(n.length, 26);
+    l.writeUInt32LE(0x04034b50); l.writeUInt16LE(20, 4); l.writeUInt16LE(flags, 6); l.writeUInt16LE(method, 8); l.writeUInt32LE(crc, 14);
+    l.writeUInt32LE(b.length, 18); l.writeUInt32LE(declaredSize ?? b.length, 22); l.writeUInt16LE(n.length, 26);
     local.push(l, n, b);
     const c = Buffer.alloc(46);
     c.writeUInt32LE(0x02014b50); c.writeUInt16LE(0x314, 4); c.writeUInt16LE(20, 6);
-    c.writeUInt32LE(crc, 16); c.writeUInt32LE(b.length, 20); c.writeUInt32LE(b.length, 24);
+    c.writeUInt16LE(flags, 8); c.writeUInt16LE(method, 10);
+    c.writeUInt32LE(crc, 16); c.writeUInt32LE(b.length, 20); c.writeUInt32LE(declaredSize ?? b.length, 24);
     c.writeUInt16LE(n.length, 28); c.writeUInt32LE((mode << 16) >>> 0, 38); c.writeUInt32LE(offset, 42);
     central.push(c, n);
     offset += l.length + n.length + b.length;
@@ -391,4 +392,18 @@ test('ZIP extraction only admits bounded data files and rejects links, traversal
     } else await assert.rejects(extractCandidate(file, dest), undefined, JSON.stringify(cases[i]));
   }
   assert.ok(!fs.existsSync(path.join(root, 'outside.txt')));
+});
+
+test('ZIP bounds and encryption are refused before any oversized/decrypted payload is written', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cloud-zip-bounds-'));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  for (const [label, entry, error] of [
+    ['large', { name: 'site/index.html', declaredSize: 65 * 1024 * 1024, method: 8 }, /expanded artifact too large/],
+    ['encrypted', { name: 'site/index.html', flags: 1, method: 8 }, /encrypted artifact/],
+  ]) {
+    const file = path.join(root, label + '.zip'), destination = path.join(root, label);
+    fs.writeFileSync(file, zip([entry]));
+    await assert.rejects(extractCandidate(file, destination), error);
+    assert.ok(!fs.existsSync(path.join(destination, 'site', 'index.html')));
+  }
 });

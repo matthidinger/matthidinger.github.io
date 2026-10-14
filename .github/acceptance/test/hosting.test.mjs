@@ -274,6 +274,23 @@ test('cloud-aware NAS readiness refuses missing/stale cloud proofs and preserves
   assert.equal(g(blocked, 'cloud-provenance').status, 'blocked');
 });
 
+test('PR hosted section uses verified cloud-aware readiness without replacing NAS evidence or falling back to stale links', (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cloud-hosted-section-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const cloud = withCloud().cloud;
+  cloud.hosted = { ...HOSTED, public: true, checkedAt: '2026-10-14', provenance: cloud.report.provenance };
+  writeJson(path.join(dir, 'readiness.json'), { sha: SHA, cloud });
+  const section = hostedSection(dir);
+  assert.match(section, /Preview built in Actions run 42/);
+  assert.match(section, /NAS build evidence is recorded separately/);
+  assert.ok(section.includes(AZURE + PFX + '/'));
+  writeJson(path.join(dir, 'hosted', 'report.json'), cloud.hosted);
+  writeJson(path.join(dir, 'readiness.json'), { sha: SHA, cloud: { status: 'fail' } });
+  assert.equal(hostedSection(dir), '', 'failed cloud proof must not fall back to a stale NAS hosted report');
+  writeJson(path.join(dir, 'readiness.json'), { sha: OTHER, cloud });
+  assert.equal(hostedSection(dir), '', 'stale cloud proof must not embed links');
+});
+
 test('readiness (azure-receipt): ready only with a verified receipt and a passing hosted browser run for this SHA', () => {
   const r = evaluate(ready());
   assert.equal(r.overall, 'ready', JSON.stringify(r.gates.filter((x) => x.status !== 'pass')));

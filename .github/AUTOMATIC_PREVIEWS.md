@@ -157,6 +157,12 @@ inspection, embedded screenshots and UX baseline gates. A cloud report cannot
 substitute for any of them. Without `--cloud-run`, the existing NAS-export path
 and schema-1 readiness contract are unchanged.
 
+After this readiness check, the normal `upload-screenshots.mjs RUN --pr N`
+(with `--baseline BASE_RUN` for UX jobs) refreshes the PR's readiness table and
+verified cloud page links. It labels the Actions-built hosted evidence separately
+from the NAS screenshots and does not fall back to stale hosted links when cloud
+proof fails.
+
 ## Activation and validation
 
 The workflow/tooling must first be merged to `master` by Matt. This bootstrap PR

@@ -63,10 +63,20 @@ function gallery(title, report, record) {
 // Hosted-preview browser results. Page links are listed only for a public, approved backend.
 export function hostedSection(runDir) {
   const f = path.join(runDir, 'hosted', 'report.json');
-  if (!fs.existsSync(f)) return '';
-  const h = readJson(f);
+  const readyFile = path.join(runDir, 'readiness.json');
+  const ready = fs.existsSync(readyFile) ? readJson(readyFile) : null;
+  let h;
+  if (ready && Object.hasOwn(ready, 'cloud')) {
+    if (ready.cloud?.status !== 'pass' || ready.cloud.report?.sha !== ready.sha) return '';
+    h = ready.cloud.hosted;
+    if (!h?.passed || h.sha !== ready.sha || h.verification?.status !== 'pass') return '';
+  } else {
+    if (!fs.existsSync(f)) return '';
+    h = readJson(f);
+  }
   const lines = ['', `#### Hosted preview checks: ${h.passed ? 'PASS' : 'FAIL'} — ${h.backend}, commit \`${h.sha}\` (checked ${h.checkedAt})`, '',
     `Revision verification: ${h.verification?.status} — ${(h.verification?.detail || '').replace(/\|/g, '\\|')}`];
+  if (h.provenance?.kind === 'github-actions') lines.push('', `Preview built in Actions run ${h.provenance.runId}, attempt ${h.provenance.runAttempt}; NAS build evidence is recorded separately.`);
   if (!h.results?.length) return lines.join('\n');
   lines.push('', `| Route | Viewport | Result | Copy code |${h.public ? ' Preview |' : ''}`, `|---|---|---|---|${h.public ? '---|' : ''}`);
   for (const r of h.results) {

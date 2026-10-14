@@ -61,7 +61,7 @@ try {
     writeJson('.artifacts/hosted/report.json', {
       schemaVersion: 1, sha: report.sha, pr: report.pr, prefix: report.prefix, provenance: report.provenance,
       publicationRunId: positiveInt(process.env.GITHUB_RUN_ID), origin: CLOUD_ORIGIN,
-      backend: 'azure-receipt',
+      backend: 'azure-receipt', public: true, checkedAt: new Date().toISOString(),
       strictOverflow: true, verification, results, passed: results.every((r) => r.passed),
       visualInspection: 'pending',
     });
