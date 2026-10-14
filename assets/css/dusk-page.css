@@ -294,7 +294,8 @@ a.post-pager__link:hover { border-color: var(--accent); }
 }
 .dkp-comments-btn:hover { background: var(--ink); color: var(--paper); }
 .dkp-comments-btn[hidden] { display: none; }
-.dkp-comments noscript { display: block; font-size: 15px; color: var(--muted); }
+.dkp-comments noscript, .dkp-comments-note { display: block; margin: 0; font-size: 15px; color: var(--muted); }
+.dkp-comments h2[tabindex]:focus { outline: none; }
 #disqus_thread:empty { display: none; }
 
 /* ---------- Blog listing ---------- */

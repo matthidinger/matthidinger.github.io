@@ -128,10 +128,18 @@
       s.src = `https://${cbtn.dataset.shortname}.disqus.com/embed.js`;
       s.async = true;
       s.setAttribute('data-timestamp', String(Date.now()));
+      const note = document.createElement('p');
+      note.className = 'dkp-comments-note';
+      note.setAttribute('role', 'status');
+      note.textContent = 'Loading comments…';
+      cbtn.after(note);
+      s.onload = () => note.remove();
+      s.onerror = () => { note.textContent = 'Comments could not be loaded.'; };
       document.body.appendChild(s);
+      // The button is about to disappear, so hand focus to the section heading instead of <body>.
+      const head = cbtn.parentElement.querySelector('h2');
       cbtn.hidden = true;
-      const thread = document.getElementById('disqus_thread');
-      if (thread) { thread.tabIndex = -1; thread.focus({ preventScroll: true }); }
+      if (head) { head.tabIndex = -1; head.focus({ preventScroll: true }); }
     }, { once: true });
   }
 
