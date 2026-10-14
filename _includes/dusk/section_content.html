@@ -1,0 +1,10 @@
+{%- assign s = include.section -%}
+    <section class="dk-plate dk-plate-{{ include.plate }}" aria-labelledby="{{ s.title | slugify }}">
+      <svg class="dk-edge" viewBox="0 0 1600 90" preserveAspectRatio="none" aria-hidden="true"><path d=""/></svg>
+      <div class="dk-inner dk-about">
+        <span class="dk-duo"><img src="{{ site.baseurl }}/images/bio-photo.jpg" alt="{{ site.author.name }}" width="250" height="250"></span>
+        <div>
+          {{ s.content | markdownify }}
+        </div>
+      </div>
+    </section>

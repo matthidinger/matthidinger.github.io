@@ -1,0 +1,13 @@
+{%- assign s = include.section -%}
+    <section class="dk-plate dk-plate-{{ include.plate }}" aria-labelledby="{{ s.title | slugify }}">
+      <svg class="dk-edge" viewBox="0 0 1600 90" preserveAspectRatio="none" aria-hidden="true"><path d=""/></svg>
+      <div class="dk-inner">
+        {{ s.content | markdownify }}
+        <ol class="dk-posts">
+        {%- for post in site.posts limit:5 %}
+          <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %Y" }}</time></li>
+        {%- endfor %}
+        </ol>
+        <p class="dk-more"><a href="{{ site.baseurl }}/blog/">View more posts</a></p>
+      </div>
+    </section>
