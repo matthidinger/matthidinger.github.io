@@ -1,6 +1,8 @@
-// Isolated preview export: only the compiled, prefix-rewritten public site for one PR head commit.
+// Isolated preview export: only the compiled, prefix-rewritten public site for one PR head commit, plus
+// its revision receipt (site/preview-revision.json) so the package maps 1:1 onto the URL prefix.
 import fs from 'node:fs';
 import path from 'node:path';
+import { RECEIPT_FILE, buildReceipt, exportManifest, receiptBytes, sameManifest } from './hosting.mjs';
 import { BASE_BRANCH, PREVIEW_SITE_DIR, REPO_NWO, manifest, readJson, sh } from './util.mjs';
 
 const FORBIDDEN = [/^\.git(\/|$)/, /^\.github(\/|$)/, /(^|\/)_config\.yml$/, /(^|\/)Gemfile(\.lock)?$/, /(^|\/)AGENTS\.md$/, /(^|\/)\.env/, /(^|\/)node_modules\//, /(^|\/)\.artifacts\//];
@@ -50,12 +52,13 @@ export function exportPreview({ runDir, previewRoot }) {
   if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error('staged preview no longer matches the accepted manifest');
   const bad = Object.keys(actual).filter((rel) => FORBIDDEN.some((re) => re.test(rel)));
   if (bad.length) throw new Error(`non-site files in preview output: ${bad.slice(0, 5).join(', ')}`);
+  const packaged = exportManifest(report, expected);
 
   const target = previewTarget(previewRoot, report.pr, report.sha);
   const revisionDir = path.dirname(target);
   if (fs.existsSync(revisionDir)) {
     const existing = fs.existsSync(target) ? manifest(target) : null;
-    if (JSON.stringify(existing) === JSON.stringify(expected)) return { target, status: 'already-published', files: Object.keys(expected).length };
+    if (sameManifest(existing, packaged)) return { target, status: 'already-published', files: Object.keys(expected).length };
     throw new Error('a different preview already exists for this PR/commit; published revisions are immutable');
   }
   const prDir = path.dirname(revisionDir);
@@ -67,7 +70,8 @@ export function exportPreview({ runDir, previewRoot }) {
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       fs.copyFileSync(path.join(source, rel), dest);
     }
-    if (JSON.stringify(manifest(path.join(staging, 'site'))) !== JSON.stringify(expected)) throw new Error('copy verification failed');
+    fs.writeFileSync(path.join(staging, 'site', RECEIPT_FILE), receiptBytes(buildReceipt(report, expected)));
+    if (!sameManifest(manifest(path.join(staging, 'site')), packaged)) throw new Error('copy verification failed');
     fs.renameSync(staging, revisionDir);
   } catch (e) {
     fs.rmSync(staging, { recursive: true, force: true });

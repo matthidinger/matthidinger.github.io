@@ -1,27 +1,16 @@
 // Final-SHA readiness gates. gatherFacts() collects live state; evaluate() is pure and unit-tested.
 import fs from 'node:fs';
 import path from 'node:path';
+import { PREVIEW_TIMEOUT_MS, exportManifest, hostedErrors, previewOrigin, resolveBackend, routeFile, sameManifest, verifyHostedReceipt } from './hosting.mjs';
 import { previewTarget, prInfo, validateAssociation } from './preview.mjs';
 import { REPO_NWO, dirtyFiles, headSha, manifest, readJson, sh, sha256, sha256File } from './util.mjs';
 
 export const REQUIRED_CHECK = 'site-acceptance';
-export const PREVIEW_TIMEOUT_MS = 15000;
 const ATTACHMENT_RE = /^https:\/\/github\.com\/user-attachments\/assets\/[0-9a-f-]{36}$/;
 
 const readIf = (f) => (fs.existsSync(f) ? readJson(f) : null);
 
-// The configured preview base must be a bare HTTPS origin (no credentials, path, query or fragment).
-export function previewOrigin(base) {
-  let u;
-  try { u = new URL(base); } catch { throw new Error('COPILOT_PREVIEW_BASE_URL is not a valid URL'); }
-  if (u.protocol !== 'https:') throw new Error('COPILOT_PREVIEW_BASE_URL must use https');
-  if (u.username || u.password || (u.pathname !== '/' && u.pathname !== '') || u.search || u.hash || base.includes('?') || base.includes('#')) {
-    throw new Error('COPILOT_PREVIEW_BASE_URL must be a bare origin (no credentials, path, query or fragment)');
-  }
-  return u.origin;
-}
-
-export const routeFile = (routePath) => (routePath.endsWith('/') ? routePath + 'index.html' : routePath).replace(/^\/+/, '');
+export { PREVIEW_TIMEOUT_MS, previewOrigin, routeFile };
 
 // Verifies the operator-configured private preview over this runtime's ambient authenticated transport.
 // No identity/auth headers are injected and redirects are never followed. Owner-only access policy is an
@@ -62,6 +51,17 @@ export async function verifyPreviewLink({ base, prefix, sha, paths, expected, fe
   return { status: 'pass', detail: `${routes.length} accepted routes served with X-Preview-Revision ${sha} and accepted HTML bytes`, routes };
 }
 
+// Backend-specific verification of the hosted preview for an accepted report. Returns null when the
+// header backend has no configured base (readiness then reports BLOCKED).
+export async function verifyHostedPreview({ backend, pr, report, expected, fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS }) {
+  const paths = [...new Set((report.results || []).map((x) => x.path))];
+  if (backend.type === 'header') {
+    if (!backend.base) return null;
+    return verifyPreviewLink({ base: backend.base, prefix: report.prefix, sha: report.sha, paths, expected, fetchImpl, timeoutMs });
+  }
+  return verifyHostedReceipt({ origin: backend.origin, prefix: report.prefix, pr, sha: report.sha, builder: report.builder, expected, paths, fetchImpl, timeoutMs });
+}
+
 export function verifyEvidence(runDir, report) {
   const missing = [];
   const mismatched = [];
@@ -74,7 +74,7 @@ export function verifyEvidence(runDir, report) {
   return { missing, mismatched };
 }
 
-export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.env, run = sh }) {
+export function gatherFacts({ root, runDir, pr, baselineDir, ux, backendFlag, env = process.env, run = sh, previewConfig }) {
   const report = readIf(path.join(runDir, 'report.json'));
   const facts = {
     pr, ux: !!ux, head: headSha(root), dirty: dirtyFiles(root), report,
@@ -84,8 +84,10 @@ export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.e
     baseline: baselineDir ? { report: readIf(path.join(baselineDir, 'report.json')), uploads: readIf(path.join(baselineDir, 'evidence', 'uploads.json')) } : null,
     mergeBase: null, pr_info: null, checks: null,
     previewRoot: env.COPILOT_PREVIEW_ROOT || '', previewBaseUrl: env.COPILOT_PREVIEW_BASE_URL || '',
-    preview: null, previewFetch: null,
+    preview: null, previewFetch: null, backend: null, backendError: null,
+    hosted: readIf(path.join(runDir, 'hosted', 'report.json')),
   };
+  try { facts.backend = resolveBackend({ flag: backendFlag, env, ...(previewConfig ? { config: previewConfig } : {}) }); } catch (e) { facts.backendError = e.message; }
   try { facts.mergeBase = run('git', ['merge-base', 'HEAD', 'origin/master'], { cwd: root }) || null; } catch (e) { facts.mergeBaseError = e.message.split('\n')[0]; }
   try { facts.pr_info = prInfo(pr, run); } catch (e) { facts.pr_info = { error: e.message.split('\n')[0] }; }
   if (report?.sha) {
@@ -97,7 +99,9 @@ export function gatherFacts({ root, runDir, pr, baselineDir, ux, env = process.e
       const target = previewTarget(facts.previewRoot, pr, report.sha);
       const expected = readIf(path.join(runDir, 'preview-manifest.json'));
       const exists = fs.existsSync(target);
-      facts.preview = { exists, matches: exists && expected ? JSON.stringify(manifest(target)) === JSON.stringify(expected) : false };
+      let want = null;
+      try { want = expected && exportManifest(report, expected); } catch (e) { facts.previewError = e.message; }
+      facts.preview = { exists, matches: exists && want ? sameManifest(manifest(target), want) : false };
     }
   }
   return facts;
@@ -157,16 +161,46 @@ export function evaluate(f) {
     else gate('ci', 'pass', `${checks.length} check run(s) succeeded on ${sha}`);
   }
 
-  if (!f.previewRoot) gate('preview-export', 'blocked', 'COPILOT_PREVIEW_ROOT is not provided by the runtime');
-  else if (!f.preview?.exists) gate('preview-export', 'fail', 'preview not exported for this PR/commit; run bin/export-preview.mjs');
-  else if (!f.preview.matches) gate('preview-export', 'fail', 'exported preview does not match the accepted build');
-  else gate('preview-export', 'pass', 'immutable preview exported for this PR/commit');
+  const be = f.backend;
+  if (!be) gate('preview-backend', 'fail', f.backendError || 'no preview backend selected');
+  else gate('preview-backend', 'pass', `${be.id}: ${be.type === 'receipt' ? 'revision receipt plus served bytes' : 'X-Preview-Revision header plus route HTML'} (selected by ${be.source})`);
 
-  if (!f.previewBaseUrl) gate('private-preview-link', 'blocked', 'COPILOT_PREVIEW_BASE_URL is not configured: private preview ingress has not been approved/configured by the operator');
-  else if (!f.previewFetch) gate('private-preview-link', 'fail', 'preview deep link was not verified');
-  else if (f.previewFetch.status === 'blocked') gate('private-preview-link', 'blocked', `external verification blocker: ${f.previewFetch.detail}`);
-  else if (f.previewFetch.status !== 'pass') gate('private-preview-link', 'fail', `preview deep link check failed: ${f.previewFetch.detail}`);
-  else gate('private-preview-link', 'pass', f.previewFetch.detail);
+  if (!f.previewRoot) gate('preview-export', 'blocked', 'COPILOT_PREVIEW_ROOT is not provided by the runtime');
+  else if (f.previewError) gate('preview-export', 'fail', f.previewError);
+  else if (!f.preview?.exists) gate('preview-export', 'fail', 'preview not exported for this PR/commit; run bin/export-preview.mjs');
+  else if (!f.preview.matches) gate('preview-export', 'fail', 'exported preview does not match the accepted build plus its revision receipt');
+  else gate('preview-export', 'pass', 'immutable preview package (accepted site + revision receipt) exported for this PR/commit');
+
+  const pf = f.previewFetch;
+  let link = null;
+  if (be?.type === 'header') {
+    if (!f.previewBaseUrl) link = ['blocked', 'COPILOT_PREVIEW_BASE_URL is not configured: private preview ingress has not been approved/configured by the operator'];
+    else if (!pf) link = ['fail', 'preview deep link was not verified'];
+    else if (pf.status === 'blocked') link = ['blocked', `external verification blocker: ${pf.detail}`];
+    else if (pf.status !== 'pass') link = ['fail', `preview deep link check failed: ${pf.detail}`];
+    else link = ['pass', pf.detail];
+    gate('private-preview-link', ...link);
+  } else if (be?.type === 'receipt') {
+    if (!pf) link = ['fail', 'hosted preview receipt was not verified'];
+    else if (pf.status === 'blocked') link = ['blocked', `external blocker: ${pf.detail}`];
+    else if (pf.status !== 'pass') link = ['fail', `hosted preview rejected: ${pf.detail}`];
+    else link = ['pass', pf.detail];
+    gate('preview-receipt', ...link);
+  }
+
+  if (!be) gate('hosted-browser', 'fail', 'no preview backend selected');
+  else if (link?.[0] === 'blocked') gate('hosted-browser', 'blocked', 'waiting for a verified hosted preview before browser checks can count');
+  else if (link?.[0] !== 'pass') gate('hosted-browser', 'fail', 'hosted preview is not verified, so hosted browser checks cannot count');
+  else {
+    let origin = be.origin;
+    if (be.type === 'header') { try { origin = previewOrigin(f.previewBaseUrl); } catch { origin = null; } }
+    const errs = hostedErrors(f.hosted, { report: r, pr: f.pr, backend: be, origin });
+    if (errs.length) gate('hosted-browser', 'fail', errs.join('; '));
+    else {
+      const copy = f.hosted.results.filter((x) => x.copyCode?.length).length;
+      gate('hosted-browser', 'pass', `${f.hosted.results.length} route/viewport checks passed in Chromium against the hosted preview for ${sha}, including ${copy} copy-code interaction runs`);
+    }
+  }
 
   if (f.ux) {
     const b = f.baseline;

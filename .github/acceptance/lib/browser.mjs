@@ -1,5 +1,7 @@
-// Browser acceptance for a prefix-served build: route/content assertions, loading failures,
-// layout overflow, code/table scrollability and non-blank screenshots.
+// Browser acceptance for a prefix-served build (local NAS server or the hosted preview): route/content
+// assertions, loading failures, layout overflow, code/table scrollability, non-blank screenshots and the
+// blog "Copy code" behaviour (exact clipboard text, keyboard focus/activation, live announcements,
+// denied/unavailable clipboard and no-JavaScript readability).
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
@@ -82,34 +84,243 @@ function inspectPage(spec) {
     scrollHeight: doc.scrollHeight };
 }
 
+// ---------- Copy code buttons ----------
+export const COPY_BLOCKS = '.page__content div.highlighter-rouge, .page__content figure.highlight';
+export const COPY_SUCCESS_RE = /\bcopied\b/i;
+export const COPY_FAILURE_RE = /\b(fail(ed|ure)?|denied|unavailable|could ?n[o']t|unable)\b/i;
+// Denial as the browser reports it: writeText rejects with NotAllowedError. (Chromium cannot be made to
+// deny a user-activated write through permissions, so the rejection is injected at the API boundary.)
+const DENY_CLIPBOARD = `(() => {
+  const deny = () => Promise.reject(new DOMException('Write permission denied.', 'NotAllowedError'));
+  if (typeof Clipboard !== 'undefined') Object.defineProperty(Clipboard.prototype, 'writeText', { value: deny, configurable: true, writable: true });
+})();`;
+const NO_CLIPBOARD = `Object.defineProperty(Navigator.prototype, 'clipboard', { get: () => undefined, configurable: true });`;
+
+// Runs in the page: where copy buttons are, and whether they are where they belong.
+function surveyCopy(sel) {
+  const codeOf = (b) => b.querySelector('td.rouge-code pre') || b.querySelector('pre code') || b.querySelector('pre');
+  const blocks = [...document.querySelectorAll(sel)].filter((b, _, all) => !all.some((o) => o !== b && o.contains(b)));
+  const nonEmpty = blocks.filter((b) => codeOf(b) && codeOf(b).textContent.trim() !== '');
+  const buttons = [...document.querySelectorAll('.code-copy')];
+  const problems = [];
+  for (const b of blocks) {
+    const own = [...b.children].filter((c) => c.matches('.code-copy'));
+    if (!nonEmpty.includes(b) && own.length) problems.push('copy button on an empty code block');
+    if (nonEmpty.includes(b) && own.length !== 1) problems.push(`nonempty code block has ${own.length} copy buttons`);
+  }
+  for (const btn of buttons) {
+    if (btn.tagName !== 'BUTTON' || btn.type !== 'button') problems.push(`copy control is <${btn.tagName.toLowerCase()}>, not <button type="button">`);
+    if (btn.closest('pre, code')) problems.push('copy button inside the code text');
+    if (!nonEmpty.includes(btn.parentElement)) problems.push('copy button outside a nonempty code block (inline code, prose or empty block)');
+    if (btn.textContent.trim() !== 'Copy code') problems.push(`button label is "${btn.textContent.trim()}"`);
+    const r = btn.getBoundingClientRect();
+    const pr = btn.parentElement.getBoundingClientRect();
+    const st = getComputedStyle(btn);
+    if (!(r.width > 0 && r.height > 0) || st.visibility === 'hidden' || st.display === 'none') problems.push('copy button not visible');
+    else {
+      if (r.left < pr.left - 1 || r.right > pr.right + 1) problems.push('copy button overflows its code block');
+      if (r.width < 24 || r.height < 24) problems.push(`copy button target ${Math.round(r.width)}x${Math.round(r.height)}px is under 24px`);
+    }
+  }
+  const unreadable = nonEmpty.filter((b) => {
+    const pre = b.querySelector('pre');
+    const r = pre ? pre.getBoundingClientRect() : { width: 0, height: 0 };
+    return !pre || r.width === 0 || r.height === 0 || getComputedStyle(pre).userSelect === 'none' || getComputedStyle(codeOf(b)).userSelect === 'none';
+  }).length;
+  return { blocks: blocks.length, nonEmpty: nonEmpty.length, buttons: buttons.length, problems: [...new Set(problems)], unreadable };
+}
+
+const expectedCode = (btn) => btn.evaluate((b) => {
+  const blk = b.parentElement;
+  const c = blk.querySelector('td.rouge-code pre') || blk.querySelector('pre code') || blk.querySelector('pre');
+  return c ? c.textContent : null;
+});
+
+// Starts recording live-region text changes made from now on, so a stale message from an earlier
+// activation can never satisfy a later check.
+const watchLive = (page) => page.evaluate(() => {
+  const read = () => [...document.querySelectorAll('[role="status"], [role="alert"], [aria-live="polite"], [aria-live="assertive"]')]
+    .map((e) => e.textContent.trim()).filter(Boolean).join(' | ');
+  window.__liveLog = [];
+  window.__liveObserver?.disconnect();
+  window.__liveObserver = new MutationObserver(() => { const t = read(); if (t) window.__liveLog.push(t); });
+  window.__liveObserver.observe(document.body, { subtree: true, childList: true, characterData: true });
+});
+
+async function waitLive(page, re, timeout = 3000) {
+  return page.waitForFunction(({ src, flags }) => (window.__liveLog || []).some((t) => new RegExp(src, flags).test(t)),
+    { src: re.source, flags: re.flags }, { timeout }).then(() => true, () => false);
+}
+const liveLog = (page) => page.evaluate(() => (window.__liveLog || []).join(' || '));
+
+// Keyboard-focus a button (so :focus-visible applies as it would for a keyboard user) and report its focus ring.
+async function keyboardFocus(page, btn) {
+  await btn.focus().catch(() => {});
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Tab');
+  return btn.evaluate((b) => {
+    const st = getComputedStyle(b);
+    return { active: document.activeElement === b, focusVisible: b.matches(':focus-visible'), outline: st.outlineStyle, width: parseFloat(st.outlineWidth) || 0, color: st.outlineColor };
+  });
+}
+
+export async function checkCopyCode({ newContext, url, spec, viewport }) {
+  const out = [];
+  const add = (name, ok, detail) => out.push({ name: `copy-code: ${name}`, ok: !!ok, detail });
+  const min = spec.min ?? 1;
+  const open = async (ctxOpts = {}, init) => {
+    const ctx = await newContext(ctxOpts);
+    if (init) await ctx.addInitScript(init);
+    const page = await ctx.newPage();
+    page.setDefaultTimeout(15000);
+    const errors = [];
+    page.on('pageerror', (e) => errors.push(String(e.message).split('\n')[0]));
+    await page.goto(url, { waitUntil: 'load' });
+    return { ctx, page, errors };
+  };
+
+  // 1. Placement + real clipboard via keyboard (Enter, Space) and pointer on several snippets.
+  {
+    const { ctx, page, errors } = await open({ permissions: ['clipboard-read', 'clipboard-write'] });
+    try {
+      const s = await page.evaluate(surveyCopy, COPY_BLOCKS);
+      add('buttons on every nonempty code block only', s.buttons === s.nonEmpty && s.nonEmpty >= min && !s.problems.length,
+        `${s.buttons} buttons / ${s.nonEmpty} nonempty of ${s.blocks} code blocks (min ${min})${s.problems.length ? '; ' + s.problems.join('; ') : ''}`);
+      const n = Math.min(s.buttons, s.nonEmpty);
+      const plan = [];
+      if (n >= 1) plan.push({ i: 0, how: 'Enter' });
+      if (n >= 2) plan.push({ i: n - 1, how: 'Space' });
+      if (n >= 3) plan.push({ i: Math.floor(n / 2), how: viewport.isMobile ? 'tap' : 'click' });
+      if (!n) add('copy interactions', false, 'no copy buttons to exercise');
+      for (const { i, how } of plan) {
+        const step = `snippet ${i + 1} ${how}`;
+        try {
+          const btn = page.locator('.code-copy').nth(i);
+          const expected = await expectedCode(btn);
+          const sentinel = `sentinel-${Date.now()}-${i}`;
+          await page.evaluate(() => window.focus());
+          await page.evaluate((t) => navigator.clipboard.writeText(t), sentinel).catch(() => {});
+          await btn.scrollIntoViewIfNeeded();
+          if (how === 'Enter' || how === 'Space') {
+            const f = await keyboardFocus(page, btn);
+            add(`snippet ${i + 1} visible keyboard focus`, f.active && f.focusVisible && f.outline !== 'none' && f.width >= 2,
+              f.active ? `focus-visible=${f.focusVisible} outline ${f.outline} ${f.width}px ${f.color}` : 'button did not receive keyboard focus');
+            await watchLive(page);
+            await page.keyboard.press(how);
+          } else {
+            await watchLive(page);
+            if (how === 'tap') await btn.tap(); else await btn.click();
+          }
+          const announced = await waitLive(page, COPY_SUCCESS_RE);
+          const live = await liveLog(page);
+          const label = ((await btn.textContent()) || '').trim();
+          let clip;
+          try { clip = await page.evaluate(() => navigator.clipboard.readText()); } catch (e) { clip = `<read failed: ${e.message.split('\n')[0]}>`; }
+          const exact = expected !== null && clip === expected;
+          add(`${step} copies exact code`, exact && !/copy code/i.test(clip),
+            exact ? `${expected.length} chars, ${expected.split('\n').length} lines identical` : clip === sentinel ? 'clipboard unchanged' : `clipboard differs from the code (${JSON.stringify(String(clip).slice(0, 60))})`);
+          add(`${step} announces success`, announced && !COPY_FAILURE_RE.test(live) && COPY_SUCCESS_RE.test(label),
+            `live region "${live}", button "${label}"`);
+        } catch (e) {
+          add(`${step} copy`, false, `error: ${e.message.split('\n')[0]}`);
+        }
+      }
+      if (errors.length) add('no script errors', false, errors.join('; '));
+    } finally {
+      await ctx.close();
+    }
+  }
+
+  // 2/3. Denied and unavailable clipboard: honest failure, no success, code still readable and selected.
+  for (const [mode, init] of [['denied clipboard', DENY_CLIPBOARD], ['unavailable clipboard', NO_CLIPBOARD]]) {
+    const { ctx, page, errors } = await open({}, init);
+    try {
+      const btn = page.locator('.code-copy').first();
+      if (!(await btn.count())) { add(`${mode} reports failure`, false, 'no copy button'); continue; }
+      await btn.scrollIntoViewIfNeeded();
+      await watchLive(page);
+      await btn.click();
+      const failed = await waitLive(page, COPY_FAILURE_RE);
+      await page.waitForTimeout(300);
+      const live = await liveLog(page);
+      const label = ((await btn.textContent()) || '').trim();
+      const st = await btn.evaluate((b) => {
+        const blk = b.parentElement;
+        const code = blk.querySelector('td.rouge-code pre') || blk.querySelector('pre code') || blk.querySelector('pre');
+        if (!code) return { visible: false, selectable: false, selected: false };
+        const sel = window.getSelection();
+        const r = code.getBoundingClientRect();
+        return { visible: r.width > 0 && r.height > 0, selectable: getComputedStyle(code).userSelect !== 'none',
+          selected: !!(sel && sel.rangeCount && sel.getRangeAt(0).intersectsNode(code) && sel.toString().trim()) };
+      });
+      add(`${mode} reports failure, never success`, failed && !COPY_SUCCESS_RE.test(live) && !COPY_SUCCESS_RE.test(label) && COPY_FAILURE_RE.test(label),
+        `live region "${live}", button "${label}"`);
+      add(`${mode} leaves code readable and selectable`, st.visible && st.selectable, `visible=${st.visible} selectable=${st.selectable} selectedForManualCopy=${st.selected}`);
+      if (errors.length) add(`${mode} no script errors`, false, errors.join('; '));
+    } catch (e) {
+      add(`${mode} reports failure, never success`, false, `error: ${e.message.split('\n')[0]}`);
+    } finally {
+      await ctx.close();
+    }
+  }
+
+  // 4. No JavaScript: code is readable, nothing inert is rendered.
+  {
+    const { ctx, page } = await open({ javaScriptEnabled: false });
+    try {
+      const s = await page.evaluate(surveyCopy, COPY_BLOCKS).catch(() => null);
+      const nojs = await page.$$eval(COPY_BLOCKS, (bs) => bs.map((b) => {
+        const pre = b.querySelector('pre');
+        const r = pre ? pre.getBoundingClientRect() : { width: 0, height: 0 };
+        return { ok: !!pre && r.width > 0 && r.height > 0 && pre.textContent.trim().length > 0 && ['auto', 'scroll'].includes(getComputedStyle(pre).overflowX) };
+      }));
+      const readable = nojs.filter((x) => x.ok).length;
+      const buttons = await page.locator('.code-copy').count();
+      add('no-JavaScript code readable without buttons', buttons === 0 && readable >= min && (!s || !s.unreadable),
+        `${readable}/${nojs.length} code blocks readable and scrollable, ${buttons} copy buttons`);
+    } catch (e) {
+      add('no-JavaScript code readable without buttons', false, `error: ${e.message.split('\n')[0]}`);
+    } finally {
+      await ctx.close();
+    }
+  }
+  return out;
+}
+
 export async function checkRoute(browser, { origin, prefix, route, viewport, outDir, origins, strictOverflow, label }) {
   const failures = [];
   const warnings = [];
   const external = new Set();
   const prodRe = originRegex(origins);
-  const ctx = await browser.newContext({
-    viewport: { width: viewport.width, height: viewport.height },
-    deviceScaleFactor: viewport.deviceScaleFactor || 1,
-    isMobile: !!viewport.isMobile,
-    hasTouch: !!viewport.isMobile,
-    serviceWorkers: 'block',
-  });
-  try {
-    await ctx.route('**/*', (r) => {
-      const u = r.request().url();
-      if (u.startsWith(origin + '/')) {
-        const p = new URL(u).pathname;
-        if (p === prefix || p.startsWith(prefix + '/')) return r.continue();
-        failures.push(`request escaped preview prefix: ${p}`);
-        return r.fulfill({ status: 404, body: '' });
-      }
-      if (prodRe.test(u)) {
-        failures.push(`production URL requested instead of branch asset: ${u}`);
-        return r.abort();
-      }
-      try { external.add(new URL(u).host); } catch { /* data: etc */ }
+  const routeRequests = (r) => {
+    const u = r.request().url();
+    if (u.startsWith(origin + '/')) {
+      const p = new URL(u).pathname;
+      if (p === prefix || p.startsWith(prefix + '/')) return r.continue();
+      failures.push(`request escaped preview prefix: ${p}`);
+      return r.fulfill({ status: 404, body: '' });
+    }
+    if (prodRe.test(u)) {
+      failures.push(`production URL requested instead of branch asset: ${u}`);
       return r.abort();
+    }
+    try { external.add(new URL(u).host); } catch { /* data: etc */ }
+    return r.abort();
+  };
+  const newContext = async (extra = {}) => {
+    const c = await browser.newContext({
+      viewport: { width: viewport.width, height: viewport.height },
+      deviceScaleFactor: viewport.deviceScaleFactor || 1,
+      isMobile: !!viewport.isMobile,
+      hasTouch: !!viewport.isMobile,
+      serviceWorkers: 'block',
+      ...extra,
     });
+    await c.route('**/*', routeRequests);
+    return c;
+  };
+  const ctx = await newContext();
+  try {
     const page = await ctx.newPage();
     page.setDefaultTimeout(30000);
     page.on('pageerror', (e) => {
@@ -185,9 +396,19 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
       }
     }
 
+    let copyCode = null;
+    if (route.copyCode) {
+      try {
+        copyCode = await checkCopyCode({ newContext, url, spec: route.copyCode, viewport });
+        for (const a of copyCode) assert(a.name, a.ok, a.detail);
+      } catch (e) {
+        failures.push(`copy-code check crashed: ${e.message.split('\n')[0]}`);
+      }
+    }
+
     return {
       route: route.id, path: route.path, purpose: route.purpose, viewport: viewport.name,
-      status: resp ? resp.status() : null, h1: info.h1, counts: info.counts, assertions, interactions,
+      status: resp ? resp.status() : null, h1: info.h1, counts: info.counts, assertions, interactions, copyCode,
       overflowPx: info.overflowPx, wideBlocks: info.wideBlocks, blocks: info.blocks,
       externalBlocked: [...external].sort(),
       screenshot: { file, sha256: sha256(png), width: viewport.width, height, truncated: info.scrollHeight > MAX_SHOT_HEIGHT, inkRatio: Number(ink.toFixed(4)) },

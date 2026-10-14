@@ -14,7 +14,7 @@ Closes #
 - [ ] Self-hosted deliverable acceptance passed on the final commit (`bin/accept.mjs --pr N`)
 - [ ] Every screenshot viewed and recorded (`bin/inspect.mjs`); before/after included for UX work
 - [ ] `site-acceptance` CI passed on the final commit
-- [ ] Preview exported; private link: configured / BLOCKED (state which)
+- [ ] Preview package exported; hosted preview (backend `azure-receipt` / `private-header`): verified + `bin/check-hosted.mjs` passed / BLOCKED awaiting publication (state which)
 - [ ] Readiness: READY / BLOCKED (exact gate)
 
 <!-- The acceptance evidence section below is maintained by bin/upload-screenshots.mjs. -->

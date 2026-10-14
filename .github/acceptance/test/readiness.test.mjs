@@ -26,6 +26,8 @@ function facts(over = {}) {
     checks: [{ name: 'site-acceptance', status: 'completed', conclusion: 'success' }],
     previewRoot: '/preview', preview: { exists: true, matches: true },
     previewBaseUrl: 'https://preview.invalid', previewFetch: { status: 'pass', detail: 'verified' },
+    backend: { id: 'private-header', type: 'header', source: 'test', originEnv: 'COPILOT_PREVIEW_BASE_URL', base: 'https://preview.invalid', public: false, configured: true },
+    hosted: { sha: SHA, pr: 2, prefix: previewPrefix(2, SHA), backend: 'private-header', origin: 'https://preview.invalid', strictOverflow: false, verification: { status: 'pass' }, results: [{ route: 'talks', viewport: 'desktop', passed: true, failures: [] }], passed: true },
     ...over,
   };
 }
@@ -39,6 +41,7 @@ test('missing preview base URL -> blocked (not ready, no link)', () => {
   const r = evaluate(facts({ previewBaseUrl: '', previewFetch: null }));
   assert.equal(r.overall, 'blocked');
   assert.equal(gate(r, 'private-preview-link').status, 'blocked');
+  assert.equal(gate(r, 'hosted-browser').status, 'blocked');
 });
 
 test('failed or unverified preview link is not ready; unreachable/denied is an external blocker', () => {
@@ -84,6 +87,7 @@ test('CI missing, pending or failed -> not ready', () => {
 test('preview not exported or different -> not ready', () => {
   assert.equal(gate(evaluate(facts({ preview: { exists: false } })), 'preview-export').status, 'fail');
   assert.equal(gate(evaluate(facts({ preview: { exists: true, matches: false } })), 'preview-export').status, 'fail');
+  assert.equal(gate(evaluate(facts({ previewError: 'accepted site already contains preview-revision.json' })), 'preview-export').status, 'fail');
 });
 
 test('UX jobs require strict overflow and embedded before/after', () => {

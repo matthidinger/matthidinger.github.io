@@ -1,0 +1,17 @@
+{
+  "defaultBackend": "azure-receipt",
+  "backends": {
+    "azure-receipt": {
+      "type": "receipt",
+      "description": "Approved public static preview. An operator publishes the exported package unchanged; readiness verifies preview-revision.json and every served byte.",
+      "origin": "https://matthidingerpreviews.z5.web.core.windows.net",
+      "public": true
+    },
+    "private-header": {
+      "type": "header",
+      "description": "Operator-configured private ingress from COPILOT_PREVIEW_BASE_URL. Each route must carry X-Preview-Revision and the accepted HTML bytes.",
+      "originEnv": "COPILOT_PREVIEW_BASE_URL",
+      "public": false
+    }
+  }
+}

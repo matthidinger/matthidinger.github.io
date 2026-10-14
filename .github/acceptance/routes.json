@@ -56,7 +56,10 @@
           "message": "google is not defined",
           "reason": "pre-existing: js/grayscale.js calls Google Maps but the timeline layout never loads that API (also happens in production)"
         }
-      ]
+      ],
+      "maxSelectors": {
+        ".code-copy": 0
+      }
     },
     {
       "id": "blog",
@@ -70,7 +73,8 @@
         "nav.pagination a[rel=\"next\"]": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0
+        "#site-nav .hidden-links li": 0,
+        ".code-copy": 0
       },
       "interactions": [
         {
@@ -91,7 +95,8 @@
       ],
       "minText": 50,
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0
+        "#site-nav .hidden-links li": 0,
+        ".code-copy": 0
       }
     },
     {
@@ -116,7 +121,10 @@
           "click": ".post-pager__link--next",
           "expectPath": "/archive/2008/06/17/synergy-3-desktops-1-keyboard/"
         }
-      ]
+      ],
+      "copyCode": {
+        "min": 13
+      }
     },
     {
       "id": "post-migrated-code",
@@ -139,6 +147,9 @@
         "#site-nav .hidden-links li": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
+      },
+      "copyCode": {
+        "min": 3
       }
     },
     {
@@ -161,7 +172,10 @@
       "absentText": [
         "**",
         "###"
-      ]
+      ],
+      "copyCode": {
+        "min": 3
+      }
     },
     {
       "id": "blog-page-2",
@@ -174,7 +188,8 @@
         "nav.pagination a[aria-current=\"page\"]": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0
+        "#site-nav .hidden-links li": 0,
+        ".code-copy": 0
       },
       "interactions": [
         {
@@ -203,7 +218,8 @@
       "maxSelectors": {
         "#site-nav .hidden-links li": 0,
         ".page__content h1": 0,
-        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
+        ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
+        ".code-copy": 0
       },
       "absentText": [
         "**"
@@ -222,7 +238,8 @@
         "#site-nav .hidden-links li": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
-        ".page__content table": 0
+        ".page__content table": 0,
+        ".code-copy": 0
       },
       "absentText": [
         "| ---"
@@ -252,7 +269,31 @@
           "click": ".post-pager__link--prev",
           "expectPath": "/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project/"
         }
-      ]
+      ],
+      "copyCode": {
+        "min": 4
+      }
+    },
+    {
+      "id": "post-inline-code",
+      "path": "/archive/2011/12/12/tweaking-subtext-with-hero-shots-next-to-each-post/",
+      "purpose": "Post mixing inline code in a numbered list with code blocks: copy buttons on blocks only, never on inline code",
+      "title": "Tweaking Subtext with Hero Shots next to each post",
+      "h1": "Tweaking Subtext with Hero Shots next to each post",
+      "text": [
+        "If no images have that ID"
+      ],
+      "selectors": {
+        "pre.highlight": 3,
+        ".page__content li > code": 3
+      },
+      "maxSelectors": {
+        "#site-nav .hidden-links li": 0,
+        ".page__content :not(pre) > code ~ .code-copy, .page__content li > .code-copy, .page__content p > .code-copy": 0
+      },
+      "copyCode": {
+        "min": 3
+      }
     }
   ]
 }
