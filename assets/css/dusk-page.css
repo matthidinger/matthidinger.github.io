@@ -150,7 +150,7 @@ img, svg { max-width: 100%; }
 
 /* ---------- Images ---------- */
 .dkp-prose img { height: auto; border-radius: 6px; vertical-align: middle; }
-.dkp-prose :is(p > img:only-child, p > a:only-child > img:only-child, li > img, li > a > img) {
+.dkp-prose :where(p > img:only-child, p > a:only-child > img:only-child, li > img, li > a > img) {
   display: block; margin: .4em auto;
   box-shadow: 0 0 0 1px rgba(27, 33, 66, .1), 0 10px 30px -12px rgba(27, 33, 66, .25);
 }
@@ -189,8 +189,9 @@ img, svg { max-width: 100%; }
 .dkp-prose > :is(div.highlighter-rouge, figure.highlight, figure.dk-video) {
   margin-inline: calc(-1 * clamp(0px, (100cqw - var(--col)) / 2, 60px));
 }
+.dkp-prose :where(div.highlighter-rouge, figure.highlight)::before { content: "Code"; }
 .dkp-prose :is(div.highlighter-rouge, figure.highlight)::before {
-  content: "Code"; display: block; height: 46px; padding: 0 28px;
+  display: block; height: 46px; padding: 0 28px;
   font: 600 12px/46px var(--ui); letter-spacing: .14em; text-transform: uppercase; color: #a7a6c2;
 }
 .dkp-prose .language-csharp::before, .dkp-prose .language-cs::before { content: "C#"; }

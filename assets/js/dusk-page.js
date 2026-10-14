@@ -45,6 +45,7 @@
     set(S.tower, 'fill', row[13]); set(S.boat, 'fill', row[14]); set(S.boat, 'color', row[14]);
     for (const el of [S.stars, S.moon, S.lamp, S.mast]) set(el, 'opacity', 1);
   }
+  const starPts = S ? [...S.stars.querySelectorAll('circle')].map((c) => [c, +c.getAttribute('cx'), +c.getAttribute('cy')]) : [];
 
   function foot() {
     if (!S) return;
@@ -70,6 +71,17 @@
     for (const [a, b] of busy) { take(cur, Math.min(a, hi)); cur = Math.max(cur, b); }
     take(cur, hi);
     set(S.moon, 'transform', `translate(${f(x0 + w * 0.82)},${f(top + (my - box.top) / sc)})`);
+    // Stars stay out of the footer's words so the links read cleanly.
+    const words = [];
+    for (const el of document.querySelectorAll('.dk-foot-in a, .dk-foot-in p')) {
+      const rg = document.createRange();
+      rg.selectNodeContents(el);
+      for (const b of rg.getClientRects()) if (b.width) words.push([b.left - 6, b.top - 6, b.right + 6, b.bottom + 6]);
+    }
+    for (const [c, cx, cy] of starPts) {
+      const sx = box.left + (cx - x0) * sc, sy = box.top + (cy - top) * sc;
+      set(c, 'visibility', words.some(([l, t, rr, bb]) => sx > l && sx < rr && sy > t && sy < bb) ? 'hidden' : 'visible');
+    }
     if (edge && edge.clientWidth) {
       const W = Math.round((edge.clientWidth * 90) / (edge.clientHeight || 60));
       set(edge, 'viewBox', `0 0 ${W} 90`);
@@ -99,6 +111,22 @@
     }
   }
 
+  // Long CamelCase identifiers in titles may break at their word humps rather than mid-letter.
+  for (const el of document.querySelectorAll('.dkp-title, .dkp-entry-title a, .post-pager__title, .dkp-more a')) {
+    for (const n of [...el.childNodes]) {
+      if (n.nodeType !== 3 || !/\S{16,}/.test(n.data)) continue;
+      const frag = document.createDocumentFragment();
+      for (const tok of n.data.split(/(\s+)/)) {
+        if (tok.length < 16) { frag.append(tok); continue; }
+        tok.split(/(?<=[a-z])(?=[A-Z])/).forEach((part, i) => {
+          if (i) frag.append(document.createElement('wbr'));
+          frag.append(part);
+        });
+      }
+      n.replaceWith(frag);
+    }
+  }
+
   function layout() {
     if (msvg) mast();
     foot();
@@ -106,6 +134,7 @@
   }
   new ResizeObserver(layout).observe(document.body);
   layout();
+  if (document.fonts) document.fonts.ready.then(layout);
   if (S) D.loop(fsvg, frame);
 
   // Very wide or very tall teaser images crop from the top-left, where screenshots carry their detail.
