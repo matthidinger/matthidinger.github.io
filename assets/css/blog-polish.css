@@ -260,6 +260,45 @@
 .page__content pre::-webkit-scrollbar { height: 10px; }
 .page__content pre::-webkit-scrollbar-thumb { border: 3px solid var(--bp-code-bg); border-radius: 10px; background: #3a4a5a; }
 .page__content pre:focus-visible { outline: 2px solid #7cc4e4; outline-offset: -2px; }
+.page__content pre ::selection { background: rgba(124, 196, 228, 0.32); }
+
+/* Copy code button (added by assets/js/code-copy.js), aligned with the language bar */
+.page__content .code-copy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0.5em 1.1em;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0 var(--bp-radius) 0 0;
+  background: transparent;
+  color: #b8c6d2;
+  font-family: var(--bp-mono);
+  font-size: 0.68em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.page__content .code-copy:hover { background: rgba(255, 255, 255, 0.07); color: var(--bp-code-text); }
+.page__content .code-copy:focus { outline: none; }
+.page__content .code-copy:focus-visible { outline: 2px solid #7cc4e4; outline-offset: -3px; color: var(--bp-code-text); }
+.page__content .code-copy.is-copied { color: #7ee787; }
+.page__content .code-copy.is-failed { color: #ffa198; }
+.code-copy__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Syntax colours (Rouge tokens), tuned for WCAG AA on the dark background */
 .highlight .c, .highlight .ch, .highlight .cm, .highlight .c1, .highlight .cs, .highlight .cpf { color: #8b9aa8; font-style: italic; }
@@ -478,4 +517,5 @@
 @media print {
   .page__content div.highlighter-rouge { box-shadow: none; }
   .page__content pre { white-space: pre-wrap; }
+  .page__content .code-copy { display: none; }
 }

@@ -48,7 +48,7 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
 
 ```sh
 npm ci --prefix .github/acceptance --ignore-scripts   # pinned browser driver; isolated from the root npm project
-npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, readiness, export)
+npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, copy-code, readiness, hosting, export)
 
 # Iterate on uncommitted work (labelled development; never deliverable):
 node .github/acceptance/bin/accept.mjs --dev --pr N
@@ -62,9 +62,12 @@ RUN=.artifacts/acceptance/pr-N-$(git rev-parse HEAD)
 
 node .github/acceptance/bin/inspect.mjs "$RUN" --note "what you checked in each image"  # only after viewing every PNG
 node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N [--baseline BASE_RUN]  # upload + embed in PR body
-node .github/acceptance/bin/export-preview.mjs "$RUN" --pr N                            # isolated immutable preview
+node .github/acceptance/bin/export-preview.mjs "$RUN" --pr N                            # isolated immutable preview package + receipt
 gh pr checks N -R matthidinger/matthidinger.github.io --watch                           # final-SHA CI
 node .github/acceptance/bin/readiness.mjs "$RUN" --pr N [--ux --baseline BASE_RUN]      # 0 ready, 2 blocked, 1 not ready
+# after the operator publishes the package (readiness then verifies receipt + served bytes):
+node .github/acceptance/bin/check-hosted.mjs "$RUN" --pr N                              # browser checks against the hosted preview
+node .github/acceptance/bin/readiness.mjs "$RUN" --pr N [--ux --baseline BASE_RUN]      # re-run; hosted-browser gate now counts
 node .github/acceptance/bin/upload-screenshots.mjs "$RUN" --pr N [--baseline BASE_RUN]  # refresh the readiness table; keep --baseline or the before images drop out
 ```
 
@@ -82,6 +85,7 @@ Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-
   - wide code and tables scroll inside their own box
   - the screenshot is not blank
   - page-level horizontal overflow is a warning, or a failure with `--ux`
+  - `copyCode` (`{min}`) on blog-post routes: every nonempty fenced block (and nothing else) gets a real `<button type="button">` with a visible `:focus-visible` ring; Enter, Space and click/tap each copy the exact `code` text (whitespace and newlines, no label or button text) to the clipboard and announce success in a polite live region; a denied or unavailable clipboard announces failure, never success, and leaves the code readable and selectable; with JavaScript disabled the code is readable and scrollable with no buttons. `maxSelectors: {".code-copy": 0}` keeps buttons off non-post pages
   - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot)
   - screenshots show the real UI. Never hide a defect in the harness; if a capture looks wrong, reproduce it with real browser actions (e.g. a viewport change) and fix the site
 - **Readiness.** Every gate must pass:
@@ -89,12 +93,26 @@ Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-
   - an open PR from this repo against `master`
   - screenshots matching their hashes, inspected and embedded as `github.com/user-attachments` URLs together with the SHA
   - the `site-acceptance` check succeeded on that SHA
-  - the preview is exported, and its private link is configured and verified
+  - a known preview backend is selected, the preview package (site + receipt) is exported, the hosted preview is verified for this exact revision, and `check-hosted.mjs` passed every accepted route/viewport against it for the same SHA
   - for `--ux` jobs, before/after evidence, with a baseline built from the merge base with `origin/master` (if the merge base cannot be established, the gate fails)
 
-## Private preview
+## Preview hosting
 
-`export-preview.mjs` copies only the compiled, prefix-rewritten public site into `$COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site`. The preview reader serves that directory at the URL `/matthidinger.github.io/pr-N/FULL_SHA/...`: `site` is a disk directory, never a URL segment. The copy is atomic (stage, then rename) and immutable (a different build for the same commit is refused). It validates the PR number, state, base, head repo and head SHA first.
+`export-preview.mjs` copies only the compiled, prefix-rewritten public site, plus a generated `preview-revision.json` receipt, into `$COPILOT_PREVIEW_ROOT/matthidinger.github.io/pr-N/FULL_SHA/site`. The preview reader serves that directory at the URL `/matthidinger.github.io/pr-N/FULL_SHA/...`: `site` is a disk directory, never a URL segment. The copy is atomic (stage, then rename) and immutable (a different build for the same commit is refused). It validates the PR number, state, base, head repo and head SHA first. The receipt is `{schemaVersion: 1, repository, pr, sha, builder, files}`, where `files` is the complete accepted manifest (relative path → SHA-256). It sits at the prefix root, so the package maps 1:1 onto the URL prefix. A site that already contains that file name is refused.
+
+Readiness verifies the hosted preview through one backend from `.github/acceptance/preview.json`. It is selected by `--preview-backend ID`, then `COPILOT_PREVIEW_BACKEND`, then `defaultBackend`. Readiness names the selected backend, and an unknown backend fails. Both backends also require the `hosted-browser` gate: `check-hosted.mjs` re-verifies the hosted revision, then runs every `routes.json` check (including the copy interaction) in Chromium at the hosted origin and prefix, and writes `RUN/hosted/report.json`. That report must pass, be for the same SHA, PR, prefix, backend and origin, and cover every accepted route/viewport.
+
+### `azure-receipt` (default; approved public origin)
+
+Matt approved `https://matthidingerpreviews.z5.web.core.windows.net` with immutable `/matthidinger.github.io/pr-N/FULL_SHA/` paths. An operator publishes the exported package unchanged using existing access. Agents never upload, provision credentials or change access, and never claim publication before readiness verifies it. Readiness:
+- fetches `PREFIX/preview-revision.json` with bounded timeouts, no redirects and no injected headers
+- requires repository `matthidinger/matthidinger.github.io`, this PR, the full evidence SHA, the accepted builder and exactly the accepted manifest (missing, extra or changed entries fail)
+- fetches every accepted file and route URL and compares SHA-256 with the accepted build
+- reports an absent receipt (404), 401/403 or a timeout as `BLOCKED` (awaiting operator publication); a wrong receipt, invalid JSON, redirect, missing file or different bytes fails
+
+Deep links on this origin may appear in the PR once readiness has verified them.
+
+### `private-header` (operator-configured private ingress)
 
 The serving origin is controlled by the operator. Agents never create ingress or access policy and never copy GitHub credentials to another service.
 
@@ -106,7 +124,7 @@ If `COPILOT_PREVIEW_BASE_URL` is empty, readiness is `BLOCKED`: no link exists, 
 - each route must return 200, `X-Preview-Revision` equal to the full SHA, and HTML bytes whose hash matches the accepted build
 - a timeout, unreachable origin or 401/403 from this runtime is reported as an external verification blocker (`BLOCKED`), never worked around
 
-Only post the deep link in a public PR if Matt has approved disclosing that origin.
+Only post a private-header deep link in a public PR if Matt has approved disclosing that origin. `check-hosted.mjs` uses the same ambient transport; if it is denied, the gate stays blocked or failed.
 
 ## Known limitations
 

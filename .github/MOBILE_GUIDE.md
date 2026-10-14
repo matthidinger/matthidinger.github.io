@@ -10,5 +10,7 @@ Agents follow [AGENTS.md](../AGENTS.md). PRs target `master` of `matthidinger/ma
 ## Review the PR
 - The PR stays **draft** until every readiness gate passes on its latest commit. Its body lists the acceptance criteria, a results table and embedded desktop/mobile screenshots labelled with route and commit.
 - The **Readiness** table states READY, BLOCKED (with the exact missing approval) or NOT READY.
-- The private preview link appears only once preview access is configured and approved; until then readiness is BLOCKED. A CI artifact is a seven-day download, not a hosted preview.
+- Previews use the approved public origin `https://matthidingerpreviews.z5.web.core.windows.net`, one immutable path per commit: `/matthidinger.github.io/pr-N/FULL_SHA/`. The agent exports the package; an operator publishes it unchanged. Until it is published and verified, readiness is BLOCKED ("awaiting operator publication") and the PR stays draft.
+- Once published, readiness checks `preview-revision.json` (repo, PR, full SHA, complete file list) and every served file, and Chromium re-runs the page checks (including copy code) on the hosted site. The PR then lists tap-ready page links in **Hosted preview checks**.
+- A CI artifact is a seven-day download, not a hosted preview.
 - Merge only when satisfied. Telegram submission is a separate integration and is not part of this setup.

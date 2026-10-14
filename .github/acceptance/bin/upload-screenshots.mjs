@@ -14,7 +14,7 @@ import { REPO_NWO, fail, parseArgs, prNumber, readJson, sh, writeJson } from '..
 export const START = '<!-- acceptance-evidence:start -->';
 export const END = '<!-- acceptance-evidence:end -->';
 
-async function upload(file, name, repoId, token) {
+export async function upload(file, name, repoId, token) {
   const q = new URLSearchParams({ name, content_type: 'image/png', repository_id: String(repoId) });
   const res = await fetch(`https://uploads.github.com/user-attachments/assets?${q}`, {
     method: 'POST',
@@ -60,6 +60,22 @@ function gallery(title, report, record) {
   return [`#### ${title} — commit \`${report.sha}\``, '', ...rows, '', 'Screenshots are full-page captures (cut off at 5000px) of the branch build.'].join('\n');
 }
 
+// Hosted-preview browser results. Page links are listed only for a public, approved backend.
+export function hostedSection(runDir) {
+  const f = path.join(runDir, 'hosted', 'report.json');
+  if (!fs.existsSync(f)) return '';
+  const h = readJson(f);
+  const lines = ['', `#### Hosted preview checks: ${h.passed ? 'PASS' : 'FAIL'} — ${h.backend}, commit \`${h.sha}\` (checked ${h.checkedAt})`, '',
+    `Revision verification: ${h.verification?.status} — ${(h.verification?.detail || '').replace(/\|/g, '\\|')}`];
+  if (!h.results?.length) return lines.join('\n');
+  lines.push('', `| Route | Viewport | Result | Copy code |${h.public ? ' Preview |' : ''}`, `|---|---|---|---|${h.public ? '---|' : ''}`);
+  for (const r of h.results) {
+    const copy = r.copyCode ? `${r.copyCode.filter((a) => a.ok).length}/${r.copyCode.length}` : '—';
+    lines.push(`| \`${r.path}\` | ${r.viewport} | ${r.passed ? '✅' : '❌ ' + (r.failures || []).slice(0, 2).join('; ').replace(/\|/g, '\\|')} | ${copy} |${h.public ? ` [open](${h.origin}${h.prefix}${r.path}) |` : ''}`);
+  }
+  return lines.join('\n');
+}
+
 function readinessTable(runDir) {
   const f = path.join(runDir, 'readiness.json');
   if (!fs.existsSync(f)) return '';
@@ -89,7 +105,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const before = await uploadRun(path.resolve(args.baseline), repoId, token);
       parts.push('', gallery('Before (base branch)', before.report, before.record));
     }
-    parts.push(readinessTable(runDir));
+    parts.push(hostedSection(runDir), readinessTable(runDir));
     const info = prInfo(pr);
     const tmp = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'pr-body-')), 'body.md');
     fs.writeFileSync(tmp, replaceSection(info.body || '', parts.join('\n')));

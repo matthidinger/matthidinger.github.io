@@ -21,6 +21,7 @@
     });
   })();
 </script>
+{% if page.collection == "posts" %}<script src="{{ base_path }}/assets/js/code-copy.js"></script>{% endif %}
 
 {% include analytics.html %}
 {% include /comments-providers/scripts.html %}
