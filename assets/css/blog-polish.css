@@ -465,8 +465,8 @@
   .pagination li a { min-width: 2.3em; padding: 0.5em 0.65em; }
   .pagination li a.disabled:not(.current) { min-width: 0; padding-right: 0.3em; padding-left: 0.3em; }
   /* A disabled Previous/Next is noise on a phone; the current page is already highlighted. */
-  .pagination li:first-child a.disabled:not(.current),
-  .pagination li:last-child a.disabled:not(.current) { display: none; }
+  .pagination li:first-child:has(> a.disabled:not(.current)),
+  .pagination li:last-child:has(> a.disabled:not(.current)) { display: none; }
 }
 
 /* ---------- Sidebar ---------- */
