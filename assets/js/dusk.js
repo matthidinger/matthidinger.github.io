@@ -18,7 +18,7 @@
   const clamp = (v) => Math.min(1, Math.max(0, v));
   const smooth = (v) => v * v * (3 - 2 * v);
   const set = (el, a, v) => el.setAttribute(a, v);
-  let night = 0, sweep = 1, range = [0, 1600];
+  let night = 0, sweep = 1, range = [0, 1600], water = 905;
 
   function colors(t) {
     const p = clamp(t) * (PAL.length - 1), i = Math.min(PAL.length - 2, Math.floor(p)), u = smooth(p - i);
@@ -84,9 +84,21 @@
     },
   ];
   const edgeEls = [...document.querySelectorAll('.dk-edge')];
+  const hero = document.querySelector('.dk-hero');
+
+  // The scene is 100lvh tall, but a phone's first screen is only 100svh and the first plate's edge
+  // rises into it, so the 509 would sit below the fold. Lift her waterline until the hull clears both.
+  function waterline() {
+    const box = svg.getBoundingClientRect(), sc = Math.max(box.width / 1600, box.height / 1000);
+    if (!sc || !hero) return 905;
+    const svh = parseFloat(getComputedStyle(hero).minHeight) || innerHeight;
+    const fold = Math.min(svh, hero.getBoundingClientRect().bottom + scrollY) - (edgeEls[0] ? edgeEls[0].clientHeight : 0);
+    return Math.max(780, Math.min(905, 1000 - (box.height - fold + 18) / sc));
+  }
 
   function layout() {
     range = sliceRange(svg, 1600, 1000);
+    water = waterline();
     const [x0, x1] = range, w = x1 - x0, k = Math.min(1, Math.max(0.5, w / 1500)), H0 = S.H0;
     set(S.west, 'transform', `translate(${f(x0)},${H0}) scale(${f(k)}) translate(0,${-H0})`);
     set(S.east, 'transform', `translate(${f(x1)},${H0}) scale(${f(k)}) translate(-1600,${-H0})`);
@@ -103,11 +115,12 @@
     if (reduced.matches) frame(-1);
   }
 
-  // The boat crosses the visible water every 70 s; the lighthouse beam sweeps once night falls.
+  // The boat crosses the visible water every 70 s, starting a third of the way over so she is in view
+  // on first paint; the lighthouse beam sweeps once night falls.
   function frame(clock) {
-    const [x0, x1] = range, s = innerWidth <= 760 ? 0.3 : 0.38, m = 330 * s;
-    const p = clock < 0 ? 0.3 : (clock / 70000) % 1;
-    const y = 905 + (clock < 0 ? 0 : Math.sin(clock / 850) * 2.2), rot = clock < 0 ? 0 : Math.sin(clock / 1300) * 1.4;
+    const [x0, x1] = range, s = innerWidth <= 760 ? 0.34 : 0.38, m = 330 * s;
+    const p = clock < 0 ? 0.3 : (0.3 + clock / 70000) % 1;
+    const y = water + (clock < 0 ? 0 : Math.sin(clock / 850) * 2.2), rot = clock < 0 ? 0 : Math.sin(clock / 1300) * 1.4;
     set(S.boatW, 'transform', `translate(${f(x0 - m + p * (x1 - x0 + 2 * m))},${f(y)}) rotate(${f(rot)}) scale(${s})`);
     const sx = Math.cos(clock < 0 ? Math.PI : clock / 1150);
     sweep = 0.3 + 0.7 * Math.abs(sx);

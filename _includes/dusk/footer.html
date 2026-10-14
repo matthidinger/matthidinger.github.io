@@ -1,0 +1,24 @@
+{%- comment -%}
+  Shared Dusk footer. Pass scene=true on inner pages to draw the night scene behind it (assets/js/dusk-page.js).
+{%- endcomment %}
+<footer class="dk-foot{% if include.scene %} dk-foot--scene{% endif %}">
+  {%- if include.scene %}
+  <svg class="dk-foot-edge" viewBox="0 0 1600 90" preserveAspectRatio="none" aria-hidden="true"><path d=""/></svg>
+  <svg class="dk-foot-scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+  <div class="dk-foot-in">
+    <p class="dk-foot-name">{{ site.title }}</p>
+  {%- endif %}
+    <div class="dk-foot-cols">
+      <nav aria-label="Site">
+        {%- for link in site.data.navigation.main %}<a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>{% endfor -%}
+      </nav>
+      <nav aria-label="Elsewhere">
+        {%- for s in site.data.social %}<a href="{{ s.url }}">{{ s.title }}</a>{% endfor -%}
+        <a href="{{ site.baseurl }}/feed.xml">RSS</a>
+      </nav>
+    </div>
+    <p class="dk-copy">Copyright &copy; {{ site.author.name }} {{ site.time | date: "%Y" }}</p>
+  {%- if include.scene %}
+  </div>
+  {%- endif %}
+</footer>

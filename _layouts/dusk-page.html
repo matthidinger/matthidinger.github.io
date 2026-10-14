@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+{% include dusk/head.html %}
+</head>
+<body class="dkp">
+  <a class="dk-skip" href="#dk-main">Skip to content</a>
+  <div class="dkp-mast">
+    <svg class="dkp-mast-art" aria-hidden="true" focusable="false"></svg>
+    {% include dusk/header.html %}
+  </div>
+
+  <main id="dk-main" class="dkp-main">
+    {{ content }}
+  </main>
+
+  {% include dusk/footer.html scene=true %}
+
+  <script src="{{ site.baseurl }}/assets/js/dusk-kit.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/dusk-geo.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/dusk-scene.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/dusk-page.js"></script>
+  {%- if page.collection == "posts" %}
+  <script src="{{ site.baseurl }}/assets/js/code-copy.js"></script>
+  {%- endif %}
+  {% include analytics.html %}
+</body>
+</html>

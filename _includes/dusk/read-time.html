@@ -1,0 +1,4 @@
+{%- assign dk_words = include.content | strip_html | number_of_words -%}
+{%- assign dk_min = dk_words | divided_by: site.words_per_minute -%}
+{%- if dk_min < 1 %}{% assign dk_min = 1 %}{% endif -%}
+{{ dk_min }} min read

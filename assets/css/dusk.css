@@ -9,7 +9,7 @@ a { color: inherit; }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 
 .dk {
-  --dk-disp: "Tw Cen MT Condensed Extra Bold", "Bahnschrift Condensed", "DIN Condensed", "Roboto Condensed", "Arial Narrow", sans-serif;
+  --dk-disp: "Tw Cen MT Condensed Extra Bold", "Bahnschrift Condensed", "DIN Condensed", sans-serif-condensed, "Roboto Condensed", "Arial Narrow", sans-serif;
   --dk-body: "Gill Sans MT", "Gill Sans", "Seravek", "Segoe UI", system-ui, sans-serif;
   --dk-pad: clamp(20px, 4vw, 56px);
   --dk-cream: #f3e6cf;
@@ -38,6 +38,7 @@ a { color: inherit; }
 .dk-top a { text-decoration: none; padding: 6px 0; }
 .dk-top a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .dk-nav { display: flex; gap: 28px; }
+.dk-top--home { justify-content: flex-end; }
 
 .dk-hero { min-height: 100vh; min-height: 100svh; padding: clamp(96px, 13vh, 140px) var(--dk-pad) 0; }
 .dk-name { font: 400 clamp(64px, 12vw, 180px)/.86 var(--dk-disp); letter-spacing: .02em; text-transform: uppercase; color: var(--dk-cream); margin-bottom: 24px; }

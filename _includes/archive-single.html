@@ -1,37 +1,17 @@
 {% include base_path %}
-
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% capture teaser %}{{ site.teaser }}{% endcapture %}
-{% endif %}
-
-<div class="{{ include.type | default: "list" }}__item">
-  {% if post.link %}
-    <a href="{{ post.link }}" target="_blank">
-  {% else %}
-    <a href="{{ base_path }}{{ post.url }}">
-  {% endif %}
-    <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-      {% if include.type == "grid" and teaser != blank %}
-        <div class="archive__item-teaser">
-          <img src=
-            {% if teaser contains "http" %}
-              "{{ teaser }}"
-            {% else %}
-              "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-            {% endif %}
-            alt="">
-        </div>
-      {% endif %}
-      <h2 class="archive__item-title" itemprop="headline">{% if post.id %}{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}{% else %}{{ post.title }}{% endif %}{% if post.link %}<i class="fa fa-star" aria-hidden="true"></i>{% endif %}</h2>
-      {% if post.date or post.read_time %}
-        <p class="page__meta">
-          {% if post.date %}<span class="page__meta-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></span>{% endif %}
-          {% if post.read_time %}<span class="page__meta-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>{% endif %}
-        </p>
-      {% endif %}
-      {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 500 }}</p>{% endif %}
-    </article>
-  </a>
-</div>
+{%- assign dk_teaser = post.header.teaser | default: "" -%}
+{%- assign dk_excerpt = post.excerpt | strip_html | normalize_whitespace -%}
+{%- assign dk_excerpt_words = dk_excerpt | number_of_words -%}
+{%- if dk_excerpt_words < 12 %}{% assign dk_excerpt = post.content | strip_html | normalize_whitespace | truncatewords: 45 %}{% endif -%}
+<article class="archive__item dkp-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <div>
+    <h2 class="archive__item-title dkp-entry-title" itemprop="headline"><a href="{{ base_path }}{{ post.url }}">{{ post.title | markdownify | strip_html | strip_newlines }}</a></h2>
+    {%- if dk_excerpt != "" %}
+    <p class="dkp-entry-excerpt" itemprop="description">{{ dk_excerpt }}</p>
+    {%- endif %}
+    <p class="page__meta"><span class="page__meta-item"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></span><span class="page__meta-item">{% include dusk/read-time.html content=post.content %}</span></p>
+  </div>
+  {%- if dk_teaser != "" %}{% unless dk_teaser contains "://" %}
+  <a class="dkp-entry-thumb" href="{{ base_path }}{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{% assign dk_t0 = dk_teaser | slice: 0 %}{% if dk_t0 == '/' %}{{ site.baseurl }}{{ dk_teaser }}{% else %}{{ site.baseurl }}/images/{{ dk_teaser }}{% endif %}" alt=""></a>
+  {%- endunless %}{% endif %}
+</article>

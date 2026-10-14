@@ -9,7 +9,7 @@
     "productionShape": {
       "talks/index.html": [
         "<link rel=\"canonical\" href=\"https://matthidinger.com/talks/\"",
-        "href=\"https://matthidinger.com/assets/css/main.css\""
+        "href=\"https://matthidinger.com/assets/css/dusk-page.css\""
       ],
       "CNAME": [
         "matthidinger.com"
@@ -54,7 +54,8 @@
         "199X"
       ],
       "absentText": [
-        "Principal Program Manager"
+        "Principal Program Manager",
+        "Facebook"
       ],
       "selectors": {
         ".dk-nav a": 3,
@@ -66,6 +67,8 @@
       },
       "maxSelectors": {
         ".masthead": 0,
+        ".dk-sig": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         "img[loading=\"lazy\"]": 0,
         ".code-copy": 0
       },
@@ -99,39 +102,43 @@
           "name": "home footer to Talks",
           "click": ".dk-foot a[href$=\"/talks/\"]",
           "expectPath": "/talks/"
-        },
-        {
-          "name": "home signature",
-          "click": ".dk-sig",
-          "expectPath": "/"
         }
       ]
     },
     {
       "id": "about",
       "path": "/about/",
-      "purpose": "About page: updated title and round trips to home and the blog",
+      "purpose": "About page in the shared Dusk shell (masthead, night footer); round trips to home and the blog",
       "title": "About",
       "h1": "About",
       "text": [
         "Principal Product Manager at Microsoft"
       ],
       "absentText": [
-        "Principal Program Manager"
+        "Principal Program Manager",
+        "Facebook"
       ],
+      "selectors": {
+        ".dk-sig": 1,
+        ".dk-nav a": 3,
+        ".dkp-mast-art": 1,
+        ".dk-foot-scene": 1
+      },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".code-copy": 0
       },
       "interactions": [
         {
           "name": "about back to home",
-          "click": ".masthead__menu-item--lg a",
+          "click": ".dk-sig",
           "expectPath": "/"
         },
         {
           "name": "about nav to Blog",
-          "click": "#site-nav .visible-links a[href$=\"/blog/\"]",
+          "click": ".dk-nav a[href$=\"/blog/\"]",
           "expectPath": "/blog/"
         }
       ]
@@ -139,18 +146,27 @@
     {
       "id": "blog",
       "path": "/blog/",
-      "purpose": "Blog listing (paginated archive)",
+      "purpose": "Blog listing (paginated archive) as a Dusk reading index",
       "title": "Blog",
       "h1": "Blog",
       "selectors": {
         ".archive__item-title": 5,
         ".archive__item .page__meta-item time": 5,
-        "nav.pagination a[rel=\"next\"]": 1
+        "nav.pagination a[rel=\"next\"]": 1,
+        "nav.pagination a[aria-current=\"page\"]": 1,
+        ".dkp-mast-art": 1,
+        ".dk-foot-scene": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
+        "nav.pagination a[rel=\"prev\"]": 0,
         ".code-copy": 0
       },
+      "absentText": [
+        "Facebook"
+      ],
       "interactions": [
         {
           "name": "blog next page",
@@ -159,56 +175,103 @@
         },
         {
           "name": "blog back to home",
-          "click": ".masthead__menu-item--lg a",
+          "click": ".dk-sig",
           "expectPath": "/"
         },
         {
           "name": "blog nav to Talks",
-          "click": "#site-nav .visible-links a[href$=\"/talks/\"]",
+          "click": ".dk-nav a[href$=\"/talks/\"]",
           "expectPath": "/talks/"
+        },
+        {
+          "name": "blog topics",
+          "click": ".dkp-head a[href$=\"/tags/\"]",
+          "expectPath": "/tags/"
         }
       ]
     },
     {
       "id": "talks",
       "path": "/talks/",
-      "purpose": "Talks page",
+      "purpose": "Talks page in the shared Dusk shell (content unchanged; redesign is #11)",
       "title": "Talks",
       "h1": "Talks",
       "text": [
         "These are talks I"
       ],
       "minText": 50,
+      "selectors": {
+        ".dk-sig": 1,
+        ".dkp-mast-art": 1,
+        ".dk-foot-scene": 1
+      },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".code-copy": 0
       },
+      "absentText": [
+        "Facebook"
+      ],
       "interactions": [
         {
           "name": "talks back to home",
-          "click": ".masthead__menu-item--lg a",
+          "click": ".dk-sig",
           "expectPath": "/"
         },
         {
           "name": "talks nav to About",
-          "click": "#site-nav .visible-links a[href$=\"/about/\"]",
+          "click": ".dk-nav a[href$=\"/about/\"]",
           "expectPath": "/about/"
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "path": "/tags/",
+      "purpose": "Blog topics: every post grouped by tag in the Dusk reading shell",
+      "title": "Blog topics",
+      "h1": "Blog topics",
+      "selectors": {
+        ".dkp-mast-art": 1,
+        ".dk-foot-scene": 1
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
+        ".code-copy": 0
+      },
+      "absentText": [
+        "Facebook"
+      ],
+      "interactions": [
+        {
+          "name": "topics back to the blog",
+          "click": ".dkp-head a[href$=\"/blog/\"]",
+          "expectPath": "/blog/"
         }
       ]
     },
     {
       "id": "post-code",
       "path": "/archive/2008/05/08/linq-to-sql-audit-trail/",
-      "purpose": "Post with many fenced C# code blocks and images",
+      "purpose": "Post with many fenced C# code blocks and images in the Dusk reading layout",
       "title": "LINQ to SQL Audit Trail",
       "h1": "LINQ to SQL Audit Trail",
       "selectors": {
         "pre.highlight": 10,
         ".page__content img": 5,
-        "header .page__meta time": 1
+        "header .page__meta time": 1,
+        ".dk-sig": 1,
+        ".dkp-mast-art": 1,
+        ".dk-foot-scene": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
       },
@@ -220,13 +283,16 @@
         },
         {
           "name": "post back to home",
-          "click": ".masthead__menu-item--lg a",
+          "click": ".dk-sig",
           "expectPath": "/"
         }
       ],
       "copyCode": {
         "min": 13
-      }
+      },
+      "absentText": [
+        "Facebook"
+      ]
     },
     {
       "id": "post-migrated-code",
@@ -240,13 +306,16 @@
       },
       "absentText": [
         "### Usage",
-        "**Doddle"
+        "**Doddle",
+        "Facebook"
       ],
       "text": [
         "Usage"
       ],
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0
       },
@@ -266,14 +335,17 @@
         ".page__content h3#finally-above-all-else": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
         ".page__content table:not(.layout-grid)": 0
       },
       "absentText": [
         "**",
-        "###"
+        "###",
+        "Facebook"
       ],
       "copyCode": {
         "min": 3
@@ -290,7 +362,9 @@
         "nav.pagination a[aria-current=\"page\"]": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".code-copy": 0
       },
       "interactions": [
@@ -304,6 +378,9 @@
           "click": "nav.pagination a[rel=\"next\"]",
           "expectPath": "/blog/page3/"
         }
+      ],
+      "absentText": [
+        "Facebook"
       ]
     },
     {
@@ -318,13 +395,16 @@
         ".page__content img": 7
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
         ".code-copy": 0
       },
       "absentText": [
-        "**"
+        "**",
+        "Facebook"
       ]
     },
     {
@@ -337,14 +417,17 @@
         ".page__content img": 4
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
         ".page__content table": 0,
         ".code-copy": 0
       },
       "absentText": [
-        "| ---"
+        "| ---",
+        "Facebook"
       ]
     },
     {
@@ -360,7 +443,9 @@
         ".page__content ol[start=\"8\"]": 1
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content h1": 0,
         ".page__content h2:empty, .page__content h3:empty, .page__content h4:empty": 0,
         "div.language-plaintext pre.highlight": 0
@@ -374,7 +459,10 @@
       ],
       "copyCode": {
         "min": 4
-      }
+      },
+      "absentText": [
+        "Facebook"
+      ]
     },
     {
       "id": "post-inline-code",
@@ -390,12 +478,17 @@
         ".page__content li > code": 3
       },
       "maxSelectors": {
-        "#site-nav .hidden-links li": 0,
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
         ".page__content :not(pre) > code ~ .code-copy, .page__content li > .code-copy, .page__content p > .code-copy": 0
       },
       "copyCode": {
         "min": 3
-      }
+      },
+      "absentText": [
+        "Facebook"
+      ]
     }
   ]
 }

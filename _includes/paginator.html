@@ -1,70 +1,25 @@
 {% include base_path %}
-{% capture page_base_path %}{{ base_path }}/blog/page{% endcapture %}
-{% if paginator.total_pages > 1 %}
+{%- if paginator.total_pages > 1 %}
+{%- assign cur = paginator.page %}
+{%- assign last = paginator.total_pages %}
+{%- assign last_m1 = last | minus: 1 %}
+{%- assign lo = cur | minus: 1 %}{% if lo < 2 %}{% assign lo = 2 %}{% endif %}
+{%- assign hi = cur | plus: 1 %}{% if hi > last_m1 %}{% assign hi = last_m1 %}{% endif %}
 <nav class="pagination" aria-label="Blog pages">
   <ul>
-    {% comment %} Link for previous page {% endcomment %}
-    {% if paginator.previous_page %}
-      {% if paginator.previous_page == 1 %}
-        <li><a href="{{ base_path }}/blog/" rel="prev">{{ site.data.ui-text[site.locale].pagination_previous }}</a></li>
-      {% else %}
-        <li><a href="{{ page_base_path }}{{ paginator.previous_page }}/" rel="prev">{{ site.data.ui-text[site.locale].pagination_previous }}</a></li>
-      {% endif %}
-    {% else %}
-      <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_previous }}</span></a></li>
-    {% endif %}
-
-    {% comment %} First page {% endcomment %}
-    {% if paginator.page == 1 %}
-      <li><a href="#" class="disabled current" aria-current="page">1</a></li>
-    {% else %}
-      <li><a href="{{ base_path }}/blog/">1</a></li>
-    {% endif %}
-
-    {% assign page_start = 2 %}
-    {% if paginator.page > 4 %}
-      {% assign page_start = paginator.page | minus: 2 %}
-      {% comment %} Ellipsis for truncated links {% endcomment %}
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    {% endif %}
-
-    {% assign page_end = paginator.total_pages | minus: 1 %}
-    {% assign pages_to_end = paginator.total_pages | minus: paginator.page %}
-    {% if pages_to_end > 4 %}
-      {% assign page_end = paginator.page | plus: 2 %}
-    {% endif %}
-
-    {% for index in (page_start..page_end) %}
-      {% if index == paginator.page %}
-        <li><a href="{{ page_base_path }}{{ index }}/" class="disabled current" aria-current="page">{{ index }}</a></li>
-      {% else %}
-        {% comment %} Distance from current page and this link {% endcomment %}
-        {% assign dist = paginator.page | minus: index %}
-        {% if dist < 0 %}
-          {% comment %} Distance must be a positive value {% endcomment %}
-          {% assign dist = 0 | minus: dist %}
-        {% endif %}
-        <li><a href="{{ page_base_path }}{{ index }}/">{{ index }}</a></li>
-      {% endif %}
-    {% endfor %}
-
-    {% comment %} Ellipsis for truncated links {% endcomment %}
-    {% if pages_to_end > 3 %}
-      <li><a href="#" class="disabled">&hellip;</a></li>
-    {% endif %}
-
-    {% if paginator.page == paginator.total_pages %}
-      <li><a href="#" class="disabled current" aria-current="page">{{ paginator.page }}</a></li>
-    {% else %}
-      <li><a href="{{ page_base_path }}{{ paginator.total_pages }}/">{{ paginator.total_pages }}</a></li>
-    {% endif %}
-
-    {% comment %} Link next page {% endcomment %}
-    {% if paginator.next_page %}
-      <li><a href="{{ page_base_path }}{{ paginator.next_page }}/" rel="next">{{ site.data.ui-text[site.locale].pagination_next }}</a></li>
-    {% else %}
-      <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_next }}</span></a></li>
-    {% endif %}
+    <li>{% if paginator.previous_page %}<a class="pagination-step" href="{% if paginator.previous_page == 1 %}{{ base_path }}/blog/{% else %}{{ base_path }}/blog/page{{ paginator.previous_page }}/{% endif %}" rel="prev">&larr; Newer</a>{% else %}<span class="pagination-step" aria-hidden="true">&larr; Newer</span>{% endif %}</li>
+    <li><a href="{{ base_path }}/blog/"{% if cur == 1 %} aria-current="page"{% endif %}>1</a></li>
+    {%- if lo > 2 %}
+    <li><span>&hellip;</span></li>
+    {%- endif %}
+    {%- if hi >= lo %}{% for i in (lo..hi) %}
+    <li><a href="{{ base_path }}/blog/page{{ i }}/"{% if i == cur %} aria-current="page"{% endif %}>{{ i }}</a></li>
+    {%- endfor %}{% endif %}
+    {%- if hi < last_m1 %}
+    <li><span>&hellip;</span></li>
+    {%- endif %}
+    <li><a href="{{ base_path }}/blog/page{{ last }}/"{% if cur == last %} aria-current="page"{% endif %}>{{ last }}</a></li>
+    <li>{% if paginator.next_page %}<a class="pagination-step" href="{{ base_path }}/blog/page{{ paginator.next_page }}/" rel="next">Older &rarr;</a>{% else %}<span class="pagination-step" aria-hidden="true">Older &rarr;</span>{% endif %}</li>
   </ul>
 </nav>
-{% endif %}
+{%- endif %}
