@@ -15,7 +15,6 @@ update
 
 I’ve updated the code to check for the MapZoom event; also fixed a typo of MapClick to MouseClick.
 
- 
 
 Original Post
 -------------
@@ -28,7 +27,6 @@ Without MapClick there is no built-in way (to my knowledge) to detect when the u
 
 The solution I came up with is a Trigger called MapTapTrigger. In meeting with a number of other WP7 developers over the past year I came to the realization that many of them don’t use Blend often, and even fewer have used the very helpful Trigger feature. With that in mind you really owe it to yourself to get more familiar with Blend when you can!
 
-####  
 
 #### Defining triggers in Blend
 
@@ -40,8 +38,6 @@ In my scenario, I have a visual state on my page called “MapOnlyState” which
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/f558d26ebae1_B4AB/SNAGHTML64ad1bd5_thumb.png)
 
-
-####  
 
 #### Defining Triggers in XAML
 
@@ -57,7 +53,6 @@ The steps above generate the following XAML, which you could of course write you
 </m:Map>
 ```
 
- 
 
 ### MapTapTrigger code
 
@@ -110,6 +105,4 @@ public class MapTapTrigger : TriggerBase<Map>
     }
 }
 ```
-
-
 

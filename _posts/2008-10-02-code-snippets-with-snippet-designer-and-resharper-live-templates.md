@@ -26,7 +26,7 @@ So the big question is how can we create our own snippets? Let’s take a real-w
 
 ### Snipper Designer (free Visual Studio Plugin)
 
-A few weeks ago a project was released on CodePlex called Snipper Designer. [Snippet Designer](https://www.codeplex.com/SnippetDesigner) **** is a plugin for Visual Studio that was previously used internally by Microsoft and has since been released for all of us to enjoy. After downloading the MSI, it istalled in no time and I was on my way to creating a basic snippet I wish I had created long ago.
+A few weeks ago a project was released on CodePlex called Snipper Designer. [Snippet Designer](https://www.codeplex.com/SnippetDesigner) is a plugin for Visual Studio that was previously used internally by Microsoft and has since been released for all of us to enjoy. After downloading the MSI, it istalled in no time and I was on my way to creating a basic snippet I wish I had created long ago.
 
 To start off I took some Configuration Property code that I had already written as the starting point for my snippet. Anyone who has done extensive configuration with the System.Configuration assembly should be very familiar with this code: it is a property declaration for automatic strongly-typed reading and writing to an XML attribute in your app.config. There are a number of similar code snippets I will be creating for various Configuration-related tasks, and I hope to update this post with my complete list of Configuration snippets shortly.
 
@@ -48,8 +48,7 @@ Our final bit of customization lies in a property pane below the snippet code. F
 ![](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_7.png)
 
 
-### 
-ReSharper Live Templates
+### ReSharper Live Templates
 
 Many of you will probably be familiar with the Visual Studio plugin [ReSharper](https://www.jetbrains.com/resharper). ReSharper has quickly become a favorite of mine over the last year or so, and I feel as though I have only scratched the surface of it’s productivity potential. One of said features is their own snippet framework (which they have named Live Templates). ReSharper Live Templates are slightly more powerful than the aforementioned Snippet Designer.
 
@@ -74,11 +73,10 @@ So what exactly did the last few minutes do for us? Well for me, any time in the
 When selected, it expands into this simple code block, which allows me to \[tab\] through the 5 variables and be on my way. And if you happen to think this won’t save you much time, then I would challenge the fact that you have probably not copy-pasted a significant number of these configuration properties before. As I mentioned in the beginning, I will be creating an army of these snippets, ranging from not only my Configuration-related ones, but repeatable tasks like ViewState-backed property wrappers, etc.
 
 ![](/images/subtext-content/CodeSnippetswithSnippetDesignerandReShar_AE89/image_thumb_12.png)
- 
+
 
 ### Download
 
 -   [Snippet Designer](https://www.codeplex.com/SnippetDesigner)
 -   [ReSharper](https://www.jetbrains.com/resharper)
-
 

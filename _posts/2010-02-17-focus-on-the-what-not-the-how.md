@@ -37,5 +37,3 @@ LINQ is another prime example of this simple concept: focus on the what.
 
 I’ve paid closer attention to some of my favorite blogs (and magazine articles, and newspapers, etc) and noticed that they make good use of images to offset the text in their content. I don’t particularly care for this image or placement within this post, but it’s a work in progress!
 
- 
-

@@ -78,5 +78,3 @@ I will never forget the look on a friend’s face when I told him that ASP.NET *
 
 That about wraps up the 20-minute conversation. I will probably be amending this post in the future should any new areas for discussion come about. Comments are welcome!
 
- 
-

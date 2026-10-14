@@ -1,5 +1,5 @@
 ---
-title: "Automatically secure your database queries with LINQ &ndash; Part 1"
+title: "Automatically secure your database queries with LINQ – Part 1"
 disqus_identifier: https://www.matthidinger.com/archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx
 redirect_from: /archive/2010/07/22/automatically-secure-your-database-queries-with-linq-part-1.aspx/
 tags: 
@@ -46,7 +46,6 @@ Essentially, the process is boiled down to this:
 1.  When your application starts up, register all the “security clauses” you need in your application. There are basically WHERE statements that will be automatically injected into the LINQ expression tree every time a developer queries the database
 2.  During application execution, your repository classes will understand the QueryFilterService and make sure that if there is a “security clause” applied to this type of entity, it will automatically append it to the current query, thereby automatically filtering the result set according to your security rules.
 
- 
 
 ### Implementation
 
@@ -109,8 +108,4 @@ public class QueryFilterService
 ### Stay Tuned for Part 2
 
 If this isn’t making sense, stay tuned for part 2 where I will try to bring it all together!
-
- 
-
- 
 

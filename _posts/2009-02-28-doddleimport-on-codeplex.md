@@ -17,7 +17,7 @@ Flexible importing of data via a fluid and fully extensible API to easily add su
 I will update the documentation and provide some better examples when I get back. Here you can see a quick example of me importing some Excel data into a SharePoint list. As you can see it supports a variety of validation including missing fields and data type conversion problems.
 
 ![](/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb.png)
- 
+
 
 ![](/images/subtext-content/DoddleImportonCodePlex_14E69/image_thumb_3.png)
 
@@ -118,6 +118,4 @@ That's all for now, check back for updates on this and some other projects.
 ### Get the Source and Try it out!
 
 [Check it out at CodePlex](https://codeplex.com/doddleimport)
-
-
 

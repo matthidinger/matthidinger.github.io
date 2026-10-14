@@ -20,7 +20,6 @@ During TechWeek Chicago, Microsoft is hosting [Windows Phone Unleashed @ TechWee
 There are a limited number of tickets, so RSVP ASAP!
 <https://windowsphonetechweek.eventbrite.com>
 
- 
 
 > Don’t miss this opportunity to get hands on with Windows Phone and the new features coming in Windows Phone “Mango”. Get help developing apps from the Windows Phone experts! This is a “hands-on” Hackathon where you will learn how to build, scale and publish your Windows Phone apps from the Windows Phone and Windows Azure experts. If you are a beginner or even an expert Windows Phone developer, you should not miss this event.
 >

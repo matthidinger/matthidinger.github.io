@@ -181,5 +181,3 @@ Using [**TortoiseHg**](https://tortoisehg.bitbucket.org/) simply clone the URL: 
 
 [**Browse the Selector code, MvcGrabBag.Web/Selectors folder**](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fSelectors%2fSelectorAttribute.cs)
 
- 
-

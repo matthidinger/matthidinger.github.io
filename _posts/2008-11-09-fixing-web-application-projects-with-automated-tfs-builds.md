@@ -33,7 +33,6 @@ Once open, a search for the &lt;Import&gt; tag revealed the exact line causing t
 
 It would appear the Visual Studio 2008 will install all necessary MSBuild targets into the v9.0 directory – which is exactly what brings us to our problem. My Build Server does not have Visual Studio installed, it is just a basic Server 2008 box with .NET 3.5 and nothing fancy (aside from all the TFS gear). The problem is that these v9.0 targets were not available on my build machine, so I found 2 completely different solutions that ended up resolving my issue.
 
- 
 
 ### Solution 1 – Add Conditional Imports (Not Recommended)
 
@@ -49,7 +48,6 @@ I replaced the original &lt;Import&gt; declaration to the following
 
 With this change in place, I re-ran by TFS Build and it worked successfully. Unfortunately, this is extremely tedious to manually edit all of my .csproj files to facilitate automated builds.
 
- 
 
 ### Solution 2 – Copy the v9.0 Targets to Build Machine (Recommended)
 
@@ -58,5 +56,4 @@ Once I started really thinking about the error, another solution seemed very cle
 On your development machine, copy everything in “C:\\Program Files\\MSBuild\\Microsoft\\VisualStudio\\v9.0”  to the same folder on your build machine. This will provide your build machine with the correct target files required by your projects. I have only tested the Web Application projects but I see no reason that everything else would not work properly. Please let me know if anyone runs into issues with this.
 
 ![](/images/subtext-content/FixingWebApplicationProjectswithautomate_B396/image_thumb_5.png)
-
 

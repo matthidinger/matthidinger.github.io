@@ -12,7 +12,7 @@ header:
 This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
+{: .series-link}
 
 The windows phone panorama
 --------------------------
@@ -23,7 +23,6 @@ Thanks again [@Templarian](https://twitter.com/templarian) for the background! B
 
 This post is going to cover a lot of topics so I will do my best to whet your appetite, but please be sure to **[Download the Code](https://realworldwpdev.codeplex.com/SourceControl/list/changesets)** and check out the app for yourself! The code should be pretty easy to follow as you get more familiar with how Caliburn does things.
 
- 
 
 ### What helps make a great experience?
 
@@ -45,7 +44,6 @@ Caliburn.Micro has great documentation. Check out the following links if you’r
 
 [Working with Windows Phone 7](https://caliburnmicro.codeplex.com/wikipage?title=Working%20with%20Windows%20Phone%207%20v1.1&referringTitle=Documentation)
 
- 
 
 ### MVVM Recap
 
@@ -59,7 +57,6 @@ MVVM is covered everywhere, so all I will say about here is the following – it
 
 Now then, the HomeViewModel is a great starting point.  At the time of the writing you can see the [full HomeViewModel source.](https://realworldwpdev.codeplex.com/SourceControl/changeset/view/ec2bb5b9a273#src%2fRealWorldStocks.Client.UI%2fViewModels%2fHome%2fHomeViewModel.cs) It’s actually a pretty simple class for doing a whole lot of stuff for us. Let’s dissect this bad boy.
 
- 
 
 ```csharp
 public class HomeViewModel : Conductor<IScreen>.Collection.OneActive, IRefreshable, IAppBarController
@@ -77,7 +74,6 @@ public class HomeViewModel : Conductor<IScreen>.Collection.OneActive, IRefreshab
 }
 ```
 
-####  
 
 #### Conductor
 
@@ -104,7 +100,6 @@ So we have a HomeViewModel, with an **Items** property that now contains 3 **oth
 </controls:Panorama>
 ```
 
- 
 
 #### IOC / Constructor Injection
 
@@ -256,12 +251,9 @@ Kudos if you followed all of that! This one took me a little while to write and 
 
 Please post any questions you have here, and again, please pull down the code and follow along as we go. Feedback is greatly appreciated!
 
- 
 
 ### Want some more RealWorldWPDev?
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
-
-
+{: .series-link}
 

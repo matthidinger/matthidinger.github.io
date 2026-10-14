@@ -1,5 +1,5 @@
 ---
-title: "RealWorldWPDev Part 2: File &ndash;&gt; New Project"
+title: "RealWorldWPDev Part 2: File –> New Project"
 disqus_identifier: https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx
 redirect_from: /archive/2011/10/16/RealWorldWPDev-Part-2-File-ndashgt-New-Project.aspx/
 tags: 
@@ -13,7 +13,7 @@ header:
 This series is going to walk through building a polished, functioning Windows Phone app from start to finish. The app is called Realworld Stocks and the [full source code will be available on CodePlex](https://realworldwpdev.codeplex.com/) as the series progresses. I’ll be using Mercurial to encourage forking and maybe even pull requests from developers who want to contribute their own real-world solutions.
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
+{: .series-link}
 
 Before you begin, install NuGet!
 --------------------------------
@@ -25,7 +25,6 @@ In Visual Studio: Tools –&gt; Extension Manager and find NuGet
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Real-world-Windows-Phone-File--New-Proje_11135/image_thumb.png)
 
 
- 
 -
 
 Defining our Solution Structure
@@ -42,7 +41,6 @@ For our solution we are going to create 3 Client-side projects and 1 Server-side
 
 This project contains all of our core (non-UI) client-side functionality: Data Models, Helpers, HTTP Web Service clients, etc
 
-####  
 
 #### RealWorldStocks.Client.UI
 
@@ -52,7 +50,6 @@ This project contains all of our core (non-UI) client-side functionality: Data M
 
 This project holds all UI-specific functionality for our application: Assets, Styles, ViewModels, Views (Pages and UserControls), etc
 
-####  
 
 #### RealWorldStocks.Client.BackgroundAgent
 
@@ -62,7 +59,6 @@ This project holds all UI-specific functionality for our application: Assets, St
 
 The periodic task project that will eventually update our Live Tiles in the background every 30 minutes
 
-###  
 
 ### Creating the Backend Services
 
@@ -72,19 +68,15 @@ The periodic task project that will eventually update our Live Tiles in the back
 
 This project exposes our server side endpoints. I chose MVC for service simplicity; it’s very easy to create HTTP GET Routes with query string model binding and returning JSON out of the box.
 
-###  
 
 Run it!
 -------
 
 At this point we can F5 our project and marvel at our progress! In the next part we will start giving it some signs of life.
 
- 
 
 ### Want some more RealWorldWPDev?
 
 [View the Series Introduction and Outline](https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx)
-==============================================================================================================================================
-
-
+{: .series-link}
 

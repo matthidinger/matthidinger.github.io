@@ -81,7 +81,6 @@ This is our public entry point for Auditing a table. This method might look a li
 -   The second thing that might look strange is the Func&lt;T1, T2&gt; generic parameter. This is actually a Generic Delegate that exists in the System.Core assembly that ships with 3.5.  The 5 Func&lt;T1, T2, T3, T4, TResult&gt; overloads are used to designate a method that operates on 1 or more inputs (T1 through T4) and returns a TResult. Func's can be seen all over the LINQ namespace and you will get probably pretty familiar with them once you being extending and using LINQ. Typically, they will define the signature for a Lambda expression (which is a new C\# shorthand for defining an expression or anonymous method call). In this particular Func&lt;&gt; parameter, I am expecting a method (a Lambda expression, typically), that accepts a TEntity for input, and returns an int. This is required because we need to know how to find the Primary Key property of an Entity.
 -   The third unique syntax in this method is the "where" keyword. This is telling the generic method that any TEntity that is passed to this method will be a reference type. This is required because LINQ to SQL can only map reference types.
 
- 
 
 ### Step 4 - Auditing LINQ to SQL Entity Inheritance
 
@@ -259,7 +258,7 @@ I wrote a very quick demo app for this article. You can see below a GridView of 
 
 
 ![](/images/subtext-content/LINQtoSQLAuditTrail_7DCD/image_thumb_7.png)
- 
+
 
 ### Get the Code!
 
@@ -268,5 +267,4 @@ If you stuck around for that whole article then I am impressed! If however, you 
 To download the latest version of this project please see the CodePlex Project: [DoddleAudit](https://www.codeplex.com/DoddleAudit)
 
 Thanks for reading, and please let me know if you end up using this code or have any cool features or optimizations that you have added or would like to see added!
-
 

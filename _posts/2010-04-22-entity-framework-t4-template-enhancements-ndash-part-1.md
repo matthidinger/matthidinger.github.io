@@ -1,5 +1,5 @@
 ---
-title: "Entity Framework T4 Template Enhancements &ndash; Part 1"
+title: "Entity Framework T4 Template Enhancements – Part 1"
 disqus_identifier: https://www.matthidinger.com/archive/2010/04/22/entity-framework-t4-template-enhancements-ndash-part-1.aspx
 redirect_from: /archive/2010/04/22/entity-framework-t4-template-enhancements-ndash-part-1.aspx/
 tags: 
@@ -24,17 +24,12 @@ Before working with T4, you will absolutely want to install a helpful tool to ge
 
 After restarting VS, working with T4 templates will become much more enjoyable.
 
- 
 
 ### Create the default T4 Template file
 
 The following instructions will create the .TT file from your existing EDMX. Once you have this file in your project you can begin customizing the code generation.
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
+<table class="layout-grid">
 <tbody>
 <tr class="odd">
 <td><a href="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_3.png"><img src="/images/subtext-content/EntityFrameworkT4TemplateEnhancementsPar_A140/image_thumb_3.png" title="image" alt="image" width="240" height="233" /></a> </td>
@@ -48,7 +43,6 @@ The following instructions will create the .TT file from your existing EDMX. Onc
 </tbody>
 </table>
 
- 
 
 ### Generate an IDatabase to represent your Data Context
 
@@ -101,9 +95,6 @@ Near line 184, you will see an ObjectSet field and property being generated for 
 
 Wire up the IDatabase and implementation in your IoC container, now anyone who needs direct access to the Data context can rely on a nice, mockable interface.
 
- 
 
 I hope this helps people get started with T4 and extending the default code generation of EF4. Stay tuned for the next part of the series shortly.
-
- 
 

@@ -49,5 +49,3 @@ Thanks to the Chicago dev Community! Rest assured I will still be fully involved
 
 And come on Nokia, help us get Windows Phone the market attention it deserves <img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Changing-Jobs-RealW_133DD/wlEmoticon-winkingsmile_2.png" alt="Winking smile" class="wlEmoticon wlEmoticon-winkingsmile" />
 
- 
-

@@ -17,13 +17,8 @@ My talk this year was on Onion Architecture. A slight variation of the “ports 
 
 If you happened to attend my presentation and have any feedback please do let me know! Next year I hope they will be bringing speaker evaluations back – as I greatly appreciate any input on my speaking ability, constructive or otherwise!
 
- 
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
+<table class="layout-grid">
 <tbody>
 <tr class="odd">
 <td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/ff0d136aee1f_88EA/image_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/ff0d136aee1f_88EA/image_thumb.png" title="image" alt="image" width="244" height="184" /></a></td>
@@ -37,6 +32,4 @@ If you happened to attend my presentation and have any feedback please do let me
 </tr>
 </tbody>
 </table>
-
- 
 

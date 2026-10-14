@@ -33,13 +33,11 @@ As you can see when a user visits our site with JavaScript enabled and clicks on
 
 A visitor without JavaScript will still get the same functionality, just a slightly lesser experience. Without JavaScript logic attached to our Contact Us link it behaves like a plain old hyperlink, navigating the browser to a new page. Once they fill out the form and press Send Message we redirect them back to the Home page with a confirmation message.
 
- 
 
 ### The new Controller
 
 Per the suggestion from the commenter, I have abstracted the logic into two custom ActionResults named **AjaxableViewResult** and **AjaxableActionResult**. Our new controller is much more concise and readable provided we adhere to some conventions for naming our views.
 
- 
 
 ```csharp
 [HttpGet]
@@ -65,7 +63,6 @@ public ActionResult ContactUs(ContactUsInput input)
 }
 ```
 
- 
 
 ### The Code
 
@@ -110,7 +107,6 @@ public class AjaxableActionResult : ActionResult
 }
 ```
 
- 
 
 #### AjaxableViewResult
 
@@ -224,15 +220,11 @@ public class AjaxableViewResult : ActionResult
 }
 ```
 
- 
-
- 
 
 ### Overriding the AjaxViewName convention
 
 For completeness I decided to add a simple extensibility point to change the Ajax view lookup convention. In your Global.asax you can use the static AjaxViewNameConvention to define your own partial view convention, the default looks for an underscore before the action name.
 
- 
 
 ```csharp
 protected void Application_Start()
@@ -247,7 +239,6 @@ protected void Application_Start()
 }
 ```
 
- 
 
 ### Wrap-up and source code
 
@@ -255,6 +246,4 @@ Thanks again to the commenter who sparked these improvements!  The full source 
 
 [download the source](https://buswatchapp.com/downloads/progressiveenhancement2.zip)
 -----------------------------------------------------------------------------------
-
- 
 

@@ -99,5 +99,3 @@ Rather than pasting the full source here, I will be publishing it along with a s
 
 #### [View the full HtmlFormHelper.cs](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/dee469477184#MvcGrabBag.Web%2fHelpers%2fHtmlFormHelper.cs "HtmlFormHelper.cs")
 
- 
-

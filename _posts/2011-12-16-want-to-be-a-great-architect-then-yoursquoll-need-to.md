@@ -1,5 +1,5 @@
 ---
-title: "Want to be a great architect? Then you&rsquo;ll need to be a great salesman"
+title: "Want to be a great architect? Then you’ll need to be a great salesman"
 disqus_identifier: https://www.matthidinger.com/archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx
 redirect_from: /archive/2011/12/16/want-to-be-a-great-architect-then-yoursquoll-need-to.aspx/
 tags: 
@@ -77,6 +77,4 @@ I don’t often write opinion pieces on this blog, mostly because I am still lea
 Blog: [Five Whys - Team Leadership](https://5whys.com/ "https://5whys.com/")
 
 Book: [Code Leader: Using People, Tools, and Processes to Build Successful Software](https://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248 "https://www.amazon.com/Code-Leader-Processes-Successful-Programmer/dp/0470259248")
-
- 
 

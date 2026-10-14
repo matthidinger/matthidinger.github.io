@@ -8,7 +8,7 @@ tags:
 - reporting
 - nuget
 header:
-  teaser: https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393
+  teaser: /images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_thumb.png
 ---
 > DoddleReport generates tabular reports from any IEnumerable datasource. Out of the box it can render reports to Excel, PDF, HTML, and CSV – fully pluggable of course. I created the project to provide reporting output over the LINQ queries we had already written for an application, but maybe you can find other uses for it.
 
@@ -17,11 +17,7 @@ So what does it generate?
 
 *The following samples are generated live in real-time (notice the data will change every time you open the report)*
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
+<table class="layout-grid">
 <tbody>
 <tr class="odd">
 <td><h3 id="excel-report-openxml">Excel Report (OpenXML)</h3>
@@ -38,10 +34,10 @@ So what does it generate?
 </ul></td>
 </tr>
 <tr class="even">
-<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a><br />
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_thumb.png" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a><br />
 <br />
 </p></td>
-<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204392"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204393" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a></p></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlexlsreport_thumb17_thumb.png" title="doddlexlsreport" alt="doddlexlsreport" width="300" height="211" /></a></p></td>
 </tr>
 <tr class="odd">
 <td><h3 id="pdf-report-itextsharp">PDF Report (iTextSharp)</h3>
@@ -49,20 +45,18 @@ So what does it generate?
 <li>Automatically repeats title and column headers numbers on every page</li>
 <li>Requires the DoddleReport.iTextSharp package</li>
 <li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.pdf"><strong>See it live!</strong></a></li>
-</ul>
-<h3 id="section"></h3></td>
+</ul></td>
 <td><h3 id="pdf-report-abcpdf">PDF Report (ABCpdf)</h3>
 <ul>
 <li>Automatically repeats title, column headers, and page numbers on every page</li>
 <li>Requires the DoddleReport.AbcPdf package</li>
 <li><em>Requires an</em> <a href="https://www.websupergoo.com/products.htm#pd"><em>ABCpdf license</em></a></li>
 <li><a href="https://doddle.matthidinger.com/Reporting/abcpdf/productreport.pdf"><strong>See it live!</strong></a></li>
-</ul>
-<h3 id="section-1"></h3></td>
+</ul></td>
 </tr>
 <tr class="even">
 <td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb%5B8%5D_thumb.png" title="image_thumb[8]" alt="image_thumb[8]" width="256" height="300" /></a></p></td>
-<td><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204396"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204397" title="doddlepdfreport" alt="doddlepdfreport" width="300" height="295" /></a></td>
+<td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddlepdfreport_thumb_thumb.png" title="doddlepdfreport" alt="doddlepdfreport" width="300" height="295" /></a></td>
 </tr>
 <tr class="odd">
 <td><h3 id="csvdelimited">CSV/Delimited</h3>
@@ -74,12 +68,11 @@ So what does it generate?
 <ul>
 <li>Good old HTML report</li>
 <li><a href="https://doddle.matthidinger.com/Reporting/home/productreport.html"><strong>See it live!</strong></a></li>
-</ul>
-<h3 id="section-2"></h3></td>
+</ul></td>
 </tr>
 <tr class="even">
-<td><p><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204394"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204395" title="doddleTxtReport" alt="doddleTxtReport" width="300" height="190" /></a></p></td>
-<td><a href="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204398"><img src="https://download.codeplex.com/download?ProjectName=doddlereport&amp;DownloadId=204399" title="doddleHtmlReport" alt="doddleHtmlReport" width="300" height="236" /></a></td>
+<td><p><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleTxtReport_thumb_thumb.png" title="doddleTxtReport" alt="doddleTxtReport" width="300" height="190" /></a></p></td>
+<td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_2.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/a172661a62bc_1218F/doddleHtmlReport_thumb_thumb.png" title="doddleHtmlReport" alt="doddleHtmlReport" width="300" height="236" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -93,7 +86,7 @@ Get Started!
 -   Look at the [**Building Your First Report**](https://doddlereport.codeplex.com/wikipage?title=Building%20your%20first%20report) page
 -   If you’re using ASP.NET make sure to read the [**Web Reporting**](https://doddlereport.codeplex.com/wikipage?title=Web%20Reporting) section
 -   Review the [**sample project**](https://doddlereport.codeplex.com/wikipage?title=Check%20out%20the%20sample%20project) in the solution
--   Check out the [**full documentation**](https://doddlereport.codeplex.com/documentation) **** for advanced customization and configuration
+-   Check out the [**full documentation**](https://doddlereport.codeplex.com/documentation) for advanced customization and configuration
 
 ### Get it!
 
@@ -112,7 +105,7 @@ DoddleReport has been split into multiple packages to support more users’ need
 -   **Install-Package DoddleReport.OpenXml**
 -   **Install-Package DoddleReport.Dynamic**
 
-### ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png)
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/563d45072b2e_86C1/image_thumb.png)
 
 
 New in v1.2
@@ -127,5 +120,4 @@ New in v1.2
 -   Added custom FileName support for web reporting as requested in Discussions
 -   Added MVC Areas support by calling areaRegistrationContext.MapReportingRoute();
 -   Various Bug fixes and enhancements as reported in the Discussion forum and Issue Tracker
-
 

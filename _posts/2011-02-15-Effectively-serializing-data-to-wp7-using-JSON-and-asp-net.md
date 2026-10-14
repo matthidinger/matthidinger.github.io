@@ -15,8 +15,6 @@ At [PDC'10 last year](https://www.matthidinger.com/archive/2010/10/28/highlights
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_5.png)
 
 
- 
-
 ### step 1: define your entities/model in the client (WP7) project
 
 The domain for Bus Watch is public transit, so naturally some of my entities are Routes, Stops, Vehicles, Locations, etc. I define all of these classes in the WP7 project; the Route class can be seen below.
@@ -25,8 +23,6 @@ The keen eye may have noticed that I defined Route as a partial class, I will el
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_1.png)
 
-
- 
 
 ### step 2: add a “link” to model class in your web project
 
@@ -41,8 +37,6 @@ Notice how the files have little “shortcut” overlays on their icons.
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/75137daf93c8_11BCD/image_thumb_3.png)
 
-
- 
 
 ### step 3: serialize your model as JSON from the MVC controller
 
@@ -102,7 +96,6 @@ public static class SerializationHelper
 }
 ```
 
- 
 
 Next on my client I simply convert the serialized JSON string from my MVC controller into an IEnumerable&lt;Route&gt;. By using a “link” of the Route.cs I ensure that if I add a property to my Route class it will be properly serialized and deserialized on both ends of the transmission.
 
@@ -123,6 +116,4 @@ Notice in the Solution Explorer I have a **RouteClient.cs** which defines the cl
 
 
 Hopefully this helps someone getting started with wp7dev using ASP.NET MVC!
-
- 
 

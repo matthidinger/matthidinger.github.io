@@ -20,7 +20,7 @@ The app we are creating is called Realworld Stocks, and this is what it looks li
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image29_thumb.png)
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image45_thumb.png)
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image53_thumb.png)
- 
+
 
 Series Outline
 --------------
@@ -81,14 +81,13 @@ For a great video tutorial on using Mercurial with CodePlex check out this [free
      ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/SNAGHTML223cc484_thumb.png)
 
 
-4.  Type the following Source **https://hg01.codeplex.com/realworldwpdev** **** and press **Clone**
+4.  Type the following Source **https://hg01.codeplex.com/realworldwpdev** and press **Clone**
 
     ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/RealWorldWPDev-Part-0_C07A/image_thumb_1.png)
 
 
 5.  That’s it
 
-####  
 
 Special Thanks
 --------------
@@ -102,6 +101,4 @@ Thanks [@JeffWilcox](https://twitter.com/jeffwilcox) for the [Samsung Focus Skin
 Thanks [@magnusvw](https://twitter.com/magnusvw) for connecting the backend to the Yahoo Finance API!
 
 I hope everyone enjoys this series! Feedback always welcome!
-
- 
 

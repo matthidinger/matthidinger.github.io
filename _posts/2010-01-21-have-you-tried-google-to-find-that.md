@@ -10,4 +10,3 @@ Researching strategies for unit testing view model mappers… It never occurred 
 
 ![](/images/subtext-content/HaveyoutriedGoogletofindthat_CB50/googlesearch2_thumb_3.png)
 
-

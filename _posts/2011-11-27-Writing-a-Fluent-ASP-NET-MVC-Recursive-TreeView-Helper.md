@@ -46,7 +46,7 @@ First, apologies for mixing syntax highlighters. My default one doesn’t have a
 
 The following Razor shows the API we will create. It follows a fluent syntax which many developers greatly prefer over the alternative (dozens of overloads!) In the end, it’s easier for us to write, easier to extend in the future, and more discoverable for developers who use it later on. This particular TreeView implementation also takes advantage of Razor’s awesome HelperResult templating delegate (the @&lt;text&gt; syntax seen below).
 
-``` code
+```csharp
 @model List<MvcTreeView.Models.Location>
 
 @(Html.TreeView(Model)
@@ -134,6 +134,4 @@ And of course, the full source is available to download on CodePlex.
 #### <https://mvctreeview.codeplex.com>
 
 #### [Browse the latest source code](https://mvctreeview.codeplex.com/SourceControl/BrowseLatest)
-
- 
 

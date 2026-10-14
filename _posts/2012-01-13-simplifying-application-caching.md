@@ -22,7 +22,6 @@ A very common usage of the Cache API can be seen below, but there are a few init
 4.  Lots of implementation details sprinkled around
 5.  No out of box way to scope the cache. For example, cache a unique copy of the item for each User
 
- 
 
 ```csharp
 public ActionResult Bad()
@@ -38,7 +37,6 @@ public ActionResult Bad()
 }
 ```
 
- 
 
 ### A simple ICache/HttpCache wrapper
 
@@ -101,6 +99,4 @@ Get the Code
 Rather than pasting the full source here, I will be publishing it along with a sample project at [**https://mvcgrabbag.codeplex.com**](https://mvcgrabbag.codeplex.com)
 
 #### [Browse the HttpCache code, MvcGrabBag.Web/Caching folder](https://mvcgrabbag.codeplex.com/SourceControl/changeset/view/2ea3da6732a6#MvcGrabBag.Web%2fCaching%2fHttpCache.cs)
-
- 
 

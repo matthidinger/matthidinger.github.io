@@ -24,44 +24,31 @@ Slides
 
 A number of slides were provided by Microsoft, and many specifically from [Matthias Shapiro](https://twitter.com/matthiasshap). Be sure to check out [his blog](https://matthiasshapiro.com/) for more excellent Windows Phone articles!
 
-|                                                                                                                                                                                                                                                                                                                                                                                      |     |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
-| ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg)
-  |     |
+![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/WP_20121128_001_thumb.jpg)
 
- 
 
 source
 ------
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_6.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_2.png" title="image" alt="image" width="202" height="354" /></a></td>
-<td><p>For this talk I started with my <a href="https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx">Real-World Stocks Windows Phone</a> project, extracted the central logic into a Portable Class Library, and used File-Linking to share Controls and Converters between the two projects.</p>
-<p>The full source code for Real-World Stocks can be downloaded at the following link, inside a new folder named <strong>CodeSharingSample</strong>.</p>
-<a href="https://realworldstocks.codeplex.com/" title="https://realworldstocks.codeplex.com/"><br />
-https://realworldstocks.codeplex.com/</a><br />
-<br />
+<p class="align-left"><a href="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_6.png"><img src="/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_2.png" title="image" alt="image" width="202" height="354" /></a></p>
 
-<p><br />
-For my mercurial fans…</p>
-<br />
-hg clone https://hg.codeplex.com/realworldstocks</td>
-</tr>
-</tbody>
-</table>
+<p>For this talk I started with my <a href="https://www.matthidinger.com/archive/2011/10/16/RealWorldWPDev-Part-1-Introduction-and-Outline.aspx">Real-World Stocks Windows Phone</a> project, extracted the central logic into a Portable Class Library, and used File-Linking to share Controls and Converters between the two projects.</p>
+
+<p>The full source code for Real-World Stocks can be downloaded at the following link, inside a new folder named <strong>CodeSharingSample</strong>.</p>
+
+<p><a href="https://realworldstocks.codeplex.com/">https://realworldstocks.codeplex.com/</a></p>
+
+For my mercurial fans…
+
+```sh
+hg clone https://hg.codeplex.com/realworldstocks
+```
 
 Recap: the six techniques of sharing
 ------------------------------------
 
 Sharing code is getting easier, but like all things, there is no silver bullet. Below are six techniques I’ve used in every app I’ve shared code between -- you will very likely use a combination of all of them in a single solution.
 
-####  
 
 #### Ctrl-C, Ctrl-V
 
@@ -69,11 +56,10 @@ The tried and true technique for sharing code. Simple, elegant, and a potential 
 
 Copy/pasting files is still very useful for sharing some XAML across platforms. It will let you copy the XAML as a starting point, and tweak it to look best on the alternate platform. The obvious trade-off being that these files are no way associated, so any tweaks to the XAML in the future will need to be made in both places.
 
-####  
 
 #### Linked Files
 
-Sometimes you need to share a raw .cs file between projects. You can copy/paste the file or use *Add Existing Item,* but this will create a duplicate file on disk, so any changes made in the future will need to be copy/pasted again. **
+Sometimes you need to share a raw .cs file between projects. You can copy/paste the file or use *Add Existing Item,* but this will create a duplicate file on disk, so any changes made in the future will need to be copy/pasted again.
 
 *Linking* source files between projects will come in very handy when you want to share a custom Control, or maybe a handful of custom Converters. Since Linked Files are still the same file on disk, any change made in one will be persisted between all projects.
 
@@ -82,13 +68,11 @@ Sometimes you need to share a raw .cs file between projects. You can copy/paste 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_1.png)
 
 
-####  
-
 #### Linked Files enhanced with \#if blocks
 
 Sometimes your Linked Files won’t immediately compile on both platforms.
 
-A very common nuisance is when accessibility modifier are different. For example, sharing a custom Control I wrote for Real-World Stocks: in Silverlight the method signature for *OnApplyTemplate* **** is *public;* in Windows it’s marked *protected*. To work around this I had to write a rather silly \#if block to tweak how this code will be compiled, depending on which platform it’s compiling on.
+A very common nuisance is when accessibility modifier are different. For example, sharing a custom Control I wrote for Real-World Stocks: in Silverlight the method signature for *OnApplyTemplate* is *public;* in Windows it’s marked *protected*. To work around this I had to write a rather silly \#if block to tweak how this code will be compiled, depending on which platform it’s compiling on.
 
 ```csharp
 namespace RealWorldStocks.UI.Phone.Controls
@@ -115,7 +99,6 @@ namespace RealWorldStocks.UI.Phone.Controls
 }
 ```
 
-####  
 
 #### Portable Class Libraries (PCLs)
 
@@ -127,8 +110,6 @@ Your end result is a single project, with a single codebase, *outputting a singl
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_5.png)
 
-
- 
 
 #### A Platform Adapter Abstraction
 
@@ -156,17 +137,13 @@ namespace RealWorldStocks.Core
 }
 ```
 
-#### 
-Your skills – it’s not always about sharing raw assets
+#### Your skills – it’s not always about sharing raw assets
 
 Lastly, and arguably the biggest thing worth sharing: your skills.
 
 You know C\#. You know .NET. You know (and love) XAML. These skills will you get a huge head-start, specifically on the XAML stacks. They aren’t 100% identical, as seen above, but the overarching concepts are exactly the same.
 
-### 
-
-Finally, above all else…
-========================
+### Finally, above all else…
 
 Make a great user experience!
 -----------------------------
@@ -174,7 +151,4 @@ Make a great user experience!
 Sharing code, assets, and skills are all great tools for more efficient software delivery. Just don’t forget that you are creating software for different platforms, and the user should always have the optimal experience on each. Not every screen is going to show the same data, in the same way.
 
 ![](/images/subtext-content/www_matthidinger_com/Windows-Live-Writer/Sharing-Code-Windows-8-and-Windows-Phone_83EC/image_thumb_6.png)
-
-
- 
 

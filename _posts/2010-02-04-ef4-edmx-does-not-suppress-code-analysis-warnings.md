@@ -14,7 +14,6 @@ header:
 
 I have [published the instructions and provided a template](https://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx) that can be used to properly suppress code analysis.
 
- 
 
 Starting a new project opens the doors for some great things. One of those things for me, was adherence to code analysis from the get-go. Visual Studio 2010 in particular has great [Code Analysis Rule Set support](https://blogs.msdn.com/habibh/archive/2009/08/12/create-your-own-code-analysis-rule-set-using-visual-studio-team-system-2010.aspx) allowing teams to carefully dictate which rules they wish to apply and suppress.
 
@@ -33,7 +32,4 @@ Needless to say, I am pretty disappointed with this decision.
 In the next few days I plan on [publishing a workaround using their T4 templates](https://www.matthidinger.com/archive/2010/02/09/customizing-the-entity-framework-t4-template-suppressing-code-analysis.aspx). I will provide the template and detailed instructions on how to take advantage of it if you plan on using EF4 anytime soon.
 
 ![](/images/subtext-content/EF4EDMXdoesnotsuppressCodeAnalysiswarnin_F735/CropperCapture3_thumb.png)
-
-
- 
 

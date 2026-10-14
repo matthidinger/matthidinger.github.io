@@ -1,5 +1,5 @@
 ---
-title: "A Windows Phone Developer&rsquo;s take on Xamarin"
+title: "A Windows Phone Developer’s take on Xamarin"
 disqus_identifier: https://www.matthidinger.com/archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx
 redirect_from: /archive/2013/04/21/a-windows-phone-developerrsquos-take-on-xamarin.aspx/
 tags: 
@@ -77,6 +77,4 @@ The one thing we all agree on: this is going to be a fun ride.
 I’d like to wrap-up with a special thanks the entire Xamarin community, I met a ton of great people and definitely look forward to seeing everyone next year! And of course a huge thanks to [Stephanie Schatz](https://twitter.com/she_travels), [Erik Polzin](https://twitter.com/epolzin), and [Anuj Bhatia](https://twitter.com/anooj) for the warm welcome and great conversations throughout the week.
 
 See you all at BUILD 2013!
-
- 
 

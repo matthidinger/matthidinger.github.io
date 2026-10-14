@@ -38,4 +38,3 @@ The solution I found, was to include the Timestamp column in the DataKeyNames pr
 
 This may be a well-known problem with LINQ to SQL and the DataSources, but as I mentioned I don’t use them that much for declarative data binding. Either way, hopefully this saves someone frustration down the road.
 
-

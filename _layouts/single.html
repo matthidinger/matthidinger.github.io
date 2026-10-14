@@ -27,8 +27,11 @@ layout: default
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           <h1 class="page__title" itemprop="headline">{{ page.title | remove: "<p>" | remove: "</p>" }}</h1>
-          {% if page.read_time %}
-            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
+          {% if page.date or page.read_time %}
+            <p class="page__meta page__meta--header">
+              {% if page.date %}<span class="page__meta-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></span>{% endif %}
+              {% if page.read_time %}<span class="page__meta-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>{% endif %}
+            </p>
           {% endif %}
         </header>
       {% endunless %}
@@ -45,8 +48,6 @@ layout: default
         {% include page__taxonomy.html %}
         {% if page.modified %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
-        {% elsif page.date %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
         {% endif %}
       </footer>
 

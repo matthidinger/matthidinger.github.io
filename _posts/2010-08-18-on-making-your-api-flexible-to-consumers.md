@@ -18,9 +18,6 @@ His proposed API was similar to the following very common (and outdated, IMHO) p
 
 So what exactly is my issue with this API? Well let’s assume that the caller does indeed want all the items returned from the DataReader, as seem in the TestDataAccess method. But what if we want to use LINQ to trim this list?
 
- 
-
- 
 
 Now our consumer code is going to break out of the loop early… in fact very early, after only taking a single item. While this isn’t really a concern in our sample method since it is only adding 2 items to the list, it is certainly feasible that our DataReader could return thousands or millions of rows in the future. This means that our consumer of this method is only interested in a subset of the data… but we are always returning a fully-populated List&lt;string&gt; that contains every row from our database.
 
@@ -28,9 +25,6 @@ Now our consumer code is going to break out of the loop early… in fact very ea
 
 Let’s tweak this to use IEnumerable.
 
- 
-
- 
 
 Now our GetItems() method is taking advantage of a feature that has existed since .NET 2.0 – iterators. While not only making the code more succinct and readable, it has a major performance advantage. By returning an IEnumerable we are giving our consumer full freedom to use our API in ways that **they see fit**. If they only want 1 item, or a smaller subset, they can break out of the loop early and our DataReader will close when finished.
 
@@ -45,6 +39,4 @@ With a simple .ToList() call we can get our items from the DataReader in the qui
 ### Summary
 
 While this particular post was focused on iterators, yield, and deferred execution, I think it’s very important for us to try to make our API’s as flexible as possible. We cannot possibly predict every way in which our code will be used by consumers, even if that consumer is your future self!
-
- 
 

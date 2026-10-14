@@ -94,8 +94,10 @@ include:
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
+  - .artifacts
   - .asset-cache
   - .bundle
+  - AGENTS.md
   - .jekyll-assets-cache
   - .sass-cache
   - assets/js/plugins

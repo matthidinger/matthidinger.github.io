@@ -25,8 +25,11 @@
         </div>
       {% endif %}
       <h2 class="archive__item-title" itemprop="headline">{% if post.id %}{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}{% else %}{{ post.title }}{% endif %}{% if post.link %}<i class="fa fa-star" aria-hidden="true"></i>{% endif %}</h2>
-      {% if post.read_time %}
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
+      {% if post.date or post.read_time %}
+        <p class="page__meta">
+          {% if post.date %}<span class="page__meta-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></span>{% endif %}
+          {% if post.read_time %}<span class="page__meta-item"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>{% endif %}
+        </p>
       {% endif %}
       {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 500 }}</p>{% endif %}
     </article>

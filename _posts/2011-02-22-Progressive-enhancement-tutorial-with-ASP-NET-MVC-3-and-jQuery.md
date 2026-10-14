@@ -14,7 +14,6 @@ header:
 
 Now that it’s 2011 I hope more .NET web developers really start to take progressive enhancement seriously. Sure many ASP.NET devs work on internal LOB apps and can enforce javascript requirements, but if you’re working on an internet-facing site I encourage you to take advantage of the many PE/unobtrusive javascript techniques we have available these days, especially in MVC 3.
 
- 
 
 update 3/2/2011
 ---------------
@@ -23,9 +22,6 @@ Per a suggestion from a commenter I have written a followup article that encapsu
 
 [Progressive enhancement in MVC 3 with the help of custom ActionResults](https://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx "https://www.matthidinger.com/archive/2011/03/02/Progressive-enhancement-in-MVC-3-with-the-help-of-custom.aspx")
 
- 
-
- 
 
 Building a Contact Us form
 --------------------------
@@ -96,7 +92,6 @@ public ActionResult ContactUs(ContactUsInput input)
 }
 ```
 
- 
 
 ### step 2: wire up our jQuery behavior
 
@@ -146,7 +141,6 @@ The jQuery code below operates on the following conventions:
 </script>
 ```
 
- 
 
 ### step 3: add the Contact Us hyperlink
 
@@ -159,7 +153,6 @@ The Contact Us hyperlink is just a standard ActionLink with some additional attr
        new { @class = "openDialog", data_dialog_id = "emailDialog", data_dialog_title = "Contact Us"})
 ```
 
- 
 
 The ActionLink renders the following HTML
 
@@ -168,7 +161,6 @@ The ActionLink renders the following HTML
      data-dialog-title="Contact Us" href="/Home/ContactUs">Contact Us</a>
 ```
 
-###  
 
 ### step 4: create our views
 
@@ -198,7 +190,6 @@ I am using Ajax.BeginForm since MVC 3 renders unobtrusive HTML-5-compatible Ajax
 }
 ```
 
- 
 
 #### ContactUs.cshtml
 
@@ -213,7 +204,6 @@ Below is the full ContactUs view, used for non-Ajax requests. In this example it
 @Html.Partial("_ContactUs")
 ```
 
- 
 
 #### \_ThanksForFeedback.cshtml
 
@@ -224,7 +214,6 @@ Below is the full ContactUs view, used for non-Ajax requests. In this example it
 <p><a href="javascript:void(0);" class="close">Close Window</a></p>
 ```
 
- 
 
 ### Wrap-up and source code
 
@@ -233,16 +222,12 @@ Below is the full ContactUs view, used for non-Ajax requests. In this example it
 
 Hopefully this tutorial covered everything! It’s exciting to see how far MVC 3 and jQuery have come to really make progressive enhancement a reality with very minimal effort.
 
- 
 
 &lt;-- For reference the final solution structure ended up looking like this
 
- 
 
 [Download the Source](https://buswatchapp.com/downloads/progressiveenhancement.zip)
 ----------------------------------------------------------------------------------
 
 VS 2010 with ASP.NET MVC 3 required to open it
-
- 
 
