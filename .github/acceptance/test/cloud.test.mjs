@@ -10,7 +10,7 @@ import {
 import { chooseImmutableCandidate, contentType, publishImmutable, verifyCloud } from '../lib/cloud-publish.mjs';
 import { shouldDispatch } from '../lib/cloud-reconcile.mjs';
 import { pages } from '../lib/cloud-github.mjs';
-import { validateHostedProof, validatePublication } from '../lib/cloud-proof.mjs';
+import { publicationRunId, validateHostedProof, validatePublication } from '../lib/cloud-proof.mjs';
 import { RECEIPT_FILE, buildReceipt, receiptBytes, receiptErrors } from '../lib/hosting.mjs';
 import { REPO_NWO, manifest, previewPrefix, readJson, sha256, writeJson } from '../lib/util.mjs';
 
@@ -201,7 +201,8 @@ test('deployment refers to PR head, not master; cannot merge, deploy production 
 test('NAS cloud proof requires successful trusted publication and matching hosted provenance/navigation', (t) => {
   const { report } = fixture(t);
   const check = { name: 'preview-verified', app: { slug: 'github-actions' }, head_sha: SHA,
-    conclusion: 'success', details_url: `https://github.com/${REPO_NWO}/actions/runs/77` };
+    status: 'completed', conclusion: 'success', details_url: `https://github.com/${REPO_NWO}/actions/runs/77`,
+    output: { summary: `[hosted checks](https://github.com/${REPO_NWO}/actions/runs/77)` } };
   const publication = { ...RUN, id: 77, path: '.github/workflows/publish-preview.yml', head_branch: 'master', head_sha: BASE, event: 'workflow_run' };
   validatePublication(publication, check, report);
   for (const over of [{ head_branch: 'feature' }, { status: 'in_progress' }, { conclusion: 'failure' },
@@ -215,6 +216,48 @@ test('NAS cloud proof requires successful trusted publication and matching hoste
   assert.throws(() => validateHostedProof({ ...hosted, provenance: { ...report.provenance, runId: 1 } }, report, 77));
   assert.throws(() => validateHostedProof({ ...hosted, results: hosted.results.slice(0, 1) }, report, 77));
   assert.throws(() => validateHostedProof({ ...hosted, sha: BASE }, report, 77));
+});
+
+const NORMALIZED_CHECK = {
+  name: 'preview-verified', app: { slug: 'github-actions' }, status: 'completed', conclusion: 'success',
+  head_sha: 'ee64fdfe409ecde246e6bf968215f47dd51f107f',
+  details_url: 'https://github.com/matthidinger/matthidinger.github.io/runs/116081955394',
+  html_url: 'https://github.com/matthidinger/matthidinger.github.io/runs/116081955394',
+  output: {
+    summary: 'Preview for `ee64fdfe409ecde246e6bf968215f47dd51f107f`: [View deployment](https://matthidingerpreviews.z5.web.core.windows.net/matthidinger.github.io/pr-12/ee64fdfe409ecde246e6bf968215f47dd51f107f/) ([cloud build and screenshots](https://github.com/matthidinger/matthidinger.github.io/actions/runs/38629725020), [hosted checks](https://github.com/matthidinger/matthidinger.github.io/actions/runs/38630387536)); exact bytes and page interactions passed, visual review is pending.',
+  },
+};
+
+test('NAS consumer accepts the real GitHub-normalized check URLs without mistaking the job or build ID for publication', () => {
+  const publication = { ...RUN, id: 38630387536, path: '.github/workflows/publish-preview.yml',
+    head_branch: 'master', head_sha: BASE, event: 'workflow_run' };
+  assert.equal(publicationRunId(NORMALIZED_CHECK, NORMALIZED_CHECK.head_sha), publication.id);
+  validatePublication(publication, NORMALIZED_CHECK, { sha: NORMALIZED_CHECK.head_sha });
+  for (const id of [116081955394, 38629725020])
+    assert.throws(() => validatePublication({ ...publication, id }, NORMALIZED_CHECK, { sha: NORMALIZED_CHECK.head_sha }), /run mismatch/);
+});
+
+test('publication resolver rejects untrusted checks and missing, ambiguous or noncanonical publication links', () => {
+  const url = `https://github.com/${REPO_NWO}/actions/runs/38630387536`;
+  for (const over of [{ name: 'other-check' }, { app: { slug: 'someone' } }, { head_sha: OTHER },
+    { status: 'in_progress' }, { conclusion: 'failure' }])
+    assert.throws(() => publicationRunId({ ...NORMALIZED_CHECK, ...over }, NORMALIZED_CHECK.head_sha), /check has not succeeded/);
+  assert.throws(() => publicationRunId(undefined, NORMALIZED_CHECK.head_sha), /check has not succeeded/);
+  const summaries = [
+    undefined, 42, '', `[cloud build and screenshots](${url})`,
+    `[hosted checks](${url}) [hosted checks](${url})`,
+    `[hosted checks](${url}) [hosted checks](${url.replace('38630387536', '77')})`,
+    `[hosted checks](${url}) [hosted checks]`,
+    `![hosted checks](${url})`, `\\[hosted checks](${url})`,
+    ...[
+      url.replace('https:', 'http:'), url.replace('github.com', 'github.com.evil.invalid'),
+      url.replace(REPO_NWO, 'other/repo'), url.replace('github.com/', 'user@github.com/'),
+      url.replace('/actions/runs/', '/runs/'), `${url}?extra=1`, `${url}#fragment`, `${url}/`,
+      url.replace('38630387536', '0'), url.replace('38630387536', '9007199254740992'),
+    ].map((target) => `[hosted checks](${target})`),
+  ];
+  for (const summary of summaries)
+    assert.throws(() => publicationRunId({ ...NORMALIZED_CHECK, output: { summary } }, NORMALIZED_CHECK.head_sha), undefined, String(summary));
 });
 
 function memoryStore(initial = {}) {

@@ -7,13 +7,26 @@ import { chooseImmutableCandidate, verifyCloud } from './cloud-publish.mjs';
 import { hostedErrors } from './hosting.mjs';
 import { REPO_NWO, readJson, sh } from './util.mjs';
 
+// GitHub can replace details_url/html_url with job URLs. Resolve only the producer's labeled
+// publication link; the caller still verifies the workflow, artifacts, provenance and hosted bytes.
+export function publicationRunId(check, sha) {
+  ensure(check?.name === 'preview-verified' && check.app?.slug === 'github-actions' && check.head_sha === sha
+    && check.status === 'completed' && check.conclusion === 'success', 'current-head preview check has not succeeded');
+  const summary = check.output?.summary;
+  ensure(typeof summary === 'string' && summary.split('[hosted checks]').length === 2, 'expected exactly one hosted checks link');
+  const link = summary.match(/(?<![!\\])\[hosted checks\]\(([^()\s]+)\)/)?.[1];
+  const prefix = `https://github.com/${REPO_NWO}/actions/runs/`;
+  ensure(link?.startsWith(prefix) && /^[1-9][0-9]*$/.test(link.slice(prefix.length)), 'no trusted publication run link');
+  return positiveInt(link.slice(prefix.length));
+}
+
 export function validatePublication(run, check, report) {
-  ensure(check.name === 'preview-verified' && check.app?.slug === 'github-actions' && check.head_sha === report.sha && check.conclusion === 'success', 'current-head preview check has not succeeded');
+  const id = publicationRunId(check, report.sha);
   ensure(run.repository?.full_name === REPO_NWO && run.head_repository?.full_name === REPO_NWO
     && run.path === '.github/workflows/publish-preview.yml' && run.head_branch === 'master'
     && ['workflow_run', 'workflow_dispatch'].includes(run.event), 'untrusted publication workflow');
   ensure(run.status === 'completed' && run.conclusion === 'success', 'publication workflow has not completed successfully');
-  ensure(check.details_url === `https://github.com/${REPO_NWO}/actions/runs/${positiveInt(run.id)}`, 'preview check/publication run mismatch');
+  ensure(positiveInt(run.id) === id, 'preview check/publication run mismatch');
 }
 
 export function validateHostedProof(hosted, report, publicationId) {
@@ -37,9 +50,7 @@ export async function gatherCloudProof({ runId, runDir, sha, pr }) {
     const checks = (await pages(`/commits/${sha}/check-runs`, 'check_runs'))
       .filter((c) => c.name === 'preview-verified' && c.app?.slug === 'github-actions').sort((a, b) => b.id - a.id);
     const check = checks[0];
-    const prefix = `https://github.com/${REPO_NWO}/actions/runs/`;
-    ensure(check?.details_url?.startsWith(prefix) && /^[1-9][0-9]*$/.test(check.details_url.slice(prefix.length)), 'no trusted publication run link');
-    const publication = await github(`/actions/runs/${positiveInt(check.details_url.slice(prefix.length))}`);
+    const publication = await github(`/actions/runs/${publicationRunId(check, report.sha)}`);
     validatePublication(publication, check, report);
     sh('git', ['merge-base', '--is-ancestor', publication.head_sha, 'origin/master']);
     ensure(sh('git', ['show', `${publication.head_sha}:.github/workflows/publish-preview.yml`])
