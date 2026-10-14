@@ -74,13 +74,15 @@ html:not(.dk-drawn) .dk-lede { color: var(--dk-cream); }
 .dk-duo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.25); mix-blend-mode: multiply; }
 .dk-duo::after { content: ""; position: absolute; inset: 0; background: #2b3b6b; mix-blend-mode: lighten; }
 
-/* Work: each stop gets its original badge, mounted like a porthole. */
+/* Work: each stop gets its original badge, mounted like a porthole. Rows share one subgrid so the
+   years column fits the widest label in whatever display face the visitor has, never wrapping. */
+.dk-work { --b: clamp(84px, 8.4vw, 116px); display: grid; grid-template-columns: max-content var(--b) 1fr; column-gap: clamp(16px, 3vw, 44px); }
 .dk-work li {
-  --b: clamp(84px, 8.4vw, 116px);
-  display: grid; grid-template-columns: minmax(150px, .36fr) var(--b) 1fr; gap: clamp(16px, 3vw, 44px); align-items: start;
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: minmax(150px, .36fr) var(--b) 1fr; grid-template-columns: subgrid; gap: clamp(16px, 3vw, 44px); align-items: start;
   padding: clamp(22px, 2.8vw, 36px) 0; border-top: 1px solid rgba(243, 230, 207, .22);
 }
-.dk-years { font: 400 clamp(52px, 6.6vw, 96px)/.84 var(--dk-disp); color: var(--dk-amber); letter-spacing: .01em; }
+.dk-years { font: 400 clamp(52px, 6.6vw, 96px)/.84 var(--dk-disp); color: var(--dk-amber); letter-spacing: .01em; white-space: nowrap; }
 .dk-badge {
   width: var(--b); height: var(--b); border-radius: 50%; object-fit: cover; background: #fff;
   box-shadow: 0 0 0 3px var(--dk-cream), 0 0 0 9px rgba(243, 230, 207, .14);
@@ -125,6 +127,7 @@ html:not(.dk-drawn) .dk-lede { color: var(--dk-cream); }
   .dk-nav { gap: 16px; }
   .dk-about { grid-template-columns: 1fr; }
   .dk-duo { width: 150px; }
+  .dk-work { display: block; }
   .dk-work li { --b: 76px; grid-template-columns: var(--b) 1fr; grid-template-areas: "badge years" "text text"; align-items: center; gap: 14px 20px; }
   .dk-years { grid-area: years; }
   .dk-badge { grid-area: badge; }
