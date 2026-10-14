@@ -59,7 +59,7 @@ export async function verifyHostedPreview({ backend, pr, report, expected, fetch
     if (!backend.base) return null;
     return verifyPreviewLink({ base: backend.base, prefix: report.prefix, sha: report.sha, paths, expected, fetchImpl, timeoutMs });
   }
-  return verifyHostedReceipt({ origin: backend.origin, prefix: report.prefix, pr, sha: report.sha, builder: report.builder, expected, paths, fetchImpl, timeoutMs });
+  return verifyHostedReceipt({ origin: backend.origin, prefix: report.prefix, pr, sha: report.sha, builder: report.builder, provenance: report.provenance, expected, paths, fetchImpl, timeoutMs });
 }
 
 export function verifyEvidence(runDir, report) {
@@ -150,7 +150,21 @@ export function evaluate(f) {
   else gate('embedded-evidence', 'pass', `${up.items.length} screenshots embedded in PR body`);
 
   const checks = f.checks;
-  if (!Array.isArray(checks)) gate('ci', 'fail', checks?.error || 'no check runs found');
+  if (f.cloudRequested) {
+    const cloud = f.cloud;
+    const matches = cloud?.status === 'pass' && cloud.report?.sha === sha && cloud.report?.pr === f.pr;
+    const unresolved = cloud?.status === 'blocked' ? 'blocked' : 'fail';
+    gate('nas-build', r?.builder === 'nas-pages-build (GitHub Pages 232, PAGES_ENV=dotcom)' ? 'pass' : 'fail',
+      'NAS acceptance is a separate required execution; cloud preview bytes are not NAS build evidence');
+    gate('cloud-provenance', matches ? 'pass' : unresolved, matches ? cloud.detail : cloud?.detail || 'cloud proof missing or stale');
+    const other = Array.isArray(checks) ? checks.filter((c) => ![REQUIRED_CHECK, 'preview-verified'].includes(c.name)) : [];
+    const bad = other.filter((c) => c.status !== 'completed' || !['success', 'neutral', 'skipped'].includes(c.conclusion));
+    gate('ci', !Array.isArray(checks) || bad.length ? 'fail' : matches ? 'pass' : unresolved, !Array.isArray(checks)
+      ? checks?.error || 'no check runs found'
+      : matches && !bad.length
+      ? 'successful Actions site-acceptance and publication runs verified for this exact PR head (not inferred from a default-branch check SHA)'
+      : bad.length ? 'other checks pending/failed: ' + bad.map((c) => c.name).join(', ') : 'cloud build/publication evidence not verified');
+  } else if (!Array.isArray(checks)) gate('ci', 'fail', checks?.error || 'no check runs found');
   else {
     const req = checks.filter((c) => c.name === REQUIRED_CHECK);
     const pending = checks.filter((c) => c.status !== 'completed');
@@ -165,7 +179,9 @@ export function evaluate(f) {
   if (!be) gate('preview-backend', 'fail', f.backendError || 'no preview backend selected');
   else gate('preview-backend', 'pass', `${be.id}: ${be.type === 'receipt' ? 'revision receipt plus served bytes' : 'X-Preview-Revision header plus route HTML'} (selected by ${be.source})`);
 
-  if (!f.previewRoot) gate('preview-export', 'blocked', 'COPILOT_PREVIEW_ROOT is not provided by the runtime');
+  if (f.cloudRequested) gate('preview-export', f.cloud?.status || 'fail',
+    f.cloud?.status === 'pass' ? 'Actions artifact and hosted package verified independently of NAS build bytes/timestamps' : 'cloud package proof failed');
+  else if (!f.previewRoot) gate('preview-export', 'blocked', 'COPILOT_PREVIEW_ROOT is not provided by the runtime');
   else if (f.previewError) gate('preview-export', 'fail', f.previewError);
   else if (!f.preview?.exists) gate('preview-export', 'fail', 'preview not exported for this PR/commit; run bin/export-preview.mjs');
   else if (!f.preview.matches) gate('preview-export', 'fail', 'exported preview does not match the accepted build plus its revision receipt');
@@ -194,7 +210,7 @@ export function evaluate(f) {
   else {
     let origin = be.origin;
     if (be.type === 'header') { try { origin = previewOrigin(f.previewBaseUrl); } catch { origin = null; } }
-    const errs = hostedErrors(f.hosted, { report: r, pr: f.pr, backend: be, origin });
+    const errs = hostedErrors(f.hosted, { report: f.cloudRequested ? f.cloud?.report : r, pr: f.pr, backend: be, origin });
     if (errs.length) gate('hosted-browser', 'fail', errs.join('; '));
     else {
       const copy = f.hosted.results.filter((x) => x.copyCode?.length).length;

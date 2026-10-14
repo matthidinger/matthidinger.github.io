@@ -8,6 +8,7 @@
     "test": "node --test \"test/*.test.mjs\""
   },
   "dependencies": {
-    "playwright-core": "1.64.0"
+    "playwright-core": "1.64.0",
+    "yauzl": "3.4.0"
   }
 }
