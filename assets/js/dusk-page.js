@@ -111,20 +111,55 @@
     }
   }
 
-  // Long CamelCase identifiers in titles may break at their word humps rather than mid-letter.
+  // A CamelCase identifier too wide for its title line breaks at its word humps rather than mid-letter.
+  const HUMP = /(?<=[a-z.])(?=[A-Z])/;
+  const camels = [];
   for (const el of document.querySelectorAll('.dkp-title, .dkp-entry-title a, .post-pager__title, .dkp-more a')) {
+    let box = el;
+    while (box.parentElement && getComputedStyle(box).display.startsWith('inline')) box = box.parentElement;
     for (const n of [...el.childNodes]) {
-      if (n.nodeType !== 3 || !/\S{16,}/.test(n.data)) continue;
+      if (n.nodeType !== 3 || !n.data.split(/\s+/).some((t) => HUMP.test(t))) continue;
       const frag = document.createDocumentFragment();
       for (const tok of n.data.split(/(\s+)/)) {
-        if (tok.length < 16) { frag.append(tok); continue; }
-        tok.split(/(?<=[a-z])(?=[A-Z])/).forEach((part, i) => {
-          if (i) frag.append(document.createElement('wbr'));
-          frag.append(part);
-        });
+        if (!HUMP.test(tok)) { frag.append(tok); continue; }
+        const span = document.createElement('span');
+        span.textContent = tok;
+        camels.push({ span, box, parts: tok.split(HUMP), split: false });
+        frag.append(span);
       }
       n.replaceWith(frag);
     }
+  }
+  function humps() {
+    // Read each title's width first, then each token's unbroken width from a hidden probe that inherits its font.
+    const rooms = camels.map(({ box }) => {
+      const cs = getComputedStyle(box);
+      return box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    });
+    const probes = camels.map((c) => {
+      const p = document.createElement('span');
+      p.style.cssText = 'position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap';
+      p.textContent = c.parts.join('');
+      c.span.append(p);
+      return p;
+    });
+    const widths = probes.map((p) => p.getBoundingClientRect().width);
+    for (const p of probes) p.remove();
+    camels.forEach((c, i) => {
+      const split = widths[i] > rooms[i] + 0.5;
+      if (split === c.split) return;
+      c.split = split;
+      c.span.replaceChildren(...c.parts.flatMap((p, j) => (split && j ? [document.createElement('wbr'), p] : [p])));
+    });
+  }
+  if (camels.length) {
+    humps();
+    // Titles narrow when teaser images load, fonts swap or the viewport changes; recheck a frame later.
+    let raf = 0;
+    const later = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(humps); };
+    const ro = new ResizeObserver(later);
+    for (const box of new Set(camels.map((c) => c.box))) ro.observe(box);
+    if (document.fonts) document.fonts.ready.then(later);
   }
 
   function layout() {
