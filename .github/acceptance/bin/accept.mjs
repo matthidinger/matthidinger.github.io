@@ -2,22 +2,25 @@
 // Build + browser acceptance.
 //   node .github/acceptance/bin/accept.mjs --pr N                 deliverable run of clean HEAD on the pinned NAS runtime
 //   node .github/acceptance/bin/accept.mjs --pr N --dev           working-tree run, explicitly NOT deliverable
-//   node .github/acceptance/bin/accept.mjs --baseline-ref master  "before" evidence for UX work
+//   node .github/acceptance/bin/accept.mjs --baseline-ref master  "before" evidence for UX work; checked against the
+//                   routes.json committed at that ref, plus capture-only (report-only) shots of routes added since
 //   --ux            strict page-level overflow gate (required for broad UX/redesign jobs)
 //   --stage-only    stage sources and print the run dir (CI builds them with the Pages action)
 //   --run DIR --site DIR --builder NAME   accept an already-built site (CI)
 import path from 'node:path';
-import { acceptRun, buildNas, stageSource } from '../lib/pipeline.mjs';
+import { acceptRun, buildNas, runConfig, stageSource } from '../lib/pipeline.mjs';
 import { fail, loadConfig, parseArgs, prNumber, readJson, repoRoot } from '../lib/util.mjs';
 
 const args = parseArgs(process.argv.slice(2));
 const root = repoRoot();
-const config = loadConfig();
+const headConfig = loadConfig();
 
 try {
   let runDir;
   let siteDir;
   let builder;
+  let config = headConfig;
+  let configSource = 'checkout routes.json';
   if (args.run) {
     runDir = path.resolve(args.run);
     if (!args.site) throw new Error('--run requires --site');
@@ -31,13 +34,15 @@ try {
     const staged = stageSource({ root, role, ref: args['baseline-ref'], pr });
     runDir = staged.runDir;
     console.log(`staged ${staged.meta.role} ${staged.meta.sha} -> ${path.relative(root, runDir)}`);
+    ({ config, source: configSource } = runConfig({ runDir, role, headConfig }));
+    console.log(`checks from ${configSource}`);
     if (args['stage-only']) { console.log(`run_dir=${path.relative(root, runDir)}`); process.exit(0); }
     siteDir = buildNas(runDir);
     builder = 'nas-pages-build (GitHub Pages 232, PAGES_ENV=dotcom)';
     console.log('built with nas-pages-build');
   }
   const report = await acceptRun({
-    runDir, siteDir, config, builder, strictOverflow: !!args.ux, chromium: args.chromium,
+    runDir, siteDir, config, configSource, builder, strictOverflow: !!args.ux, chromium: args.chromium,
     label: args['baseline-ref'] ? 'before' : '',
   });
   for (const r of report.results) {
