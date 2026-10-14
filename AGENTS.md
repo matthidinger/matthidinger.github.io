@@ -53,7 +53,7 @@ To show a talk or other video in a post, use `{% include video.html youtube="ID"
 
 ```sh
 npm ci --prefix .github/acceptance --ignore-scripts   # pinned browser driver; isolated from the root npm project
-npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, copy-code, readiness, hosting, export)
+npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, copy-code, title breaks, readiness, hosting, export)
 
 # Iterate on uncommitted work (labelled development; never deliverable):
 node .github/acceptance/bin/accept.mjs --dev --pr N
