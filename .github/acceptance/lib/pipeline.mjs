@@ -41,14 +41,14 @@ export function settleCaptureOnly(results, config, role) {
     : r));
 }
 
-// role: "deliverable" (clean committed HEAD), "development" (working tree, never deliverable) or "baseline" (a ref, e.g. master).
+// Cloud runs build an explicit ref, never masquerading as a local/NAS deliverable.
 export function stageSource({ root, role = 'deliverable', ref, pr = 0 }) {
   let sha;
   let dirty = dirtyFiles(root);
   if (role === 'deliverable') {
     if (dirty.length) throw new Error(`working tree is dirty; commit first or use --dev (non-deliverable):\n  ${dirty.slice(0, 10).join('\n  ')}`);
     sha = headSha(root);
-  } else if (role === 'baseline') {
+  } else if (role === 'baseline' || role === 'cloud') {
     sha = sh('git', ['rev-parse', `${ref}^{commit}`], { cwd: root });
     dirty = [];
   } else if (role === 'development') {
@@ -56,7 +56,7 @@ export function stageSource({ root, role = 'deliverable', ref, pr = 0 }) {
   } else {
     throw new Error(`unknown role ${role}`);
   }
-  const name = role === 'deliverable' ? `pr-${pr}-${sha}` : role === 'baseline' ? `baseline-${sha.slice(0, 12)}` : `dev-${sha.slice(0, 12)}-${Date.now()}`;
+  const name = role === 'deliverable' || role === 'cloud' ? `pr-${pr}-${sha}` : role === 'baseline' ? `baseline-${sha.slice(0, 12)}` : `dev-${sha.slice(0, 12)}-${Date.now()}`;
   const runDir = path.join(root, RUNS_DIR, name);
   fs.rmSync(runDir, { recursive: true, force: true });
   const src = path.join(runDir, 'src');

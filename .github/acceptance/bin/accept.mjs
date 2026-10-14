@@ -28,6 +28,7 @@ try {
     builder = args.builder || 'external';
     const meta = readJson(path.join(runDir, 'meta.json'));
     if (meta.deliverable && args.pr && Number(args.pr) !== meta.pr) throw new Error('--pr does not match staged run');
+    ({ config, source: configSource } = runConfig({ runDir, role: meta.role, headConfig }));
   } else {
     const role = args['baseline-ref'] ? 'baseline' : args.dev ? 'development' : 'deliverable';
     const pr = role === 'deliverable' ? prNumber(args.pr) : args.pr ? prNumber(args.pr) : 0;

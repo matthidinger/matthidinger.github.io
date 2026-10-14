@@ -1,0 +1,160 @@
+name: Publish preview
+on:
+  workflow_run:
+    workflows: [Build preview]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Build preview run ID (retry publication, not the build)
+        required: true
+        type: string
+
+permissions: {}
+concurrency:
+  group: publish-preview-run-${{ github.event.workflow_run.id || inputs.run_id }}
+  cancel-in-progress: false
+
+env:
+  SOURCE_RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
+
+jobs:
+  gate:
+    if: github.repository == 'matthidinger/matthidinger.github.io' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    outputs:
+      pr: ${{ steps.gate.outputs.pr }}
+      sha: ${{ steps.gate.outputs.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+      - id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/acceptance/bin/cloud-preview.mjs gate
+
+  publish:
+    needs: gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: website-preview
+    concurrency:
+      group: azure-preview-pr-${{ needs.gate.outputs.pr }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+      - name: Require operator-configured preview identity
+        env:
+          CLIENT: ${{ vars.AZURE_CLIENT_ID }}
+          TENANT: ${{ vars.AZURE_TENANT_ID }}
+          SUBSCRIPTION: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          if [ -z "$CLIENT" ] || [ -z "$TENANT" ] || [ -z "$SUBSCRIPTION" ]; then
+            echo "::error::BLOCKED: configure the approved website-preview OIDC identity and environment variables."
+            exit 1
+          fi
+      - uses: azure/login@eec3c95657c1536435858eda1f3ff5437fee8474 # v2.3.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Validate again and create immutable preview blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AZURE_CORE_OUTPUT: none
+        run: node .github/acceptance/bin/cloud-preview.mjs publish
+
+  hosted:
+    needs: [gate, publish]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    outputs:
+      sha: ${{ steps.hosted.outputs.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+      - id: hosted
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: node .github/acceptance/bin/cloud-preview.mjs hosted
+      - name: Upload hosted browser evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: hosted-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .artifacts/hosted/
+          retention-days: 7
+          if-no-files-found: warn
+
+  announce:
+    if: always() && github.repository == 'matthidinger/matthidinger.github.io' && github.ref == 'refs/heads/master'
+    needs: [gate, publish, hosted]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: write
+      deployments: write
+      checks: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+      - name: Publish only the verified final-head deployment link
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_RESULT: ${{ needs.publish.result }}
+          HOSTED_RESULT: ${{ needs.hosted.result }}
+          HOSTED_SHA: ${{ needs.hosted.outputs.sha }}
+        run: node .github/acceptance/bin/cloud-preview.mjs announce
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: cloud-readiness-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .artifacts/cloud-readiness.json
+          retention-days: 7
+          if-no-files-found: warn

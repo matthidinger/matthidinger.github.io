@@ -1,0 +1,32 @@
+name: Test acceptance tooling
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - '.github/acceptance/**'
+      - '.github/workflows/**'
+      - '.github/hooks/**'
+permissions:
+  contents: read
+concurrency:
+  group: acceptance-tooling-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  acceptance-tooling:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # PR tooling is untrusted. Keep its tests in a different workflow/artifact namespace from the
+      # publishable build, without environment access, OIDC, secrets, write permissions or caches.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: npm ci --prefix .github/acceptance --ignore-scripts --no-audit --no-fund
+      - env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: npm --prefix .github/acceptance test

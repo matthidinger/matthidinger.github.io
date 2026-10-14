@@ -236,6 +236,44 @@ function ready(over = {}) {
 }
 const g = (r, id) => r.gates.find((x) => x.id === id);
 
+function withCloud(over = {}) {
+  const report = { ...REPORT, role: 'cloud', deliverable: false, builder: 'actions/jekyll-build-pages@pinned',
+    provenance: { kind: 'github-actions', runId: 42, runAttempt: 1, artifactId: 123 } };
+  return ready({
+    cloudRequested: true,
+    cloud: { status: 'pass', report, verification: { status: 'pass' }, hosted: HOSTED, detail: 'cloud proof verified' },
+    previewRoot: '', preview: { exists: false, matches: false },
+    checks: [{ name: 'preview-verified', status: 'completed', conclusion: 'success' }],
+    ...over,
+  });
+}
+
+test('NAS readiness can consume distinct cloud bytes/provenance without pretending the cloud build ran on NAS', () => {
+  const result = evaluate(withCloud());
+  assert.equal(result.overall, 'ready', JSON.stringify(result.gates.filter((x) => x.status !== 'pass')));
+  assert.equal(g(result, 'nas-build').status, 'pass');
+  assert.equal(g(result, 'preview-export').status, 'pass');
+  assert.match(g(result, 'preview-export').detail, /independently of NAS build bytes/);
+  assert.match(g(result, 'ci').detail, /not inferred from a default-branch check SHA/);
+  assert.equal(evaluate(withCloud({ report: { ...REPORT, passed: false } })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ report: { ...REPORT, builder: 'actions/jekyll-build-pages' } })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ report: { ...REPORT, deliverable: false, role: 'cloud' } })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ inspection: null })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ uploads: null })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ dirty: ['M changed'] })).overall, 'not-ready');
+});
+
+test('cloud-aware NAS readiness refuses missing/stale cloud proofs and preserves blocked access', () => {
+  assert.equal(evaluate(withCloud({ cloud: null })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ cloud: { ...withCloud().cloud, report: { ...withCloud().cloud.report, sha: OTHER } } })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ checks: { error: 'API failed' } })).overall, 'not-ready');
+  assert.equal(evaluate(withCloud({ checks: [{ name: 'lint', status: 'completed', conclusion: 'failure' }] })).overall, 'not-ready');
+  const blocked = evaluate(withCloud({ cloud: { status: 'blocked', detail: 'GitHub artifact access denied' },
+    previewFetch: { status: 'blocked', detail: 'GitHub artifact access denied' }, hosted: null }));
+  assert.equal(blocked.overall, 'blocked');
+  assert.equal(g(blocked, 'cloud-provenance').status, 'blocked');
+});
+
 test('readiness (azure-receipt): ready only with a verified receipt and a passing hosted browser run for this SHA', () => {
   const r = evaluate(ready());
   assert.equal(r.overall, 'ready', JSON.stringify(r.gates.filter((x) => x.status !== 'pass')));

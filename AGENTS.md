@@ -37,6 +37,7 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
    - **Broad UX/redesign requests:** audit representative real content first. Use the routes in `.github/acceptance/routes.json` and add any routes the change affects. Design the change intentionally, run a "before" baseline, and use the strict `--ux` overflow gate. A CSS tweak or arbitrary small diff does not satisfy a redesign request.
 5. **Use the configured advanced model.** Don't silently fall back to a cheaper one.
 6. **Build and test on the self-hosted runtime** with the commands below. Cloud CI is extra verification. It does not prove a local build.
+   The [automatic PR preview pipeline](.github/AUTOMATIC_PREVIEWS.md) is an explicitly separate GitHub-hosted path. Once activated, NAS jobs may use `readiness.mjs RUN --pr N --cloud-run BUILD_RUN_ID` to verify its exact-head hosted evidence while retaining their own real NAS build, screenshot inspection and review gates. Never compare a cloud preview's timestamp-dependent bytes to a separate NAS build, or call cloud execution NAS evidence.
 7. **Inspect every screenshot by viewing the image itself.** A passing process is not visual acceptance. Fix what looks wrong and re-run. Then record the inspection.
 8. **Commit and push, then gather evidence for that exact commit:** accept, inspect, upload/embed, export the preview and wait for CI. Then run readiness. Any new commit makes earlier evidence stale.
 9. **Stop correctly:**
@@ -111,6 +112,8 @@ Matt approved `https://matthidingerpreviews.z5.web.core.windows.net` with immuta
 - reports an absent receipt (404), 401/403 or a timeout as `BLOCKED` (awaiting operator publication); a wrong receipt, invalid JSON, redirect, missing file or different bytes fails
 
 Deep links on this origin may appear in the PR once readiness has verified them.
+
+The approved automatic Actions publisher is the exception to operator-only publication, not permission for a coding agent to upload manually. It uses trusted default-branch code, the protected `website-preview` environment, and preview-container-only OIDC. Its schema-2 receipt records explicit Actions run/artifact provenance; schema-1 NAS exports remain unchanged. See [automatic previews](.github/AUTOMATIC_PREVIEWS.md) for activation, fork exclusions, retry/immutability behavior, and the cloud-aware NAS readiness invocation. Automatic preview verification never marks a PR ready or replaces visual review, and no preview cleanup is authorized.
 
 ### `private-header` (operator-configured private ingress)
 

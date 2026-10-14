@@ -46,7 +46,12 @@ export function resolveBackend({ flag, env = process.env, config = loadPreviewCo
 const sortKeys = (o) => Object.fromEntries(Object.keys(o).sort().map((k) => [k, o[k]]));
 
 export function buildReceipt(report, files) {
-  return { schemaVersion: RECEIPT_SCHEMA, repository: REPO_NWO, pr: report.pr, sha: report.sha, builder: report.builder, files: sortKeys(files) };
+  return {
+    schemaVersion: report.provenance ? 2 : RECEIPT_SCHEMA, repository: REPO_NWO, pr: report.pr,
+    sha: report.sha, builder: report.builder,
+    ...(report.provenance ? { provenance: report.provenance } : {}),
+    files: sortKeys(files),
+  };
 }
 
 export const receiptBytes = (receipt) => Buffer.from(JSON.stringify(receipt, null, 2) + '\n');
@@ -73,11 +78,14 @@ export function sameManifest(a, b) {
 const few = (xs) => xs.slice(0, 3).join(', ') + (xs.length > 3 ? ', ...' : '');
 
 // Pure receipt validation against the accepted report and manifest.
-export function receiptErrors(receipt, { pr, sha, builder, expected }) {
+export function receiptErrors(receipt, { pr, sha, builder, expected, provenance }) {
   if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)) return ['receipt is not a JSON object'];
   const e = [];
   const j = JSON.stringify;
-  if (receipt.schemaVersion !== RECEIPT_SCHEMA) e.push(`schemaVersion ${j(receipt.schemaVersion)} != ${RECEIPT_SCHEMA}`);
+  const schema = provenance ? 2 : RECEIPT_SCHEMA;
+  if (receipt.schemaVersion !== schema) e.push(`schemaVersion ${j(receipt.schemaVersion)} != ${schema}`);
+  if (provenance && JSON.stringify(sortKeys(receipt.provenance || {})) !== JSON.stringify(sortKeys(provenance))) e.push('cloud provenance differs from the accepted workflow run/artifact');
+  if (!provenance && receipt.provenance) e.push('unexpected cloud provenance on a NAS receipt');
   if (receipt.repository !== REPO_NWO) e.push(`repository ${j(receipt.repository)} != ${REPO_NWO}`);
   if (receipt.pr !== pr) e.push(`pr ${j(receipt.pr)} != ${pr}`);
   if (!isFullSha(receipt.sha)) e.push(`sha ${j(receipt.sha)} is not a full 40-character commit SHA`);
@@ -129,7 +137,7 @@ const encodePath = (rel) => '/' + rel.split('/').map(encodeURIComponent).join('/
 // builder and list exactly the accepted manifest; then every accepted file and route URL is fetched and
 // its served bytes hashed. Redirects are never followed and no auth headers are sent. An absent receipt,
 // denied access or timeout is an external blocker (awaiting operator publication); anything else wrong fails.
-export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, expected, paths = [], fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS, concurrency = FETCH_CONCURRENCY }) {
+export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, expected, provenance, paths = [], fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS, concurrency = FETCH_CONCURRENCY }) {
   if (!expected || !Object.keys(expected).length) return { status: 'fail', detail: 'no accepted preview manifest to verify against' };
   const got = await fetchExact(fetchImpl, origin + prefix + '/' + RECEIPT_FILE, timeoutMs);
   if (got.kind === 'missing') return { status: 'blocked', detail: `receipt ${RECEIPT_FILE} is absent (404): awaiting operator publication of this exact package` };
@@ -137,7 +145,7 @@ export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, ex
   if (got.kind === 'fail') return { status: 'fail', detail: `receipt ${got.detail}` };
   let receipt;
   try { receipt = JSON.parse(got.body.toString('utf8')); } catch { return { status: 'fail', detail: 'receipt is not valid JSON' }; }
-  const errs = receiptErrors(receipt, { pr, sha, builder, expected });
+  const errs = receiptErrors(receipt, { pr, sha, builder, expected, provenance });
   if (errs.length) return { status: 'fail', detail: `receipt rejected: ${errs.join('; ')}` };
 
   const targets = Object.keys(expected).map((rel) => ({ label: rel, url: encodePath(rel), want: expected[rel] }));
