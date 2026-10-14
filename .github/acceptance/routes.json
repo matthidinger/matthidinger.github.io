@@ -13,9 +13,14 @@
       ],
       "CNAME": [
         "matthidinger.com"
+      ],
+      "Default.aspx/index.html": [
+        "<link rel=\"canonical\" href=\"https://matthidinger.com/\">",
+        "url=https://matthidinger.com/\""
       ]
     },
     "mustNotExist": [
+      "home",
       "AGENTS.md",
       ".github",
       ".artifacts",
