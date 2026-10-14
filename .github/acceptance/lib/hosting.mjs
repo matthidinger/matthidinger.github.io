@@ -116,7 +116,7 @@ async function fetchExact(fetchImpl, url, timeoutMs) {
   if (s === 404) return { kind: 'missing', detail: 'not found (404)' };
   if (s !== 200) return { kind: 'fail', detail: `HTTP ${s}` };
   try {
-    return { kind: 'ok', body: Buffer.from(await res.arrayBuffer()) };
+    return { kind: 'ok', body: Buffer.from(await res.arrayBuffer()), contentType: res.headers?.get?.('content-type') || '' };
   } catch (e) {
     return { kind: 'blocked', detail: `body read failed (${e?.name || 'error'})` };
   }
@@ -137,7 +137,7 @@ const encodePath = (rel) => '/' + rel.split('/').map(encodeURIComponent).join('/
 // builder and list exactly the accepted manifest; then every accepted file and route URL is fetched and
 // its served bytes hashed. Redirects are never followed and no auth headers are sent. An absent receipt,
 // denied access or timeout is an external blocker (awaiting operator publication); anything else wrong fails.
-export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, expected, provenance, paths = [], fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS, concurrency = FETCH_CONCURRENCY }) {
+export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, expected, provenance, contentTypes, paths = [], fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS, concurrency = FETCH_CONCURRENCY }) {
   if (!expected || !Object.keys(expected).length) return { status: 'fail', detail: 'no accepted preview manifest to verify against' };
   const got = await fetchExact(fetchImpl, origin + prefix + '/' + RECEIPT_FILE, timeoutMs);
   if (got.kind === 'missing') return { status: 'blocked', detail: `receipt ${RECEIPT_FILE} is absent (404): awaiting operator publication of this exact package` };
@@ -147,17 +147,29 @@ export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, ex
   try { receipt = JSON.parse(got.body.toString('utf8')); } catch { return { status: 'fail', detail: 'receipt is not valid JSON' }; }
   const errs = receiptErrors(receipt, { pr, sha, builder, expected, provenance });
   if (errs.length) return { status: 'fail', detail: `receipt rejected: ${errs.join('; ')}` };
+  const verified = await verifyHostedFiles({ origin, prefix, expected, contentTypes, paths, fetchImpl, timeoutMs, concurrency });
+  if (verified.status !== 'pass') return verified;
+  return { status: 'pass', detail: `receipt matches ${REPO_NWO} PR #${pr} @ ${sha} with the complete ${Object.keys(expected).length}-file accepted manifest; ${verified.detail}` };
+}
 
-  const targets = Object.keys(expected).map((rel) => ({ label: rel, url: encodePath(rel), want: expected[rel] }));
+// Also used before the cloud receipt is committed; verification must not depend on that receipt.
+export async function verifyHostedFiles({ origin, prefix, expected, contentTypes, paths = [], fetchImpl = fetch, timeoutMs = PREVIEW_TIMEOUT_MS, concurrency = FETCH_CONCURRENCY }) {
+  if (!expected || !Object.keys(expected).length) return { status: 'fail', detail: 'no accepted preview manifest to verify against' };
+  const targets = Object.keys(expected).map((rel) => ({ label: rel, url: encodePath(rel), want: expected[rel], type: contentTypes?.[rel] }));
   const routeFails = [];
   for (const p of [...new Set(paths)]) {
-    const want = expected[routeFile(p)];
+    const rel = routeFile(p), want = expected[rel];
     if (!want) routeFails.push(`${p}: route not in the accepted preview manifest`);
-    else if (p.endsWith('/')) targets.push({ label: p, url: p, want });
+    else if (p.endsWith('/')) targets.push({ label: p, url: p, want, type: contentTypes?.[rel] });
   }
   const results = await pool(targets, concurrency, async (t) => {
     const r = await fetchExact(fetchImpl, origin + prefix + t.url, timeoutMs);
-    if (r.kind === 'ok') return sha256(r.body) === t.want ? null : { kind: 'fail', msg: `${t.label}: served bytes differ from the accepted build` };
+    if (r.kind === 'ok') {
+      if (sha256(r.body) !== t.want) return { kind: 'fail', msg: `${t.label}: served bytes differ from the accepted build` };
+      const mediaType = (value) => value.split(';', 1)[0].trim().toLowerCase();
+      if (t.type && mediaType(r.contentType) !== mediaType(t.type)) return { kind: 'fail', msg: `${t.label}: missing or unexpected Content-Type` };
+      return null;
+    }
     return { kind: r.kind === 'blocked' ? 'blocked' : 'fail', msg: `${t.label}: ${r.detail}` };
   });
   const fails = [...routeFails, ...results.filter((x) => x?.kind === 'fail').map((x) => x.msg)];
@@ -165,7 +177,7 @@ export async function verifyHostedReceipt({ origin, prefix, pr, sha, builder, ex
   if (fails.length) return { status: 'fail', detail: `${fails.length} of ${targets.length + routeFails.length} served URL(s) rejected: ${few(fails)}` };
   if (blocked.length) return { status: 'blocked', detail: `${blocked.length} served URL(s) could not be fetched: ${few(blocked)}` };
   const files = Object.keys(expected).length;
-  return { status: 'pass', detail: `receipt matches ${REPO_NWO} PR #${pr} @ ${sha} with the complete ${files}-file accepted manifest; ${files} files and ${targets.length - files} route URLs served with accepted bytes` };
+  return { status: 'pass', detail: `${files} files and ${targets.length - files} route URLs served with accepted bytes${contentTypes ? ' and expected media types' : ''}` };
 }
 
 // Pure validation of a bin/check-hosted.mjs report against the accepted deliverable report.

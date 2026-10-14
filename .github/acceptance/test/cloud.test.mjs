@@ -104,6 +104,26 @@ test('paths reject traversal, encodings, Windows names, duplicate separators and
     assert.equal(sitePath(rel), rel);
 });
 
+test('candidate admits the existing public Font Awesome assets, not arbitrary stylesheet sources', (t) => {
+  const { dir, c } = fixture(t);
+  const vendor = new URL('../../../font-awesome/', import.meta.url);
+  const assets = [...fs.readdirSync(new URL('less/', vendor)).filter((name) => name.endsWith('.less')).map((name) => `less/${name}`),
+    'scss/font-awesome.scss'];
+  assert.equal(assets.length, 14);
+  for (const asset of assets) {
+    const rel = 'font-awesome/' + asset;
+    assert.equal(sitePath(rel), rel);
+    const target = path.join(dir, 'site', rel);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.copyFileSync(new URL(asset, vendor), target);
+  }
+  c.files = manifest(path.join(dir, 'site'));
+  assert.equal(validate(dir, c), c);
+  for (const rel of ['assets/custom.less', 'font-awesome/less/private.less', 'font-awesome/scss/_variables.scss',
+    'font-awesome/scss/private.scss', 'nested/font-awesome/less/core.less', 'font-awesome/less/core.less.map'])
+    assert.throws(() => sitePath(rel), undefined, rel);
+});
+
 test('complete candidate validates exact committed expectations, strict gate, baseline and screenshots', (t) => {
   const { dir, c } = fixture(t);
   assert.equal(validate(dir, c), c);
@@ -210,13 +230,65 @@ function memoryStore(initial = {}) {
   };
 }
 
+function memoryFetch(store) {
+  return async (url, options) => {
+    assert.equal(new URL(url).origin, CLOUD_ORIGIN);
+    assert.equal(options.headers, undefined);
+    assert.equal(options.redirect, 'manual');
+    let name = decodeURIComponent(new URL(url).pathname.slice(1));
+    if (name.endsWith('/')) name += 'index.html';
+    return new Response(store.blobs.get(name), {
+      status: store.blobs.has(name) ? 200 : 404,
+      headers: { 'Content-Type': contentType(name) },
+    });
+  };
+}
+
+test('public verification failures leave the revision receipt absent despite successful blob uploads', async (t) => {
+  const { dir, c, report } = fixture(t);
+  for (const failure of ['bytes', 'missing', 'type', 'missing-type', 'route', 'denied', 'unreachable', 'redirect']) {
+    const store = memoryStore();
+    const fetchImpl = async (url, options) => {
+      const response = await memoryFetch(store)(url, options);
+      if (failure === 'route' && url.endsWith('/')) return new Response('wrong route', { headers: response.headers });
+      if (!url.endsWith('/index.html')) return response;
+      if (failure === 'bytes') return new Response('changed', { headers: response.headers });
+      if (failure === 'missing') return new Response(null, { status: 404 });
+      if (failure === 'denied') return new Response(null, { status: 403 });
+      if (failure === 'unreachable') throw new TypeError('network unavailable');
+      if (failure === 'redirect') return new Response(null, { status: 302, headers: { Location: 'https://other.invalid' } });
+      if (failure === 'type') response.headers.set('Content-Type', 'text/plain');
+      if (failure === 'missing-type') response.headers.delete('Content-Type');
+      return response;
+    };
+    const error = await publishImmutable({ dir, report, files: c.files, store, fetchImpl, assertFresh: async () => {} })
+      .then(() => null, (e) => e);
+    assert.equal(store.blobs.has(report.prefix.slice(1) + '/' + RECEIPT_FILE), false, `receipt committed before rejecting ${failure}`);
+    assert.match(error?.message || '', /before receipt/);
+    assert.equal(error.blocked, ['denied', 'unreachable'].includes(failure));
+    assert.equal(store.writes.length, Object.keys(c.files).length, 'test must reach public verification after the uploads');
+    await publishImmutable({ dir, report, files: c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} });
+    assert.ok(store.blobs.has(report.prefix.slice(1) + '/' + RECEIPT_FILE), 'an identical retry can commit after public verification succeeds');
+    assert.equal(store.writes.length, Object.keys(c.files).length + 1, 'retry must not overwrite any uploaded file');
+  }
+});
+
 test('immutable publishing writes receipt last, correct MIME types, exact bytes and is idempotent', async (t) => {
   const { dir, c, report } = fixture(t);
   const store = memoryStore();
   let fresh = 0;
-  const args = { dir, report, files: c.files, store, assertFresh: async () => { fresh++; } };
+  let first = true;
+  const requests = [];
+  const fetchImpl = async (url, options) => {
+    if (first) assert.ok(!store.blobs.has(report.prefix.slice(1) + '/' + RECEIPT_FILE), 'public files must be verified before the receipt');
+    requests.push(url);
+    return memoryFetch(store)(url, options);
+  };
+  const args = { dir, report, files: c.files, store, fetchImpl, assertFresh: async () => { fresh++; } };
   await publishImmutable(args);
+  first = false;
   assert.equal(fresh, 2);
+  assert.equal(new Set(requests).size, Object.keys(c.files).length + 1, 'every file and the slash route must be checked');
   assert.ok(store.writes.at(-1).name.endsWith('/' + RECEIPT_FILE));
   assert.equal(store.writes.find((x) => x.name.endsWith('/index.html')).type, 'text/html; charset=utf-8');
   assert.equal(contentType('x.css'), 'text/css; charset=utf-8');
@@ -224,15 +296,12 @@ test('immutable publishing writes receipt last, correct MIME types, exact bytes 
   const count = store.writes.length;
   await publishImmutable(args);
   assert.equal(store.writes.length, count);
-  const fetchImpl = async (url, options) => {
-    assert.equal(new URL(url).origin, CLOUD_ORIGIN);
-    assert.equal(options.headers, undefined);
-    assert.equal(options.redirect, 'manual');
-    let name = decodeURIComponent(new URL(url).pathname.slice(1));
-    if (name.endsWith('/')) name += 'index.html';
-    return new Response(store.blobs.get(name), { status: store.blobs.has(name) ? 200 : 404 });
-  };
   assert.equal((await verifyCloud(report, c.files, fetchImpl)).status, 'pass');
+  assert.equal((await verifyCloud(report, c.files, async (url, options) => {
+    const response = await fetchImpl(url, options);
+    if (url.endsWith('/index.html')) response.headers.set('Content-Type', 'text/plain');
+    return response;
+  })).status, 'fail', 'post-receipt verification must also reject incorrect media types');
   store.blobs.set(report.prefix.slice(1) + '/index.html', Buffer.from('wrong bytes'));
   assert.equal((await verifyCloud(report, c.files, fetchImpl)).status, 'fail');
 });
@@ -247,7 +316,7 @@ test('immutable upload rejects extra/mismatched/incomplete committed revisions b
     { [p + RECEIPT_FILE]: receiptBytes(buildReceipt({ ...report, provenance: { ...report.provenance, runId: 1 } }, c.files)) },
   ]) {
     const store = memoryStore(initial);
-    await assert.rejects(publishImmutable({ dir, report, files: c.files, store, assertFresh: async () => {} }), /immutable/);
+    await assert.rejects(publishImmutable({ dir, report, files: c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} }), /immutable/);
     assert.equal(store.writes.length, 0);
   }
 });
@@ -257,11 +326,11 @@ test('interrupted identical upload resumes, but head changes never receive a rec
   const p = report.prefix.slice(1) + '/';
   const store = memoryStore({ [p + 'index.html']: fs.readFileSync(path.join(dir, 'site/index.html')) });
   let fresh = 0;
-  await assert.rejects(publishImmutable({ dir, report, files: c.files, store, assertFresh: async () => {
+  await assert.rejects(publishImmutable({ dir, report, files: c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {
     if (++fresh === 2) throw new Error('head changed');
   } }), /head changed/);
   assert.ok(!store.blobs.has(p + RECEIPT_FILE));
-  await publishImmutable({ dir, report, files: c.files, store, assertFresh: async () => {} });
+  await publishImmutable({ dir, report, files: c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} });
   assert.ok(store.blobs.has(p + RECEIPT_FILE));
 });
 
@@ -269,7 +338,7 @@ test('Azure denial/network failure surfaces; no receipt or fabricated success', 
   const { dir, c, report } = fixture(t);
   const store = memoryStore();
   store.create = async () => { throw new Error('403'); };
-  await assert.rejects(publishImmutable({ dir, report, files: c.files, store, assertFresh: async () => {} }), /403/);
+  await assert.rejects(publishImmutable({ dir, report, files: c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} }), /403/);
   assert.equal(store.writes.length, 0);
   assert.equal((await verifyCloud(report, c.files, async () => new Response('', { status: 403 }))).status, 'blocked');
 });
@@ -295,9 +364,9 @@ test('same-SHA reruns reuse the original proven candidate, never overwrite site.
   assert.equal(selected.candidate.files['index.html'], original.c.files['index.html']);
   assert.equal(selected.reused, true);
   const store = memoryStore();
-  await publishImmutable({ dir: original.dir, report: original.report, files: original.c.files, store, assertFresh: async () => {} });
+  await publishImmutable({ dir: original.dir, report: original.report, files: original.c.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} });
   const count = store.writes.length;
-  await publishImmutable({ dir: selected.dir, report: selected.report, files: selected.candidate.files, store, assertFresh: async () => {} });
+  await publishImmutable({ dir: selected.dir, report: selected.report, files: selected.candidate.files, store, fetchImpl: memoryFetch(store), assertFresh: async () => {} });
   assert.equal(store.writes.length, count);
 });
 

@@ -38,6 +38,9 @@ are not checked out or executed. Downloaded artifacts are data only: ZIP paths,
 file types, links, duplicates, expansion limits, unexpected files, manifests,
 hashes and route/viewport coverage are checked before use. ZIP permissions are
 never restored. Artifact-provided commands, executables and URLs are not run.
+The only stylesheet-source exceptions are the 14 exact Font Awesome LESS/SCSS
+assets already present in the public site; other source/configuration files
+remain forbidden.
 
 A PR-event workflow itself can be edited by a PR. Its source definition must
 therefore match trusted master before its candidate can publish. A tooling-changing
@@ -103,9 +106,12 @@ The account and public origin are fixed in trusted code:
 `/matthidinger.github.io/pr-N/FULL_SHA/`; `site` is not a URL component.
 The publisher lists and hashes any existing prefix before writing. All writes
 are conditional creates (`If-None-Match: *`), with explicit content types.
-The receipt is written last. Partial identical uploads can resume, but an extra
-file, changed byte or incomplete committed revision is an error. No blob is
-ever overwritten or removed.
+Before the receipt is written, every file and accepted route is fetched from the
+public origin and checked for exact bytes and the expected media type; bad,
+missing, redirected or inaccessible responses prevent receipt creation. The
+complete receipt and served files are verified again afterward. Partial
+identical uploads can resume, but an extra file, changed byte or incomplete
+committed revision is an error. No blob is ever overwritten or removed.
 
 Cloud receipts use **schema 2** with the action builder, complete file manifest,
 and `provenance`: repository, workflow, build run ID/attempt, trusted tooling SHA,

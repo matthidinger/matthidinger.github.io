@@ -66,12 +66,13 @@ test('real browser: head/baseline candidate -> immutable package -> exact hosted
       fs.writeFileSync(file, bytes, { flag: 'wx' });
     },
   };
-  await publishImmutable({ dir, report: cloud, files: candidate.files, store, assertFresh: async () => {} });
   const server = await startServer(hostedRoot);
   try {
+    const fetchImpl = async (url, options) => fetch(server.origin + new URL(url).pathname, options);
+    await publishImmutable({ dir, report: cloud, files: candidate.files, store, fetchImpl, assertFresh: async () => {} });
     const served = Buffer.from(await (await fetch(server.origin + report.prefix + '/index.html', { signal: AbortSignal.timeout(15000) })).arrayBuffer());
     assert.equal(sha256(served), sha256(blobs.get(report.prefix.slice(1) + '/index.html')), 'fixture HTTP transport modified the HTML bytes');
-    const verified = await verifyCloud(cloud, candidate.files, async (url, options) => fetch(server.origin + new URL(url).pathname, options));
+    const verified = await verifyCloud(cloud, candidate.files, fetchImpl);
     assert.equal(verified.status, 'pass', verified.detail);
     const results = await runChecks({ origin: server.origin, prefix: report.prefix, config, outDir: path.join(root, 'hosted-shots'), executablePath: chromium, strictOverflow: true });
     assert.equal(results.length, 4);

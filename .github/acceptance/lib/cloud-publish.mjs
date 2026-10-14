@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildReceipt, receiptBytes, receiptErrors, RECEIPT_FILE, verifyHostedReceipt } from './hosting.mjs';
+import { buildReceipt, receiptBytes, receiptErrors, RECEIPT_FILE, verifyHostedFiles, verifyHostedReceipt } from './hosting.mjs';
 import { CLOUD_ACCOUNT, CLOUD_ORIGIN, ensure, positiveInt, sitePath } from './cloud.mjs';
 import { sha256, sh } from './util.mjs';
 
@@ -9,7 +9,8 @@ export const contentType = (rel) => ({
   '.html': 'text/html; charset=utf-8', '.htm': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8', '.xml': 'application/xml; charset=utf-8',
-  '.txt': 'text/plain; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png',
+  '.txt': 'text/plain; charset=utf-8', '.less': 'text/plain; charset=utf-8', '.scss': 'text/plain; charset=utf-8',
+  '.svg': 'image/svg+xml', '.png': 'image/png', '.avif': 'image/avif',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp',
   '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf',
   '.eot': 'application/vnd.ms-fontobject', '.otf': 'font/otf', '.pdf': 'application/pdf',
@@ -37,7 +38,7 @@ export function azureStore() {
   };
 }
 
-export async function publishImmutable({ dir, report, files, store, assertFresh }) {
+export async function publishImmutable({ dir, report, files, store, assertFresh, fetchImpl = fetch }) {
   const prefix = report.prefix.slice(1) + '/';
   Object.keys(files).forEach(sitePath);
   const receipt = receiptBytes(buildReceipt(report, files));
@@ -63,15 +64,25 @@ export async function publishImmutable({ dir, report, files, store, assertFresh 
       await store.create(prefix + rel, bytes, contentType(rel));
     }
   }));
+  const verification = await verifyHostedFiles(publicSite(report, files, fetchImpl));
+  if (verification.status !== 'pass') throw Object.assign(
+    new Error(`public preview verification failed before receipt: ${verification.status}: ${verification.detail}`),
+    { blocked: verification.status === 'blocked' },
+  );
   await assertFresh();
   if (!present.has(prefix + RECEIPT_FILE)) await store.create(prefix + RECEIPT_FILE, receipt, 'application/json; charset=utf-8');
 }
 
+function publicSite(report, files, fetchImpl) {
+  return { origin: CLOUD_ORIGIN, prefix: report.prefix, expected: files,
+    contentTypes: Object.fromEntries(Object.keys(files).map((rel) => [rel, contentType(rel)])),
+    paths: report.results.map((r) => r.path), fetchImpl };
+}
+
 export async function verifyCloud(report, files, fetchImpl = fetch) {
   return verifyHostedReceipt({
-    origin: CLOUD_ORIGIN, prefix: report.prefix, pr: report.pr, sha: report.sha,
-    builder: report.builder, provenance: report.provenance, expected: files,
-    paths: report.results.map((r) => r.path), fetchImpl,
+    ...publicSite(report, files, fetchImpl), pr: report.pr, sha: report.sha,
+    builder: report.builder, provenance: report.provenance,
   });
 }
 
