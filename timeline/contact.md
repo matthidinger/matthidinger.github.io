@@ -9,8 +9,6 @@ social:
     url: https://github.com/matthidinger
   - title: instagram
     url: https://instagram.com/matthidinger
-  - title: facebook
-    url: https://facebook/matt.hidinger
 ---
 ## Contact
 

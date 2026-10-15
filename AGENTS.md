@@ -23,9 +23,13 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
 | Talks / speaking | `_pages/talks.md` (keep `permalink: /talks/` and its `redirect_from`) | `/talks/` |
 | Blog posts | `_posts/YYYY-MM-DD-slug.md` | `/archive/YYYY/MM/DD/slug/` |
 | Blog listing (paginated) | `blog/index.html` | `/blog/` |
-| Home (timeline layout) | `index.html`, `_layouts/timeline.html` | `/` |
-| Navigation, author and UI text | `_data/`, `_config.yml` | — |
+| Blog topics | `_pages/tag-archive.html` | `/tags/` |
+| Home (Dusk scene) | `index.html`, `timeline/*.md`, `_layouts/dusk.html` | `/` |
+| Every other page (Dusk reading shell) | `_layouts/dusk-page.html` (wraps `single`/`archive`), `_includes/dusk/` | — |
+| Navigation, social links, author and UI text | `_data/navigation.yml`, `_data/social.yml`, `_config.yml` | — |
 | Images | `images/` | `/images/...` |
+
+To show a talk or other video in a post, use `{% include video.html youtube="ID" title="..." %}` (or `vimeo="ID"`; optional `poster="/images/..."` and `caption="..."`). It loads nothing from the video host until the reader presses play. Use only real video IDs and titles.
 
 ## Required job flow
 
@@ -49,7 +53,7 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
 
 ```sh
 npm ci --prefix .github/acceptance --ignore-scripts   # pinned browser driver; isolated from the root npm project
-npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, copy-code, readiness, hosting, export)
+npm --prefix .github/acceptance test                  # unit + negative tests (hook, rewrite, browser, copy-code, title breaks, readiness, hosting, export)
 
 # Iterate on uncommitted work (labelled development; never deliverable):
 node .github/acceptance/bin/accept.mjs --dev --pr N
@@ -131,7 +135,6 @@ Only post a private-header deep link in a public PR if Matt has approved disclos
 
 ## Known limitations
 
-- `/` raises `google is not defined` in production too. `js/grayscale.js` calls Google Maps, but the layout never loads that API. It is listed in `routes.json` as known and reported as a warning.
 - Some old posts overflow horizontally on mobile because of long unbroken identifiers. This is report-only unless `--ux` is used.
 - Screenshots are cut off at 5000px. Third-party widgets/CDNs are blocked during checks.
 - `inspect.mjs` records the agent's statement that it viewed each image, bound to the image hashes. It cannot prove who looked.

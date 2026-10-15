@@ -1,0 +1,12 @@
+{%- comment -%}
+  Head for Dusk inner pages (_layouts/dusk-page.html). seo.html supplies the title, canonical, social cards and JSON-LD.
+{%- endcomment -%}
+{% include base_path %}
+<meta charset="utf-8">
+{% include seo.html %}
+<link href="{{ site.baseurl }}/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');</script>
+{% include head/custom.html %}
+<link rel="preload" href="{{ site.baseurl }}/assets/fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ base_path }}/assets/css/dusk-page.css">

@@ -1,0 +1,17 @@
+{%- comment -%}
+Video preview that loads nothing from the video host until the reader presses play.
+In a post, include video.html with youtube="VIDEO_ID" (or vimeo="VIDEO_ID") and title="Talk title";
+optional: poster="/images/local-image.jpg" and caption="...". Use only real video IDs and titles.
+{%- endcomment -%}
+{%- if include.youtube -%}
+{%- capture dk_watch %}https://www.youtube.com/watch?v={{ include.youtube }}{% endcapture -%}
+{%- capture dk_embed %}https://www.youtube-nocookie.com/embed/{{ include.youtube }}?autoplay=1{% endcapture -%}
+{%- assign dk_src = "YouTube" -%}
+{%- elsif include.vimeo -%}
+{%- capture dk_watch %}https://vimeo.com/{{ include.vimeo }}{% endcapture -%}
+{%- capture dk_embed %}https://player.vimeo.com/video/{{ include.vimeo }}?autoplay=1&dnt=1{% endcapture -%}
+{%- assign dk_src = "Vimeo" -%}
+{%- endif -%}
+{%- if dk_watch %}
+<figure class="dk-video"><a class="dk-video-link" href="{{ dk_watch }}" data-embed="{{ dk_embed | escape }}" data-title="{{ include.title | escape }}">{% if include.poster %}<img src="{{ include.poster | relative_url }}" alt="">{% else %}<span class="dk-video-card" aria-hidden="true"></span>{% endif %}<span class="dk-video-play" aria-hidden="true"></span><span class="dk-video-meta"><span class="dk-video-title">{{ include.title | escape }}</span><span class="dk-video-src">Play on {{ dk_src }}</span></span></a>{% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}</figure>
+{% endif -%}

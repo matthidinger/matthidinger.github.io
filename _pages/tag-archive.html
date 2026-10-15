@@ -2,16 +2,28 @@
 layout: archive
 permalink: /tags/
 title: "Blog topics"
-author_profile: true
 ---
-
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}
+<header class="dkp-head">
+  <h1 class="dkp-title dkp-title--page">Blog topics</h1>
+  <p class="dkp-lede">Every post, grouped by what it covers. Back to the <a href="{{ base_path }}/blog/">latest posts</a>.</p>
+</header>
+
+<ul class="dkp-cloud">
+  {%- for tag in group_names %}
+  <li><a href="#{{ tag | slugify }}">{{ tag }} <small>{{ group_items[forloop.index0].size }}</small></a></li>
+  {%- endfor %}
+</ul>
 
 {% for tag in group_names %}
-  {% assign posts = group_items[forloop.index0] %}
-  <h2 id="{{ tag | slugify }}" class="archive__subtitle">{{ tag }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
+{%- assign posts = group_items[forloop.index0] %}
+<section class="dkp-topic">
+  <h2 id="{{ tag | slugify }}">{{ tag }}</h2>
+  <ul>
+    {%- for post in posts %}
+    <li><a href="{{ base_path }}{{ post.url }}">{{ post.title | markdownify | strip_html | strip_newlines }}</a><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time></li>
+    {%- endfor %}
+  </ul>
+</section>
 {% endfor %}

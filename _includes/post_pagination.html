@@ -1,18 +1,17 @@
 {% include base_path %}
-
 {% if page.previous or page.next %}
   <nav class="pagination post-pager" aria-label="More posts">
     {% if page.previous %}
-      <a href="{{ base_path }}{{ page.previous.url }}" class="pagination--pager post-pager__link post-pager__link--prev" rel="prev">
-        <span class="post-pager__label">&larr; {{ site.data.ui-text[site.locale].pagination_previous }}</span>
+      <a href="{{ base_path }}{{ page.previous.url }}" class="post-pager__link post-pager__link--prev" rel="prev">
+        <span class="post-pager__label">&larr; Older</span>
         <span class="post-pager__title">{{ page.previous.title | markdownify | strip_html | strip_newlines }}</span>
       </a>
     {% else %}
       <span class="post-pager__link post-pager__link--empty" aria-hidden="true"></span>
     {% endif %}
     {% if page.next %}
-      <a href="{{ base_path }}{{ page.next.url }}" class="pagination--pager post-pager__link post-pager__link--next" rel="next">
-        <span class="post-pager__label">{{ site.data.ui-text[site.locale].pagination_next }} &rarr;</span>
+      <a href="{{ base_path }}{{ page.next.url }}" class="post-pager__link post-pager__link--next" rel="next">
+        <span class="post-pager__label">Newer &rarr;</span>
         <span class="post-pager__title">{{ page.next.title | markdownify | strip_html | strip_newlines }}</span>
       </a>
     {% else %}

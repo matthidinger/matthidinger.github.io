@@ -58,7 +58,7 @@
     sail: 'M279,-58 L279,-445 L262,-438 Q110,-290 40,-98 Q165,-64 279,-58 Z',
     wishbone: 'M282,-138 Q160,-104 36,-96',
   };
-  const FONT = "'Bahnschrift','DIN Alternate','Franklin Gothic Medium','Arial Narrow',sans-serif";
+  const FONT = "'Bahnschrift','DIN Alternate','Franklin Gothic Medium','Arial Narrow',sans-serif-condensed,sans-serif";
 
   // Solid silhouette; the sail number 509 and the wishbone gap are cut out with a mask.
   function boat(id) {

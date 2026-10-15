@@ -12,18 +12,10 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/dusk.css">
 </head>
 <body>
-{%- assign nav = site.data.navigation.main -%}
 <div class="dk">
   <a class="dk-skip" href="#dk-main">Skip to content</a>
   <svg class="dk-scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
-  <header class="dk-top">
-    <a class="dk-sig" href="{{ site.baseurl }}/">{{ site.title }}</a>
-    <nav class="dk-nav" aria-label="Primary">
-      {%- for link in nav %}
-      <a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>
-      {%- endfor %}
-    </nav>
-  </header>
+  {% include dusk/header.html home=true %}
 
   <main id="dk-main">
     <section class="dk-hero">
@@ -78,17 +70,7 @@
 {%- endfor %}
   </main>
 
-  <footer class="dk-foot">
-    <div class="dk-foot-cols">
-      <nav aria-label="Site">
-        {%- for link in nav %}<a href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>{% endfor -%}
-      </nav>
-      <nav aria-label="Elsewhere">
-        {%- for s in page.social %}<a href="{{ s.url }}">{% if s.title == 'github' %}GitHub{% else %}{{ s.title | capitalize }}{% endif %}</a>{% endfor -%}
-      </nav>
-    </div>
-    <p class="dk-copy">Copyright &copy; {{ site.author.name }} {{ site.time | date: "%Y" }}</p>
-  </footer>
+  {% include dusk/footer.html %}
 </div>
 <script src="{{ site.baseurl }}/assets/js/dusk-kit.js"></script>
 <script src="{{ site.baseurl }}/assets/js/dusk-geo.js"></script>

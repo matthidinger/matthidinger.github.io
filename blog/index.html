@@ -1,15 +1,17 @@
 ---
 layout: archive
 title: "Blog"
-author_profile: true
 ---
-
 {% include base_path %}
+<header class="dkp-head">
+  <h1 class="dkp-title dkp-title--page">Blog</h1>
+  <p class="dkp-lede">{% if paginator.page > 1 %}Page {{ paginator.page }} of {{ paginator.total_pages }}{% else %}{{ site.posts.size }} posts since {{ site.posts.last.date | date: "%Y" }}{% endif %} &middot; <a href="{{ base_path }}/tags/">Browse by topic</a></p>
+</header>
 
-<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts }}</h3>
-
+<div class="dkp-entries">
 {% for post in paginator.posts %}
   {% include archive-single.html %}
 {% endfor %}
+</div>
 
 {% include paginator.html %}

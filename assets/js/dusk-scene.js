@@ -2,7 +2,7 @@
 (function () {
   const { rng, geo: G } = window.Dusk;
   const H0 = G.H0;
-  const DISPLAY = "'Tw Cen MT Condensed Extra Bold','Bahnschrift Condensed','DIN Condensed','Roboto Condensed','Arial Narrow',sans-serif";
+  const DISPLAY = "'Tw Cen MT Condensed Extra Bold','Bahnschrift Condensed','DIN Condensed',sans-serif-condensed,'Roboto Condensed','Arial Narrow',sans-serif";
 
   function boat() {
     const B = window.Dusk.boat;

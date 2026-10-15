@@ -1,0 +1,17 @@
+{%- comment -%}
+  Shared Dusk header. Pass home=true on the homepage, where the scene already says the name.
+  Posts, tags and later blog pages mark Blog as the current section.
+{%- endcomment -%}
+{%- assign here = page.url | replace: 'index.html', '' -%}
+{%- assign in_blog = false -%}
+{%- if page.collection == 'posts' or here == '/tags/' or here contains '/blog/' -%}{%- assign in_blog = true -%}{%- endif %}
+<header class="dk-top{% if include.home %} dk-top--home{% endif %}">
+  {%- unless include.home %}
+  <a class="dk-sig" href="{{ site.baseurl }}/">{{ site.title }}</a>
+  {%- endunless %}
+  <nav class="dk-nav" aria-label="Primary">
+    {%- for link in site.data.navigation.main %}
+    <a href="{{ site.baseurl }}{{ link.url }}"{% if here == link.url %} aria-current="page"{% elsif in_blog and link.url == '/blog/' %} aria-current="true"{% endif %}>{{ link.title }}</a>
+    {%- endfor %}
+  </nav>
+</header>
