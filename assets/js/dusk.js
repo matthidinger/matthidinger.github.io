@@ -46,18 +46,47 @@
 
   // The name sits between the sky and the ridges: one line when it fits large, otherwise stacked.
   function nameLayout(x0, w) {
-    const g = S.nameG, cx = f(x0 + w / 2), fit = w * 0.86;
+    const g = S.nameG;
+    g.removeAttribute('transform');
+    let cx = f(x0 + w / 2), fit = w * 0.86;
     g.innerHTML = `<text x="${cx}" font-size="100" letter-spacing="2">MATT HIDINGER</text>`;
-    let size = Math.min(270, (fit / g.firstChild.getComputedTextLength()) * 100);
-    if (size >= 150) {
-      g.innerHTML = `<text x="${cx}" y="616" font-size="${f(size)}" letter-spacing="${f(size * 0.02)}">MATT HIDINGER</text>`;
+    const measuredWidth = g.firstChild.getComputedTextLength();
+    let size = Math.min(270, (fit / measuredWidth) * 100);
+    if (size < 150) {
+      g.innerHTML = `<text x="${cx}" font-size="100" letter-spacing="2">HIDINGER</text>`;
+      size = Math.min(230, (fit / g.firstChild.getComputedTextLength()) * 100);
+      const a = `x="${cx}" font-size="${f(size)}" letter-spacing="${f(size * 0.02)}"`;
+      const yb = f(616 - Math.min(size * 0.45, 40));
+      g.innerHTML = `<text ${a} y="${f(yb - size * 0.8)}">MATT</text><text ${a} y="${yb}">HIDINGER</text>`;
       return;
     }
-    g.innerHTML = `<text x="${cx}" font-size="100" letter-spacing="2">HIDINGER</text>`;
-    size = Math.min(230, (fit / g.firstChild.getComputedTextLength()) * 100);
-    const a = `x="${cx}" font-size="${f(size)}" letter-spacing="${f(size * 0.02)}"`;
-    const yb = f(616 - Math.min(size * 0.45, 40));
-    g.innerHTML = `<text ${a} y="${f(yb - size * 0.8)}">MATT</text><text ${a} y="${yb}">HIDINGER</text>`;
+    const rect = svg.getBoundingClientRect(), scale = rect.width / w;
+    const visibleTop = Math.max(0, 1000 - rect.height / scale);
+    const nav = document.querySelector('.dk-top').getBoundingClientRect();
+    const intro = document.querySelector('.dk-lede').getBoundingClientRect();
+    let skyTop = visibleTop + (nav.bottom + scrollY + 24) / scale;
+    const ridgeTop = S.far.getBBox().y;
+    // In a shallow sky, use the space beside the introduction rather than drawing over it.
+    if (rect.width / rect.height > 1.9) {
+      const inset = (intro.right + 24) / scale;
+      x0 += inset;
+      w -= inset;
+    } else {
+      skyTop = Math.max(skyTop, visibleTop + (intro.bottom + scrollY + 24) / scale);
+    }
+    cx = f(x0 + w / 2);
+    fit = w * 0.86;
+    size = Math.min(270, (fit / measuredWidth) * 100);
+    g.innerHTML = `<text x="${cx}" y="616" font-size="${f(size)}" letter-spacing="${f(size * 0.02)}">MATT HIDINGER</text>`;
+    // Font boxes include empty descent space; measure ink so the ridge hides at most 12% of a line.
+    const ctx = document.createElement('canvas').getContext('2d');
+    const style = getComputedStyle(g.firstChild);
+    ctx.font = `${style.fontSize} ${style.fontFamily}`;
+    const metrics = ctx.measureText(g.firstChild.textContent);
+    const top = 616 - metrics.actualBoundingBoxAscent, bottom = 616 + metrics.actualBoundingBoxDescent;
+    const overlap = Math.min(20, (bottom - top) * 0.12);
+    const shrink = Math.min(1, Math.max(1, ridgeTop - skyTop) / (bottom - top - overlap));
+    set(g, 'transform', `translate(${cx},${ridgeTop + overlap * shrink}) scale(${shrink}) translate(${-cx},${-bottom})`);
   }
 
   // Top edges of the three content plates: a ridge line, a fir line, and a swell.
