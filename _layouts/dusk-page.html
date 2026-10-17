@@ -10,7 +10,7 @@
     {% include dusk/header.html %}
   </div>
 
-  <main id="dk-main" class="dkp-main">
+  <main id="dk-main" class="dkp-main{% if layout.main_class %} {{ layout.main_class }}{% endif %}">
     {{ content }}
   </main>
 
@@ -22,6 +22,9 @@
   <script src="{{ site.baseurl }}/assets/js/dusk-page.js"></script>
   {%- if page.collection == "posts" %}
   <script src="{{ site.baseurl }}/assets/js/code-copy.js"></script>
+  {%- endif %}
+  {%- if layout.script %}
+  <script src="{{ site.baseurl }}{{ layout.script }}"></script>
   {%- endif %}
   {% include analytics.html %}
 </body>

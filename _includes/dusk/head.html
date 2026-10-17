@@ -1,5 +1,7 @@
 {%- comment -%}
   Head for Dusk inner pages (_layouts/dusk-page.html). seo.html supplies the title, canonical, social cards and JSON-LD.
+  A child layout can add its own stylesheet, script and main class with `stylesheet:`, `script:` and `main_class:`
+  in its front matter (see _layouts/talks.html).
 {%- endcomment -%}
 {% include base_path %}
 <meta charset="utf-8">
@@ -10,3 +12,6 @@
 {% include head/custom.html %}
 <link rel="preload" href="{{ site.baseurl }}/assets/fonts/source-serif-4-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ base_path }}/assets/css/dusk-page.css">
+{%- if layout.stylesheet %}
+<link rel="stylesheet" href="{{ base_path }}{{ layout.stylesheet }}">
+{%- endif %}

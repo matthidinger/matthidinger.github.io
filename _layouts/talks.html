@@ -1,0 +1,183 @@
+---
+layout: dusk-page
+main_class: tkc-main
+stylesheet: /assets/css/talks.css
+script: /assets/js/talks.js
+---
+{%- comment -%}
+  Talks (/talks/): featured recordings on a marquee that open in a theater, what's coming up, then every talk by year.
+  Content: _data/talks.yml. Theater and poster strip: assets/js/talks.js; without JavaScript each poster is a plain YouTube link.
+  _includes/talks/fir-edge.svg is the tree line at the bottom of the marquee (seeded generator, W 1600, base 82, h 24-78, seed 510).
+{%- endcomment -%}
+{%- assign d = site.data.talks -%}
+{%- assign years = d.talks | group_by_exp: "t", "t.date | slice: 0, 4" -%}
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- assign soon = d.upcoming | where_exp: "u", "u.date >= today" -%}
+{%- capture play -%}<svg class="pill-play" viewBox="0 0 10 12" aria-hidden="true"><path d="M0 0L10 6L0 12Z"/></svg>{%- endcapture -%}
+{%- assign posters = "" -%}
+{%- assign bills = "" -%}
+{%- assign rail = "" -%}
+{%- for id in d.featured -%}
+  {%- assign t = d.talks | where: "id", id | first -%}
+  {%- assign from = "" -%}
+  {%- if t.video.start -%}
+    {%- assign m = t.video.start | divided_by: 60 -%}
+    {%- assign s = t.video.start | modulo: 60 -%}
+    {%- capture from -%}{{ m }}:{% if s < 10 %}0{% endif %}{{ s }}{%- endcapture -%}
+  {%- endif -%}
+  {%- capture watch -%}https://www.youtube.com/watch?v={{ t.video.youtube }}{% if t.video.start %}&amp;t={{ t.video.start }}s{% endif %}{%- endcapture -%}
+  {%- capture poster %}
+      <li><a class="dk-video-link tkc-poster" href="{% if t.video %}{{ watch }}{% else %}{{ t.learn | default: t.archive | default: t.page | escape }}{% endif %}"
+        {%- if t.video %} data-tid="{{ t.id }}" data-play="https://www.youtube-nocookie.com/embed/{{ t.video.youtube }}?autoplay=1{% if t.video.start %}&amp;start={{ t.video.start }}{% endif %}" data-title="{{ t.title | escape }}"{% endif %} style="background:linear-gradient(180deg, {{ d.eras[t.era] }})">
+        <img src="{{ t.thumb.tall_src | default: t.thumb.src | relative_url }}" alt="" loading="lazy" style="object-position:{{ t.thumb.tall_pos }}">
+        <span class="tkc-yr" aria-hidden="true">{{ t.date | slice: 0, 4 }}</span>
+        <span class="dk-video-play" aria-hidden="true"></span>
+        <span class="tkc-pmeta"><span class="tkc-pev">{{ t.event | escape }}</span><span class="tkc-pt">{{ t.short | default: t.title | escape }}</span><span class="tkc-pgo">{% if t.video %}Watch{% if from != "" %} from {{ from }}{% endif %}{% elsif t.learn %}Watch on Microsoft Learn{% else %}Watch the archive{% endif %}</span></span>
+      </a></li>
+  {%- endcapture -%}
+  {%- assign posters = posters | append: poster -%}
+  {%- if t.video -%}
+    {%- capture bill %}
+        <article class="tkc-bill" data-tid="{{ t.id }}" hidden>
+          <p class="tkc-bev">{{ t.event | escape }}{% if t.session %} · {{ t.session | escape }}{% endif %}{% if t.city %} · {{ t.city | escape }}{% endif %}</p>
+          <h3 class="tkc-bt">{{ t.title | escape }}</h3>
+          {%- if t.with %}
+          <p class="tkc-bwith">with {{ t.with | escape }}</p>
+          {%- elsif t.keynote %}
+          <p class="tkc-bwith">In {{ t.keynote | escape }}</p>
+          {%- endif %}
+          {%- if t.blurb %}
+          <p class="tkc-bblurb">{{ t.blurb | escape }}</p>
+          {%- endif %}
+          <p class="tkc-blinks"><a href="{{ watch }}">Open on YouTube</a>
+            {%- if t.page %}<a href="{{ t.page | escape }}">Session</a>{% endif %}
+            {%- if t.slides %}<a href="{{ t.slides | escape }}">Slides</a>{% endif %}
+            {%- if t.code %}<a href="{{ t.code | escape }}">Code</a>{% endif %}
+            {%- if t.post %}<a href="{{ t.post | relative_url }}">Post</a>{% endif %}</p>
+        </article>
+    {%- endcapture -%}
+    {%- assign bills = bills | append: bill -%}
+    {%- capture card %}
+        <li><button type="button" class="tkc-rcard" data-tid="{{ t.id }}" aria-current="false">
+          <span class="tkc-rthumb"><img src="{{ t.thumb.src | relative_url }}" alt="" loading="lazy" style="object-position:{{ t.thumb.pos }}"><span class="tkc-rplay" aria-hidden="true"></span></span>
+          <span class="tkc-rtext"><span class="tkc-rev">{{ t.event | escape }}</span><span class="tkc-rt">{{ t.short | default: t.title | escape }}</span><span class="tkc-rnow"><i></i><i></i><i></i><b>Now playing</b></span></span>
+        </button></li>
+    {%- endcapture -%}
+    {%- assign rail = rail | append: card -%}
+  {%- endif -%}
+{%- endfor %}
+<section class="tkc-stage" aria-labelledby="tkc-h1">
+  <div class="tkc-hero">
+    <img src="{{ d.stage.src | relative_url }}" alt="{{ d.stage.alt | escape }}" width="748" height="421" fetchpriority="high">
+    <div class="tkc-hcopy">
+      <p class="tkc-kicker">{{ years.last.name }}–{{ years.first.name }}</p>
+      <h1 class="tkc-h1" id="tkc-h1">{{ page.title }}</h1>
+    </div>
+  </div>
+  <div class="tkc-now">
+    <div class="tkc-nowhead">
+      <h2 class="tkc-label">Now showing</h2>
+      <button type="button" class="tkc-exit" aria-label="Close theater" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9"/></svg><span>Close<span class="tkc-exit-long"> theater</span></span><kbd>Esc</kbd></button>
+    </div>
+    <ul class="tkc-posters">{{ posters }}
+    </ul>
+    <div class="tkc-dots" aria-hidden="true">{% for id in d.featured %}<button type="button" tabindex="-1"></button>{% endfor %}</div>
+    <section class="tkc-theater" tabindex="-1" aria-label="Theater" hidden>
+      <div class="tkc-screen"><div class="tkc-glow" aria-hidden="true"></div><div class="tkc-sbox"></div></div>
+      <div class="tkc-under">
+        <div class="tkc-bills">{{ bills }}
+        </div>
+        <ol class="tkc-rail" aria-label="Now showing">{{ rail }}
+        </ol>
+      </div>
+    </section>
+  </div>
+  {%- if soon.size > 0 %}
+  <div class="tkc-soon">
+    <h2 class="tkc-label">Coming soon</h2>
+    <ul>
+      {%- for u in soon %}
+      <li data-date="{{ u.date }}"><a href="{{ u.page | escape }}"><span class="tkc-sd">{{ u.date | date: "%b %-d" }}</span><span class="tkc-st">{{ u.title | escape }}</span><span class="tkc-se">{{ u.event | escape }}{% if u.city %} · {{ u.city | escape }}{% endif %}</span></a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {%- endif %}
+  {% include talks/fir-edge.svg %}
+</section>
+<section class="tkc-log" aria-labelledby="tkc-log">
+  <h2 id="tkc-log">All talks</h2>
+  <p>Older recordings link to the Channel 9 archive.</p>
+  <div class="tkc-ylog">
+  {%- for y in years %}
+    <section class="tkl-year" aria-labelledby="tkl-y{{ y.name }}">
+      <h3 class="tkl-yr" id="tkl-y{{ y.name }}"><span class="tkl-bar" style="background:linear-gradient(180deg, {{ d.eras[y.items.first.era] }})" aria-hidden="true"></span>{{ y.name }}</h3>
+      <ol class="tkl-rows">
+      {%- for t in y.items %}
+        {%- assign parts = t.date | split: "-" -%}
+        {%- assign when = "" -%}
+        {%- if parts.size == 3 -%}
+          {%- assign when = t.date | date: "%b %-d" -%}
+        {%- elsif parts.size == 2 -%}
+          {%- assign when = t.date | append: "-01" | date: "%B" -%}
+        {%- endif -%}
+        {%- assign from = "" -%}
+        {%- if t.video.start -%}
+          {%- assign m = t.video.start | divided_by: 60 -%}
+          {%- assign s = t.video.start | modulo: 60 -%}
+          {%- capture from -%}{{ m }}:{% if s < 10 %}0{% endif %}{{ s }}{%- endcapture -%}
+        {%- endif -%}
+        {%- capture pills -%}
+          {%- if t.video -%}
+            <a class="is-watch" href="https://www.youtube.com/watch?v={{ t.video.youtube }}{% if t.video.start %}&amp;t={{ t.video.start }}s{% endif %}">{{ play }}Watch{% if from != "" %} <span>from {{ from }}</span>{% endif %}</a>
+          {%- elsif t.learn -%}
+            <a class="is-watch" href="{{ t.learn | escape }}">{{ play }}Watch</a>
+          {%- elsif t.archive -%}
+            <a class="is-watch" href="{{ t.archive | escape }}">{{ play }}Archived video</a>
+          {%- endif -%}
+          {%- if t.page %}<a href="{{ t.page | escape }}">Session</a>{% endif -%}
+          {%- if t.slides %}<a href="{{ t.slides | escape }}">Slides</a>{% endif -%}
+          {%- if t.code %}<a href="{{ t.code | escape }}">Code</a>{% endif -%}
+          {%- if t.post %}<a href="{{ t.post | relative_url }}">Post</a>{% endif -%}
+        {%- endcapture %}
+        <li>
+          <p class="tkl-when{% if when == "" %}{% unless t.session %} tkl-when--none{% endunless %}{% endif %}">{% if when != "" %}{{ when }}{% else %}&nbsp;{% endif %}{% if t.session %}<span>{{ t.session | escape }}</span>{% endif %}</p>
+          <div>
+            <p class="tkl-ev">{{ t.event | escape }}{% if t.city %} · {{ t.city | escape }}{% endif %}</p>
+            <p class="tkl-t">{{ t.title | escape }}</p>
+            {%- if t.with %}
+            <p class="tkl-with">with {{ t.with | escape }}</p>
+            {%- elsif t.keynote %}
+            <p class="tkl-with">In {{ t.keynote | escape }}</p>
+            {%- endif %}
+            {%- if t.remark %}
+            <p class="tkl-remark">{{ t.remark | escape }}</p>
+            {%- endif %}
+            {%- if pills != "" %}
+            <p class="tkl-links">{{ pills }}</p>
+            {%- endif %}
+            {%- if t.lost %}
+            <p class="tkl-lost">{{ t.lost | escape }}</p>
+            {%- endif %}
+          </div>
+        </li>
+      {%- endfor %}
+      </ol>
+    </section>
+  {%- endfor %}
+  </div>
+  <section class="tkc-also" aria-labelledby="tkc-also">
+    <h2 class="tkc-also-label" id="tkc-also">Community calls and podcasts</h2>
+    <dl>
+      {%- for s in d.series %}
+      <dt>{{ s.role | escape }}</dt>
+      <dd>{{ s.name | escape }}, {{ s.years }}. {{ s.note | escape }} <a href="{{ s.highlight.url | escape }}">{{ s.highlight.title | escape }}</a> · <a href="{{ s.url | escape }}">Recaps</a></dd>
+      {%- endfor %}
+      <dt>Podcasts</dt>
+      <dd>
+        {%- for p in d.podcasts -%}
+        <a href="{% if p.url contains '://' %}{{ p.url | escape }}{% else %}{{ p.url | relative_url }}{% endif %}">{{ p.show | escape }}{% if p.ep %} {{ p.ep | escape }}{% endif %}</a>, “{{ p.title | escape }}” ({{ p.date | slice: 0, 4 }}){% unless forloop.last %}; {% endunless %}
+        {%- endfor -%}
+      </dd>
+    </dl>
+  </section>
+</section>

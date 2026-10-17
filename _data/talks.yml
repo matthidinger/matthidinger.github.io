@@ -1,0 +1,295 @@
+# Talks page data, rendered by _layouts/talks.html.
+#
+# talks: newest first. date is a quoted "YYYY", "YYYY-MM" or "YYYY-MM-DD"; the log groups by its year.
+#   era picks the sky colours (eras below). video is a YouTube id with an optional start in seconds.
+#   learn, archive, page, slides, code and post become link pills; post is a path on this site.
+#   lost explains a missing recording. Featured talks also need a thumb (pos = 16:9 crop, tall_pos = 3:4 crop)
+#   and only featured talks with a YouTube video play in the theater.
+# upcoming: tiles drop off once their date has passed.
+
+stage:
+  src: /images/talks/stage.jpg
+  alt: Matt at a Microsoft lectern, demoing a team of AI agents on the big screen
+
+featured: [eppc26key, ignite24, build19]
+
+eras:
+  agents: "#f6c48d, #f2a571, #e08a55"
+  cards: "#e08a55, #b0644e, #5a4a7a"
+  windows: "#5a4a7a, #3a3f6e, #2b3b6b"
+  chicago: "#2b3b6b, #1b2547, #0a1026"
+
+upcoming:
+  - date: "2026-10-27"
+    event: Power Platform Community Conference
+    city: Las Vegas
+    title: Agent Accounts in Copilot Studio and Agent 365
+    page: https://www.powerplatformconf.com/speakers/Matt-Hidinger
+  - date: "2026-11-17"
+    event: Microsoft Ignite 2026
+    city: San Francisco
+    title: Session to be announced
+    page: https://ignite.microsoft.com/en-US/speakers/177730559163ignite27-1789777208832001x8k3
+
+talks:
+  - id: eppc26
+    date: "2026"
+    era: agents
+    event: EPPC26
+    title: "From Copilot Studio to AI Teammate: Building Collaborative Agents with Agent 365"
+    with: Kendra Springer
+    page: https://espc.tech/conference/eppc-2026/programme/from-copilot-studio-to-ai-teammate-building-collaborative-agents-with-agent-365/
+
+  - id: eppc26key
+    date: "2026"
+    era: agents
+    event: EPPC26 keynote
+    title: "Live demo: a time-tracking agent inside a Power Apps app"
+    short: "Keynote demo: an agent inside Power Apps"
+    keynote: Ryan Cunningham’s keynote, “Building What’s Next for Work”
+    video: { youtube: nOqZhkdYDAQ, start: 1474 }
+    code: https://github.com/matthidinger/powerapps-timetracker-copilot-sample
+    blurb: A time-tracking agent built into an existing Power Apps app, demoed live in the EPPC26 keynote.
+    thumb:
+      src: /images/talks/eppc26key.jpg
+      pos: 50% 25%
+      tall_src: /images/talks/eppc26key-tall.jpg
+      tall_pos: 50% 30%
+
+  - id: ignite24
+    date: "2024-11"
+    era: agents
+    event: Microsoft Ignite 2024
+    city: Chicago
+    session: BRK173
+    title: Unlock Productivity with AI in Power Apps
+    with: Anthony Uitz
+    video: { youtube: hMyoAfRJaNU, start: 1228 }
+    blurb: AI in Power Apps for makers and the people using their apps. My part starts at 20:28.
+    thumb:
+      src: /images/talks/ignite24-art.jpg
+      pos: 50% 50%
+      tall_src: /images/talks/ignite24.jpg
+      tall_pos: 90% 50%
+
+  - id: build20
+    date: "2020-05"
+    era: cards
+    event: Microsoft Build 2020
+    city: Online
+    session: SK134
+    title: "Adaptive Cards: the next gen of contextual user experiences in your apps and Microsoft 365"
+    video: { youtube: hEBhwB72Qn4 }
+
+  - id: build19
+    date: "2019-05"
+    era: cards
+    event: Microsoft Build 2019
+    city: Seattle
+    session: BRK3070
+    title: Adaptive Cards vNext – Powering the next generation of contextual user experiences
+    short: Adaptive Cards vNext
+    with: David Claux
+    video: { youtube: wT1yFr_j6IM }
+    blurb: What’s next for Adaptive Cards, live on the Build stage in Seattle.
+    thumb:
+      src: /images/talks/build19.jpg
+      pos: 40% 30%
+      tall_src: /images/talks/build19-tall.jpg
+      tall_pos: 50% 20%
+
+  - id: ignite18
+    date: "2018-09"
+    era: cards
+    event: Microsoft Ignite 2018
+    city: Orlando
+    session: BRK2118
+    title: Adaptive Cards in Teams, Windows, Outlook and your own applications
+    with: Andrew Leader
+    code: https://github.com/matthidinger/ContosoScubaBot
+    lost: No recording found
+
+  - id: build18
+    date: "2018-05"
+    era: cards
+    event: Microsoft Build 2018
+    city: Seattle
+    session: BRK2401
+    title: Adaptive Cards in Bots, Windows, Outlook and your own applications
+    with: David Claux
+    learn: https://learn.microsoft.com/en-us/shows/build-2018/brk2401
+
+  - id: ignite17
+    date: "2017-10-11"
+    era: cards
+    event: Microsoft Ignite 2017
+    city: Orlando
+    session: BRK2053
+    title: Low investment, high reach enterprise experiences using bots and Adaptive Cards
+    with: Thomas Fennel
+    archive: https://web.archive.org/web/20200720062815/https://channel9.msdn.com/Events/Ignite/Microsoft-Ignite-Orlando-2017/BRK2053
+
+  - id: windev17
+    date: "2017-10-10"
+    era: cards
+    event: Windows Developer Day
+    session: WinDev003
+    title: Adaptive Cards for Timeline, Bots, and Beyond
+    learn: https://learn.microsoft.com/en-us/shows/windows-windows-developer-day-fall-creators-update/windev003
+
+  - id: build17
+    date: "2017-05"
+    era: cards
+    event: Microsoft Build 2017
+    city: Seattle
+    session: B8002
+    title: Introducing Adaptive Cards
+    with: Lei Xu and Sergio Silva
+    archive: https://web.archive.org/web/20200719222250/https://channel9.msdn.com/Events/Build/2017/B8002
+
+  - id: build16
+    date: "2016"
+    era: windows
+    event: Microsoft Build 2016
+    city: San Francisco
+    session: B803
+    title: What’s New for Tiles and Toast Notifications
+    with: Lei Xu
+    learn: https://learn.microsoft.com/en-us/shows/build-2016/b803
+
+  - id: build15
+    date: "2015-04"
+    era: windows
+    event: Microsoft Build 2015
+    city: San Francisco
+    session: 2-617
+    title: Introducing the Windows 10 App Model
+    with: Andrew Clinick and Akhil Kaza
+    archive: https://web.archive.org/web/20190110175258/https://channel9.msdn.com/Events/Build/2015/2-617
+
+  - id: build14
+    date: "2014"
+    era: windows
+    event: Microsoft Build 2014
+    city: San Francisco
+    session: 2-523
+    title: Live Tiles Enhancements
+    with: Saral Shodhan
+    archive: https://web.archive.org/web/20200720080516/https://channel9.msdn.com/Events/Build/2014/2-523
+
+  - id: build13
+    date: "2013-06"
+    era: chicago
+    event: Microsoft Build 2013
+    city: San Francisco
+    session: 2-215
+    title: "Real Talk: Sharing Code Between the Windows & Windows Phone Platforms"
+    archive: https://web.archive.org/web/20200719222449/https://channel9.msdn.com/Events/Build/2013/2-215
+    code: https://github.com/matthidinger/Build2013RealWorldStocks
+    post: /archive/2013/07/02/video-and-code-from-my-build-talk-on-sharing-code/
+    remark: My first talk at a major conference. My clicker started to die early on, which virtually tethered me to the podium.
+
+  - id: neow
+    date: "2012"
+    era: chicago
+    event: Microsoft New Era of Work
+    city: Chicago
+    title: "Sharing Code: Windows 8 and Windows Phone"
+    slides: https://www.slideshare.net/slideshow/sharing-code-win8-wp8/15506371
+    code: https://github.com/matthidinger/RealWorldStocksWinJS
+    post: /archive/2012/12/05/sharing-code-windows-8-and-windows-phone/
+
+  - id: stirtrek
+    date: "2012-05-04"
+    era: chicago
+    event: Stir Trek
+    city: Columbus
+    title: WinJS for C# Developers
+    post: /archive/2012/05/06/windycitygo-stirtrek-windows-8-anchor/
+    remark: Built a Stocks app on stage, on one of the worst market days in recent memory.
+
+  - id: anchor
+    date: "2012-04-26"
+    era: chicago
+    event: Windows 8 Anchor, Navy Pier
+    city: Chicago
+    title: Windows 8 from the Trenches
+    with: Erik Klimczak
+    post: /archive/2012/05/06/windycitygo-stirtrek-windows-8-anchor/
+    remark: Nearly 400 people eager to see what was coming with Windows 8.
+
+  - id: wcg
+    date: "2012-04-05"
+    era: chicago
+    event: WindyCityGo
+    city: Chicago
+    title: Real World Windows Phone Development
+    post: /archive/2012/05/06/windycitygo-stirtrek-windows-8-anchor/
+
+  - id: techweek
+    date: "2011-07-27"
+    era: chicago
+    event: Windows Phone Unleashed @ TechWeek
+    city: Chicago
+    title: Windows Phone MVVM with Caliburn.Micro
+    post: /archive/2011/07/22/Windows-Phone-Unleashed-TechWeek-Chicago/
+
+  - id: altnet
+    date: "2011-07-13"
+    era: chicago
+    event: Chicago ALT.NET
+    city: Chicago
+    title: Onion Architecture with ASP.NET MVC
+    slides: https://www.slideshare.net/slideshow/onion-architecture/8677984
+    code: https://github.com/matthidinger/OnionArchitecture
+
+  - id: codecamp
+    date: "2011-05-14"
+    era: chicago
+    event: Chicago Code Camp
+    city: Grayslake
+    title: Onion Architecture
+    post: /archive/2011/05/17/Onion-Architecture-code-and-slides-from-Chicago-Code-Camp/
+
+  - id: cwpdg
+    date: "2011-03-14"
+    era: chicago
+    event: Chicago Windows Phone Developer Group
+    city: Chicago
+    title: Windows Phone MVVM with Caliburn.Micro
+    post: /archive/2011/03/23/Code-from-my-Chicago-Windows-Phone-presentation/
+
+  - id: cag
+    date: "2010-04-20"
+    era: chicago
+    event: Chicago IT Architects Group
+    city: Chicago
+    title: Onion Architecture
+    post: /archive/2010/04/15/presenting-at-chicago-architects-group-on-onion-architecture/
+    remark: In early 2010 I decided to try my hand at presenting.
+
+series:
+  - role: Host
+    name: Adaptive Cards Community Call
+    years: "2021"
+    note: Monthly; later handed to J.P. Roca and folded into the Microsoft 365 platform call in 2023.
+    highlight:
+      title: Deep dive into Universal Actions
+      url: https://www.youtube.com/watch?v=mwWAFw8df50
+    url: https://pnp.github.io/blog/categories/adaptive-cards-community-call/
+
+podcasts:
+  - show: Microsoft 365 Developer Podcast
+    ep: "#203"
+    title: Adaptive Cards, with David Claux
+    date: "2020-04"
+    url: https://www.m365devpodcast.com/e/adaptive-cards-wdavid-claux-matt-hidinger/
+  - show: MS Dev Show
+    title: Adaptive Cards Update
+    date: "2019-07"
+    url: https://msdevshow.com/2019/07/adaptive-cards-update-with-matt-hindinger/
+  - show: Developer Smackdown
+    ep: "#53"
+    title: Building CTA Watch
+    date: "2011-07"
+    url: /archive/2011/07/20/Building-CTA-Watch-on-the-Developer-Smackdown-podcast/
