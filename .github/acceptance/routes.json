@@ -198,16 +198,23 @@
     {
       "id": "talks",
       "path": "/talks/",
-      "purpose": "Talks page in the shared Dusk shell (content unchanged; redesign is #11)",
+      "purpose": "Talks marquee (#11): featured recordings that open in a theater, what's coming up, then every talk by year",
       "title": "Talks",
       "h1": "Talks",
       "text": [
-        "These are talks I"
+        "All talks",
+        "Adaptive Cards vNext",
+        "Unlock Productivity with AI in Power Apps",
+        "Community calls and podcasts"
       ],
       "minText": 50,
       "selectors": {
         ".dk-sig": 1,
         ".dkp-mast-art": 1,
+        ".tkc-hero img": 1,
+        ".tkc-poster": 3,
+        ".tkl-rows > li": 20,
+        ".tkl-links a.is-watch": 10,
         ".dk-foot-scene": 1
       },
       "maxSelectors": {
@@ -217,9 +224,15 @@
         ".code-copy": 0
       },
       "absentText": [
-        "Facebook"
+        "Facebook",
+        "These are talks I"
       ],
       "interactions": [
+        {
+          "name": "talks poster opens theater",
+          "click": ".tkc-poster[data-play]",
+          "expectVisible": ".tkc-theater"
+        },
         {
           "name": "talks back to home",
           "click": ".dk-sig",
