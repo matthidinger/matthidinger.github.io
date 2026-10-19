@@ -1,0 +1,386 @@
+# Every part you can pick in the model: its card text, product link, and the project and photo it belongs to.
+# Coordinates are Blender metres: +X forward, +Y port, +Z up. Part IDs are the model's `part` extras (see _hardware-tools/README.md).
+ac-cable:
+  title: AC wiring (120 V)
+  body: Shore power to the AC panel, out to the MultiPlus and back, then on to the water heater and the microwave. Runs to the outlets aren't drawn.
+ac-panel:
+  title: AC panel
+  body: Breakers for the 120 V circuits. The water heater and the galley outlet run on shore power only; the other four outlets and the microwave are fed through the MultiPlus, so they work at anchor too.
+acuva-uv-filter:
+  title: Acuva ArrowMax 2.0 UV purifier
+  body: UV-LED purifier under the galley sink, on the cold line to the galley faucet, so the drinking water is treated on demand.
+  project: fresh
+  photo: fresh/acuva
+alternator-balmar:
+  title: Balmar XT170 alternator
+  body: High-output engine charging, controlled by the external Balmar regulator.
+  project: m35b
+  photo: m35b/alternator
+anchor:
+  title: Anchor
+  body: Stainless steel anchor, stowed on the bow roller.
+autopilot-acu:
+  title: Raymarine autopilot ACU
+  body: The Actuator Control Unit that drives the autopilot, on the port side of the engine-room bulkhead across from the MultiPlus. It runs the Linear Drive, reads the rudder sensor and links to the Axiom.
+  project: autopilot
+autopilot-control-p70s:
+  title: Raymarine p70s autopilot control
+  body: Autopilot head on the helm, next to the Axiom. It talks to the ACU over NMEA 2000.
+autopilot-network-cable:
+  title: Autopilot network cable
+  body: Links the ACU to the Axiom at the helm.
+balmar-regulator:
+  title: Balmar regulator
+  body: External regulator that controls the alternator’s charging.
+battery-bms:
+  title: Battery BMS
+  body: Battery management for the lithium bank.
+  project: victron
+battery-switch:
+  title: Battery switch
+  body: Main battery disconnect.
+batteryprotect:
+  title: Victron BatteryProtect
+  body: Disconnects loads before the batteries are drawn down too far.
+belt-pulley:
+  title: Belt pulley
+bow-roller:
+  title: Bow roller
+  body: Leads the chain from the anchor to the windlass.
+busbars-lynx:
+  title: Busbars
+  body: Main DC distribution.
+cerbo-gx:
+  title: Victron Cerbo GX
+  body: "The system brain: it collects data from the Victron gear and the BMS."
+  project: victron
+chain:
+  title: Chain
+chartplotter:
+  title: Raymarine Axiom 2 Pro 9 chartplotter
+  body: Mounted on the pedestal guard, in view of the helm. It sits on the NMEA 2000 network, and the radar plugs straight into it.
+chartplotter-screen:
+  title: Chartplotter screen
+class-t-fuse:
+  title: Class T fuse
+  body: Main fuse on the lithium bank.
+cold-water-line:
+  title: Cold water
+  body: Pressure line from the pump to the galley (through the Acuva), head sink, shower and water heater, with a tee to the transom shower.
+cortex-handset:
+  title: Vesper Cortex handset
+  body: The VHF handset for the Cortex M1, next to the chartplotter. The Cortex replaced the old fixed VHF.
+cortex-m1:
+  title: Vesper Cortex M1
+  body: VHF, AIS and remote boat monitoring in one black box. In the wet locker between the engine bulkhead and the Fusion cabinet; it puts AIS targets on the NMEA 2000 network.
+crank-pulley:
+  title: Crank pulley
+cutless-bearing:
+  title: Cutless bearing
+dc-cable:
+  title: DC wiring (12 V)
+  body: "Battery cables, charging and distribution: busbars, MultiPlus, alternator, Orion, SafetyHub fuse block and DC panel."
+dc-panel:
+  title: DC panel
+  body: Breakers for the 12 V circuits.
+deck-switch:
+  title: Windlass up/down switch
+  body: Maxwell up/down switch, mounted just inside the original anchor-chain hole, which I reused as an access port beside the windlass.
+  project: windlass
+depth-transducer:
+  title: Depth transducer
+  body: Through-hull depth sensor, read by the iTC-5.
+drive-bracket:
+  title: Drive bracket
+  body: Bolted to the face of the block on an aluminium plate. The linear drive pivots on its pin.
+drive-cable:
+  title: Drive cable
+  body: From the ACU to the Linear Drive.
+engine-bed:
+  title: Engine bed
+engine-block:
+  title: M35B diesel
+  body: The auxiliary engine, sitting under the cockpit and driving aft through a V-drive.
+  project: m35b
+  photo: m35b/main
+engine-coolant-loop:
+  title: Engine coolant loop
+  body: Hot coolant from the M35B runs through the heater, so motoring heats the water.
+ev-1-core-pack:
+  title: Raymarine EV-1 heading sensor
+  body: The autopilot’s compass and motion sensor.
+exhaust-hose:
+  title: Exhaust hose
+eyebrow-stripe:
+  title: Navy eyebrow stripe
+  body: Navy vinyl stripe along the top of the cabin sides, where the 35-year-old wood eyebrow was. Nothing left to maintain. (Stripe width and ends stylised.)
+  project: eyebrow
+  photo: eyebrow/final
+fridge-isotherm-top-loader:
+  title: IsoTherm fridge
+  body: Top-loading fridge in the galley.
+fusion-stereo:
+  title: Fusion stereo
+  body: In the cabin, next to the GX Touch, on the NMEA 2000 network.
+galley-faucet:
+  title: Galley faucet
+  body: Hot and cold pressure water at the galley sink, right under the microwave.
+  project: fresh
+galley-outlet-shore-only:
+  title: Galley outlet (shore only)
+  body: Shore power only, not through the inverter. It's where the heater plugs in over the winter. Beside the galley inverter outlet.
+gx-touch:
+  title: Victron GX Touch
+  body: Display for the Cerbo, inside the cabin by the panels.
+  project: victron
+head-faucet:
+  title: Head sink
+  body: Hot and cold pressure water at the head sink.
+heat-exchanger:
+  title: Heat exchanger
+  body: Raw water cools the engine’s coolant here. Replaced, along with the exhaust elbows, because of all the debris from the engine sitting.
+  project: m35b
+hot-water-line:
+  title: Hot water
+  body: From the water heater forward to the galley, the head sink and the shower.
+house-battery-1-330ah-lifepo4:
+  title: "House bank: 2 × 330 Ah LiFePO4"
+  body: Lithium house batteries under the cockpit.
+  project: victron
+house-battery-2-330ah-lifepo4:
+  title: "House bank: 2 × 330 Ah LiFePO4"
+  body: Lithium house batteries under the cockpit.
+  project: victron
+i70s-display:
+  title: Raymarine i70s displays (×3)
+  body: "Three instrument displays stacked one above the other on the starboard side of the cabin bulkhead, readable from the cockpit: wind, depth, speed and more."
+idler-sheave:
+  title: Idler sheave
+inspection-port:
+  title: Beckson inspection port
+  body: Access port cut into the top of each fresh water tank, so the tank can be deep cleaned and disinfected from the inside.
+  url: https://www.beckson.com/dckplt.html
+  project: fresh
+  photo: fresh/port
+inverter-outlet:
+  title: 120 V outlets (inverter)
+  body: "Four outlets fed through the MultiPlus, so they work at anchor too: two on the cabin bulkhead, one in the head and one in the galley."
+isotemp-water-heater:
+  title: IsoTemp water heater
+  body: 750 W, 4.2 gallons, in the engine space. Heats from shore power, or from engine coolant while motoring.
+  project: fresh
+  photo: fresh/isotemp
+itc-5-converter:
+  title: Raymarine iTC-5 converter
+  body: Turns the older analog wind and depth transducers into NMEA 2000 data.
+linear-drive:
+  title: Raymarine Linear Drive
+  body: The autopilot ram. It pushes a tiller arm on the rudder stock.
+  project: autopilot
+  photo: autopilot/drive
+linear-drive-block:
+  title: Linear drive block
+  body: A pyramid-shaped block glassed to the inside of the transom, starboard side. It takes the drive’s push.
+  project: autopilot
+  photo: autopilot/painted
+linear-drive-ram:
+  title: Linear drive ram
+manual-pump:
+  title: Manual pump
+  body: Backup water at the galley sink, no power needed. Draws through the tank valves.
+maxwell-breaker:
+  title: Maxwell windlass breaker
+  body: 135 A breaker for the windlass, on the port side of the forward cabin.
+  project: windlass
+microwave:
+  title: RCA microwave
+  body: In its own cabinet on the forward galley bulkhead, right above the sink. AC from the AC panel, through the MultiPlus, so it works at anchor too.
+  project: microwave
+  photo: microwave/done
+multiplus-inverter-charger:
+  title: Victron MultiPlus
+  body: "Inverter/charger: makes AC from the batteries, and charges them on shore power."
+  project: victron
+nmea-2000-cable:
+  title: NMEA 2000 network
+  body: One backbone links the Axiom, the p70s, the i70s, the ACU, the EV-1, the iTC-5, the Cortex, the Fusion, the Cerbo GX and the tank sensors. Routes are drawn, not traced.
+orion-dc-dc-charger:
+  title: Victron Orion DC-DC charger
+  body: Keeps the AGM start battery topped up from the lithium house bank.
+  project: victron
+pedestal:
+  title: Pedestal
+pedestal-guard:
+  title: Pedestal guard
+pepwave-router:
+  title: Pepwave MAX Transit router
+  body: Cellular router in the wet locker beside the Cortex M1, so the boat stays online.
+pressure-pump:
+  title: Shurflo Aqua King II pump
+  body: 12 V, 3 GPM pump that pressurises the hot and cold lines. In a small cabinet in the head, behind the toilet.
+  url: https://www.pentair.com/en-us/flow/shurflo/shurflo-products/shurflo-marine-applications/freshwater-washdown-systems/shurflo-aqua-king-ii-junior-standard-fresh-water-pumps.html
+  project: fresh
+  photo: fresh/pump
+prop-blade:
+  title: Prop blade
+prop-hub:
+  title: Propeller
+  body: On the end of the shaft, carried by a strut and cutless bearing.
+prop-shaft:
+  title: Prop shaft
+pss-dripless-seal:
+  title: PSS dripless shaft seal
+  body: Seals the shaft where it leaves the hull, without a dripping stuffing box.
+radar:
+  title: Raymarine radar
+  body: Radome about halfway up the mast; its cable runs down to the Axiom.
+radar-cable:
+  title: Radar cable
+  body: From the radome down the mast and aft to the Axiom. Route is drawn, not traced.
+radial-drive:
+  title: Radial drive
+  body: Cable-driven quadrant on the rudder stock that the wheel steers through.
+raw-water-hose:
+  title: Raw water hose
+raw-water-pump:
+  title: JMP raw water pump
+  body: All bronze. It replaced a Sherwood pump made of steel.
+  project: m35b
+  photo: m35b/pump
+rudder-sensor:
+  title: Rudder reference sensor
+  body: Tells the autopilot where the rudder is pointing.
+  project: autopilot
+rudder-sensor-cable:
+  title: Rudder sensor cable
+  body: Carries the rudder angle back to the ACU.
+rudder-stock:
+  title: Rudder stock
+safetyhub-150-fuse-block:
+  title: Blue Sea SafetyHub 150 fuse block
+  body: "Blue Sea 7748, directly behind the DC panel: four MIDI fuse slots for the heavier feeds, six ATO blade circuits and a negative bus. The windlass feed runs aft along the port side to here."
+  url: https://powerwerx.com/blue-sea-7748-safetyhub-150-fuse-block
+serpentine-belt:
+  title: Balmar serpentine belt kit
+  body: New pulleys and a Balmar serpentine belt, fitted with the XT170 alternator.
+  project: m35b
+  photo: m35b/alternator
+shaft-coupling:
+  title: Shaft coupling
+shore-power-inlet:
+  title: Shore power inlet
+  body: Where the dock power cord plugs in. It feeds the AC panel, with a galvanic isolator on the ground.
+shower:
+  title: Shower
+  body: Hot and cold shower in the head.
+shunt:
+  title: Battery shunt
+  body: Measures current in and out of the house bank.
+  project: victron
+shut-off-valves:
+  title: Tank shut-off valves
+  body: Under the floorboards by the head door. They choose which tank the pump draws from.
+speed-transducer:
+  title: Speed wheel
+  body: Paddlewheel speed sensor through the hull.
+spoke:
+  title: Spoke
+start-battery-group-24-agm:
+  title: Start battery (Group 24 AGM)
+  body: A separate AGM battery for starting the engine, right beside the house bank.
+steering-cable:
+  title: Steering cable
+strut:
+  title: Strut
+suction-line:
+  title: Suction line
+  body: From the tanks to the valves, then the filter and pump.
+support-beam:
+  title: Support beam
+swim-platform:
+  title: Swim platform
+  body: Two slotted panels across the full width of the transom, framed in stainless, just above the waterline. (Mount details stylised.)
+  project: swim
+  photo: swim/main
+tank-gauge:
+  title: Veratron ViewLine Flex gauge
+  body: Round digital gauge in the DC panel, showing both tanks from the sensors over NMEA 2000.
+  url: https://veratron.com/products/vl-flex-52-nmea-2000-black
+  project: fresh
+  photo: fresh/gauge
+tank-level-sensor:
+  title: Veratron tank level sensors
+  body: Veratron NMEA 2000 liquid level sensors, one in each fresh water tank beside the inspection port. Levels show on the DC panel gauge and the GX Touch.
+  url: https://veratron.com/products/nmea-2000%C2%AE-liquid-level-sensor-600mm
+  project: fresh
+  photo: fresh/sensor
+terminal:
+  title: Terminal
+tiller-arm:
+  title: Tiller arm
+  body: Bronze arm clamped on the rudder stock, above the radial drive. The linear drive pushes on its end.
+transducer-cable:
+  title: Transducer cables
+  body: Analog wind, depth and speed cables back to the iTC-5.
+transom-shower:
+  title: Transom shower
+  body: Cold-only rinse on the aft deck, port of centre, just forward of the transom. Tees off the cold feed into the IsoTemp.
+v-drive:
+  title: Hurth ZF15MIV V-drive
+  body: Turns the drive back on itself so the engine can sit further aft with the shaft running under it.
+  project: m35b
+  photo: m35b/trans-in
+valve-cover:
+  title: Valve cover
+water-filter:
+  title: Whole-boat water filter
+  body: Filter and housing next to the pump, in the head cabinet. Everything the pump sends to the taps goes through it.
+  project: fresh
+water-tank-forward-berth:
+  title: Forward water tank
+  body: "Under the forward berth: the second port-side fresh water tank."
+  project: fresh
+water-tank-settee:
+  title: Settee water tank
+  body: Under the port settee. One of two fresh water tanks, both on the port side.
+  project: fresh
+waterlift-muffler:
+  title: Waterlift muffler
+  body: On the port side, between the engine and the V-drive. Cooling water and exhaust go through it, across under the cockpit, over a high loop and out the starboard side of the transom.
+wheel:
+  title: Wheel and pedestal
+  body: Cables run from the pedestal down to the radial drive.
+wheel-axle:
+  title: Wheel axle
+wind-transducer:
+  title: Masthead wind transducer
+  body: Wind speed and direction from the top of the mast; its cable runs down the mast to the iTC-5.
+windlass-base:
+  title: Windlass base
+windlass-cable:
+  title: Windlass feed (1/0 AWG)
+  body: Heavy cable from the SafetyHub fuse block behind the DC panel, through the breaker and the control unit, to the windlass motor.
+  project: windlass
+windlass-cap:
+  title: Windlass cap
+windlass-contactor:
+  title: Windlass control unit
+  body: A reversing contactor (solenoid pack) in the cabinet just forward of the breaker. The deck switch triggers it, and it switches the heavy motor current one way for up and the other for down.
+  project: windlass
+windlass-control-wire:
+  title: Windlass control wiring
+  body: Light wires from the deck switch to the control unit.
+  project: windlass
+windlass-gypsy:
+  title: Maxwell windlass
+  body: "Electric vertical windlass: chain over the gypsy, motor below deck."
+  project: windlass
+  photo: windlass/final
+windlass-motor:
+  title: Maxwell windlass motor
+  body: "Below deck: the gearbox hangs under the gypsy and the motor lies horizontal off its side."
+  project: windlass
+  photo: windlass/locker
+windlass-riser:
+  title: Custom composite riser
+  body: Lifts the windlass so the chain and rode clear the ledge along the boat's exterior. Windlass outline plus 1" all round.

@@ -1,0 +1,86 @@
+---
+title: Boat tour
+layout: hardware
+hw: tour
+permalink: /hardware/tour/
+excerpt: A walk through NONSENSE from the bow to the stern, one project at a time.
+---
+{%- comment -%}
+  The boat tour: every project with `tour:` in its front matter, bow to stern. tour-page.js pins the 3D model beside the stops and
+  flies to each one as it scrolls past; the stop is kept in the address (#stop-<id>) so a link or Back lands on it.
+{%- endcomment -%}
+{%- assign stops = site.pages | where_exp: "p", "p.tour" | sort: "tour" -%}
+{%- assign boat = site.data.hardware.boat -%}
+<section class="mix-st hw-tour" aria-labelledby="hw-tour-h1">
+  <div class="mix-st-top"><a class="pj-crumb" href="{{ '/hardware/' | relative_url }}"><span aria-hidden="true">←</span> Hardware</a></div>
+  <div class="mix-st-grid">
+    <div class="mix-st-sticky" hidden><div class="vx-stage"></div></div>
+    <div class="mix-st-chapters">
+      <article class="mix-ch mix-ch-intro" id="stop-start" tabindex="-1" data-name="Start">
+        <p class="kicker">{{ boat.name }} · {{ boat.model }}</p>
+        <h1 id="hw-tour-h1">A walk through the boat</h1>
+        <p class="mix-ch-lede">{{ stops.size }} projects, from the bow to the stern.<span class="hw-live-only"> Scroll and the model follows.</span></p>
+        <ol class="mix-ch-index">
+          {%- for p in stops %}
+          {%- assign pid = p.url | split: '/' | last %}
+          <li><a href="#stop-{{ pid }}"><span aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><b>{{ p.title }}</b><small>{{ p.hardware.model.where }}</small></a></li>
+          {%- endfor %}
+        </ol>
+        <p class="mix-ch-scroll" aria-hidden="true">Scroll <span>↓</span></p>
+      </article>
+      {%- for p in stops %}
+      {%- assign pid = p.url | split: '/' | last %}
+      {%- assign h = p.hardware %}
+      {%- assign cs = h.compare.steps | where_exp: "x", "x.photo" %}
+      {%- assign first = nil %}{% assign first_cap = nil %}{% assign last = nil %}{% assign last_cap = nil %}
+      {%- if cs.size > 0 %}{% assign first = cs.first.photo %}{% assign first_cap = cs.first.caption %}
+      {%- elsif h.compare.before %}{% assign first = h.compare.before %}{% assign first_cap = h.compare.before_label | default: 'Before' %}{% endif %}
+      {%- if cs.size > 1 %}{% assign last = cs.last.photo %}{% assign last_cap = cs.last.caption %}
+      {%- elsif h.compare.after %}{% assign last = h.compare.after %}{% assign last_cap = h.compare.after_label | default: 'After' %}{% endif %}
+      <article class="mix-ch" id="stop-{{ pid }}" tabindex="-1" data-name="{{ p.title | escape }}" data-project="{{ pid }}">
+        <p class="kicker">{{ forloop.index | prepend: '0' | slice: -2, 2 }} · {{ h.model.where }}</p>
+        <h2>{{ p.title }}</h2>
+        {%- if h.blurb %}
+        <p class="mix-ch-sub">{{ h.sub }}</p>
+        <p class="mix-ch-lede">{{ h.blurb }}</p>
+        {%- else %}
+        <p class="mix-ch-lede">{{ h.sub }}</p>
+        {%- endif %}
+        {%- if first and last %}
+        {%- assign first_alt = p.title | append: ': ' | append: first_cap %}
+        {%- assign last_alt = p.title | append: ': ' | append: last_cap %}
+        <div class="mix-ch-ba">
+          <figure class="b">{% include hardware/img.html pj=pid photo=first alt=first_alt sizes="(max-width:760px) 45vw, 255px" %}<figcaption>{{ first_cap }}</figcaption></figure>
+          <figure class="a">{% include hardware/img.html pj=pid photo=last alt=last_alt sizes="(max-width:760px) 45vw, 255px" %}<figcaption>{{ last_cap }}</figcaption></figure>
+        </div>
+        {%- endif %}
+        {%- if h.kit %}
+        <div class="mix-ch-kit"><h3 class="mix-ch-h">What went in</h3>{% include hardware/kit.html kit=h.kit %}</div>
+        {%- endif %}
+        {%- capture along -%}
+          {%- assign n = 0 -%}
+          {%- for x in cs -%}{%- unless forloop.first or forloop.last -%}{%- if n < 6 -%}{%- assign n = n | plus: 1 -%}
+          <li>{% include hardware/img.html pj=pid photo=x.photo alt="" sizes="(max-width:760px) 30vw, 170px" %}<span>{{ x.caption }}</span></li>
+          {%- endif -%}{%- endunless -%}{%- endfor -%}
+          {%- for x in h.gallery -%}{%- if n < 6 -%}{%- assign n = n | plus: 1 -%}
+          <li>{% include hardware/img.html pj=pid photo=x.photo alt="" sizes="(max-width:760px) 30vw, 170px" %}<span>{{ x.caption }}</span></li>
+          {%- endif -%}{%- endfor -%}
+        {%- endcapture %}
+        {%- if n > 0 %}
+        <div class="mix-ch-along"><h3 class="mix-ch-h">Along the way</h3><ul>{{ along }}</ul></div>
+        {%- endif %}
+        {%- if h.soon %}
+        <p><span class="vx-soon">{{ h.soon }}</span></p>
+        {%- endif %}
+        <a class="mix-open" href="{{ p.url | relative_url }}">Open the project <span aria-hidden="true">→</span></a>
+      </article>
+      {%- endfor %}
+      <article class="mix-ch mix-ch-more" id="stop-end" tabindex="-1" data-name="End">
+        <p class="kicker">End of the tour</p>
+        <h2>That's the boat</h2>
+        <p class="mix-ch-lede">Every boat project is in the model. The house projects are on the Hardware page.</p>
+        <a class="mix-open ghost" href="{{ '/hardware/' | relative_url }}">Back to Hardware</a>
+      </article>
+    </div>
+  </div>
+</section>

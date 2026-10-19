@@ -6,9 +6,9 @@ main:
   - title: "Blog"
     url: /blog/
     
-#  - title: "Projects"
-#    url: /projects/
-
   - title: "Talks"
     url: /talks/
+
+  - title: "Hardware"
+    url: /hardware/
    

@@ -1,0 +1,29 @@
+{%- comment -%}
+  The page's data for assets/js/hardware/*.js, as JSON (read by data.js):
+  boat, parts and photos always; wiring on the wiring page; page = this project's id on a project page;
+  projects = every Hardware project in order, with the fields the model needs, and the full story for this page's project.
+  "</" is escaped so no value can close the script element. data-media is the absolute base URL the photos are served from.
+{%- endcomment -%}
+{%- assign hwd_pages = site.pages | where_exp: "p", "p.hardware" | sort: "order" -%}
+{%- assign hwd_id = page.url | split: '/' | last -%}
+{%- capture hwd_json -%}
+{"boat":{{ site.data.hardware.boat | jsonify }},
+"parts":{{ site.data.hardware.parts | jsonify }},
+"photos":{{ site.data.hardware.photos | jsonify }},
+{%- if page.hw == 'wiring' %}
+"wiring":{{ site.data.hardware.wiring | jsonify }},
+{%- endif %}
+"page":{% if page.hw %}null{% else %}{{ hwd_id | jsonify }}{% endif %},
+"projects":[
+{%- for p in hwd_pages -%}
+{%- assign pid = p.url | split: '/' | last -%}
+{%- assign h = p.hardware -%}
+{"id":{{ pid | jsonify }},"title":{{ p.title | jsonify }},"url":{{ p.url | jsonify }},"order":{{ p.order | jsonify }},"tour":{{ p.tour | jsonify }},
+"hardware":{"group":{{ h.group | jsonify }},"sub":{{ h.sub | jsonify }},"cover":{{ h.cover | jsonify }},"soon":{{ h.soon | jsonify }},"model":{{ h.model | jsonify }}
+{%- if pid == hwd_id and page.hw == nil %},"story":{{ h.story | jsonify }}{% endif %}}}{% unless forloop.last %},
+{% endunless %}
+{%- endfor -%}
+]}
+{%- endcapture -%}
+{%- assign hwd_media = site.hardware_media | default: site.data.hardware.media.base -%}
+<script type="application/json" id="hw-data" data-media="{{ hwd_media | escape }}">{{ hwd_json | replace: "</", "<\/" }}</script>

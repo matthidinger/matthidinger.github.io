@@ -1,0 +1,15 @@
+{%- comment -%}
+  Before/after slider. Params: pj (project id), title, c (the compare block: before, after, ar, before_label, after_label), sweep, sizes.
+  Without JavaScript the two photos sit side by side, labelled; widgets.js turns it into a drag-to-compare slider
+  (a range input, so it works with keys and screen readers) and, with sweep, wipes across once when it scrolls into view.
+{%- endcomment -%}
+{%- assign hws_b = include.c.before_label | default: 'Before' -%}
+{%- assign hws_a = include.c.after_label | default: 'After' -%}
+{%- assign hws_balt = include.title | append: ', ' | append: hws_b -%}
+{%- assign hws_aalt = include.title | append: ', ' | append: hws_a -%}
+<div class="ba"{% if include.sweep %} data-sweep{% endif %} style="--ar:{{ include.c.ar | default: '4/3' }}">
+  <figure class="ba-after">{% include hardware/img.html pj=include.pj photo=include.c.after alt=hws_aalt sizes=include.sizes %}<figcaption class="ba-tag r">{{ hws_a }}</figcaption></figure>
+  <figure class="ba-before">{% include hardware/img.html pj=include.pj photo=include.c.before alt=hws_balt sizes=include.sizes %}<figcaption class="ba-tag l">{{ hws_b }}</figcaption></figure>
+  <span class="ba-line" aria-hidden="true"></span>
+  <input type="range" min="0" max="100" value="50" aria-label="Compare {{ hws_b | downcase }} and {{ hws_a | downcase }}: {{ include.title }}" hidden>
+</div>

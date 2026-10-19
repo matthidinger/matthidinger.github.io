@@ -1,0 +1,157 @@
+# The 3D model of NONSENSE: systems, camera views and which parts belong to which view.
+# Coordinates are Blender metres: +X forward, +Y port, +Z up. Part IDs are the model's `part` extras (see _hardware-tools/README.md).
+name: NONSENSE
+model: 1990 Nonsuch 30 Ultra
+systems:
+  - id: all
+    name: Whole boat
+    color: "#9ca3af"
+    cam: [ 12.2, -10.6, 3 ]
+    at: [ 4.4, 0, 2 ]
+    tall_lift: 0.9
+  - id: propulsion
+    name: Propulsion
+    color: "#E39B32"
+    cam: [ 4, -4.6, 1.9 ]
+    at: [ 1.6, 0, 0 ]
+    tags: [ engine-block, v-drive, pss-dripless-seal, prop-hub, waterlift-muffler ]
+  - id: steering
+    name: Steering & autopilot
+    color: "#E2654A"
+    cam: [ -1.6, -3.8, 2.9 ]
+    at: [ 0.9, -0.1, 0.7 ]
+    also: [ chartplotter ]
+    tags: [ radial-drive, linear-drive, linear-drive-block, rudder-sensor, chartplotter, autopilot-acu ]
+  - id: electrical
+    name: Electrical
+    color: "#2FB0A8"
+    cam: [ -1.6, -3.4, 2.7 ]
+    at: [ 1.9, -0.2, 0.5 ]
+    also: [ isotemp-water-heater ]
+    tags:
+      - house-battery-1-330ah-lifepo4
+      - start-battery-group-24-agm
+      - multiplus-inverter-charger
+      - cerbo-gx
+      - alternator-balmar
+      - orion-dc-dc-charger
+      - shore-power-inlet
+      - gx-touch
+      - fridge-isotherm-top-loader
+    modes_label: Electrical circuits
+    modes:
+      - id: both
+        name: Both
+      - id: dc
+        name: DC 12 V
+        also: []
+        tags:
+          - house-battery-1-330ah-lifepo4
+          - start-battery-group-24-agm
+          - multiplus-inverter-charger
+          - cerbo-gx
+          - alternator-balmar
+          - orion-dc-dc-charger
+          - dc-panel
+          - safetyhub-150-fuse-block
+          - fridge-isotherm-top-loader
+      - id: ac
+        name: AC 120 V
+        cam: [ 2, -5.6, 4.6 ]
+        at: [ 4, 0.2, 0.8 ]
+        tall:
+          cam: [ -2.4, -0.6, 8 ]
+          at: [ 4, 0.2, 0.7 ]
+        tags:
+          - shore-power-inlet
+          - ac-panel
+          - multiplus-inverter-charger
+          - isotemp-water-heater
+          - microwave
+          - inverter-outlet
+          - galley-outlet-shore-only
+  - id: plumbing
+    name: Fresh & hot water
+    color: "#3D8BEB"
+    cam: [ 3, 4.6, 7.7 ]
+    at: [ 3.7, -0.1, 0.2 ]
+    tall:
+      cam: [ -3, 0.7, 9.2 ]
+      at: [ 3.7, 0, 0.2 ]
+    also: [ tank-level-sensor, tank-gauge ]
+    tags:
+      - isotemp-water-heater
+      - water-tank-settee
+      - water-tank-forward-berth
+      - shut-off-valves
+      - pressure-pump
+      - acuva-uv-filter
+      - galley-faucet
+      - head-faucet
+      - shower
+      - transom-shower
+  - id: electronics
+    name: Electronics
+    color: "#7DB544"
+    cam: [ 1, -6.6, 4.6 ]
+    at: [ 3.9, 0.1, 0.55 ]
+    tall:
+      cam: [ -2.6, -0.8, 9.6 ]
+      at: [ 4, 0.1, 0.4 ]
+    also: [ cerbo-gx, autopilot-acu, gx-touch ]
+    tags:
+      - chartplotter
+      - autopilot-control-p70s
+      - cortex-handset
+      - i70s-display
+      - depth-transducer
+      - fusion-stereo
+      - cortex-m1
+      - ev-1-core-pack
+      - tank-level-sensor
+    modes_label: Electronics views
+    modes:
+      - id: below
+        name: Below deck
+      - id: mast
+        name: Mast
+        cam: [ 13, -13.6, 5.9 ]
+        at: [ 6.8, 0, 4.4 ]
+        tall:
+          cam: [ 15.5, -16.5, 6.6 ]
+          at: [ 6.6, 0, 4.7 ]
+        tags: [ wind-transducer, radar, chartplotter, itc-5-converter ]
+  - id: tackle
+    name: Anchoring
+    color: "#8F7BE8"
+    cam: [ 6.3, 7.6, 3.6 ]
+    at: [ 6.2, 0.3, 0.7 ]
+    tall:
+      cam: [ -0.6, 0.9, 12.3 ]
+      at: [ 7.15, 0.2, 0.4 ]
+    also: [ safetyhub-150-fuse-block ]
+    tags: [ windlass-gypsy, anchor, deck-switch, windlass-contactor, maxwell-breaker, safetyhub-150-fuse-block ]
+xray:
+  name: Everything inside
+  cam: [ 3, -10.2, 5 ]
+  at: [ 4.4, 0, 1.1 ]
+  tall:
+    cam: [ -5.6, -2, 12.4 ]
+    at: [ 4.9, 0, 0.4 ]
+  also: [ swim-platform ]
+focusable: [ propulsion, steering, electrical, plumbing, tackle, electronics ]
+hull_xray:
+  keel: 0.5
+  rudder: 0.5
+  cockpit-sole: 0.2
+circuits:
+  ac:
+    - shore-power-inlet
+    - ac-panel
+    - ac-cable
+    - microwave
+    - isotemp-water-heater
+    - inverter-outlet
+    - galley-outlet-shore-only
+  both: [ multiplus-inverter-charger ]
+mast: [ radar, wind-transducer, radar-cable ]

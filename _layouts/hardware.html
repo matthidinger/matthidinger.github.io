@@ -1,0 +1,17 @@
+---
+layout: dusk-page
+main_class: hw-main
+stylesheet: /assets/css/hardware.css
+stylesheets: [/assets/css/hardware-viewer.css]
+---
+{%- comment -%}
+  Hardware (/hardware/...): Matt's boat and house projects. Every page is complete as HTML; assets/js/hardware/page.js adds the
+  3D model, the scrolling stories and the sliders on top. `hw:` in a page's front matter picks its script (index, tour, wiring);
+  project pages (_layouts/hardware-project.html) leave it out.
+  Content: _pages/hardware/*.md and _data/hardware/*.yml, maintained with the tools in _hardware-tools/ (see its README).
+{%- endcomment -%}
+<div class="hw" data-hw-page="{{ page.hw | default: 'project' }}">
+{{ content }}
+</div>
+{% include hardware/data.html %}
+<script type="module" src="{{ '/assets/js/hardware/page.js' | relative_url }}"></script>

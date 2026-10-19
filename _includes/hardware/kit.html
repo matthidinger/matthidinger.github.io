@@ -1,0 +1,6 @@
+{%- comment -%} "What went in": a project's kit list. Param: kit ([{label, value, url}]). {%- endcomment -%}
+<dl class="vx-kit">
+  {%- for k in include.kit %}
+  <div><dt>{{ k.label }}</dt><dd>{% if k.url %}<a href="{{ k.url | escape }}" rel="noopener">{{ k.value }}<span aria-hidden="true"> ↗</span></a>{% else %}{{ k.value }}{% endif %}</dd></div>
+  {%- endfor %}
+</dl>

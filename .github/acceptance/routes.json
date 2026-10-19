@@ -5,6 +5,9 @@
     "https://www.matthidinger.com",
     "http://www.matthidinger.com"
   ],
+  "mediaPrefixes": [
+    "https://matthidingerpreviews.z5.web.core.windows.net/media/hardware/"
+  ],
   "build": {
     "productionShape": {
       "talks/index.html": [
@@ -92,6 +95,11 @@
           "name": "home nav to Talks",
           "click": ".dk-nav a[href$=\"/talks/\"]",
           "expectPath": "/talks/"
+        },
+        {
+          "name": "home nav to Hardware",
+          "click": ".dk-nav a[href$=\"/hardware/\"]",
+          "expectPath": "/hardware/"
         },
         {
           "name": "home latest post",
@@ -506,6 +514,164 @@
       },
       "absentText": [
         "Facebook"
+      ]
+    },
+    {
+      "id": "hardware",
+      "path": "/hardware/",
+      "purpose": "Hardware index: three picks, the boat in 3D, the shed's design-to-built slider and every project by group; photos come from the media host",
+      "title": "Hardware",
+      "h1": "Hardware",
+      "text": [
+        "NONSENSE, inside out",
+        "Stylised model, not to scale.",
+        "Drag from the SketchUp model to the real thing.",
+        "Windlass",
+        "Workshop shed"
+      ],
+      "selectors": {
+        ".dk-nav a[aria-current][href$=\"/hardware/\"]": 1,
+        ".posters a.poster": 3,
+        ".posters img": 3,
+        ".project-log a.row": 10,
+        ".dk-sig": 1,
+        ".dk-foot-scene": 1
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"facebook.com\"], a[href*=\"plus.google.com\"]": 0,
+        "a[href*=\"photos.google.com\"], a[href*=\"photos.app.goo.gl\"]": 0,
+        ".code-copy": 0
+      },
+      "absentText": [
+        "Facebook"
+      ],
+      "interactions": [
+        {
+          "name": "hardware pick to Windlass",
+          "click": ".posters a.poster[href$=\"/hardware/windlass/\"]",
+          "expectPath": "/hardware/windlass/"
+        },
+        {
+          "name": "hardware take the tour",
+          "click": "a.mix-cta[href$=\"/hardware/tour/\"]",
+          "expectPath": "/hardware/tour/"
+        },
+        {
+          "name": "hardware back to home",
+          "click": ".dk-sig",
+          "expectPath": "/"
+        }
+      ]
+    },
+    {
+      "id": "hardware-windlass",
+      "path": "/hardware/windlass/",
+      "purpose": "Hardware project page: cover, step-by-step story, kit, 3D demo and pager; photos come from the media host",
+      "title": "Windlass",
+      "h1": "Windlass",
+      "text": [
+        "There was no windlass before",
+        "Maxwell RC10-8"
+      ],
+      "selectors": {
+        ".dk-nav a[aria-current][href$=\"/hardware/\"]": 1,
+        ".pj-cover img": 1,
+        ".pj-beat": 5,
+        ".pj-crumb": 1
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        "link[href$=\"/assets/css/main.css\"]": 0,
+        "a[href*=\"photos.google.com\"], a[href*=\"photos.app.goo.gl\"]": 0,
+        ".code-copy": 0
+      },
+      "interactions": [
+        {
+          "name": "project back to Hardware",
+          "click": ".pj-crumb",
+          "expectPath": "/hardware/"
+        },
+        {
+          "name": "project next",
+          "click": ".pj-pager a.next",
+          "expectPath": "/hardware/swim/"
+        }
+      ]
+    },
+    {
+      "id": "hardware-shed",
+      "path": "/hardware/shed/",
+      "purpose": "House project with a design-to-built slider and a photo story",
+      "title": "Workshop shed",
+      "h1": "Workshop shed",
+      "selectors": {
+        ".pj-beat": 5,
+        "input[type=\"range\"]": 1
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        "a[href*=\"photos.google.com\"], a[href*=\"photos.app.goo.gl\"]": 0,
+        ".code-copy": 0
+      },
+      "interactions": [
+        {
+          "name": "project previous",
+          "click": ".pj-pager a.prev",
+          "expectPath": "/hardware/victron/"
+        }
+      ]
+    },
+    {
+      "id": "hardware-tour",
+      "path": "/hardware/tour/",
+      "purpose": "Boat tour: every boat project bow to stern beside the 3D model",
+      "title": "Boat tour",
+      "h1": "A walk through the boat",
+      "text": [
+        "projects, from the bow to the stern",
+        "That's the boat"
+      ],
+      "selectors": {
+        ".mix-ch[data-project]": 8,
+        ".mix-ch-index a": 8
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        "a[href*=\"photos.google.com\"], a[href*=\"photos.app.goo.gl\"]": 0,
+        ".code-copy": 0
+      },
+      "interactions": [
+        {
+          "name": "tour stop opens its project",
+          "click": "#stop-windlass .mix-open",
+          "expectPath": "/hardware/windlass/"
+        }
+      ]
+    },
+    {
+      "id": "hardware-wiring",
+      "path": "/hardware/wiring/",
+      "purpose": "Wiring schematic linked to the 3D model; each circuit is listed as text without JavaScript",
+      "title": "How NONSENSE is wired",
+      "h1": "How NONSENSE is wired",
+      "text": [
+        "Stylised, not a wiring guide"
+      ],
+      "selectors": {
+        ".mix-crumbs a": 2
+      },
+      "maxSelectors": {
+        ".masthead": 0,
+        ".code-copy": 0
+      },
+      "interactions": [
+        {
+          "name": "wiring to the Victron project",
+          "click": ".mix-crumbs a[href$=\"/hardware/victron/\"]",
+          "expectPath": "/hardware/victron/"
+        }
       ]
     }
   ]

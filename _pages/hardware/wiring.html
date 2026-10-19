@@ -1,0 +1,48 @@
+---
+title: How NONSENSE is wired
+layout: hardware
+hw: wiring
+permalink: /hardware/wiring/
+stylesheets: [/assets/css/hardware-wiring.css]
+excerpt: The DC and AC wiring on NONSENSE, as a schematic linked to the 3D model.
+---
+{%- comment -%}
+  The wiring schematic beside the 3D model (wiring-page.js, schematic.js). Picking on either side selects on the other; the circuit
+  and the selected node are kept in the address (?c=ac&n=micro) so a link opens on the same part. Data: _data/hardware/wiring.yml.
+  Without JavaScript each circuit is listed as text.
+{%- endcomment -%}
+<section class="vx-systems mix-wiring" aria-labelledby="hw-wiring-h1">
+  <div class="hw-width">
+    <nav class="mix-crumbs" aria-label="Breadcrumbs">
+      <a class="pj-crumb" href="{{ '/hardware/' | relative_url }}"><span aria-hidden="true">←</span> Hardware</a>
+      <a class="pj-crumb ghost" href="{{ '/hardware/victron/' | relative_url }}">Victron lithium upgrade</a>
+    </nav>
+    <div class="block-head">
+      <div><p class="kicker">Boat / Electrical</p><h1 id="hw-wiring-h1">{{ page.title }}</h1></div>
+      <p class="hint hw-live-only">Tap a fuse or a part on either side and the other follows.</p>
+    </div>
+    <div class="vx-tabs" role="group" aria-label="Circuit" hidden>
+      {%- for sh in site.data.hardware.wiring.sheets %}
+      <button type="button" data-c="{{ sh.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ sh.name }}</button>
+      {%- endfor %}
+    </div>
+    <div class="vx-sys-grid">
+      <div class="vx-schem">
+        <div class="hw-circuits">
+          {%- for sh in site.data.hardware.wiring.sheets %}
+          <section aria-labelledby="hw-c-{{ sh.id }}">
+            <h2 class="pj-h" id="hw-c-{{ sh.id }}">{{ sh.name }}</h2>
+            <ul>
+              {%- for nd in sh.nodes %}{% if nd.title %}
+              <li><b>{{ nd.title }}</b>{% if nd.rating %} · {{ nd.rating }}{% endif %}{% if nd.sub %} · {{ nd.sub }}{% endif %}</li>
+              {%- endif %}{% endfor %}
+            </ul>
+          </section>
+          {%- endfor %}
+        </div>
+      </div>
+      <div class="vx-stage" hidden></div>
+    </div>
+    <p class="vx-note">Stylised, not a wiring guide. Dashed lines are assumed routes.</p>
+  </div>
+</section>

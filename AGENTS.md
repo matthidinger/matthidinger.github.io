@@ -28,6 +28,8 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
 | Every other page (Dusk reading shell) | `_layouts/dusk-page.html` (wraps `single`/`archive`), `_includes/dusk/` | — |
 | Navigation, social links, author and UI text | `_data/navigation.yml`, `_data/social.yml`, `_config.yml` | — |
 | Images | `images/` | `/images/...` |
+| Hardware (boat and house projects, 3D model) | `_pages/hardware/`, `_data/hardware/`, `_layouts/hardware*.html`, `_includes/hardware/`, `assets/{css,js,models}/hardware*`; tools and how-to in `_hardware-tools/README.md` | `/hardware/...` |
+| Hardware photos | Not in the repo: served from `media/hardware/` on the approved preview origin (`_data/hardware/media.yml`). Only Matt uploads them | — |
 
 To show a talk or other video in a post, use `{% include video.html youtube="ID" title="..." %}` (or `vimeo="ID"`; optional `poster="/images/..."` and `caption="..."`). It loads nothing from the video host until the reader presses play. Use only real video IDs and titles.
 
@@ -137,6 +139,7 @@ Only post a private-header deep link in a public PR if Matt has approved disclos
 
 - Some old posts overflow horizontally on mobile because of long unbroken identifiers. This is report-only unless `--ux` is used.
 - Screenshots are cut off at 5000px. Third-party widgets/CDNs are blocked during checks.
+- The Hardware 3D model needs WebGL. Where Chromium has none, the viewer says the model couldn't load and the checks still pass, so look for that message when inspecting screenshots.
 - `inspect.mjs` records the agent's statement that it viewed each image, bound to the image hashes. It cannot prove who looked.
 - `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands, inline node scripts (`node -e/--eval/-p/--print`), absolute-looking node arguments, and absolute executable paths (run installed tools by name through `PATH`). Because it reads shell text, a heredoc line that begins with `/` (e.g. a `/*` comment) also trips it; write such files with the edit tool. Put scripts in checkout-rooted helper files and use checkout-relative file arguments. Pass route IDs from `routes.json`, or keep non-filesystem URL routes inside the helper/configuration: `node probe.mjs /archive/...` otherwise looks like outside-checkout filesystem access and stalls unattended work. Do not request broader access to fix a route-expression problem. The hook only ever denies or stays silent; ordinary permitted commands still use normal permission handling. It is a hygiene guard, not a security sandbox or full shell parser.
 
