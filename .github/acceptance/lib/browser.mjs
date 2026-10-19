@@ -40,6 +40,20 @@ export async function inkRatio(browser, png) {
   }
 }
 
+// Runs in the page: scroll down like a reader so rendered loading="lazy" images are requested, then back
+// to the top. Returns how many such images the page has; pages without any are left untouched.
+async function readThrough() {
+  const lazy = [...document.images].filter((i) => i.loading === 'lazy' && i.getClientRects().length).length;
+  if (!lazy) return 0;
+  const step = Math.max(200, Math.floor(innerHeight * 0.75));
+  for (let y = 0, n = 0; y < document.documentElement.scrollHeight && n < 200; y += step, n++) {
+    scrollTo({ top: y, behavior: 'instant' });
+    await new Promise((r) => setTimeout(r, 60));
+  }
+  scrollTo({ top: 0, behavior: 'instant' });
+  return lazy;
+}
+
 // Runs in the page. Kept dependency-free so it can be serialized by Playwright.
 function inspectPage(spec) {
   const visible = (el) => {
@@ -65,7 +79,9 @@ function inspectPage(spec) {
     try { return s.href && new URL(s.href).origin === location.origin && s.cssRules.length > 0; } catch { return false; }
   }).length;
   const brokenImages = [...document.images]
-    .filter((i) => i.currentSrc && new URL(i.currentSrc).origin === location.origin)
+    .filter((i) => i.currentSrc && (new URL(i.currentSrc).origin === location.origin || (spec.media || []).some((m) => i.currentSrc.startsWith(m))))
+    // A lazy image that is not rendered (e.g. inside display:none) is never requested and no reader sees it.
+    .filter((i) => !(i.loading === 'lazy' && !i.getClientRects().length))
     .filter((i) => !i.complete || i.naturalWidth === 0)
     .map((i) => new URL(i.currentSrc).pathname);
   const overflowPx = Math.max(0, doc.scrollWidth - vw);
@@ -287,13 +303,30 @@ export async function checkCopyCode({ newContext, url, spec, viewport }) {
   return out;
 }
 
-export async function checkRoute(browser, { origin, prefix, route, viewport, outDir, origins, strictOverflow, label }) {
+// Media prefixes (routes.json mediaPrefixes) are the only URLs outside the revision prefix a page may load:
+// absolute http(s) folders that hold photos kept out of the repo. Each must load and decode like the site's own.
+export function checkMediaPrefixes(media, origin, prefix) {
+  for (const m of media) {
+    let u;
+    try { u = new URL(m); } catch { u = null; }
+    if (!u || !['http:', 'https:'].includes(u.protocol) || u.href !== m || u.search || u.hash || !m.endsWith('/') || u.pathname === '/'
+      || (origin + prefix + '/').startsWith(m) || m.startsWith(origin + prefix + '/')) {
+      throw new Error(`invalid mediaPrefixes entry ${JSON.stringify(m)}: needs an absolute http(s) folder URL ending in "/", outside the site root and the revision prefix`);
+    }
+  }
+  return media;
+}
+
+export async function checkRoute(browser, { origin, prefix, route, viewport, outDir, origins, media = [], strictOverflow, label }) {
   const failures = [];
   const warnings = [];
   const external = new Set();
   const prodRe = originRegex(origins);
+  const isMedia = (u) => media.some((m) => u.startsWith(m));
+  const where = (u) => (isMedia(u) ? u : new URL(u).pathname);
   const routeRequests = (r) => {
     const u = r.request().url();
+    if (isMedia(u)) return r.continue();
     if (u.startsWith(origin + '/')) {
       const p = new URL(u).pathname;
       if (p === prefix || p.startsWith(prefix + '/')) return r.continue();
@@ -330,19 +363,38 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
       else failures.push(`page error: ${msg}`);
     });
     page.on('response', (res) => {
-      if (res.url().startsWith(origin + '/') && res.status() >= 400) failures.push(`HTTP ${res.status()} ${new URL(res.url()).pathname}`);
+      if ((res.url().startsWith(origin + '/') || isMedia(res.url())) && res.status() >= 400) failures.push(`HTTP ${res.status()} ${where(res.url())}`);
     });
     page.on('requestfailed', (req) => {
-      if (req.url().startsWith(origin + '/')) failures.push(`request failed ${new URL(req.url()).pathname}: ${req.failure()?.errorText}`);
+      if (req.url().startsWith(origin + '/') || isMedia(req.url())) failures.push(`request failed ${where(req.url())}: ${req.failure()?.errorText}`);
     });
+    // networkidle fires once per document; this lets the read-through below wait for what scrolling started.
+    const inflight = new Set();
+    page.on('request', (r) => inflight.add(r));
+    page.on('requestfinished', (r) => inflight.delete(r));
+    page.on('requestfailed', (r) => inflight.delete(r));
+    const settle = async (quietMs = 500, capMs = 15000) => {
+      const end = Date.now() + capMs;
+      let quietSince = Date.now();
+      while (Date.now() < end) {
+        if (inflight.size) quietSince = Date.now();
+        else if (Date.now() - quietSince >= quietMs) return true;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return false;
+    };
 
     const url = origin + prefix + route.path;
     const resp = await page.goto(url, { waitUntil: 'load' });
     if (!resp || resp.status() !== 200) failures.push(`document status ${resp ? resp.status() : 'none'} for ${route.path}`);
     await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => warnings.push('network did not go idle within 15s'));
     await page.evaluate(() => document.fonts.ready.then(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))));
+    if (await page.evaluate(readThrough)) {
+      if (!(await settle())) warnings.push('network did not settle within 15s after scrolling through lazy images');
+      await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
+    }
 
-    const info = await page.evaluate(inspectPage, { selectors: route.selectors, maxSelectors: route.maxSelectors });
+    const info = await page.evaluate(inspectPage, { selectors: route.selectors, maxSelectors: route.maxSelectors, media });
     const assertions = [];
     const assert = (name, ok, detail) => { assertions.push({ name, ok, detail }); if (!ok) failures.push(`${name}: ${detail}`); };
     if (route.title) assert('title', info.title.includes(route.title), `expected "${route.title}" in "${info.title}"`);
@@ -353,7 +405,7 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
     for (const [sel, max] of Object.entries(route.maxSelectors || {})) assert(`selector ${sel} <= ${max}`, info.counts[sel] <= max, `found ${info.counts[sel]}`);
     assert('visible text', info.textLength >= (route.minText || 100), `${info.textLength} chars`);
     assert('site stylesheet loaded', info.sheets > 0, `${info.sheets} same-origin stylesheets with rules`);
-    assert('images loaded', info.brokenImages.length === 0, info.brokenImages.length ? info.brokenImages.slice(0, 5).join(', ') : 'all same-origin images decoded');
+    assert('images loaded', info.brokenImages.length === 0, info.brokenImages.length ? info.brokenImages.slice(0, 5).join(', ') : `all same-origin${media.length ? ' and media' : ''} images decoded`);
     assert('code/table blocks scrollable', info.unscrollable.length === 0, info.unscrollable.length ? info.unscrollable.join(', ') : `${info.wideBlocks}/${info.blocks} wide blocks scroll`);
     if (info.overflowPx > 1) {
       const msg = `page-level horizontal overflow ${info.overflowPx}px (${info.offenders.join(', ') || 'unknown element'})`;
@@ -377,7 +429,10 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
         await page.evaluate(() => document.fonts.ready);
         const target = page.locator(step.click).locator('visible=true').first();
         if (step.expectPath) {
-          const [nav] = await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), target.click()]);
+          // Wait for a real document load, not the first navigation event: pages may save state or rewrite
+          // their URL with the History API on click, a same-document navigation with no response.
+          const isDoc = (r) => r.request().isNavigationRequest() && r.frame() === page.mainFrame() && !(r.status() >= 300 && r.status() < 400);
+          const [nav] = await Promise.all([page.waitForResponse(isDoc), page.waitForEvent('load'), target.click()]);
           const got = new URL(page.url()).pathname;
           const ok = got === prefix + step.expectPath && nav && nav.status() === 200;
           interactions.push({ name, ok, detail: `navigated to ${got.replace(prefix, '') || '/'} (${nav ? nav.status() : 'no response'})` });
@@ -420,13 +475,14 @@ export async function checkRoute(browser, { origin, prefix, route, viewport, out
 }
 
 export async function runChecks({ origin, prefix, config, outDir, executablePath, strictOverflow = false, label = '' }) {
+  const media = checkMediaPrefixes(config.mediaPrefixes || [], origin, prefix);
   const browser = await chromium.launch({ executablePath: findChromium(executablePath)});
   const results = [];
   try {
     for (const route of config.routes) {
       for (const viewport of config.viewports) {
         try {
-          results.push(await checkRoute(browser, { origin, prefix, route, viewport, outDir, origins: config.productionOrigins, strictOverflow, label }));
+          results.push(await checkRoute(browser, { origin, prefix, route, viewport, outDir, origins: config.productionOrigins, media, strictOverflow, label }));
         } catch (e) {
           results.push({ route: route.id, path: route.path, viewport: viewport.name, failures: [`check crashed: ${e.message.split('\n')[0]}`], passed: false });
         }

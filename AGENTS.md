@@ -84,14 +84,14 @@ Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-
 - **Prefix rewrite.** The preview is served under the URL prefix `/matthidinger.github.io/pr-N/FULL_SHA/` (no `/site` segment). Compiled HTML/CSS URL attributes that point at production or the site root are rewritten into that prefix. Text inside `pre`/`code`/`script`/`style` is never changed. No CSS or content is injected.
 - **Browser checks.** Each route in `routes.json` is checked at desktop (1280px) and mobile (390px) widths with Chromium:
   - document status 200, the expected title/h1/text, and minimum counts of real elements (code blocks, tables, images)
-  - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests
+  - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests. Lazy images are scrolled into view the way a reader would before images are checked; lazy images that never render (e.g. inside `display:none`) are skipped
   - no uncaught page errors
-  - no requests to production or outside the prefix (third-party requests are blocked and listed)
+  - no requests to production or outside the prefix (third-party requests are blocked and listed). The one exception is the top-level `mediaPrefixes` in `routes.json`: absolute HTTPS folders for photos kept out of the repo, which pages may load. Their images must load and decode like same-origin ones, and every run fetches them from the real host, so new photos must be published before acceptance can pass
   - wide code and tables scroll inside their own box
   - the screenshot is not blank
   - page-level horizontal overflow is a warning, or a failure with `--ux`
   - `copyCode` (`{min}`) on blog-post routes: every nonempty fenced block (and nothing else) gets a real `<button type="button">` with a visible `:focus-visible` ring; Enter, Space and click/tap each copy the exact `code` text (whitespace and newlines, no label or button text) to the clipboard and announce success in a polite live region; a denied or unavailable clipboard announces failure, never success, and leaves the code readable and selectable; with JavaScript disabled the code is readable and scrollable with no buttons. `maxSelectors: {".code-copy": 0}` keeps buttons off non-post pages
-  - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot)
+  - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot; a click counts as navigating only when a new document loads, so `history.replaceState`/`pushState` calls don't end the wait early)
   - screenshots show the real UI. Never hide a defect in the harness; if a capture looks wrong, reproduce it with real browser actions (e.g. a viewport change) and fix the site
 - **Readiness.** Every gate must pass:
   - a deliverable passing report, a clean tree, and HEAD equal to the PR head and the evidence SHA
