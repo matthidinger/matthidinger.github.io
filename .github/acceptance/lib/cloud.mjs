@@ -51,7 +51,7 @@ export function sitePath(rel) {
   ensure(!rel.split('/').some((part) => part.startsWith('.') || /^(?:AGENTS\.md|CLAUDE\.md|Gemfile(?:\.lock)?|package(?:-lock)?\.json|node_modules|vendor|_config.*|_posts|_layouts|_includes|_sass|_data|src)$/i.test(part)),
     `source/setup file in public site: ${rel}`);
   ensure(!/\.(?:ya?ml|md|markdown|mjs|cjs|ts|tsx|jsx|rb|py|sh|ps1|pem|key|pfx|env|lock|map)$/i.test(rel), `non-site file: ${rel}`);
-  ensure(rel === 'CNAME' || PUBLIC_VENDOR_STYLES.has(rel) || /\.(?:html?|css|js|json|xml|txt|svg|png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|eot|pdf)$/i.test(rel), `unsupported public asset type: ${rel}`);
+  ensure(rel === 'CNAME' || PUBLIC_VENDOR_STYLES.has(rel) || /\.(?:html?|css|js|json|xml|txt|svg|png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|eot|pdf|glb)$/i.test(rel), `unsupported public asset type: ${rel}`);
   ensure(rel !== RECEIPT_FILE, 'receipt name is reserved');
   return rel;
 }
