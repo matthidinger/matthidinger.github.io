@@ -13,7 +13,7 @@ export const contentType = (rel) => ({
   '.svg': 'image/svg+xml', '.png': 'image/png', '.avif': 'image/avif',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp',
   '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2', '.ttf': 'font/ttf',
-  '.eot': 'application/vnd.ms-fontobject', '.otf': 'font/otf', '.pdf': 'application/pdf',
+  '.eot': 'application/vnd.ms-fontobject', '.otf': 'font/otf', '.pdf': 'application/pdf', '.glb': 'model/gltf-binary',
 }[path.extname(rel).toLowerCase()] || 'application/octet-stream');
 
 export function azureStore() {

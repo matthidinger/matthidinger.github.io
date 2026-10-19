@@ -100,8 +100,10 @@ test('paths reject traversal, encodings, Windows names, duplicate separators and
   for (const rel of ['.git/config', '.github/workflows/a.yml', '.env', 'assets/.env', 'AGENTS.md', '_config.yml',
     'Gemfile.lock', 'package.json', 'package-lock.json', 'assets/source.ts', 'tools/run.ps1', 'node_modules/a.js', RECEIPT_FILE])
     assert.throws(() => sitePath(rel), undefined, rel);
-  for (const rel of ['CNAME', 'index.html', 'assets/css/main.css', 'archive/2011/a-post/index.html', 'images/Boat 1.png'])
+  for (const rel of ['CNAME', 'index.html', 'assets/css/main.css', 'archive/2011/a-post/index.html', 'images/Boat 1.png', 'assets/models/boat.glb'])
     assert.equal(sitePath(rel), rel);
+  for (const rel of ['assets/models/boat.gltf', 'assets/models/boat.bin', 'assets/models/boat.blend'])
+    assert.throws(() => sitePath(rel), /unsupported public asset type/, rel);
 });
 
 test('candidate admits the existing public Font Awesome assets, not arbitrary stylesheet sources', (t) => {
@@ -336,6 +338,7 @@ test('immutable publishing writes receipt last, correct MIME types, exact bytes 
   assert.equal(store.writes.find((x) => x.name.endsWith('/index.html')).type, 'text/html; charset=utf-8');
   assert.equal(contentType('x.css'), 'text/css; charset=utf-8');
   assert.equal(contentType('x.js'), 'text/javascript; charset=utf-8');
+  assert.equal(contentType('x.glb'), 'model/gltf-binary');
   const count = store.writes.length;
   await publishImmutable(args);
   assert.equal(store.writes.length, count);
