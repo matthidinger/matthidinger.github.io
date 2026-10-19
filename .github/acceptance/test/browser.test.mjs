@@ -182,3 +182,11 @@ test('click interactions verify navigation target and revealed elements', opts, 
   assert.ok(has(bad, /interaction wrong: expected \/next\//));
   assert.ok(has(bad, /interaction dead/));
 });
+
+test('streamed fetch reads of site files complete without failures', opts, async () => {
+  // three.js's model loader reads fetch bodies as streams; Chromium reported those as net::ERR_ABORTED
+  // when the fixture server sent no-store, though real hosts send cacheable responses.
+  const read = '<script>fetch("big.bin").then(function(r){var rd=r.body.getReader();(function pump(){return rd.read().then(function(x){if(!x.done)return pump()})})()})</script>';
+  const res = await check({ 'index.html': page(GOOD).replace('</body>', read + '</body>'), 'big.bin': Buffer.alloc(1 << 20, 7) });
+  assert.deepEqual(res.failures, []);
+});

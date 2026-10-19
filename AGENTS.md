@@ -88,7 +88,7 @@ Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-
   - document status 200, the expected title/h1/text, and minimum counts of real elements (code blocks, tables, images)
   - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests. Lazy images are scrolled into view the way a reader would before images are checked; lazy images that never render (e.g. inside `display:none`) are skipped
   - no uncaught page errors
-  - no requests to production or outside the prefix (third-party requests are blocked and listed). The one exception is the top-level `mediaPrefixes` in `routes.json`: absolute HTTPS media bases (the Hardware photos) that pages may load. Their images must load and decode like same-origin ones, and every run fetches them from the real host, so new photos must be published before acceptance can pass
+  - no requests to production or outside the prefix (third-party requests are blocked and listed). The one exception is the top-level `mediaPrefixes` in `routes.json`: absolute HTTPS folders for photos kept out of the repo, which pages may load. Their images must load and decode like same-origin ones, and every run fetches them from the real host, so new photos must be published before acceptance can pass
   - wide code and tables scroll inside their own box
   - the screenshot is not blank
   - page-level horizontal overflow is a warning, or a failure with `--ux`
