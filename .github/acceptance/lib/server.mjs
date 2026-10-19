@@ -33,7 +33,10 @@ export async function startServer(root) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       return res.end('not found');
     }
-    res.writeHead(200, { 'Content-Type': contentType(target), 'Cache-Control': 'no-store' });
+    // no-cache, not no-store: every load still revalidates, but Chromium reports streamed reads of
+    // no-store bodies (e.g. three.js's model loader) as net::ERR_ABORTED even though they complete.
+    // Real hosts (Pages, the preview container) send cacheable responses.
+    res.writeHead(200, { 'Content-Type': contentType(target), 'Cache-Control': 'no-cache' });
     fs.createReadStream(target).pipe(res);
   });
   server.keepAliveTimeout = 1000;
