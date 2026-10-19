@@ -1,0 +1,162 @@
+/* The Hardware 3D model viewer (assets/js/hardware/viewer.js). Pages size the stage; the viewer fills it. */
+:where(.b3) { min-height: 240px; }
+.b3 {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  container-type: inline-size;
+  background: linear-gradient(#eef2f6, #dfe5ec);
+  border-radius: 14px;
+  color: var(--ink, #1b2142);
+  font: 15px/1.5 var(--ui, system-ui, sans-serif);
+}
+.b3 > .b3-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.b3 *, .b3 *::before, .b3 *::after, .b3-chip { box-sizing: border-box; }
+.b3 :focus-visible { outline: 3px solid #f2a571; outline-offset: 2px; }
+.b3 button { font-family: var(--ui, system-ui, sans-serif); }
+.b3-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* loading, and the one line left when the model can't load */
+.b3-msg { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; margin: 0; padding: 0 1rem; color: var(--muted, #585c78); font-size: .9rem; text-align: center; pointer-events: none; }
+.b3[data-state="failed"] { height: auto !important; min-height: 0 !important; aspect-ratio: auto !important; background: none; border-radius: 0; overflow: visible; }
+.b3[data-state="failed"] .b3-msg { position: static; display: block; padding: .25rem 0; text-align: left; }
+
+/* labels and photo pins, placed by CSS2DRenderer and spread apart by the viewer */
+.b3-labels { position: absolute; inset: 0; z-index: 1; overflow: clip; pointer-events: none; }
+.b3-anchor { width: 0; height: 0; }
+.b3-anchor:has(> :is(.b3-pin, .b3-tag):is(:hover, :focus-visible, .b3-hot)) { z-index: 9999 !important; }
+.b3-anchor::before { content: ""; position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: #1f2937; box-shadow: 0 0 0 2px #fff; }
+.b3-lead { position: absolute; left: 0; width: 1px; background: rgba(15, 23, 42, .45); }
+.b3-tag {
+  position: absolute; left: 0; top: 0; margin: 0; padding: 4px 9px;
+  border: 1px solid rgba(0, 0, 0, .08); border-radius: 999px;
+  background: rgba(255, 255, 255, .94); box-shadow: 0 2px 8px rgba(15, 23, 42, .12);
+  color: #1f2937; font: 600 12px/1.2 var(--ui, system-ui, sans-serif); white-space: nowrap;
+  pointer-events: auto; cursor: pointer; touch-action: manipulation;
+}
+.b3-tag.b3-has-photo::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 6px; border-radius: 50%; background: var(--accent, #d9793f); vertical-align: 1px; }
+.b3-pin {
+  position: absolute; left: 0; top: 0; width: 52px; height: 52px; margin: 0; padding: 0;
+  border: 3px solid #fff; border-radius: 50%; background: #d9d1c3; box-shadow: 0 4px 16px rgba(10, 16, 38, .35);
+  pointer-events: auto; cursor: pointer; touch-action: manipulation;
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+}
+.b3-pin img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.b3-pin .b3-pin-n { position: absolute; right: -7px; top: -7px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--accent, #d9793f); color: #fff; font: 700 11px/20px var(--ui, system-ui, sans-serif); text-align: center; box-shadow: 0 0 0 2px #fff; }
+.b3-pin .b3-pin-t {
+  position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%);
+  padding: 4px 10px; border-radius: 999px; background: var(--night, #0a1026); color: var(--cream, #f3e6cf);
+  font: 600 12px/1.2 var(--ui, system-ui, sans-serif); white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity .15s;
+}
+.b3-pin:is(:hover, :focus-visible, .b3-hot) { z-index: 3; box-shadow: 0 0 0 3px #f2a571, 0 6px 20px rgba(10, 16, 38, .45); }
+.b3-pin:is(:hover, :focus-visible, .b3-hot) .b3-pin-t { opacity: 1; }
+.b3-previewing .b3-pin:not(.b3-hot, :hover, :focus-visible) { opacity: .45; }
+.b3-pin.b3-soon { display: grid; place-items: center; background: var(--night, #0a1026); color: var(--cream, #f3e6cf); font: 600 9px/1.2 var(--ui, system-ui, sans-serif); letter-spacing: .08em; text-transform: uppercase; }
+.b3-pin.b3-polaroid { width: 150px; height: auto; border-width: 6px 6px 0; border-radius: 6px; background: #fff; transform-origin: 50% 100%; }
+.b3-pin.b3-polaroid img { height: auto; aspect-ratio: 4 / 3; border-radius: 2px; background: #e7e1d6; }
+.b3-pin.b3-polaroid .b3-pin-t {
+  position: static; display: block; transform: none; opacity: 1; padding: 5px 2px 6px;
+  background: none; color: var(--ink, #1b2142); font: italic 13px/1.25 var(--serif, Georgia, serif); white-space: normal; text-align: left;
+}
+.b3-pin.b3-polaroid .b3-pin-n { display: none; }
+
+/* the part card */
+.b3-card {
+  position: absolute; z-index: 2; left: 14px; bottom: 14px;
+  width: min(340px, calc(100% - 28px)); max-height: calc(100% - 28px); overflow: auto;
+  padding: 12px 14px; border-radius: 12px; background: rgba(255, 255, 255, .96);
+  box-shadow: 0 6px 24px rgba(15, 23, 42, .16); font-size: .9rem;
+}
+.b3-card:empty { width: 0; height: 0; padding: 0; overflow: hidden; background: none; box-shadow: none; }
+.b3-card:focus { outline: none; }
+.b3-card:focus-visible { outline: 3px solid #f2a571; outline-offset: 2px; }
+.b3-card b { display: block; margin: 0 28px 2px 0; font-size: 1rem; line-height: 1.3; }
+.b3-card small { display: block; margin-right: 28px; color: var(--muted, #585c78); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; }
+.b3-card .b3-body { margin: 2px 0 0; }
+.b3-card .b3-x { position: absolute; top: 4px; right: 6px; width: 32px; height: 32px; margin: 0; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--muted, #585c78); font-size: 20px; line-height: 1; cursor: pointer; }
+.b3-card .b3-x:hover { background: rgba(27, 33, 66, .08); color: var(--ink, #1b2142); }
+.b3-card figure { margin: 10px 0 0; }
+.b3-card figure img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: #e7e1d6; }
+.b3-card figcaption { margin-top: 4px; color: var(--muted, #585c78); font-size: .78rem; }
+.b3-card .b3-buy { display: inline-block; margin-top: 6px; color: var(--link, #9a3b26); font-size: .8rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.b3-card .b3-soon-note { display: block; margin-top: 8px; color: var(--link, #9a3b26); font-size: .8rem; }
+.b3-card .b3-open,
+.b3-card .b3-act {
+  display: inline-flex; align-items: center; gap: 6px; margin: 10px 8px 0 0; padding: 7px 14px;
+  border: 1.5px solid var(--night, #0a1026); border-radius: 999px;
+  font: 600 11px/1.3 var(--ui, system-ui, sans-serif); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+}
+.b3-card .b3-open { background: var(--night, #0a1026); color: var(--cream, #f3e6cf); }
+.b3-card .b3-open:hover { border-color: var(--link, #9a3b26); background: var(--link, #9a3b26); }
+.b3-card .b3-act { background: #fff; color: var(--ink, #1b2142); }
+.b3-card .b3-act:hover { background: var(--ink, #1b2142); color: #fff; }
+@container (max-width: 520px) {
+  .b3-card { width: min(320px, calc(100% - 28px)); }
+  .b3-card figure { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 10px; align-items: center; }
+  .b3-card figure img { aspect-ratio: 1; }
+  .b3-card figcaption { margin-top: 0; }
+  .b3-card[data-dock="top"] { top: 14px; bottom: auto; }
+  .b3:has(.b3-card[data-dock="top"]) .b3-hint { visibility: hidden; }
+}
+
+/* mode buttons (Electrical circuits, Electronics views) and the pointer hint */
+.b3-seg { position: absolute; z-index: 2; left: 14px; top: 10px; display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .9); box-shadow: 0 2px 8px rgba(15, 23, 42, .12); }
+.b3-seg[hidden] { display: none; }
+.b3-seg button { position: relative; margin: 0; padding: 5px 11px; border: 0; border-radius: 999px; background: none; color: #1f2937; font: 600 .8rem/1.2 var(--ui, system-ui, sans-serif); cursor: pointer; }
+.b3-seg button[aria-pressed="true"] { background: #1f2937; color: #fff; }
+.b3-hint { position: absolute; z-index: 1; right: 14px; top: 12px; padding: 2px 8px; border-radius: 6px; background: rgba(255, 255, 255, .7); color: var(--muted, #585c78); font-size: .78rem; pointer-events: none; }
+.b3-seg:not([hidden]) ~ .b3-hint { display: none; }
+
+/* phones: the page scrolls over the model until the person chooses to explore it */
+.b3-explore,
+.b3-done {
+  position: absolute; z-index: 3; right: 12px; bottom: 12px; min-width: 44px; min-height: 44px; margin: 0; padding: 0 18px;
+  border: 0; border-radius: 999px; background: var(--night, #0a1026); color: var(--cream, #f3e6cf);
+  box-shadow: 0 4px 14px rgba(10, 16, 38, .3); font: 600 .85rem/1 var(--ui, system-ui, sans-serif); cursor: pointer;
+}
+.b3-explore[hidden], .b3-done[hidden] { display: none; }
+.b3:has(> .b3-explore) .b3-card:not(:empty) { bottom: 68px; max-height: calc(100% - 82px); }
+
+/* keyboard route to every part in the view: out of sight until it holds focus */
+.b3-parts {
+  position: absolute; z-index: 4; left: 10px; top: 10px; width: min(300px, calc(100% - 20px)); max-height: calc(100% - 20px); overflow: auto;
+  padding: 8px; border-radius: 10px; background: var(--paper, #f8f3ea); color: var(--ink, #1b2142); box-shadow: 0 6px 24px rgba(15, 23, 42, .22);
+}
+.b3-parts:not(:focus-within) { width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; box-shadow: none; }
+.b3-parts-h { margin: 0 0 4px; padding: 0 8px; color: var(--muted, #585c78); font: 600 .72rem/1.3 var(--ui, system-ui, sans-serif); letter-spacing: .08em; text-transform: uppercase; }
+.b3-parts ul { margin: 0; padding: 0; list-style: none; }
+.b3-parts li { margin: 0; padding: 0; }
+.b3-parts button { display: block; width: 100%; min-height: 36px; margin: 0; padding: 6px 8px; border: 0; border-radius: 6px; background: none; color: inherit; font: 500 .88rem/1.3 var(--ui, system-ui, sans-serif); text-align: left; cursor: pointer; }
+.b3-parts button:is(:hover, :focus-visible) { background: rgba(27, 33, 66, .08); }
+
+/* system chips, rendered into the element the page passes as `chips` */
+.b3-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.b3-chip {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 7px 14px;
+  border: 1px solid rgba(27, 33, 66, .19); border-radius: 999px; background: #fff; color: var(--ink, #1b2142);
+  font: 500 .9rem/1.2 var(--ui, system-ui, sans-serif); cursor: pointer;
+}
+.b3-chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--c, #9ca3af); }
+.b3-chip[aria-pressed="true"] { border-color: var(--ink, #1b2142); background: var(--ink, #1b2142); color: #fff; }
+.b3-chip:focus-visible { outline: 3px solid #f2a571; outline-offset: 2px; }
+
+@container (max-width: 600px) {
+  .b3-tag { font-size: 11px; }
+  .b3-pin { width: 44px; height: 44px; }
+  .b3-pin.b3-polaroid { width: 112px; }
+}
+
+/* touch: 44px hit areas, the visuals stay as they are */
+@media (pointer: coarse) {
+  .b3-tag::before, .b3-pin::before, .b3-seg button::before, .b3-chip::before, .b3-card .b3-x::before {
+    content: ""; position: absolute; left: 50%; top: 50%; width: 100%; height: 100%; min-width: 44px; min-height: 44px; transform: translate(-50%, -50%);
+  }
+  .b3-card .b3-open, .b3-card .b3-act { min-height: 44px; }
+  .b3-card .b3-buy { display: inline-flex; align-items: center; min-height: 44px; margin-top: 0; }
+  .b3-parts button { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .b3 *, .b3 *::before, .b3 *::after, .b3-chip { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

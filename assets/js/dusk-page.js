@@ -23,7 +23,12 @@
     for (let i = 0; i < Math.round(W / 22); i++) {
       stars += `<circle cx="${f(r() * W)}" cy="${f(r() ** 1.4 * H * 0.62)}" r="${f(0.5 + r() ** 3 * 1.3)}" opacity="${f(0.35 + r() * 0.5)}"/>`;
     }
-    const mx = f(W * 0.55), my = f(W <= 760 ? H * 0.6 : H * 0.32);
+    // The crescent keeps its usual spot unless header links cover it (a wrapped nav on phones); then it takes the first clear one.
+    const box = msvg.getBoundingClientRect();
+    const links = [...document.querySelectorAll('.dk-top a')].map((a) => a.getBoundingClientRect()).filter((b) => b.width);
+    const clear = ([x, y]) => links.every((b) => x + 26 < b.left - box.left || x - 26 > b.right - box.left || y + 22 < b.top - box.top || y - 22 > b.bottom - box.top);
+    const spots = W <= 760 ? [[W * 0.55, H * 0.6], [W * 0.84, H * 0.28], [W * 0.88, H * 0.6]] : [[W * 0.55, H * 0.32]];
+    const [mx, my] = (spots.find(clear) || spots[0]).map(f);
     set(msvg, 'viewBox', `0 0 ${W} ${H}`);
     msvg.innerHTML = `<rect width="${W}" height="${H}" fill="#2b3b6b"/><g fill="#fff6e0">${stars}</g>
       <mask id="dkp-mm"><circle cx="${mx}" cy="${my}" r="15" fill="#fff"/><circle cx="${f(mx + 6)}" cy="${f(my - 5)}" r="13.5" fill="#000"/></mask>

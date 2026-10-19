@@ -1,0 +1,22 @@
+{%- comment -%}
+  One Hardware photo with its size reserved. Sizes come from _data/hardware/photos.yml: key: [width, height, small width].
+  Params: key ("windlass/final"), or pj + photo (a bare photo name is the project's own; "fresh/isotemp" is used as is),
+  alt (required, "" for decorative), sizes, eager, class, attrs (extra raw attributes, e.g. data-k="1").
+  Photos are served from the absolute base in _data/hardware/media.yml (or site.hardware_media in a local build's config).
+  The small copy (-sm.jpg) is the src; the srcset offers the full photo to wide or dense screens.
+{%- endcomment -%}
+{%- if include.key -%}
+  {%- assign hwi_key = include.key -%}
+{%- elsif include.photo contains '/' -%}
+  {%- assign hwi_key = include.photo -%}
+{%- else -%}
+  {%- assign hwi_key = include.pj | append: '/' | append: include.photo -%}
+{%- endif -%}
+{%- assign hwi_dim = site.data.hardware.photos[hwi_key] -%}
+{%- assign hwi_base = site.hardware_media | default: site.data.hardware.media.base | append: hwi_key -%}
+{%- assign hwi_full = hwi_base | append: '.jpg' -%}
+<img{% if include.class %} class="{{ include.class }}"{% endif %}
+  {%- if hwi_dim[2] %} src="{{ hwi_base | append: '-sm.jpg' }}" srcset="{{ hwi_base | append: '-sm.jpg' }} {{ hwi_dim[2] }}w, {{ hwi_full }} {{ hwi_dim[0] }}w" sizes="{{ include.sizes | default: '100vw' }}"
+  {%- else %} src="{{ hwi_full }}"{% endif %}
+  {%- if hwi_dim %} width="{{ hwi_dim[0] }}" height="{{ hwi_dim[1] }}" style="--r:{{ hwi_dim[0] }}/{{ hwi_dim[1] }}"{% endif %} alt="{{ include.alt | escape }}"
+  {%- if include.eager %} fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async"{% if include.attrs %} {{ include.attrs }}{% endif %}>

@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
-import { findChromium, runChecks } from '../lib/browser.mjs';
+import { checkMediaPrefixes, findChromium, runChecks } from '../lib/browser.mjs';
 import { stagePrefixedSite } from '../lib/rewrite.mjs';
 import { startServer } from '../lib/server.mjs';
 
@@ -21,7 +21,9 @@ const GOOD = '<h1>Fixture</h1><p>' + 'Real fixture text. '.repeat(10) + '</p><di
 let chromiumPath;
 try { chromiumPath = findChromium(); } catch { /* skipped below */ }
 
-async function check(files, { route = {}, strictOverflow = false, mobile = false } = {}) {
+// media: files served from the server root, outside the revision prefix (like the photo host);
+// mediaPath: a folder on the test server listed in config.mediaPrefixes.
+async function check(files, { route = {}, strictOverflow = false, mobile = false, media = {}, mediaPath } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'acc-fixture-'));
   const site = path.join(dir, 'site');
   const files2 = { 'style.css': CSS, 'a.png': PNG, ...files };
@@ -31,9 +33,14 @@ async function check(files, { route = {}, strictOverflow = false, mobile = false
     fs.writeFileSync(path.join(site, rel), content);
   }
   stagePrefixedSite(site, path.join(dir, 'preview', PREFIX), PREFIX, ORIGINS);
+  for (const [rel, content] of Object.entries(media)) {
+    fs.mkdirSync(path.dirname(path.join(dir, 'preview', rel)), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'preview', rel), content);
+  }
   const server = await startServer(path.join(dir, 'preview'));
   const config = {
     productionOrigins: ORIGINS,
+    ...(mediaPath ? { mediaPrefixes: [server.origin + mediaPath] } : {}),
     viewports: [mobile ? { name: 'mobile', width: 390, height: 844, isMobile: true } : { name: 'desktop', width: 1000, height: 700 }],
     routes: [{ id: 'r', path: '/', title: 'Fixture', h1: 'Fixture', selectors: { pre: 1 }, ...route }],
   };
@@ -76,6 +83,15 @@ test('broken image fails', opts, async () => {
   assert.ok(has(res, /images loaded/));
 });
 
+test('lazy images are checked after a reader scroll; unrendered ones are skipped', opts, async () => {
+  const lazy = (src, style = '') => `<div style="height:3000px"></div><div style="${style}"><img loading="lazy" src="${src}" srcset="${src} 20w" sizes="20px" width="20" height="20"></div>`;
+  const ok = await check({ 'index.html': page(GOOD + lazy('/a.png') + lazy('/hidden.png', 'display:none')) });
+  assert.deepEqual(ok.failures, []);
+  const broken = await check({ 'index.html': page(GOOD + lazy('/nope.png')) });
+  assert.ok(has(broken, /HTTP 404 .*nope\.png/));
+  assert.ok(has(broken, /images loaded: .*nope\.png/));
+});
+
 test('production asset requests fail instead of being captured', opts, async () => {
   const html = page(GOOD) .replace('</body>', '<script>var i=new Image();i.src="https://matthidinger.com/x.png";document.body.appendChild(i)</script></body>');
   const res = await check({ 'index.html': html });
@@ -86,6 +102,32 @@ test('requests escaping the revision prefix fail', opts, async () => {
   const html = page(GOOD).replace('</body>', '<script>var i=new Image();i.src="/" + "escaped.png";document.body.appendChild(i)</script></body>');
   const res = await check({ 'index.html': html });
   assert.ok(has(res, /escaped preview prefix/));
+});
+
+test('listed media prefixes load outside the revision prefix and must decode', opts, async () => {
+  const html = (name) => page(GOOD).replace('</body>', `<script>var i=new Image();i.src=location.origin + "/media/hw/${name}";document.body.appendChild(i)</script></body>`);
+  const media = { 'media/hw/p.png': PNG, 'media/hw/bad.png': 'not a png', 'other/p.png': PNG };
+  const ok = await check({ 'index.html': html('p.png') }, { media, mediaPath: '/media/hw/' });
+  assert.deepEqual(ok.failures, []);
+  assert.ok(ok.assertions.some((a) => a.name === 'images loaded' && /media images decoded/.test(a.detail)));
+  const missing = await check({ 'index.html': html('nope.png') }, { media, mediaPath: '/media/hw/' });
+  assert.ok(has(missing, /HTTP 404 http:\/\/127\.0\.0\.1:\d+\/media\/hw\/nope\.png/));
+  assert.ok(has(missing, /images loaded: \/media\/hw\/nope\.png/));
+  assert.ok(has(await check({ 'index.html': html('bad.png') }, { media, mediaPath: '/media/hw/' }), /images loaded: \/media\/hw\/bad\.png/));
+  // Unlisted, the same folder is still an escape, and a listed folder does not cover its neighbours.
+  assert.ok(has(await check({ 'index.html': html('p.png') }, { media }), /escaped preview prefix: \/media\/hw\/p\.png/));
+  const other = page(GOOD).replace('</body>', '<script>var i=new Image();i.src=location.origin + "/other/p.png";document.body.appendChild(i)</script></body>');
+  assert.ok(has(await check({ 'index.html': other }, { media, mediaPath: '/media/hw/' }), /escaped preview prefix: \/other\/p\.png/));
+});
+
+test('media prefixes must be folders outside the site root and revision prefix', () => {
+  const origin = 'https://previews.example';
+  const prefix = '/repo/pr-9/' + SHA;
+  assert.deepEqual(checkMediaPrefixes(['https://previews.example/media/hw/'], origin, prefix), ['https://previews.example/media/hw/']);
+  for (const bad of ['https://previews.example/', 'https://previews.example/media/hw', 'https://previews.example/repo/',
+    `https://previews.example${prefix}/media/`, 'ftp://previews.example/media/', 'https://previews.example/media/?x=1', '/media/hw/', 'https://PREVIEWS.example/media/']) {
+    assert.throws(() => checkMediaPrefixes([bad], origin, prefix), /invalid mediaPrefixes entry/, bad);
+  }
 });
 
 test('uncaught page errors fail unless listed as known pre-existing', opts, async () => {
@@ -121,16 +163,18 @@ test('absentText and maxSelectors fail when violated', opts, async () => {
 
 test('click interactions verify navigation target and revealed elements', opts, async () => {
   const html = page(GOOD + '<a id="next" href="next/">Next</a> <a id="wrong" href="/">Home</a>'
+    + ' <a id="saving" href="next/" onclick="history.replaceState({s:1}, \'\'); history.replaceState(history.state, \'\', \'#saved\')">Saving</a>'
     + '<button id="t" onclick="document.getElementById(\'m\').style.display=\'block\'">menu</button><div id="m" style="display:none">menu</div>'
     + '<button id="dead">dead</button>');
   const files = { 'index.html': html, 'next/index.html': page(GOOD) };
   const good = await check(files, { route: { interactions: [
     { name: 'next', click: '#next', expectPath: '/next/' },
+    { name: 'history state saved on click', click: '#saving', expectPath: '/next/' },
     { name: 'menu', click: '#t', expectVisible: '#m' },
     { name: 'mobile only', click: '#missing', expectPath: '/x/', viewports: ['mobile'] },
   ] } });
   assert.deepEqual(good.failures, []);
-  assert.equal(good.interactions.length, 2);
+  assert.equal(good.interactions.length, 3);
   const bad = await check(files, { route: { interactions: [
     { name: 'wrong', click: '#wrong', expectPath: '/next/' },
     { name: 'dead', click: '#dead', expectVisible: '#m' },

@@ -1,0 +1,180 @@
+---
+layout: hardware
+---
+{%- comment -%}
+  One Hardware project (/hardware/<id>/): the cover, then the story (an intro and one beat per step), then the photos the story
+  doesn't use and links to the neighbouring projects. Everything here reads top to bottom as plain HTML. project-page.js adds a
+  sticky stage beside the beats: the 3D model, pinned where each photo was taken, or (for projects with no `story.views`) the
+  step photos crossfading on wide screens.
+{%- endcomment -%}
+{%- assign id = page.url | split: '/' | last -%}
+{%- assign h = page.hardware -%}
+{%- assign s = h.story -%}
+{%- assign c = h.compare -%}
+{%- assign media = site.hardware_media | default: site.data.hardware.media.base -%}
+{%- assign is3d = false -%}{%- if s.views -%}{%- assign is3d = true -%}{%- endif -%}
+{%- assign nsteps = s.steps | size -%}
+{%- capture compare -%}
+  {%- if c.type == 'slider' -%}
+  <div class="pj-beat-ba"><h3 class="mix-ch-h">{% if c.before_label == 'Design' %}Design / built{% else %}Before / after{% endif %}</h3>
+  {% include hardware/slider.html pj=id title=page.title c=c sizes="(max-width:760px) 92vw, 560px" %}</div>
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture links -%}
+  {%- if h.wiring -%}
+  <a class="mix-open" href="{{ '/hardware/wiring/' | relative_url }}{% if h.wiring.circuit %}?c={{ h.wiring.circuit }}{% if h.wiring.node %}&amp;n={{ h.wiring.node }}{% endif %}{% endif %}">{{ h.wiring.label }} <span aria-hidden="true">→</span></a>
+  {%- endif -%}
+  {%- if is3d and page.tour %}
+  <a class="mix-open ghost" href="{{ '/hardware/tour/' | relative_url }}#stop-{{ id }}">See it on the tour <span aria-hidden="true">→</span></a>
+  {%- endif -%}
+{%- endcapture -%}
+<article class="pj{% unless h.cover %} pj-nocover{% endunless %}">
+  <header class="pj-cover">
+    {%- if h.cover %}
+    {% include hardware/img.html pj=id photo=h.cover alt="" eager=true sizes="100vw" %}
+    {%- endif %}
+    <div class="hw-width pj-head">
+      <a class="pj-crumb" href="{{ '/hardware/' | relative_url }}"><span aria-hidden="true">←</span> Hardware</a>
+      <div>
+        <p class="kicker">{{ h.group }}</p>
+        <h1>{{ page.title }}</h1>
+        {%- if h.sub %}
+        <p class="pj-sub">{{ h.sub }}</p>
+        {%- endif %}
+      </div>
+    </div>
+  </header>
+
+  {%- if nsteps > 0 %}
+  <section class="mix-st pj-story{% unless is3d %} pj-story-photos{% endunless %}" aria-label="{{ page.title }}, step by step" data-story="{% if is3d %}model{% else %}photos{% endif %}">
+    <div class="mix-st-grid">
+      <div class="mix-st-sticky" hidden>
+        {%- if is3d %}
+        <div class="vx-stage"></div>
+        {%- else %}
+        <div class="pj-photo-stage"></div>
+        {%- endif %}
+      </div>
+      <div class="mix-st-chapters">
+        <article class="mix-ch pj-beat-intro" id="beat-start" tabindex="-1" data-name="Overview">
+          <p class="kicker">{% if is3d %}{{ h.model.where }}{% else %}{{ h.group }}{% endif %} · {{ nsteps }} steps</p>
+          <h2>Step by step</h2>
+          {%- if h.blurb %}
+          <p class="mix-ch-lede">{{ h.blurb }}</p>
+          {%- endif %}
+          {%- if h.soon %}
+          <p><span class="vx-soon">{{ h.soon }}</span></p>
+          {%- endif %}
+          {%- if h.kit %}
+          <div class="mix-ch-kit"><h3 class="mix-ch-h">What went in</h3>{% include hardware/kit.html kit=h.kit %}</div>
+          {%- endif %}
+          {{ compare }}
+          <h3 class="mix-ch-h">The steps</h3>
+          <ol class="pj-steps">
+            {%- for st in s.steps %}
+            <li><a href="#beat-{{ st.id }}"><span aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> <b>{{ st.caption }}</b></a></li>
+            {%- endfor %}
+          </ol>
+          {%- if links != '' %}
+          <p class="pj-beat-links">{{ links }}</p>
+          {%- endif %}
+          <p class="mix-ch-scroll" aria-hidden="true">Scroll <span>↓</span></p>
+        </article>
+        {%- for st in s.steps %}
+        {%- assign v = s.views[st.view] %}
+        {%- assign alt = page.title | append: ': ' | append: st.caption %}
+        <article class="mix-ch pj-beat" id="beat-{{ st.id }}" tabindex="-1" data-name="{{ st.caption | escape }}">
+          <p class="kicker">Step {{ forloop.index | prepend: '0' | slice: -2, 2 }}{% if v.where %} · {{ v.where }}{% endif %}</p>
+          <h2>{{ st.caption }}</h2>
+          {%- if st.photo %}
+          <figure class="pj-shot">{% include hardware/img.html pj=id photo=st.photo alt=alt sizes="(max-width:760px) 92vw, 520px" %}</figure>
+          {%- endif %}
+          {%- if st.more %}
+          <div class="pj-more">
+            {%- for m in st.more %}
+            <figure>{% include hardware/img.html pj=id photo=m.photo alt=m.caption sizes="(max-width:760px) 45vw, 150px" %}<figcaption>{{ m.caption }}</figcaption></figure>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+          {%- if st.text %}
+          <p class="mix-ch-lede">{{ st.text }}</p>
+          {%- endif %}
+          {%- if st.demo == 'anchor' %}
+          <p class="pj-demo" hidden><button type="button" class="mix-open" data-demo="anchor" aria-pressed="false">Lower the anchor</button></p>
+          {%- endif %}
+          {%- if st.about %}
+          <div class="pj-abouts"><h3 class="mix-ch-h">In the model</h3>
+            {%- for a in st.about %}
+            {%- assign part = site.data.hardware.parts[a] %}
+            {%- if part %}
+            <div class="pj-about"><b>{{ part.title }}</b>
+              {%- if part.body %}<p>{{ part.body }}</p>{% endif %}
+              {%- if part.url %}<a class="pj-buy" href="{{ part.url | escape }}" rel="noopener">Product page<span class="hw-sr">: {{ part.title }}</span><span aria-hidden="true"> ↗</span></a>{% endif %}</div>
+            {%- endif %}
+            {%- endfor %}
+          </div>
+          {%- endif %}
+        </article>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+  {%- endif %}
+
+  <div class="hw-width pj-body">
+    {%- if nsteps == 0 %}
+    <div class="pj-intro">
+      {%- if h.blurb %}<p class="blurb">{{ h.blurb }}</p>{% endif %}
+      {%- if h.soon %}<p><span class="vx-soon">{{ h.soon }}</span></p>{% endif %}
+      {%- if h.kit %}<h2 class="pj-h">What went in</h2>{% include hardware/kit.html kit=h.kit %}{% endif %}
+      {{ compare }}
+      {%- if links != '' %}<p class="pj-beat-links">{{ links }}</p>{% endif %}
+    </div>
+    {%- endif %}
+    {%- comment -%} Photos the story doesn't show: the compare steps, then the gallery, once each. {%- endcomment -%}
+    {%- assign used = '|' %}
+    {%- for st in s.steps %}
+      {%- assign used = used | append: st.photo | append: '|' %}
+      {%- for m in st.more %}{% assign used = used | append: m.photo | append: '|' %}{% endfor %}
+    {%- endfor %}
+    {%- capture more -%}
+      {%- for g in c.steps %}
+        {%- assign tag = '|' | append: g.photo | append: '|' %}
+        {%- unless used contains tag %}
+          {%- assign used = used | append: g.photo | append: '|' %}
+          {%- if g.photo contains '/' %}{% assign full = g.photo %}{% else %}{% assign full = id | append: '/' | append: g.photo %}{% endif %}
+          {%- assign full = media | append: full | append: '.jpg' %}
+      <figure><a href="{{ full }}">{% include hardware/img.html pj=id photo=g.photo alt=g.caption sizes="(max-width:760px) 45vw, 240px" %}</a><figcaption>{{ g.caption }}</figcaption></figure>
+        {%- endunless %}
+      {%- endfor %}
+      {%- for g in h.gallery %}
+        {%- assign tag = '|' | append: g.photo | append: '|' %}
+        {%- unless used contains tag %}
+          {%- assign used = used | append: g.photo | append: '|' %}
+          {%- if g.photo contains '/' %}{% assign full = g.photo %}{% else %}{% assign full = id | append: '/' | append: g.photo %}{% endif %}
+          {%- assign full = media | append: full | append: '.jpg' %}
+      <figure><a href="{{ full }}">{% include hardware/img.html pj=id photo=g.photo alt=g.caption sizes="(max-width:760px) 45vw, 240px" %}</a><figcaption>{{ g.caption }}</figcaption></figure>
+        {%- endunless %}
+      {%- endfor %}
+    {%- endcapture %}
+    {%- assign more = more | strip %}
+    {%- if more != '' %}
+    <section class="pj-sec" aria-labelledby="pj-more-h">
+      <h2 class="pj-h" id="pj-more-h">More photos</h2>
+      <div class="gallery">{{ more }}</div>
+    </section>
+    {%- endif %}
+    {%- assign pjs = site.pages | where_exp: "p", "p.hardware" | sort: "order" %}
+    {%- for p in pjs %}{% if p.url == page.url %}{% assign at = forloop.index0 %}{% endif %}{% endfor %}
+    {%- assign pv = nil %}{% if at > 0 %}{% assign pvi = at | minus: 1 %}{% assign pv = pjs[pvi] %}{% endif %}
+    {%- assign nxi = at | plus: 1 %}{% assign nx = pjs[nxi] %}
+    <nav class="pj-pager" aria-label="More projects">
+      {%- if pv %}
+      <a class="prev" href="{{ pv.url | relative_url }}"><small><span aria-hidden="true">←</span> Previous</small><b>{{ pv.title }}</b></a>
+      {%- else %}<span></span>{% endif %}
+      {%- if nx %}
+      <a class="next" href="{{ nx.url | relative_url }}"><small>Next <span aria-hidden="true">→</span></small><b>{{ nx.title }}</b></a>
+      {%- else %}<span></span>{% endif %}
+    </nav>
+  </div>
+</article>

@@ -1,0 +1,116 @@
+---
+title: Hardware
+layout: hardware
+hw: index
+permalink: /hardware/
+excerpt: My boat and house projects, step by step, with a 3D model of NONSENSE, my Nonsuch 30.
+---
+{%- comment -%}
+  The Hardware index: a marquee with three picks, the boat in 3D (index-page.js), the shed's design-to-built slider and every
+  project grouped by where it lives. Without JavaScript the 3D block is just its links.
+{%- endcomment -%}
+{%- assign pjs = site.pages | where_exp: "p", "p.hardware" | sort: "order" -%}
+{%- assign touring = site.pages | where_exp: "p", "p.tour" -%}
+{%- assign shed = pjs | where_exp: "p", "p.url == '/hardware/shed/'" | first -%}
+<section class="marquee" aria-labelledby="hw-h1">
+  <div class="hero">
+    {% include hardware/img.html key="banner" alt="Sailboat at anchor with the sun behind the mast" eager=true sizes="100vw" %}
+    <div class="hw-width"><h1 id="hw-h1">Hardware</h1></div>
+  </div>
+  <div class="hw-width marquee-inner">
+    <h2 class="section-label">Selected projects</h2>
+    <ul class="posters">
+      {%- assign picks = "windlass,swim,shed" | split: "," %}
+      {%- for pick in picks %}
+      {%- assign purl = '/hardware/' | append: pick | append: '/' %}
+      {%- assign p = pjs | where: "url", purl | first %}
+      <li><a class="poster" href="{{ p.url | relative_url }}">
+        {% include hardware/img.html pj=pick photo=p.hardware.cover alt="" sizes="(max-width:760px) 76vw, 340px" %}
+        <span class="n" aria-hidden="true">0{{ forloop.index }}</span>
+        <span class="kicker">{{ p.hardware.group }}</span>
+        <h3>{{ p.title }}</h3>
+        <span class="open">View project <span aria-hidden="true">→</span></span>
+      </a></li>
+      {%- endfor %}
+    </ul>
+  </div>
+  {% include talks/fir-edge.svg %}
+</section>
+
+<section class="feature mix-inside" aria-labelledby="hw-inside">
+  <div class="hw-width">
+    <h2 class="section-label" id="hw-inside">Inside the boat</h2>
+    <div class="block vx-inset">
+      <div class="block-head">
+        <div>
+          <p class="kicker">Boat / In 3D</p>
+          <h3>NONSENSE, inside out</h3>
+          <p class="hint hw-live-only">Pick a system, or tap a photo to open its project.</p>
+        </div>
+        <a class="mix-cta" href="{{ '/hardware/tour/' | relative_url }}"><span>Take the tour</span><small>{{ touring.size }} projects, bow to stern</small><i aria-hidden="true">→</i></a>
+      </div>
+      <div class="mix-chiprow" hidden>
+        <div class="vx-chips b3-chips" role="toolbar" aria-label="Show in the model">
+          <button type="button" class="b3-chip" data-id="xray" aria-pressed="true" style="--c:#d9793f"><i></i>Projects</button>
+          {%- for sys in site.data.hardware.boat.systems %}{% unless sys.id == 'all' %}
+          <button type="button" class="b3-chip" data-id="{{ sys.id }}" aria-pressed="false" style="--c:{{ sys.color }}"><i></i>{{ sys.name }}</button>
+          {%- endunless %}{% endfor %}
+        </div>
+        <a class="mix-chiplink" href="{{ '/hardware/wiring/' | relative_url }}" hidden>Wiring diagram <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="vx-stage" hidden></div>
+      <p class="vx-note">Stylised model, not to scale.</p>
+    </div>
+  </div>
+</section>
+
+{%- if shed %}
+<section class="feature" aria-labelledby="hw-ba">
+  <div class="hw-width">
+    <h2 class="section-label" id="hw-ba">Before / after</h2>
+    <div class="block wide">
+      <div class="block-head">
+        <div><p class="kicker">Home / Design to built</p><h3>{{ shed.title }}</h3></div>
+        <p class="hint">Drag from the SketchUp model to the real thing. <a class="mix-chiplink" href="{{ shed.url | relative_url }}">Open the project <span aria-hidden="true">→</span></a></p>
+      </div>
+      {% include hardware/slider.html pj="shed" title=shed.title c=shed.hardware.compare sweep=true sizes="(max-width:1160px) 92vw, 1000px" %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="paper" aria-labelledby="hw-all">
+  <div class="hw-width">
+    <h2 class="section-label" id="hw-all">All projects</h2>
+    {%- assign groups = pjs | group_by_exp: "p", "p.hardware.group" %}
+    {%- for g in groups %}
+    <section class="project-log {{ g.name | downcase }}" aria-labelledby="hw-g-{{ g.name | downcase }}">
+      <h3 id="hw-g-{{ g.name | downcase }}">{{ g.name }}</h3>
+      <ul class="rows">
+        {%- for p in g.items %}
+        {%- assign h = p.hardware %}
+        {%- assign pid = p.url | split: '/' | last %}
+        {%- assign num = p.order | prepend: '0' | slice: -2, 2 %}
+        {%- if h.compare.type == 'slider' and h.compare.before_label == 'Design' %}{% assign label = 'Design / built' %}
+        {%- elsif h.compare.type == 'slider' %}{% assign label = 'Before / after' %}
+        {%- elsif h.story.steps %}{% assign label = 'Step by step' %}
+        {%- else %}{% assign label = h.group %}{% endif %}
+        <li><a class="row{% if h.soon %} soon{% endif %}" href="{{ p.url | relative_url }}">
+          <span class="num" aria-hidden="true">{{ num }}</span>
+          <span class="row-text">
+            {%- unless h.soon %}<span class="kicker">{{ label }}</span>{% endunless %}
+            <span class="row-title">{{ p.title }}</span>
+            {%- if h.sub %}<span class="sub">{{ h.sub }}</span>{% endif %}
+          </span>
+          {%- if h.cover %}
+          <span class="thumb">{% include hardware/img.html pj=pid photo=h.cover alt="" sizes="132px" %}</span>
+          {%- else %}
+          <span class="thumb">{{ h.soon }}</span>
+          {%- endif %}
+        </a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endfor %}
+  </div>
+</section>

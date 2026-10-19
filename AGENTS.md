@@ -28,6 +28,8 @@ Never invent a conference, talk, date, speaker credit, link or quote. If a requi
 | Every other page (Dusk reading shell) | `_layouts/dusk-page.html` (wraps `single`/`archive`), `_includes/dusk/` | — |
 | Navigation, social links, author and UI text | `_data/navigation.yml`, `_data/social.yml`, `_config.yml` | — |
 | Images | `images/` | `/images/...` |
+| Hardware (boat and house projects, 3D model) | `_pages/hardware/`, `_data/hardware/`, `_layouts/hardware*.html`, `_includes/hardware/`, `assets/{css,js,models}/hardware*`; tools and how-to in `_hardware-tools/README.md` | `/hardware/...` |
+| Hardware photos | Not in the repo: served from `media/hardware/` on the approved preview origin (`_data/hardware/media.yml`). Only Matt uploads them | — |
 
 To show a talk or other video in a post, use `{% include video.html youtube="ID" title="..." %}` (or `vimeo="ID"`; optional `poster="/images/..."` and `caption="..."`). It loads nothing from the video host until the reader presses play. Use only real video IDs and titles.
 
@@ -84,14 +86,14 @@ Invoke installed tools by name through `PATH` (`chromium --version`, `nas-pages-
 - **Prefix rewrite.** The preview is served under the URL prefix `/matthidinger.github.io/pr-N/FULL_SHA/` (no `/site` segment). Compiled HTML/CSS URL attributes that point at production or the site root are rewritten into that prefix. Text inside `pre`/`code`/`script`/`style` is never changed. No CSS or content is injected.
 - **Browser checks.** Each route in `routes.json` is checked at desktop (1280px) and mobile (390px) widths with Chromium:
   - document status 200, the expected title/h1/text, and minimum counts of real elements (code blocks, tables, images)
-  - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests
+  - a same-origin stylesheet loaded, every same-origin image decoded, and no 4xx/failed requests. Lazy images are scrolled into view the way a reader would before images are checked; lazy images that never render (e.g. inside `display:none`) are skipped
   - no uncaught page errors
-  - no requests to production or outside the prefix (third-party requests are blocked and listed)
+  - no requests to production or outside the prefix (third-party requests are blocked and listed). The one exception is the top-level `mediaPrefixes` in `routes.json`: absolute HTTPS media bases (the Hardware photos) that pages may load. Their images must load and decode like same-origin ones, and every run fetches them from the real host, so new photos must be published before acceptance can pass
   - wide code and tables scroll inside their own box
   - the screenshot is not blank
   - page-level horizontal overflow is a warning, or a failure with `--ux`
   - `copyCode` (`{min}`) on blog-post routes: every nonempty fenced block (and nothing else) gets a real `<button type="button">` with a visible `:focus-visible` ring; Enter, Space and click/tap each copy the exact `code` text (whitespace and newlines, no label or button text) to the clipboard and announce success in a polite live region; a denied or unavailable clipboard announces failure, never success, and leaves the code readable and selectable; with JavaScript disabled the code is readable and scrollable with no buttons. `maxSelectors: {".code-copy": 0}` keeps buttons off non-post pages
-  - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot)
+  - optional per-route regressions: `absentText` (strings that must not render, e.g. a literal `###`), `maxSelectors` (upper bounds counted whether visible or not, e.g. `#site-nav .hidden-links li: 0` for no folded nav), and `interactions` (`{name, click, expectPath | expectVisible, viewports?}`, run on a fresh load after the screenshot; a click counts as navigating only when a new document loads, so `history.replaceState`/`pushState` calls don't end the wait early)
   - screenshots show the real UI. Never hide a defect in the harness; if a capture looks wrong, reproduce it with real browser actions (e.g. a viewport change) and fix the site
 - **Readiness.** Every gate must pass:
   - a deliverable passing report, a clean tree, and HEAD equal to the PR head and the evidence SHA
@@ -137,6 +139,7 @@ Only post a private-header deep link in a public PR if Matt has approved disclos
 
 - Some old posts overflow horizontally on mobile because of long unbroken identifiers. This is report-only unless `--ux` is used.
 - Screenshots are cut off at 5000px. Third-party widgets/CDNs are blocked during checks.
+- The Hardware 3D model needs WebGL. Where Chromium has none, the viewer says the model couldn't load and the checks still pass, so look for that message when inspecting screenshots.
 - `inspect.mjs` records the agent's statement that it viewed each image, bound to the image hashes. It cannot prove who looked.
 - `.github/hooks/command-hygiene.*` denies ambiguous `cd` + `..` shell commands, inline node scripts (`node -e/--eval/-p/--print`), absolute-looking node arguments, and absolute executable paths (run installed tools by name through `PATH`). Because it reads shell text, a heredoc line that begins with `/` (e.g. a `/*` comment) also trips it; write such files with the edit tool. Put scripts in checkout-rooted helper files and use checkout-relative file arguments. Pass route IDs from `routes.json`, or keep non-filesystem URL routes inside the helper/configuration: `node probe.mjs /archive/...` otherwise looks like outside-checkout filesystem access and stalls unattended work. Do not request broader access to fix a route-expression problem. The hook only ever denies or stays silent; ordinary permitted commands still use normal permission handling. It is a hygiene guard, not a security sandbox or full shell parser.
 

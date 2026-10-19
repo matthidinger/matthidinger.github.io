@@ -1,0 +1,23 @@
+{
+  "name": "hardware-tools",
+  "private": true,
+  "description": "Maintenance tools for the Hardware section: photos, the three.js bundle and the boat model. Not part of the site build.",
+  "type": "module",
+  "engines": { "node": ">=20.9.0" },
+  "scripts": {
+    "photos": "node prepare-photos.mjs",
+    "sizes": "node check-photos.mjs",
+    "check": "node check-photos.mjs --check",
+    "three": "node build-three.mjs",
+    "glb": "node compress-glb.mjs"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "esbuild": "0.25.10",
+    "meshoptimizer": "1.2.0",
+    "sharp": "0.35.5",
+    "three": "0.186.1"
+  }
+}

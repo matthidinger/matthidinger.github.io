@@ -1,0 +1,737 @@
+# The wiring schematic (stylised, not a wiring guide). Node x/y/w/h are SVG units; `assumed` wires are drawn dashed.
+# Coordinates are Blender metres: +X forward, +Y port, +Z up. Part IDs are the model's `part` extras (see _hardware-tools/README.md).
+sheets:
+  - id: dc
+    name: DC 12 V
+    w: 776
+    h: 900
+    hint: Tap any fuse, breaker or part. Its feed lights up back to the battery, and the 3D view flies to it.
+    nodes:
+      - id: bank
+        t: battery
+        x: 20
+        "y": 16
+        w: 130
+        h: 56
+        title: House bank
+        sub: 2 × 330 Ah LiFePO4
+        part: house-battery-1-330ah-lifepo4
+      - id: classt
+        t: fuse
+        x: 20
+        "y": 100
+        w: 130
+        title: Class T (Bank)
+        rating: 300 A
+        sub: 400 A holder
+        part: class-t-fuse
+        chain: true
+      - id: switch
+        t: switch
+        x: 20
+        "y": 168
+        w: 130
+        h: 40
+        title: Battery switch
+        part: battery-switch
+        chain: true
+        badge: false
+      - id: pbus
+        t: bus
+        x: 79
+        "y": 232
+        w: 12
+        h: 246
+        title: Positive bus
+        label: POSITIVE BUS
+        part: busbars-lynx
+      - id: shunt
+        t: device
+        x: 248
+        "y": 22
+        title: Shunt
+        sub: measures the bank
+        part: shunt
+      - id: nbus
+        t: device
+        x: 382
+        "y": 22
+        title: Negative bus
+        sub: every return
+        part: busbars-lynx
+      - id: bms
+        t: device
+        x: 248
+        "y": 96
+        title: Battery BMS
+        sub: lithium bank
+        part: battery-bms
+      - id: cerbo
+        t: device
+        x: 382
+        "y": 96
+        title: Cerbo GX
+        sub: monitoring
+        part: cerbo-gx
+        badge: false
+      - id: touch
+        t: device
+        x: 516
+        "y": 96
+        title: GX Touch
+        sub: display
+        part: gx-touch
+      - id: f-inv
+        t: fuse
+        x: 114
+        "y": 246
+        title: Inverter
+        rating: 250 A
+        chain: true
+      - id: multi
+        t: device
+        x: 248
+        "y": 246
+        title: Victron MultiPlus
+        sub: inverter/charger
+        part: multiplus-inverter-charger
+      - id: to-ac
+        t: link
+        x: 382
+        "y": 252
+        w: 104
+        h: 32
+        title: AC side →
+        go: ac
+      - id: f-alt
+        t: fuse
+        x: 114
+        "y": 314
+        title: Alternator
+        rating: 200 A
+        chain: true
+      - id: alt
+        t: device
+        x: 248
+        "y": 314
+        title: Balmar alternator
+        sub: on the M35B
+        part: alternator-balmar
+      - id: reg
+        t: device
+        x: 382
+        "y": 314
+        title: Balmar regulator
+        sub: field control
+        part: balmar-regulator
+      - id: f-orion
+        t: fuse
+        x: 114
+        "y": 382
+        title: Orion feed
+        chain: true
+      - id: orion
+        t: device
+        x: 248
+        "y": 382
+        title: Orion DC-DC
+        sub: house → start
+        part: orion-dc-dc-charger
+      - id: start
+        t: battery
+        x: 382
+        "y": 382
+        title: Start battery
+        sub: Group 24 AGM
+        part: start-battery-group-24-agm
+      - id: f-house
+        t: fuse
+        x: 114
+        "y": 450
+        title: House
+        rating: 250 A
+        chain: true
+      - id: bp
+        t: device
+        x: 248
+        "y": 450
+        title: BatteryProtect
+        sub: 220 A
+        part: batteryprotect
+        chain: true
+      - id: block
+        t: box
+        x: 286
+        "y": 500
+        w: 224
+        h: 170
+        title: SafetyHub 150
+        sub: Blue Sea 7748 · behind the DC panel
+        part: safetyhub-150-fuse-block
+      - id: sbus
+        t: bus
+        x: 299
+        "y": 520
+        w: 12
+        h: 130
+        title: SafetyHub bus
+        part: safetyhub-150-fuse-block
+      - id: f-dc
+        t: fuse
+        x: 382
+        "y": 530
+        title: House DC
+        rating: 40 A
+        sub: MIDI
+        part: safetyhub-150-fuse-block
+        chain: true
+      - id: dcp
+        t: device
+        x: 516
+        "y": 530
+        title: DC panel
+        sub: 12 V breakers
+        part: dc-panel
+      - id: fridge
+        t: load
+        x: 650
+        "y": 514
+        h: 24
+        title: Fridge
+        part: fridge-isotherm-top-loader
+      - id: pump
+        t: load
+        x: 650
+        "y": 540
+        h: 24
+        title: Shurflo pump
+        part: pressure-pump
+        badge: false
+      - id: acu
+        t: load
+        x: 650
+        "y": 566
+        h: 24
+        title: Autopilot ACU
+        part: autopilot-acu
+      - id: f-amp
+        t: fuse
+        x: 382
+        "y": 604
+        title: Stereo amp
+        rating: 40 A
+        sub: MIDI
+        part: safetyhub-150-fuse-block
+        chain: true
+      - id: amp
+        t: device
+        x: 516
+        "y": 604
+        title: Fusion stereo
+        sub: amp
+        part: fusion-stereo
+      - id: brk
+        t: breaker
+        x: 382
+        "y": 720
+        title: Windlass
+        rating: 135 A
+        sub: fwd cabin
+        part: maxwell-breaker
+        chain: true
+      - id: ctl
+        t: device
+        x: 516
+        "y": 720
+        title: Control unit
+        sub: reversing contactor
+        part: windlass-contactor
+      - id: wmotor
+        t: device
+        x: 650
+        "y": 720
+        title: Windlass motor
+        sub: Maxwell RC10-8
+        part: windlass-motor
+      - id: deck
+        t: device
+        x: 516
+        "y": 796
+        h: 40
+        title: Deck switch
+        sub: up / down
+        part: deck-switch
+    wires:
+      - from: bank
+        to: classt
+        kind: pos
+        points:
+          - [ 85, 72 ]
+          - [ 85, 100 ]
+      - from: classt
+        to: switch
+        kind: pos
+        points:
+          - [ 85, 144 ]
+          - [ 85, 168 ]
+      - from: switch
+        to: pbus
+        kind: pos
+        points:
+          - [ 85, 208 ]
+          - [ 85, 232 ]
+      - from: bank
+        to: shunt
+        kind: neg
+        points:
+          - [ 150, 44 ]
+          - [ 248, 44 ]
+      - from: shunt
+        to: nbus
+        kind: neg
+        points:
+          - [ 362, 44 ]
+          - [ 382, 44 ]
+      - from: bank
+        to: bms
+        kind: data
+        points:
+          - [ 150, 62 ]
+          - [ 200, 62 ]
+          - [ 200, 118 ]
+          - [ 248, 118 ]
+      - from: bms
+        to: cerbo
+        kind: data
+        points:
+          - [ 362, 118 ]
+          - [ 382, 118 ]
+      - from: shunt
+        to: cerbo
+        kind: data
+        points:
+          - [ 305, 66 ]
+          - [ 305, 82 ]
+          - [ 439, 82 ]
+          - [ 439, 96 ]
+      - from: cerbo
+        to: touch
+        kind: data
+        points:
+          - [ 496, 118 ]
+          - [ 516, 118 ]
+      - from: pbus
+        to: f-inv
+        kind: pos
+        points:
+          - [ 91, 268 ]
+          - [ 114, 268 ]
+      - from: f-inv
+        to: multi
+        kind: pos
+        points:
+          - [ 228, 268 ]
+          - [ 248, 268 ]
+      - from: pbus
+        to: f-alt
+        kind: pos
+        points:
+          - [ 91, 336 ]
+          - [ 114, 336 ]
+      - from: f-alt
+        to: alt
+        kind: pos
+        points:
+          - [ 228, 336 ]
+          - [ 248, 336 ]
+      - from: alt
+        to: reg
+        kind: ctl
+        points:
+          - [ 362, 336 ]
+          - [ 382, 336 ]
+      - from: pbus
+        to: f-orion
+        kind: pos
+        points:
+          - [ 91, 404 ]
+          - [ 114, 404 ]
+      - from: f-orion
+        to: orion
+        kind: pos
+        points:
+          - [ 228, 404 ]
+          - [ 248, 404 ]
+      - from: orion
+        to: start
+        kind: pos
+        points:
+          - [ 362, 404 ]
+          - [ 382, 404 ]
+      - from: pbus
+        to: f-house
+        kind: pos
+        points:
+          - [ 91, 472 ]
+          - [ 114, 472 ]
+      - from: f-house
+        to: bp
+        kind: pos
+        points:
+          - [ 228, 472 ]
+          - [ 248, 472 ]
+      - from: bp
+        to: sbus
+        kind: pos
+        points:
+          - [ 305, 494 ]
+          - [ 305, 520 ]
+      - from: sbus
+        to: f-dc
+        kind: pos
+        points:
+          - [ 311, 552 ]
+          - [ 382, 552 ]
+      - from: f-dc
+        to: dcp
+        kind: pos
+        points:
+          - [ 496, 552 ]
+          - [ 516, 552 ]
+      - from: dcp
+        to: fridge
+        kind: pos
+        points:
+          - [ 630, 552 ]
+          - [ 640, 552 ]
+          - [ 640, 526 ]
+          - [ 650, 526 ]
+        assumed: true
+      - from: dcp
+        to: pump
+        kind: pos
+        points:
+          - [ 630, 552 ]
+          - [ 650, 552 ]
+        assumed: true
+      - from: dcp
+        to: acu
+        kind: pos
+        points:
+          - [ 630, 552 ]
+          - [ 640, 552 ]
+          - [ 640, 578 ]
+          - [ 650, 578 ]
+        assumed: true
+      - from: sbus
+        to: f-amp
+        kind: pos
+        points:
+          - [ 311, 626 ]
+          - [ 382, 626 ]
+      - from: f-amp
+        to: amp
+        kind: pos
+        points:
+          - [ 496, 626 ]
+          - [ 516, 626 ]
+      - from: sbus
+        to: brk
+        kind: pos
+        points:
+          - [ 305, 650 ]
+          - [ 305, 742 ]
+          - [ 382, 742 ]
+        label: [ 1/0 AWG, port side ]
+        lx: 316
+        ly: 700
+      - from: brk
+        to: ctl
+        kind: pos
+        points:
+          - [ 496, 742 ]
+          - [ 516, 742 ]
+      - from: ctl
+        to: wmotor
+        kind: pos
+        points:
+          - [ 630, 742 ]
+          - [ 650, 742 ]
+      - from: deck
+        to: ctl
+        kind: ctl
+        points:
+          - [ 573, 796 ]
+          - [ 573, 764 ]
+    legend:
+      - kind: pos
+        label: +12 V
+      - kind: neg
+        label: − return
+      - kind: data
+        label: data
+      - kind: ctl
+        label: control
+      - kind: assumed
+        label: route assumed
+  - id: ac
+    name: AC 120 V
+    w: 776
+    h: 672
+    hint: Shore power comes in at the top. Only the inverter side of the panel (bottom right) also works at anchor.
+    nodes:
+      - id: inlet
+        t: device
+        x: 20
+        "y": 20
+        w: 130
+        title: Shore power inlet
+        part: shore-power-inlet
+      - id: iso
+        t: device
+        x: 248
+        "y": 20
+        title: Galvanic isolator
+        sub: in the ground wire
+        nomodel: true
+      - id: gnd
+        t: device
+        x: 382
+        "y": 20
+        title: Boat ground
+        sub: bonded to DC −
+        nomodel: true
+      - id: shore
+        t: box
+        x: 10
+        "y": 160
+        w: 232
+        h: 296
+        title: AC panel · shore side
+        part: ac-panel
+      - id: main
+        t: breaker
+        x: 20
+        "y": 184
+        w: 130
+        title: Main
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: shbus
+        t: bus
+        x: 79
+        "y": 246
+        w: 12
+        h: 190
+        title: Shore bus
+        part: ac-panel
+      - id: b-wh
+        t: breaker
+        x: 114
+        "y": 250
+        title: Water heater
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: wh
+        t: device
+        x: 382
+        "y": 250
+        title: IsoTemp heater
+        sub: 750 W · shore only
+        part: isotemp-water-heater
+      - id: b-inv
+        t: breaker
+        x: 114
+        "y": 318
+        title: Inverter feed
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: multi
+        t: device
+        x: 382
+        "y": 318
+        h: 76
+        title: Victron MultiPlus
+        sub: AC in → AC out
+        part: multiplus-inverter-charger
+        chain: true
+      - id: b-gal
+        t: breaker
+        x: 114
+        "y": 400
+        title: Galley outlet
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: galout
+        t: device
+        x: 258
+        "y": 400
+        w: 140
+        title: Galley outlet
+        sub: shore only · heater
+        part: galley-outlet-shore-only
+      - id: to-dc
+        t: link
+        x: 520
+        "y": 340
+        w: 104
+        h: 32
+        title: DC side →
+        go: dc
+      - id: inv
+        t: box
+        x: 414
+        "y": 466
+        w: 184
+        h: 134
+        title: AC panel · inverter side
+        part: ac-panel
+      - id: ibus
+        t: bus
+        x: 433
+        "y": 492
+        w: 12
+        h: 96
+        title: Inverter bus
+        part: ac-panel
+      - id: b-out
+        t: breaker
+        x: 470
+        "y": 490
+        title: Outlets
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: b-mw
+        t: breaker
+        x: 470
+        "y": 546
+        title: Microwave
+        part: ac-panel
+        chain: true
+        badge: false
+      - id: outlets
+        t: device
+        x: 650
+        "y": 490
+        title: 120 V outlets
+        sub: 4 · on the inverter
+        part: inverter-outlet
+      - id: micro
+        t: device
+        x: 650
+        "y": 546
+        title: Microwave
+        sub: RCA
+        part: microwave
+    wires:
+      - from: inlet
+        to: main
+        kind: ac
+        points:
+          - [ 85, 64 ]
+          - [ 85, 184 ]
+      - from: inlet
+        to: iso
+        kind: gnd
+        points:
+          - [ 150, 42 ]
+          - [ 248, 42 ]
+      - from: iso
+        to: gnd
+        kind: gnd
+        points:
+          - [ 362, 42 ]
+          - [ 382, 42 ]
+      - from: main
+        to: shbus
+        kind: ac
+        points:
+          - [ 85, 228 ]
+          - [ 85, 246 ]
+      - from: shbus
+        to: b-wh
+        kind: ac
+        points:
+          - [ 91, 272 ]
+          - [ 114, 272 ]
+      - from: b-wh
+        to: wh
+        kind: ac
+        points:
+          - [ 228, 272 ]
+          - [ 382, 272 ]
+      - from: shbus
+        to: b-inv
+        kind: ac
+        points:
+          - [ 91, 340 ]
+          - [ 114, 340 ]
+      - from: b-inv
+        to: multi
+        kind: ac
+        points:
+          - [ 228, 340 ]
+          - [ 382, 340 ]
+        label: [ AC in ]
+        lx: 300
+        ly: 332
+      - from: shbus
+        to: b-gal
+        kind: ac
+        points:
+          - [ 91, 422 ]
+          - [ 114, 422 ]
+      - from: b-gal
+        to: galout
+        kind: ac
+        points:
+          - [ 228, 422 ]
+          - [ 258, 422 ]
+      - from: multi
+        to: ibus
+        kind: ac
+        points:
+          - [ 439, 394 ]
+          - [ 439, 492 ]
+        label: [ AC out ]
+        lx: 448
+        ly: 432
+      - from: ibus
+        to: b-out
+        kind: ac
+        points:
+          - [ 445, 512 ]
+          - [ 470, 512 ]
+      - from: b-out
+        to: outlets
+        kind: ac
+        points:
+          - [ 584, 512 ]
+          - [ 650, 512 ]
+      - from: ibus
+        to: b-mw
+        kind: ac
+        points:
+          - [ 445, 568 ]
+          - [ 470, 568 ]
+      - from: b-mw
+        to: micro
+        kind: ac
+        points:
+          - [ 584, 568 ]
+          - [ 650, 568 ]
+    legend:
+      - kind: ac
+        label: 120 V (hot + neutral)
+      - kind: gnd
+        label: ground
+alias:
+  house-battery-2-330ah-lifepo4: house-battery-1-330ah-lifepo4
+  windlass-gypsy: windlass-motor
+  windlass-cable: maxwell-breaker
+  windlass-control-wire: deck-switch

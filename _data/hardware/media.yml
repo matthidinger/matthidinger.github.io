@@ -1,0 +1,3 @@
+# Where the Hardware photos are served from. They live outside the repo so a photo can be removed for good;
+# _hardware-tools/upload-media.ps1 publishes them. A local build can point elsewhere with `hardware_media:` in its config.
+base: https://matthidingerpreviews.z5.web.core.windows.net/media/hardware/
